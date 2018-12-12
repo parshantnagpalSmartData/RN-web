@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "clean": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean" ,
+    "clean": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean",
     "web-build-dev": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --port 3001 --inline --hot --colors",
     "web-build-prod": "./node_modules/.bin/webpack -p --config ./web/webpack.config.js"
   },
@@ -36,5 +36,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/assets/Font"
+    ]
   }
 }

@@ -1,22 +1,13 @@
-import React from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
-import AppData from './src';
-class App extends React.Component {
-  
-  render() {
-    return (
-      <View style={styles.box}>
-        <Text style={styles.text}>Hello, world!</Text>
-        <AppData/>  
-      </View>
-    );
-  }
-}
+import React from "react";
+import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import App from "./src";
+// class App extends React.Component {
+//   render() {
+//     return <AppData />;
+//   }
+// }
 
-const styles = StyleSheet.create({
-  box: { padding: 10 },
-  text: { fontWeight: 'bold' }
+AppRegistry.registerComponent("App", () => App);
+AppRegistry.runApplication("App", {
+  rootTag: document.getElementById("react-root")
 });
-
-AppRegistry.registerComponent('App', () => App);
-AppRegistry.runApplication('App', { rootTag: document.getElementById('react-root') });
