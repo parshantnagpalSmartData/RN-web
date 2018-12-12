@@ -13,10 +13,13 @@ const appDirectory = path.resolve(__dirname, '../');
 const babelLoaderConfiguration = {
   test: /\.js$/,
   // Add every directory that needs to be compiled by Babel during the build.
+
   include: [
     path.resolve(appDirectory, 'index.web.js'),
     path.resolve(appDirectory, 'src'),
-    path.resolve(appDirectory, 'node_modules/react-native-uncompiled')
+    path.resolve(appDirectory, 'node_modules/react-native-uncompiled'),
+    path.resolve(appDirectory, 'node_modules/react-native-navigation'),
+    path.resolve(appDirectory, 'node_modules/react-native/Libraries')
   ],
   use: {
     loader: 'babel-loader',
