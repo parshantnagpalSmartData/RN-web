@@ -7,13 +7,15 @@ import {
   StyleSheet,
   TextInput,
   Button,
-  AsyncStorage
+  AsyncStorage,
+  Platform
 } from 'react-native'
 import {removeListeners} from '../utilities/listeners';
-import { goHome } from '../config/navigation'
-import {Navigation} from 'react-native-navigation';
+//  import { goHome } from '../config/navigation'
+ import * as AppAction from '../actions'
+import { platform } from 'os';
 
-import * as AppAction from '../actions'
+
 let removeListener = true;
 class SignIn extends React.Component {
   constructor(props){
@@ -36,8 +38,15 @@ class SignIn extends React.Component {
     const { username, password } = this.state;
     console.log(this.props,AppAction)
      removeListener = false;
-     this.props.dispatch(AppAction.login());
-    goHome();
+     console.log('Platform.OS',Platform.OS)
+     if(Platform.OS !== 'web'){
+      this.props.dispatch(AppAction.login());
+     }else{
+      this.props.history.push("/about")
+     }
+
+
+    // goHome();
   }
   signUp(){
     this.props.dispatch(AppAction.pushTParticulatScreen(this.props.componentId,'SignUp'));
