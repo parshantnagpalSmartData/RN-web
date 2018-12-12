@@ -10,6 +10,8 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import FloatingInput from "../../components/common/FloatingInput";
 import Header from "../../components/common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import AuthButton from "../../components/common/AuthButton";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -56,6 +58,7 @@ class Login extends Component {
               ref={ref => (this.password = ref)}
             />
           </View>
+          <AuthButton buttonName={"Login"} />
         </ScrollView>
       </View>
     );
