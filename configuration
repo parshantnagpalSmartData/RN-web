@@ -1,2 +1,18 @@
 used packkage react-native-web-linear-gradient for support react-native-linear-gradient in web view
 https://github.com/react-native-web-community/react-native-web-linear-gradient
+
+/** platfrom specific code example  *****/
+ Platform.OS==="ios"?"This is ios":"This is android"
+
+
+  ...Platform.select({
+      web: {
+        outline: "none"
+      },
+      ios:{
+
+      },
+      android:{
+
+      }
+    })

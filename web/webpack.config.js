@@ -16,8 +16,12 @@ const babelLoaderConfiguration = {
   include: [
     path.resolve(appDirectory, "index.web.js"),
     path.resolve(appDirectory, "src"),
-    path.resolve(appDirectory, "node_modules/react-native-uncompiled")
-    // path.resolve(appDirectory, "node_modules/react-native-linear-gradient")
+    path.resolve(appDirectory, "node_modules/react-native-uncompiled"),
+    path.resolve(appDirectory, "node_modules/lodash"),
+    path.resolve(
+      appDirectory,
+      "node_modules/react-native-keyboard-aware-scroll-view"
+    )
   ],
   use: {
     loader: "babel-loader",

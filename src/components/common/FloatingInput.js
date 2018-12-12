@@ -13,7 +13,8 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from "react-native";
 
 import Constants from "../../constants";
@@ -33,6 +34,7 @@ class FloatingInput extends Component {
   focus() {
     this.inputBox.focus();
   }
+
   render() {
     const {
       label,
@@ -116,16 +118,18 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Regular,
     height: moderateScale(50),
     fontSize: moderateScale(18),
-    color: Constants.Colors.Black
-    //backgroundColor:'red',
-    // width:Constants.BaseStyle.DEVICE_WIDTH*0.5
+    color: Constants.Colors.Black,
+    ...Platform.select({
+      web: {
+        outline: "none"
+      }
+    })
   },
   inputWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderBottomColor: Constants.Colors.Secondary
-    //backgroundColor: "#aabbcc"
   },
   cancelImg: {
     backgroundColor: "#A9AFAF",
