@@ -8,12 +8,13 @@ import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import Login from "./containers/auth/Login";
 import ForgotPassword from "./containers/auth/ForgotPassword";
+import MySchedule from "./containers/MySchedule";
 
 // global.isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent; // eslint-disable-line
 console.disableYellowBox = true; // eslint-disable-line
 export default class App extends Component {
   render() {
-    return <ForgotPassword />;
+    return <MySchedule />;
   }
 }
 
