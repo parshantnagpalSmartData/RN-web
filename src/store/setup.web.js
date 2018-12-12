@@ -3,7 +3,6 @@
  * Description: Contains all redux store configuration
  * date: 7 Seopt 2018
  */
-import { AsyncStorage } from "react-native";
 import { applyMiddleware, createStore, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import * as reducers from "./../reducers";
@@ -12,6 +11,8 @@ import { createLogger } from "redux-logger";
 import promise from "./promise";
 import array from "./array";
 import whitelist from "./whitelist";
+import { asyncSessionStorage } from 'redux-persist/storages'
+import * as AppAction from './../actions'
 // import { goToAuth, goHome } from '../config/navigation'
 // import startApp from '../config/navigators'
 export default function setup() {
@@ -32,13 +33,14 @@ export default function setup() {
     // eslint-disable-line
     window.store = store;
   }
-  persistStore(store, { whitelist, storage: AsyncStorage }, () => {
-    console.log("newstore", store.getState().app.root);
-    // if (store.getState().user.isLoggedIn) {
-    //       goHome()
-    //     } else {
-    //       goToAuth()
-    //     }
+  persistStore(store, { whitelist,storage: asyncSessionStorage }, () => {
+    console.log("newstore", store.getState().user.isLoggedIn);
+    if (store.getState().user.isLoggedIn) {
+          store.dispatch(AppAction.pushTParticulatScreen('/Screen2'))
+        } else {
+            console.log('workingggggg')
+          store.dispatch(AppAction.pushTParticulatScreen('/'))
+        }
     // on app loading the persit store loads and we have route from here
     // startApp(store.getState().app.root);
   });

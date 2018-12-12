@@ -5,16 +5,18 @@
  * Date : 12 December 2018
  */
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Router, Route, Link } from "react-router-dom";
 import SignIn from '../container/SignIn';
+import Screen2 from '../container/Screen2';
 
+import history from '../utilities/history';
 export default routes = () => {
     return (
-    <Router >
+    <Router history={history}>
         <div>
             <Header />
             <Route exact path="/" component={SignIn} />
-            <Route path="/about" component={About} />
+            <Route path="/Screen2" component={Screen2} />
             <Route path="/topics" component={Topics} />
         </div>
     </Router>

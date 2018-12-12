@@ -4,9 +4,8 @@ import {
   Text,
   Button,
   StyleSheet,
+  Platform
 } from 'react-native'
-import { goToAuth } from '../config/navigation'
-import {Navigation} from 'react-native-navigation';
 import {connect} from 'react-redux';
 import * as AppAction from '../actions'
  
@@ -28,7 +27,13 @@ class Screen2 extends React.Component {
         <Button
           onPress={() => {
             // Navigation.pop(this.props.componentId)
+            if(Platform.OS !== 'web'){
             this.props.dispatch(AppAction.pop(this.props.componentId,'Screen2'))
+            }else{
+            this.props.dispatch(AppAction.goBack()) 
+            }
+            this.props.dispatch(AppAction.logOut());
+
           }}
           title="Go Back"
         />

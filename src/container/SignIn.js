@@ -13,7 +13,7 @@ import {
 import {removeListeners} from '../utilities/listeners';
 //  import { goHome } from '../config/navigation'
  import * as AppAction from '../actions'
-import { platform } from 'os';
+
 
 
 let removeListener = true;
@@ -27,9 +27,11 @@ class SignIn extends React.Component {
   }
 
   componentWillUnmount(){
+    if(Platform.OS !== 'web'){
     if(removeListener){
       removeListeners();
     }  
+  }
   }
   onChangeText = (key, value) => {
     this.setState({ [key]: value })
@@ -39,14 +41,17 @@ class SignIn extends React.Component {
     console.log(this.props,AppAction)
      removeListener = false;
      console.log('Platform.OS',Platform.OS)
+     this.props.dispatch(AppAction.login());
      if(Platform.OS !== 'web'){
-      this.props.dispatch(AppAction.login());
+      this.props.dispatch(AppAction.pushTParticulatScreen(this.props.componentId,'Screen2'));
      }else{
-      this.props.history.push("/about")
+      this.props.dispatch(AppAction.pushTParticulatScreen('/Screen2'));
+      
+     // this.props.history.push("/about")
      }
 
 
-    // goHome();
+   
   }
   signUp(){
     this.props.dispatch(AppAction.pushTParticulatScreen(this.props.componentId,'SignUp'));
@@ -93,7 +98,18 @@ const styles = StyleSheet.create({
     margin: 10,
     color: 'white',
     padding: 8,
-    borderRadius: 14
+    borderRadius: 14,
+    ...Platform.select({
+      web: {
+        outline: "none"
+      },
+      ios:{
+
+      },
+      android:{
+
+      }
+    })
   },
   container: {
     flex: 1,
