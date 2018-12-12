@@ -14,7 +14,8 @@ const instructions = Platform.select({
     "Double tap R on your keyboard to reload,\n" +
     "Shake or press menu button for dev menu"
 });
-
+global.isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent; // eslint-disable-line
+console.disableYellowBox = true; // eslint-disable-line
 export default class App extends Component {
   render() {
     return (
