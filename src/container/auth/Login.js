@@ -7,9 +7,11 @@ Date : 11 Dec 2018
 
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import _ from "lodash";
-
+import * as AppAction from '../../actions'
 import FloatingInput from "../../components/common/FloatingInput";
 import Header from "../../components/common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
@@ -54,7 +56,17 @@ class Login extends Component {
       alert(Constants.Strings.Common.EnterPassword);
       return;
     }
-    alert("logged in sucessfully");
+   
+    console.log('Platform.OS',Platform.OS)
+    this.props.dispatch(AppAction.login());
+    if(Platform.OS !== 'web'){
+     this.props.dispatch(AppAction.pushTParticulatScreen(this.props.componentId,'Screen2'));
+    }else{
+     this.props.dispatch(AppAction.pushTParticulatScreen('/Screen2'));
+     
+    // this.props.history.push("/about")
+    }
+
     return;
   });
 
@@ -158,4 +170,13 @@ const Styles = StyleSheet.create({
   gradientStyle: { borderRadius: 0 }
 });
 
-export default Login;
+const mapStateToProps = state => ({
+  user: state.user,
+  app: state.app
+});
+const mapDispatchToProps = dispatch => ({
+  appAction : bindActionCreators(AppAction,dispatch)  
+})
+
+
+export default connect(mapStateToProps,null)(Login);
