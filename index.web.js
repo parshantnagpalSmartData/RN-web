@@ -1,18 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
-import { Provider } from 'react-redux';
-import AppData from './src';
+import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import AppData from "./src";
 import setup from "./src/store/setup";
-const store = setup()
-import Routes from './src/config/routes';
+const store = setup();
+import Routes from "./src/config/routes";
 
 class App extends React.Component {
-  
   render() {
     return (
       <Provider store={store}>
-         <Routes/>
+        <Routes />
       </Provider>
     );
   }
