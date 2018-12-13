@@ -17,7 +17,7 @@ import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
 
-class Login extends Component {
+class ForgotPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,9 @@ class Login extends Component {
       password: ""
     };
   }
-
+  static navigatorStyle = {
+    navBarHidden: true
+  };
   submitLogin = _.debounce(() => {
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
@@ -44,15 +46,7 @@ class Login extends Component {
       alert(Constants.Strings.Common.ValidEmailAddress);
       return;
     }
-    if (_.isEmpty(password.trim())) {
-      // toastMessage(navigator, {
-      //   type: Constants.AppCosntants.Notificaitons.Error,
-      //   message: Constants.Strings.Common.EnterPassword
-      // });
-      alert(Constants.Strings.Common.EnterPassword);
-      return;
-    }
-    alert("logged in sucessfully");
+    alert("mail has been sent to your email account");
     return;
   });
 
@@ -77,7 +71,7 @@ class Login extends Component {
             style={{
               height:
                 Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.848
+                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.845
                   : Constants.BaseStyle.DEVICE_HEIGHT * 0.87,
               width:
                 Platform.OS === "web"
@@ -102,29 +96,10 @@ class Login extends Component {
                   this.focusNext("password");
                 }}
               />
-              <FloatingInput
-                label={"Password"}
-                onChangeText={password => {
-                  this.setState({ password });
-                }}
-                value={this.state.password}
-                returnKey="done"
-                onSubmitEditing={() => {
-                  this.onLoginPress();
-                }}
-                autoCapitalize={"none"}
-                secureTextEntry
-                ref={ref => (this.password = ref)}
-              />
-            </View>
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <Text onPress={() => alert("under development")}>
-                Forgot Password
-              </Text>
             </View>
             <View>
               <AuthButton
-                buttonName={"Login"}
+                buttonName={"Reset Password"}
                 gradientColors={["#009", "#009"]}
                 textStyle={{ color: "#fff" }}
                 buttonStyle={Styles.buttonStyle}
@@ -156,4 +131,4 @@ const Styles = StyleSheet.create({
   gradientStyle: { borderRadius: 0 }
 });
 
-export default Login;
+export default ForgotPassword;
