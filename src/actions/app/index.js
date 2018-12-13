@@ -1,3 +1,12 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: conatins all navigation actions for app 
+Date : 13 december 2018
+*/
+
+
+
 import * as types from "../../actionTypes";
 import { Navigation } from 'react-native-navigation';
 
