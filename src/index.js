@@ -9,15 +9,10 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import Login from "./container/auth/Login";
 import ForgotPassword from "./container/auth/ForgotPassword";
 import MySchedule from "./container/MySchedule";
-import { RegisterNetEvents } from "./helpers/registerevents";
 
 // global.isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent; // eslint-disable-line
 console.disableYellowBox = true; // eslint-disable-line
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    RegisterNetEvents();
-  }
   render() {
     return <MySchedule />;
   }
