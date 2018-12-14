@@ -35,8 +35,13 @@ class MapApi {
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.status === "OK") {
-            if (responseJson.routes.length && Idx(responseJson, _ => _.routes[0].legs[0].steps)) {
-              let steps = this.decodeMapPoints(responseJson.routes[0].overview_polyline.points);
+            if (
+              responseJson.routes.length &&
+              Idx(responseJson, _ => _.routes[0].legs[0].steps)
+            ) {
+              let steps = this.decodeMapPoints(
+                responseJson.routes[0].overview_polyline.points
+              );
               return resolve(steps);
             }
           } else {
@@ -52,14 +57,30 @@ class MapApi {
 
   // it will decode the map points between source to destination
   static decodeMapPoints(t, e = 5) {
-    for (var n, o, u = 0, l = 0, r = 0, d = [], h = 0, i = 0, a = null, c = Math.pow(10, e || 5); u < t.length; ) {
+    for (
+      var n,
+        o,
+        u = 0,
+        l = 0,
+        r = 0,
+        d = [],
+        h = 0,
+        i = 0,
+        a = null,
+        c = Math.pow(10, e || 5);
+      u < t.length;
+
+    ) {
       (a = null), (h = 0), (i = 0);
       do (a = t.charCodeAt(u++) - 63), (i |= (31 & a) << h), (h += 5);
       while (a >= 32);
       (n = 1 & i ? ~(i >> 1) : i >> 1), (h = i = 0);
       do (a = t.charCodeAt(u++) - 63), (i |= (31 & a) << h), (h += 5);
       while (a >= 32);
-      (o = 1 & i ? ~(i >> 1) : i >> 1), (l += n), (r += o), d.push([l / c, r / c]);
+      (o = 1 & i ? ~(i >> 1) : i >> 1),
+        (l += n),
+        (r += o),
+        d.push([l / c, r / c]);
     }
     return (d = d.map(function(t) {
       return {
@@ -73,9 +94,9 @@ class MapApi {
 
   static googleMapNavigate(source, destination) {
     let url = "";
-    url = `http://maps.google.com/maps?saddr=${source.latitude},${source.longitude}&daddr=${destination.latitude},${
-      destination.longitude
-    }`;
+    url = `http://maps.google.com/maps?saddr=${source.latitude},${
+      source.longitude
+    }&daddr=${destination.latitude},${destination.longitude}`;
     // console.log('URL ', url);
     Linking.canOpenURL(url).then(supported => {
       if (!supported) {
@@ -95,7 +116,9 @@ class MapApi {
     let radlat2 = (Math.PI * destination.lat) / 180;
     let theta = source.lng - destination.lng;
     let radtheta = (Math.PI * theta) / 180;
-    let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    let dist =
+      Math.sin(radlat1) * Math.sin(radlat2) +
+      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     dist = Math.acos(dist);
     dist = (dist * 180) / Math.PI;
     dist = dist * 60 * 1.1515;
@@ -134,10 +157,12 @@ class MapApi {
         position => {
           // console.log("position",position);
           let { latitude, longitude, heading } = position.coords;
-          this.getRegionForCoordinates([{ latitude, longitude }]).then(region => {
-            region.angle = heading;
-            resolve(region);
-          });
+          this.getRegionForCoordinates([{ latitude, longitude }]).then(
+            region => {
+              region.angle = heading;
+              resolve(region);
+            }
+          );
         },
         error => {
           console.log("error on getting current position", error);
@@ -249,16 +274,23 @@ class MapApi {
       navigator.geolocation.watchPosition(
         position => {
           const { latitude, longitude, heading } = position.coords;
-          this.getRegionForCoordinates([{ latitude, longitude }]).then(region => {
-            region.angle = heading;
-            console.log("watcher", region);
-            DriverSocket.updateTripLocation(region);
-            resolve(region);
-          });
+          this.getRegionForCoordinates([{ latitude, longitude }]).then(
+            region => {
+              region.angle = heading;
+              console.log("watcher", region);
+              DriverSocket.updateTripLocation(region);
+              resolve(region);
+            }
+          );
         },
         error => reject(error),
         // { enableHighAccuracy: false, distanceFilter: 0.1 }
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 }
+        {
+          enableHighAccuracy: true,
+          timeout: 20000,
+          maximumAge: 1000,
+          distanceFilter: 10
+        }
       );
     });
   }
@@ -293,7 +325,10 @@ class MapApi {
           let lon = Math.atan2(Y, X);
           let hyp = Math.sqrt(X * X + Y * Y);
           let lat = Math.atan2(Z, hyp);
-          let obj = { latitude: (lat * 180) / Math.PI, longitude: (lon * 180) / Math.PI };
+          let obj = {
+            latitude: (lat * 180) / Math.PI,
+            longitude: (lon * 180) / Math.PI
+          };
           obj.latitudeDelta = latitudeDelta;
           obj.longitudeDelta = longitudeDelta;
           resolve(obj);

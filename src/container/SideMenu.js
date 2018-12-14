@@ -1,25 +1,24 @@
-import React from 'react'
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   TouchableOpacity
-} from 'react-native'
-var {height, width} = Dimensions.get('window');
-import {Navigation} from 'react-native-navigation';
+} from "react-native";
+var { height, width } = Dimensions.get("window");
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import * as AppAction from '../actions';
+import { bindActionCreators } from "redux";
+import * as AppAction from "../actions";
 
- class SideMenu extends React.Component {
-  constructor(props){
+class SideMenu extends React.Component {
+  constructor(props) {
     super(props);
     this.hideSideMenu = this.hideSideMenu.bind(this);
     this.setScrenStack = this.setScrenStack.bind(this);
   }
   hideSideMenu() {
-    this.props.appAction.mergeOptions(this.props.componentId,false);
+    this.props.appAction.mergeOptions(this.props.componentId, false);
     // Navigation.mergeOptions(this.props.componentId, {
     //   sideMenu: {
     //     left: {
@@ -29,30 +28,46 @@ import * as AppAction from '../actions';
     // });
   }
 
-  setScrenStack(screen,visible){
-    this.props.appAction.setScrenStack( 'MY_STACK' ,screen , visible);
+  setScrenStack(screen, visible) {
+    this.props.appAction.setScrenStack("MY_STACK", screen, visible);
     this.hideSideMenu();
   }
- 
-
 
   render() {
     return (
       <View style={styles.container}>
-       <View style={[styles.text,styles.marginTop]}>
-        <Text style={styles.welcome}>SideMenu</Text>
-       </View> 
-       <View style={styles.text}>
-       <TouchableOpacity onPress={()=>{this.setScrenStack("Home",true)}}><Text style={styles.welcome}>SecondPage</Text></TouchableOpacity>
-       </View> 
-       <View style={styles.text}>
-       <TouchableOpacity onPress={()=>{this.setScrenStack("Loader",false)}}><Text style={styles.welcome}>SecondPage</Text></TouchableOpacity>
-       </View> 
-       <View style={styles.text}>
-       <TouchableOpacity onPress={()=>{this.hideSideMenu()}}><Text style={styles.welcome}>Close</Text></TouchableOpacity>
-       </View> 
+        <View style={[styles.text, styles.marginTop]}>
+          <Text style={styles.welcome}>SideMenu</Text>
+        </View>
+        <View style={styles.text}>
+          <TouchableOpacity
+            onPress={() => {
+              this.setScrenStack("Home", true);
+            }}
+          >
+            <Text style={styles.welcome}>SecondPage</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.text}>
+          <TouchableOpacity
+            onPress={() => {
+              this.setScrenStack("Loader", false);
+            }}
+          >
+            <Text style={styles.welcome}>SecondPage</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.text}>
+          <TouchableOpacity
+            onPress={() => {
+              this.hideSideMenu();
+            }}
+          >
+            <Text style={styles.welcome}>Close</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    )
+    );
   }
 }
 
@@ -63,22 +78,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  text : {
-    height : height*10/100,
-    width : width*80/100,
-    justifyContent : 'center',
-    alignItems: 'center'
+  text: {
+    height: (height * 10) / 100,
+    width: (width * 80) / 100,
+    justifyContent: "center",
+    alignItems: "center"
   },
-  marginTop : {
-    marginTop : height*5/100,
+  marginTop: {
+    marginTop: (height * 5) / 100
   }
-})
-const mapStateToProps = state => ({
-  user: state.user,
-  app: state.app
 });
+// const mapStateToProps = state => ({
+//   user: state.user,
+//   app: state.app
+// });
 const mapDispatchToProps = dispatch => ({
-  appAction : bindActionCreators(AppAction,dispatch)  
-})
+  appAction: bindActionCreators(AppAction, dispatch)
+});
 
-export default connect(null,mapDispatchToProps)(SideMenu);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SideMenu);

@@ -12,7 +12,8 @@ let AppCosntants = {
     SuperAdmin: "superAdmin"
   },
   Error: {
-    serverError: "The server is not reachable right now, sorry for inconvenience."
+    serverError:
+      "The server is not reachable right now, sorry for inconvenience."
   },
   UserLocation: {
     Source: "source",

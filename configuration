@@ -16,3 +16,9 @@ https://github.com/react-native-web-community/react-native-web-linear-gradient
 
       }
     })
+
+
+react native web responsive use onLayout of view
+
+https://github.com/necolas/react-native-web/issues/1177
+https://codesandbox.io/s/l5mxv6v59z

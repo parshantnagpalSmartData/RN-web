@@ -10,26 +10,26 @@ import { createLogger } from "redux-logger";
 import promise from "./promise";
 import array from "./array";
 import whitelist from "./whitelist";
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
-import * as AppAction from './../actions'
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
+import * as AppAction from "./../actions";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
   whitelist
-}
+};
 export default function setup() {
-
-
   const logger = createLogger();
 
   const middleware = [applyMiddleware(...[thunk, promise, array, logger])];
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    middleware.push(applyMiddleware(require("redux-immutable-state-invariant").default()));
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+    middleware.push(
+      applyMiddleware(require("redux-immutable-state-invariant").default())
+    );
   }
   const reducer = combineReducers(reducers);
-  const persistedReducer = persistReducer(persistConfig, reducer)
+  const persistedReducer = persistReducer(persistConfig, reducer);
 
   const store = createStore(persistedReducer, {}, compose(...middleware));
 
@@ -39,13 +39,12 @@ export default function setup() {
     window.store = store;
   }
   const persistor = persistStore(store, null, () => {
-    console.log("newstore", store.getState().user.isLoggedIn);
+    // console.log("newstore", store.getState().user.isLoggedIn);
     if (store.getState().user.isLoggedIn) {
-          store.dispatch(AppAction.pushTParticulatScreen('/Screen2'))
-        } else {
-            console.log('workingggggg')
-          store.dispatch(AppAction.pushTParticulatScreen('/'))
-        }
+      store.dispatch(AppAction.pushTParticulatScreen("/Screen2"));
+    } else {
+      store.dispatch(AppAction.pushTParticulatScreen("/"));
+    }
     // on app loading the persit store loads and we have route from here
     // startApp(store.getState().app.root);
   });

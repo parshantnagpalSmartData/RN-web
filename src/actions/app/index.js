@@ -5,13 +5,10 @@ Description: conatins all navigation actions for app
 Date : 13 december 2018
 */
 
-
-
-import * as types from "../../actionTypes";
 import { Navigation } from "react-native-navigation";
 
 export const pushTParticulatScreen = (componentId, screenNAme) => {
-  return dispatch => {
+  return () => {
     Navigation.push(componentId, {
       component: {
         name: screenNAme
@@ -21,12 +18,12 @@ export const pushTParticulatScreen = (componentId, screenNAme) => {
 };
 
 export const pop = componentId => {
-  return dispatch => {
+  return () => {
     Navigation.pop(componentId);
   };
 };
 export const mergeOptions = (componentId, draweropen) => {
-  return dispatch => {
+  return () => {
     Navigation.mergeOptions(componentId, {
       sideMenu: {
         left: {
@@ -37,7 +34,7 @@ export const mergeOptions = (componentId, draweropen) => {
   };
 };
 export const setScrenStack = (componentId, screen, visible) => {
-  return dispatch => {
+  return () => {
     Navigation.setStackRoot(componentId, {
       component: {
         name: screen,

@@ -1,6 +1,6 @@
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from "react-native-navigation";
 
-export const registerScreens=(store, Provider) =>{
+export const registerScreens = (store, Provider) => {
   // Loader Stack
   Navigation.registerComponentWithRedux(
     "Loader",
