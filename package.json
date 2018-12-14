@@ -2,6 +2,22 @@
   "name": "ActNursesportal",
   "version": "0.0.1",
   "private": true,
+  "contributors": [
+    {
+      "name": "Parshant Nagpal",
+      "email": "parshant.nagpal@smartdatainc.net",
+      "url": "https://github.com/parshantnagpalSmartData"
+    },
+    {
+      "name": "Suraj Sanwal",
+      "email": "suraj.sanwal@smartdatainc.net",
+      "url": "https://github.com/sonu654"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ravik2015/react-native-web-Starter-kit.git"
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",

@@ -10,6 +10,11 @@ Navigation.events().registerAppLaunchedListener(() => {
   const store = setup();
   registerScreens(store, Provider);
   addListeners();
+  Navigation.setDefaultOptions({
+    topBar: {
+      visible: false
+    }
+  });
   Navigation.setRoot({
     root: {
       component: {

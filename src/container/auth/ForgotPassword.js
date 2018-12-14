@@ -28,7 +28,8 @@ class ForgotPassword extends Component {
   static navigatorStyle = {
     navBarHidden: true
   };
-  submitLogin = _.debounce(() => {
+
+  submitEmail = _.debounce(() => {
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
       // toastMessage(navigator, {
@@ -57,12 +58,12 @@ class ForgotPassword extends Component {
       <View style={Styles.containner}>
         <Header
           title={title}
-          hideBack
           hideDrawer
-          color="#009"
+          color="#9999D6"
           headerText={{ color: "#fff" }}
         />
         <KeyboardAwareScrollView
+          scrollEnabled={false}
           contentContainerStyle={{
             alignItems: "center"
           }}
@@ -71,13 +72,14 @@ class ForgotPassword extends Component {
             style={{
               height:
                 Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.845
+                  ? Constants.BaseStyle.DEVICE_HEIGHT
                   : Constants.BaseStyle.DEVICE_HEIGHT * 0.87,
               width:
                 Platform.OS === "web"
                   ? Constants.BaseStyle.DEVICE_WIDTH / 2
                   : Constants.BaseStyle.DEVICE_WIDTH,
-              justifyContent: "space-between",
+              justifyContent:
+                Platform.OS === "web" ? "space-evenly" : "space-between",
               overflow: "hidden"
             }}
           >
@@ -97,14 +99,14 @@ class ForgotPassword extends Component {
                 }}
               />
             </View>
-            <View>
+            <View style={{ flex: 0.15 }}>
               <AuthButton
-                buttonName={"Reset Password"}
-                gradientColors={["#009", "#009"]}
+                buttonName={"Forgot Password"}
+                gradientColors={["#9999D6", "#9999D6"]}
                 textStyle={{ color: "#fff" }}
                 buttonStyle={Styles.buttonStyle}
                 gradientStyle={Styles.gradientStyle}
-                onPress={this.submitLogin}
+                onPress={() => this.submitEmail}
               />
             </View>
           </View>
