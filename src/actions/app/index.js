@@ -5,9 +5,7 @@ Description: conatins all navigation actions for app
 Date : 13 december 2018
 */
 
-
-
-import * as types from "../../actionTypes";
+// import * as types from "../../actionTypes";
 import { Navigation } from "react-native-navigation";
 
 export const pushTParticulatScreen = (componentId, screenNAme) => {

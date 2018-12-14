@@ -9,7 +9,10 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import _ from "lodash";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+import * as appAction from "../../actions";
 import FloatingInput from "../../components/common/FloatingInput";
 import Header from "../../components/common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
@@ -30,25 +33,17 @@ class ForgotPassword extends Component {
   };
 
   submitEmail = _.debounce(() => {
+    let { appAction } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
-      // toastMessage(navigator, {
-      //   type: Constants.AppCosntants.Notificaitons.Error,
-      //   message: Constants.Strings.Common.EmptyEmailMsg
-      // });
       alert(Constants.Strings.Common.EmptyEmailMsg);
       return;
     }
     if (!Regex.validateEmail(email.trim())) {
-      // toastMessage(navigator, {
-      //   type: Constants.AppCosntants.Notificaitons.Error,
-      //   message: Constants.Strings.Common.ValidEmailAddress
-      // });
       alert(Constants.Strings.Common.ValidEmailAddress);
       return;
     }
-    alert("mail has been sent to your email account");
-    return;
+    appAction.forgotPassword({ username: email });
   });
 
   render() {
@@ -106,7 +101,7 @@ class ForgotPassword extends Component {
                 textStyle={{ color: "#fff" }}
                 buttonStyle={Styles.buttonStyle}
                 gradientStyle={Styles.gradientStyle}
-                onPress={() => this.submitEmail}
+                onPress={this.submitEmail}
               />
             </View>
           </View>
@@ -133,4 +128,15 @@ const Styles = StyleSheet.create({
   gradientStyle: { borderRadius: 0 }
 });
 
-export default ForgotPassword;
+const mapStateToProps = state => ({
+  user: state.user,
+  app: state.app
+});
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ForgotPassword);

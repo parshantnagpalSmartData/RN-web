@@ -24,6 +24,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isWide: false,
       email: "suraj.sanwal@smartdatainc.net",
       password: "welcome123"
     };
@@ -57,11 +58,16 @@ class Login extends Component {
     }
   };
 
+  _handleLayout = ({ nativeEvent }) => {
+    this.setState(() => ({ isWide: nativeEvent.layout.width > 600 }));
+    console.log("now changing state : ", this.state.isWide);
+  };
+
   render() {
     let title = `ACT HOME HEALTH SERVICES, INC.
     NURSE PORTAL`;
     return (
-      <View style={Styles.containner}>
+      <View style={Styles.containner} onLayout={this._handleLayout}>
         <Header
           title={title}
           hideBack
