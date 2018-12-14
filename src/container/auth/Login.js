@@ -9,7 +9,10 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import _ from "lodash";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+import * as appAction from "../../actions";
 import FloatingInput from "../../components/common/FloatingInput";
 import Header from "../../components/common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
@@ -21,42 +24,44 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      email: "suraj.sanwal@smartdatainc.net",
+      password: "welcome123"
     };
   }
-  static navigatorStyle = {
-    navBarHidden: true
-  };
+
   submitLogin = _.debounce(() => {
+    console.log(this.props);
+    let { appAction, componentId, dispatch } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
-      // toastMessage(navigator, {
-      //   type: Constants.AppCosntants.Notificaitons.Error,
-      //   message: Constants.Strings.Common.EmptyEmailMsg
-      // });
       alert(Constants.Strings.Common.EmptyEmailMsg);
       return;
     }
     if (!Regex.validateEmail(email.trim())) {
-      // toastMessage(navigator, {
-      //   type: Constants.AppCosntants.Notificaitons.Error,
-      //   message: Constants.Strings.Common.ValidEmailAddress
-      // });
       alert(Constants.Strings.Common.ValidEmailAddress);
       return;
     }
     if (_.isEmpty(password.trim())) {
-      // toastMessage(navigator, {
-      //   type: Constants.AppCosntants.Notificaitons.Error,
-      //   message: Constants.Strings.Common.EnterPassword
-      // });
       alert(Constants.Strings.Common.EnterPassword);
       return;
     }
-    alert("logged in sucessfully");
-    return;
+    appAction.signIn({ username: email, password: password }, componentId);
   });
+
+  onForgotPassword = () => {
+    if (Platform.OS !== "web") {
+      this.props.dispatch(
+        AppAction.pushTParticulatScreen(
+          this.props.componentId,
+          "ForgotPassword"
+        )
+      );
+    } else {
+      this.props.dispatch(AppAction.pushTParticulatScreen("/ForgotPassword"));
+
+      // this.props.history.push("/about")
+    }
+  };
 
   render() {
     let title = `ACT HOME HEALTH SERVICES, INC.
@@ -67,10 +72,11 @@ class Login extends Component {
           title={title}
           hideBack
           hideDrawer
-          color="#009"
+          color="#9999D6"
           headerText={{ color: "#fff" }}
         />
         <KeyboardAwareScrollView
+          scrollEnabled={false}
           contentContainerStyle={{
             alignItems: "center"
           }}
@@ -79,13 +85,14 @@ class Login extends Component {
             style={{
               height:
                 Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.848
-                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.87,
+                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.85
+                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.9,
               width:
                 Platform.OS === "web"
                   ? Constants.BaseStyle.DEVICE_WIDTH / 2
                   : Constants.BaseStyle.DEVICE_WIDTH,
-              justifyContent: "space-between",
+              justifyContent:
+                Platform.OS === "web" ? "space-evenly" : "space-between",
               overflow: "hidden"
             }}
           >
@@ -119,19 +126,23 @@ class Login extends Component {
                 ref={ref => (this.password = ref)}
               />
             </View>
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <Text onPress={() => alert("under development")}>
-                Forgot Password
-              </Text>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Text onPress={this.onForgotPassword}>Forgot Password</Text>
             </View>
-            <View>
+            <View style={{ flex: 0.25 }}>
               <AuthButton
                 buttonName={"Login"}
-                gradientColors={["#009", "#009"]}
+                gradientColors={["#9999D6", "#9999D6"]}
                 textStyle={{ color: "#fff" }}
                 buttonStyle={Styles.buttonStyle}
                 gradientStyle={Styles.gradientStyle}
                 onPress={this.submitLogin}
+                buttonStyle={{ flex: 1 }}
               />
             </View>
           </View>
@@ -158,4 +169,15 @@ const Styles = StyleSheet.create({
   gradientStyle: { borderRadius: 0 }
 });
 
-export default Login;
+const mapStateToProps = state => ({
+  user: state.user,
+  app: state.app
+});
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

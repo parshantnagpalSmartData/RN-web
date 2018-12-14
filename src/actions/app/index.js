@@ -1,23 +1,23 @@
 import * as types from "../../actionTypes";
-import { Navigation } from 'react-native-navigation';
+import { Navigation } from "react-native-navigation";
 
 export const pushTParticulatScreen = (componentId, screenNAme) => {
-  return (dispatch) => {
+  return dispatch => {
     Navigation.push(componentId, {
       component: {
-        name: screenNAme,
+        name: screenNAme
       }
     });
   };
-}
+};
 
-export const pop = (componentId) => {
-  return (dispatch) => {
+export const pop = componentId => {
+  return dispatch => {
     Navigation.pop(componentId);
   };
-}
+};
 export const mergeOptions = (componentId, draweropen) => {
-  return (dispatch) => {
+  return dispatch => {
     Navigation.mergeOptions(componentId, {
       sideMenu: {
         left: {
@@ -25,27 +25,25 @@ export const mergeOptions = (componentId, draweropen) => {
         }
       }
     });
-  }
-}
-export const setScrenStack = (componentId,screen,visible)=> {
-  return(dispatch) => {
+  };
+};
+export const setScrenStack = (componentId, screen, visible) => {
+  return dispatch => {
     Navigation.setStackRoot(componentId, {
       component: {
         name: screen,
         options: {
           topBar: {
             title: {
-              text: 'Pushed 1'
+              text: "Pushed 1"
             }
           },
-             bottomTabs: {
-                  visible,
-                  drawBehind:true,
-                }
+          bottomTabs: {
+            visible,
+            drawBehind: true
+          }
         }
       }
     });
-  }
-}
-
-
+  };
+};

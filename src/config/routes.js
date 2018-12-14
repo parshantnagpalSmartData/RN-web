@@ -16,8 +16,8 @@ export const registerScreens = (store, Provider) => {
     store
   );
   Navigation.registerComponentWithRedux(
-    "SignUp",
-    () => require("../container/SignUp").default,
+    "ForgotPassword",
+    () => require("../container/auth/ForgotPassword").default,
     Provider,
     store
   );
