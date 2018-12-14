@@ -7,7 +7,9 @@
     "test": "jest",
     "clean": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean",
     "web-build-dev": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --port 3001 --inline --hot --colors",
-    "web-build-prod": "./node_modules/.bin/webpack -p --config ./web/webpack.config.js"
+    "web-build-prod": "./node_modules/.bin/webpack -p --config ./web/webpack.config.js",
+    "watchman-clear": "watchman watch-del-all",
+    "preinstall": "node preinstall.js"
   },
   "dependencies": {
     "lodash": "^4.17.11",
