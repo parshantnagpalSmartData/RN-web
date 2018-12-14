@@ -49,17 +49,11 @@ class Login extends Component {
   });
 
   onForgotPassword = () => {
+    let { appAction, componentId } = this.props;
     if (Platform.OS !== "web") {
-      this.props.dispatch(
-        AppAction.pushTParticulatScreen(
-          this.props.componentId,
-          "ForgotPassword"
-        )
-      );
+      appAction.pushTParticulatScreen(this.props.componentId, "ForgotPassword");
     } else {
-      this.props.dispatch(AppAction.pushTParticulatScreen("/ForgotPassword"));
-
-      // this.props.history.push("/about")
+      appAction.pushTParticulatScreen("/ForgotPassword");
     }
   };
 
