@@ -6,7 +6,7 @@ Date : 11 Dec 2018
 */
 
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -25,13 +25,26 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "suraj.sanwal@smartdatainc.net",
-      password: "welcome123"
+      password: "welcome123",
+      deviceWidth: window.innerWidth
     };
   }
-
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+  updateDimensions() {
+    // console.log("change event ", window.innerWidth);
+    this.setState({ deviceWidth: window.innerWidth });
+  }
+  /**
+   * Remove event listener
+   */
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions.bind(this));
+  }
   submitLogin = _.debounce(() => {
-    console.log(this.props);
-    let { appAction, componentId, dispatch } = this.props;
+    // console.log(this.props);
+    let { appAction, componentId } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
       alert(Constants.Strings.Common.EmptyEmailMsg);
@@ -51,19 +64,21 @@ class Login extends Component {
   onForgotPassword = () => {
     if (Platform.OS !== "web") {
       this.props.dispatch(
-        AppAction.pushTParticulatScreen(
+        appAction.pushTParticulatScreen(
           this.props.componentId,
           "ForgotPassword"
         )
       );
     } else {
-      this.props.dispatch(AppAction.pushTParticulatScreen("/ForgotPassword"));
+      this.props.dispatch(appAction.pushTParticulatScreen("/ForgotPassword"));
 
       // this.props.history.push("/about")
     }
   };
 
   render() {
+    let { deviceWidth } = this.state;
+    // console.log("deviceWidthdeviceWidth", this.state.deviceWidth);
     let title = `ACT HOME HEALTH SERVICES, INC.
     NURSE PORTAL`;
     return (
@@ -89,7 +104,7 @@ class Login extends Component {
                   : Constants.BaseStyle.DEVICE_HEIGHT * 0.9,
               width:
                 Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_WIDTH / 2
+                  ? deviceWidth / 2
                   : Constants.BaseStyle.DEVICE_WIDTH,
               justifyContent:
                 Platform.OS === "web" ? "space-evenly" : "space-between",
@@ -139,7 +154,7 @@ class Login extends Component {
                 buttonName={"Login"}
                 gradientColors={["#9999D6", "#9999D6"]}
                 textStyle={{ color: "#fff" }}
-                buttonStyle={Styles.buttonStyle}
+                // buttonStyle={Styles.buttonStyle}
                 gradientStyle={Styles.gradientStyle}
                 onPress={this.submitLogin}
                 buttonStyle={{ flex: 1 }}
