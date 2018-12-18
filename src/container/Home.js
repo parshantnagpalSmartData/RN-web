@@ -1,74 +1,158 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { goToAuth } from "../config/navigation";
-import { connect } from "react-redux";
-import * as AppAction from "../actions";
-import { removeListeners } from "../utilities/listeners";
-// import { handleBackPress } from "../utilities/BackButtonHandling";
-import { Navigation } from "react-native-navigation";
+import React, { Component } from "react";
+import { View, StyleSheet, FlatList, Text, Platform } from "react-native";
+
+import Constants from "../constants";
+import { moderateScale } from "../helpers/ResponsiveFonts";
 import Header from "../components/common/Header";
-let removeListener = true;
-class Home extends React.Component {
-  /*
-		Constructor Function
-	*/
+
+class Home extends Component {
   constructor(props) {
     super(props);
-    Navigation.events().bindComponent(this);
-  }
-  componentDidAppear() {
-    // BackHandler.addEventListener('hardwareBackPress', handleBackPress); // Back Button handling
-  }
-  componentDidDisappear() {
-    // BackHandler.removeEventListener('hardwareBackPress', handleBackPress); // Back Button handling
-  }
-  componentWillUnmount() {
-    if (removeListener) {
-      removeListeners();
-    }
   }
 
-  logout = () => {
-    removeListener = false;
-    this.props.dispatch(AppAction.logOut());
-    goToAuth();
-  };
-  render() {
+  renderPatients = ({ item, index }) => {
     return (
-      <View style={styles.container}>
-        <Header
-          title={"MY SCHEDULE"}
-          hideBack
-          hideDrawer
-          color="#9999D6"
-          headerText={{ color: "#fff" }}
-        />
-        <Text>Hello from Home screen.</Text>
-        <Button onPress={() => this.logout()} title="Sign Out" />
-        <Button
-          onPress={() => {
-            // Navigation.push(this.props.componentId, {
-            //   component: {
-            //     name: 'Screen2',
-            //   }
-            // });
-            this.props.dispatch(
-              AppAction.pushTParticulatScreen(this.props.componentId, "Screen2")
-            );
+      <View
+        key={index}
+        style={{
+          paddingHorizontal: moderateScale(25),
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          borderColor: Constants.Colors.gray,
+          borderWidth: 0,
+          borderTopWidth: index !== 0 ? 1 : 0,
+          borderBottomWidth: 1,
+          padding: moderateScale(20),
+          width:
+            Platform.OS === "web"
+              ? Constants.BaseStyle.DEVICE_WIDTH / 2
+              : Constants.BaseStyle.DEVICE_WIDTH
+        }}
+      >
+        <View
+          style={{
+            padding: moderateScale(10)
           }}
-          title="View next screen"
+        >
+          <Text>{item.date}</Text>
+        </View>
+        <View>
+          <View>
+            <Text>{item.name}</Text>
+          </View>
+          <View>
+            <Text>
+              {item.from} - {item.to}
+            </Text>
+          </View>
+          <View>
+            <Text>{item.type}</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  render() {
+    let patitents = [
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      },
+      {
+        name: "Suraj Sanwal",
+        from: "9",
+        to: "11",
+        type: "scheduled",
+        date: "Tue 9"
+      }
+    ];
+    return (
+      <View style={Styles.containner}>
+        <Header title={"My Schedule"} />
+        <FlatList
+          data={patitents}
+          renderItem={this.renderPatients}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          style={{
+            ...Platform.select({
+              web: {
+                overflow: "hidden"
+              }
+            })
+          }}
         />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
+const Styles = StyleSheet.create({
+  containner: {
+    flex: 1,
+    justifyContent: "center"
+    // /alignItems: "center"
   }
 });
-export default connect(
-  null,
-  null
-)(Home);
+
+export default Home;

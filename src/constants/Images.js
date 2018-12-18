@@ -10,5 +10,6 @@ module.exports = {
   Email: require("../assets/images/User/user.png"),
   Password: require("../assets/images/Password/padlock.png"),
   Back: require("../assets/images/Next/next.png"),
-  Drawer: require("../assets/images/Drawer/drawer.png")
+  Drawer: require("../assets/images/Drawer/drawer.png"),
+  UserAvatar: require("../assets/images/username/username.png")
 };

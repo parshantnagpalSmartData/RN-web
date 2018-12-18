@@ -16,6 +16,7 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 const Header = props => {
   let {
+    onDrawerPress,
     hideBack,
     hideDrawer,
     color,
@@ -24,7 +25,6 @@ const Header = props => {
     rightIcon,
     onRightPress,
     rightText,
-    navigator,
     headerText,
     onBackPress,
     searchBox,
@@ -55,14 +55,7 @@ const Header = props => {
           ]}
         >
           {!hideDrawer ? (
-            <TouchableOpacity
-              style={Styles.iconBtn}
-              onPress={() => {
-                navigator.toggleDrawer({
-                  side: "left"
-                });
-              }}
-            >
+            <TouchableOpacity style={Styles.iconBtn} onPress={onDrawerPress}>
               <Image
                 source={Constants.Images.Drawer}
                 resizeMode={"contain"}
@@ -70,12 +63,7 @@ const Header = props => {
               />
             </TouchableOpacity>
           ) : !hideBack ? (
-            <TouchableOpacity
-              style={Styles.iconBtn}
-              onPress={() => {
-                onBackPress ? onBackPress() : navigator.pop();
-              }}
-            >
+            <TouchableOpacity style={Styles.iconBtn} onPress={onBackPress}>
               <Image source={Constants.Images.Back} resizeMode={"contain"} />
             </TouchableOpacity>
           ) : (
