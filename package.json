@@ -29,15 +29,19 @@
     "test": "jest",
     "clean": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean",
     "web-build-dev": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --port 3001 --inline --hot --colors",
-    "web-build-prod": "./node_modules/.bin/webpack -p --config ./web/webpack.config.js",
+    "web-build-prod": "npm run cleanWeb && ./node_modules/.bin/webpack -p --config ./web/webpack.config.js",
     "watchman-clear": "watchman watch-del-all",
     "preinstall": "node preinstall.js",
+    "cleanWeb": "rm -rf ./dist/bundle.web.js",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
-    "precommit": "npm run rp && lint-staged"
+    "precommit": "npm run rp && lint-staged",
+    "serve": "./node_modules/.bin/serve -s dist",
+    "startWeb": "./node_modules/.bin/http-server ./dist --cors -a localhost -p 8000"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
+    "http-server": "^0.11.1",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
     "react-art": "^16.6.3",
