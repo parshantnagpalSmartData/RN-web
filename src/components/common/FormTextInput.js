@@ -7,7 +7,7 @@
 "use strict";
 
 import React, { Component } from "react";
-import { Image, View, TextInput, StyleSheet } from "react-native";
+import { Image, View, TextInput, StyleSheet, Platform } from "react-native";
 
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
@@ -70,7 +70,7 @@ class FormTextInput extends Component {
       autoFocus,
       editable,
       value,
-      imageSource,
+      image,
       maximumLength,
       onChangeText
     } = this.props;
@@ -79,18 +79,20 @@ class FormTextInput extends Component {
         style={[
           Styles.viewStyle,
           {
-            borderColor: this.state.focusColor,
-            borderWidth: this.state.borderWidth
+            borderBottomColor: this.state.focusColor,
+            borderBottomWidth: this.state.borderWidth
           },
           this.props.style
         ]}
       >
-        {this.props.imageSource && (
-          <Image
-            source={imageSource}
-            style={Styles.imageStyle}
-            resizeMode="contain"
-          />
+        {image && (
+          <View style={Styles.imgWrapper}>
+            <Image
+              source={image}
+              style={Styles.imageStyle}
+              resizeMode="contain"
+            />
+          </View>
         )}
         <TextInput
           ref={ref => (this.inputBox = ref || "inputbox")}
@@ -126,20 +128,32 @@ const Styles = StyleSheet.create({
   viewStyle: {
     flexDirection: "row",
     borderColor: Constants.Colors.placehoder,
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(10),
-    //alignSelf: "stretch",
-    borderRadius: moderateScale(25),
+    marginTop: moderateScale(15),
+    marginBottom: moderateScale(15),
     marginHorizontal: moderateScale(25),
+    justifyContent: "center"
+    // alignItems: "center"
+  },
+  inputStyle: {
+    flex: 1,
+    color: Constants.Colors.Black,
+    ...Constants.Fonts.Light,
+    fontSize: moderateScale(16),
+    margin: moderateScale(10),
+    ...Platform.select({
+      web: {
+        outline: "none"
+      }
+    })
+  },
+  imgWrapper: {
+    height: moderateScale(40),
+    width: moderateScale(40),
     justifyContent: "center",
     alignItems: "center"
   },
-  inputStyle: {
-    //marginLeft: moderateScale(10),
-    //width: Constants.BaseStyle.DEVICE_WIDTH,
-    height: moderateScale(30),
-    color: Constants.Colors.Primary,
-    ...Constants.Fonts.Regular,
-    fontSize: moderateScale(16)
+  imageStyle: {
+    height: moderateScale(25),
+    width: moderateScale(25)
   }
 });
