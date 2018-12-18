@@ -25,7 +25,27 @@ export const signIn = (postData, componentId) => {
       })
       .catch(e => {
         dispatch({ type: Types.LOGIN_FAIL });
-        console.warn("error", e);
+        console.warn("error", e); // eslint-disable-line 
+      });
+  };
+};
+
+export const forgotPassword = postData => {
+  return dispatch => {
+    dispatch({ type: Types.FORGOT_REQUEST });
+    RestClient.restCall("users/forgotpassword", postData)
+      .then(res => {
+        if (res.status) {
+          dispatch({ type: Types.FORGOT_SUCESS });
+          alert(res.message);
+        } else {
+          dispatch({ type: Types.FORGOT_FAIL });
+          alert(res.message);
+        }
+      })
+      .catch(e => {
+        dispatch({ type: Types.FORGOT_FAIL });
+        console.warn("error", e); // eslint-disable-line 
       });
   };
 };

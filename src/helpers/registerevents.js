@@ -6,7 +6,7 @@
 /* eslint-disable */
 import { NetInfo } from "react-native";
 
-let Events = {
+var Events = {
   RegisterNetEvents: () => {
     let handleFirstConnectivityChange = () => {
       NetInfo.isConnected.removeEventListener(

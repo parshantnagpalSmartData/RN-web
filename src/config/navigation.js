@@ -48,24 +48,6 @@ export const goHome = () =>
                     }
                   ]
                 }
-              },
-              {
-                stack: {
-                  children: [
-                    {
-                      component: {
-                        name: "Tab2",
-                        options: {
-                          bottomTab: {
-                            text: "Tab 2",
-                            fontSize: 12,
-                            icon: require("../assets/img/signup.png")
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
               }
             ]
           }

@@ -24,13 +24,16 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isWide: false,
       email: "suraj.sanwal@smartdatainc.net",
       password: "welcome123",
       deviceWidth: window.innerWidth
     };
   }
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    if (Platform.OS == "web") {
+      window.addEventListener("resize", this.updateDimensions.bind(this));
+    }
   }
   updateDimensions() {
     // console.log("change event ", window.innerWidth);
@@ -40,7 +43,9 @@ class Login extends Component {
    * Remove event listener
    */
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    if (Platform.OS == "web") {
+      window.removeEventListener("resize", this.updateDimensions.bind(this));
+    }
   }
   submitLogin = _.debounce(() => {
     // console.log(this.props);
@@ -50,6 +55,7 @@ class Login extends Component {
       alert(Constants.Strings.Common.EmptyEmailMsg);
       return;
     }
+
     if (!Regex.validateEmail(email.trim())) {
       alert(Constants.Strings.Common.ValidEmailAddress);
       return;
@@ -62,23 +68,16 @@ class Login extends Component {
   });
 
   onForgotPassword = () => {
+    let { appAction, componentId } = this.props;// eslint-disable-line 
     if (Platform.OS !== "web") {
-      this.props.dispatch(
-        appAction.pushTParticulatScreen(
-          this.props.componentId,
-          "ForgotPassword"
-        )
-      );
+      appAction.pushTParticulatScreen(this.props.componentId, "ForgotPassword");
     } else {
-      this.props.dispatch(appAction.pushTParticulatScreen("/ForgotPassword"));
-
-      // this.props.history.push("/about")
+      appAction.pushTParticulatScreen("/ForgotPassword");
     }
   };
 
   render() {
     let { deviceWidth } = this.state;
-    // console.log("deviceWidthdeviceWidth", this.state.deviceWidth);
     let title = `ACT HOME HEALTH SERVICES, INC.
     NURSE PORTAL`;
     return (
@@ -91,7 +90,7 @@ class Login extends Component {
           headerText={{ color: "#fff" }}
         />
         <KeyboardAwareScrollView
-          scrollEnabled={false}
+          scrollEnabled={true}
           contentContainerStyle={{
             alignItems: "center"
           }}

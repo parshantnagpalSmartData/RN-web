@@ -71,6 +71,7 @@ class FloatingInput extends Component {
                     : Constants.Colors.placehoder
                 }
               ]}
+              underlineColorAndroid={Constants.Colors.Transparent}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               value={value}
