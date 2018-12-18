@@ -1,0 +1,102 @@
+{
+  "name": "ActNursesportal",
+  "version": "0.0.1",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Parshant Nagpal",
+      "email": "parshant.nagpal@smartdatainc.net",
+      "url": "https://github.com/parshantnagpalSmartData"
+    },
+    {
+      "name": "Suraj Sanwal",
+      "email": "suraj.sanwal@smartdatainc.net",
+      "url": "https://github.com/sonu654"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ravik2015/react-native-web-Starter-kit.git"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "clean": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean",
+<<<<<<< HEAD
+    "web-build-dev": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --port 3001 --inline --hot --colors",
+    "web-build-prod": "npm run cleanWeb && ./node_modules/.bin/webpack -p --config ./web/webpack.config.js",
+=======
+    "web-build-dev": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --port 4221 --inline --hot --colors",
+    "web-build-prod": "./node_modules/.bin/webpack -p --config ./web/webpack.config.js",
+>>>>>>> f5eee897068c82ad33fe2a8bb24ada978d5560f1
+    "watchman-clear": "watchman watch-del-all",
+    "preinstall": "node preinstall.js",
+    "cleanWeb": "rm -rf ./dist/bundle.web.js",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
+    "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
+    "precommit": "npm run rp && lint-staged",
+    "serve": "./node_modules/.bin/serve -s dist",
+    "startWeb": "./node_modules/.bin/http-server ./dist --cors -a localhost -p 8000"
+  },
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "http-server": "^0.11.1",
+    "lodash": "^4.17.11",
+    "react": "^16.6.3",
+    "react-art": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-native": "0.55.4",
+    "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-linear-gradient": "^2.5.3",
+    "react-native-navigation": "^2.1.3-patch.2",
+    "react-native-web": "^0.9.9",
+    "react-native-web-linear-gradient": "^1.0.5",
+    "react-redux": "^6.0.0",
+    "react-responsive": "^6.0.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0",
+    "seamless-immutable": "^7.1.4"
+  },
+  "devDependencies": {
+    "babel": "6.23.0",
+    "babel-core": "6.26.0",
+    "babel-jest": "23.6.0",
+    "babel-loader": "7.1.4",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-react-native-web": "^0.9.9",
+    "babel-plugin-react-transform": "3.0.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-react-native": "4.0.1",
+    "babel-preset-stage-0": "6.24.1",
+    "eslint": "^5.10.0",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^1.2.1",
+    "jest": "23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "react-test-renderer": "16.3.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/assets/Font"
+    ]
+  }
+}
