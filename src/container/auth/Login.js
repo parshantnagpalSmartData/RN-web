@@ -64,7 +64,6 @@ class Login extends Component {
       alert(Constants.Strings.Common.EnterPassword);
       return;
     }
-
     appAction.signIn({ username: email, password: password }, componentId);
   });
 
