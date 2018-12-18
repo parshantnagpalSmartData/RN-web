@@ -1,5 +1,5 @@
 import { Navigation } from "react-native-navigation";
-
+import Constants from "../constants";
 export const goToAuth = () =>
   Navigation.setRoot({
     root: {
@@ -41,7 +41,7 @@ export const goHome = () =>
                           bottomTab: {
                             fontSize: 12,
                             text: "Home",
-                            icon: require("../assets/img/signin.png")
+                            icon: Constants.Images.logo
                           }
                         }
                       }
