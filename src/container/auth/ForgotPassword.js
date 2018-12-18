@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import FloatingInput from "../../components/common/FloatingInput";
+import FormTextInput from "../../components/common/FormTextInput";
 import Header from "../../components/common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import AuthButton from "../../components/common/AuthButton";
@@ -25,7 +25,8 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      deviceWidth: window.innerWidth
     };
   }
   static navigatorStyle = {
@@ -47,18 +48,13 @@ class ForgotPassword extends Component {
   });
 
   render() {
-    let title = `ACT HOME HEALTH SERVICES, INC.
-    NURSE PORTAL`;
+    let { deviceWidth } = this.state;
+    let title = "ACT HOME HEALTH SERVICES";
     return (
       <View style={Styles.containner}>
-        <Header
-          title={title}
-          hideDrawer
-          color="#9999D6"
-          headerText={{ color: "#fff" }}
-        />
+        <Header title={title} hideDrawer />
         <KeyboardAwareScrollView
-          scrollEnabled={false}
+          scrollEnabled={true}
           contentContainerStyle={{
             alignItems: "center"
           }}
@@ -67,20 +63,22 @@ class ForgotPassword extends Component {
             style={{
               height:
                 Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT
-                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.87,
+                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.62
+                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
               width:
                 Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_WIDTH / 2
+                  ? deviceWidth > 600
+                    ? deviceWidth / 2
+                    : deviceWidth
                   : Constants.BaseStyle.DEVICE_WIDTH,
-              justifyContent:
-                Platform.OS === "web" ? "space-evenly" : "space-between",
+              justifyContent: "space-evenly",
               overflow: "hidden"
             }}
           >
             <View style={Styles.FloatingInputContainer}>
-              <FloatingInput
-                label={"Username"}
+              <FormTextInput
+                image={Constants.Images.Email}
+                placeHolderText={"Username"}
                 onChangeText={email => {
                   this.setState({ email });
                 }}
@@ -94,13 +92,18 @@ class ForgotPassword extends Component {
                 }}
               />
             </View>
-            <View style={{ flex: 0.15 }}>
+
+            <View
+              style={{
+                flex: 0.25,
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
               <AuthButton
                 buttonName={"Forgot Password"}
-                gradientColors={["#9999D6", "#9999D6"]}
-                textStyle={{ color: "#fff" }}
-                buttonStyle={Styles.buttonStyle}
-                gradientStyle={Styles.gradientStyle}
+                gradientColors={Constants.Colors.ButtonGradients}
+                //textStyle={{ color: "#fff" }}
                 onPress={this.submitEmail}
               />
             </View>

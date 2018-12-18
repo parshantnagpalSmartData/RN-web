@@ -63,7 +63,7 @@ var Fonts = {
     fontFamily: "Montserrat-MediumItalic"
   },
   Medium: {
-    fontFamily: "MontserratAlternates-Medium"
+    fontFamily: "Montserrat-Medium"
   },
 
   AlternatesBold: {

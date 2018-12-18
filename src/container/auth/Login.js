@@ -13,12 +13,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import FloatingInput from "../../components/common/FloatingInput";
-import Header from "../../components/common/Header";
+// import FloatingInput from "../../components/common/FloatingInput";
+import FormTextInput from "../../components/common/FormTextInput";
+// import Header from "../../components/common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
+import LogoText from "../../components/common/LogoText";
 
 class Login extends Component {
   constructor(props) {
@@ -71,7 +73,7 @@ class Login extends Component {
   onForgotPassword = () => {
     let { appAction, componentId } = this.props; // eslint-disable-line
     if (Platform.OS !== "web") {
-      appAction.pushTParticulatScreen(this.props.componentId, "ForgotPassword");
+      appAction.pushTParticulatScreen(componentId, "ForgotPassword");
     } else {
       appAction.pushTParticulatScreen("/ForgotPassword");
     }
@@ -79,17 +81,11 @@ class Login extends Component {
 
   render() {
     let { deviceWidth } = this.state;
-    let title = `ACT HOME HEALTH SERVICES, INC.
-    NURSE PORTAL`;
     return (
       <View style={Styles.containner}>
-        <Header
-          title={title}
-          hideBack
-          hideDrawer
-          color="#9999D6"
-          headerText={{ color: "#fff" }}
-        />
+        <View style={{ flex: 0.5, justifyContent: "center" }}>
+          <LogoText text={"ACT Home Health Services"} />
+        </View>
         <KeyboardAwareScrollView
           scrollEnabled={true}
           contentContainerStyle={{
@@ -100,19 +96,21 @@ class Login extends Component {
             style={{
               height:
                 Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.85
-                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.9,
+                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.62
+                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
               width:
                 Platform.OS === "web"
-                  ? deviceWidth / 2
+                  ? deviceWidth > 600
+                    ? deviceWidth / 2
+                    : deviceWidth
                   : Constants.BaseStyle.DEVICE_WIDTH,
-              justifyContent:
-                Platform.OS === "web" ? "space-evenly" : "space-between",
+              justifyContent: "space-evenly",
               overflow: "hidden"
             }}
           >
             <View style={Styles.FloatingInputContainer}>
-              <FloatingInput
+              <FormTextInput
+                image={Constants.Images.Email}
                 label={"Username"}
                 onChangeText={email => {
                   this.setState({ email });
@@ -126,7 +124,8 @@ class Login extends Component {
                   this.focusNext("password");
                 }}
               />
-              <FloatingInput
+              <FormTextInput
+                image={Constants.Images.Password}
                 label={"Password"}
                 onChangeText={password => {
                   this.setState({ password });
@@ -141,24 +140,38 @@ class Login extends Component {
                 ref={ref => (this.password = ref)}
               />
             </View>
+
             <View
               style={{
+                flex: 0.25,
                 justifyContent: "center",
                 alignItems: "center"
               }}
             >
-              <Text onPress={this.onForgotPassword}>Forgot Password</Text>
-            </View>
-            <View style={{ flex: 0.25 }}>
               <AuthButton
                 buttonName={"Log In"}
                 gradientColors={Constants.Colors.ButtonGradients}
                 textStyle={{ color: "#fff" }}
-                // buttonStyle={Styles.buttonStyle}
-                gradientStyle={Styles.gradientStyle}
                 onPress={this.submitLogin}
-                buttonStyle={{ flex: 1 }}
               />
+            </View>
+            <View
+              style={{
+                justifyContent: "flex-start",
+                alignItems: "center",
+                flex: 0.25
+              }}
+            >
+              <Text
+                style={{
+                  ...Constants.Fonts.Regular,
+                  fontSize: moderateScale(16),
+                  color: Constants.Colors.Secondary
+                }}
+                onPress={this.onForgotPassword}
+              >
+                Forgot Password?
+              </Text>
             </View>
           </View>
         </KeyboardAwareScrollView>
@@ -173,13 +186,9 @@ const Styles = StyleSheet.create({
     justifyContent: "center"
   },
   FloatingInputContainer: {
-    paddingVertical: moderateScale(40),
+    flex: 0.5,
     paddingHorizontal: moderateScale(25),
-    justifyContent: "flex-start"
-  },
-  buttonStyle: {
-    borderWidth: 0.4,
-    borderColor: Constants.Colors.placehoder
+    justifyContent: "center"
   },
   gradientStyle: { borderRadius: 0 }
 });

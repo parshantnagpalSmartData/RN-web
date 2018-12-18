@@ -7,6 +7,7 @@ Date : 17 Sept 2018
 
 import React from "react";
 import { TouchableOpacity, View, Image, Text, StyleSheet } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 
 import Constants from "../../constants";
 import SafeView from "./SafeView";
@@ -30,113 +31,114 @@ const Header = props => {
     onChangeSearchText,
     searchText,
     searchPlaceHolder,
-    rightComponent
+    rightComponent,
+    gradientColors,
+    gradientStyle
   } = props;
 
   return (
-    <View style={{ backgroundColor: color || Constants.Colors.Transparent }}>
-      <SafeView />
-      <View
-        style={[
-          Styles.container,
-          {
-            backgroundColor: color,
-            paddingVertical: !searchBox ? moderateScale(15) : 0
-          }
-        ]}
-      >
-        {!hideDrawer ? (
-          <TouchableOpacity
-            style={Styles.iconBtn}
-            onPress={() => {
-              navigator.toggleDrawer({
-                side: "left"
-              });
-            }}
-          >
-            <Image
-              source={Constants.Images.Drawer.Toggle}
-              resizeMode={"contain"}
-              style={Styles.iconBtn}
-            />
-            {/* <Image
-              source={{
-                uri:
-                  "https://www.google.co.in/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-                width: 40,
-                height: 40
-              }}
-            /> */}
-          </TouchableOpacity>
-        ) : !hideBack ? (
-          <TouchableOpacity
-            style={Styles.iconBtn}
-            onPress={() => {
-              onBackPress ? onBackPress() : navigator.pop();
-            }}
-          >
-            <Image
-              source={Constants.Images.Common.Back}
-              resizeMode={"contain"}
-            />
-          </TouchableOpacity>
-        ) : (
-          <View style={Styles.iconBtn} />
-        )}
+    <LinearGradient
+      start={{ x: 1, y: 0 }}
+      end={{ x: 0, y: 0 }}
+      colors={gradientColors || Constants.Colors.ButtonGradients}
+      style={[Styles.gradientStyle, gradientStyle]}
+    >
+      <View style={{ backgroundColor: color || Constants.Colors.Transparent }}>
+        <SafeView />
         <View
           style={[
-            Styles.header,
+            Styles.container,
             {
-              justifyContent: searchBox ? "flex-start" : "center",
-              alignItems: searchBox ? "flex-start" : "center"
+              backgroundColor: color,
+              paddingVertical: !searchBox ? moderateScale(15) : 0
             }
           ]}
         >
-          {searchBox ? (
-            <FormTextInput
-              onChangeText={text => onChangeSearchText(text)}
-              value={searchText}
-              placeHolderText={searchPlaceHolder}
-              style={Styles.searchBox}
-              inputStyle={Styles.inputStyle}
-            />
-          ) : null}
-          {title ? (
-            <Text numberOfLines={2} style={[Styles.headerText, headerText]}>
-              {title}
-            </Text>
-          ) : null}
-          {subTitle ? (
-            <Text numberOfLines={1} style={Styles.subHeaderText}>
-              {subTitle}
-            </Text>
+          {!hideDrawer ? (
+            <TouchableOpacity
+              style={Styles.iconBtn}
+              onPress={() => {
+                navigator.toggleDrawer({
+                  side: "left"
+                });
+              }}
+            >
+              <Image
+                source={Constants.Images.Drawer}
+                resizeMode={"contain"}
+                style={Styles.iconBtn}
+              />
+            </TouchableOpacity>
+          ) : !hideBack ? (
+            <TouchableOpacity
+              style={Styles.iconBtn}
+              onPress={() => {
+                onBackPress ? onBackPress() : navigator.pop();
+              }}
+            >
+              <Image source={Constants.Images.Back} resizeMode={"contain"} />
+            </TouchableOpacity>
+          ) : (
+            <View style={Styles.iconBtn} />
+          )}
+          <View
+            style={[
+              Styles.header,
+              {
+                justifyContent: searchBox ? "flex-start" : "center",
+                alignItems: searchBox ? "flex-start" : "center"
+              }
+            ]}
+          >
+            {searchBox ? (
+              <FormTextInput
+                onChangeText={text => onChangeSearchText(text)}
+                value={searchText}
+                placeHolderText={searchPlaceHolder}
+                style={Styles.searchBox}
+                inputStyle={Styles.inputStyle}
+              />
+            ) : null}
+            {title ? (
+              <Text numberOfLines={2} style={[Styles.headerText, headerText]}>
+                {title}
+              </Text>
+            ) : null}
+            {subTitle ? (
+              <Text numberOfLines={1} style={Styles.subHeaderText}>
+                {subTitle}
+              </Text>
+            ) : null}
+          </View>
+          {rightIcon ? (
+            <TouchableOpacity
+              style={Styles.iconBtn}
+              onPress={() => onRightPress()}
+            >
+              <Image source={rightIcon} resizeMode={"contain"} />
+            </TouchableOpacity>
+          ) : rightText ? (
+            <TouchableOpacity
+              style={Styles.iconBtn}
+              onPress={() => onRightPress()}
+            >
+              <Text style={Styles.skip}>{rightText}</Text>
+            </TouchableOpacity>
+          ) : rightComponent ? (
+            <View style={Styles.iconBtn}>{rightComponent}</View>
           ) : null}
         </View>
-        {rightIcon ? (
-          <TouchableOpacity
-            style={Styles.iconBtn}
-            onPress={() => onRightPress()}
-          >
-            <Image source={rightIcon} resizeMode={"contain"} />
-          </TouchableOpacity>
-        ) : rightText ? (
-          <TouchableOpacity
-            style={Styles.iconBtn}
-            onPress={() => onRightPress()}
-          >
-            <Text style={Styles.skip}>{rightText}</Text>
-          </TouchableOpacity>
-        ) : rightComponent ? (
-          <View style={Styles.iconBtn}>{rightComponent}</View>
-        ) : null}
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
 export default Header;
 
 const Styles = StyleSheet.create({
+  gradientStyle: {
+    justifyContent: "center"
+  },
   container: {
     paddingHorizontal: moderateScale(20),
     paddingVertical: moderateScale(15),
@@ -157,15 +159,15 @@ const Styles = StyleSheet.create({
   },
   headerText: {
     ...Constants.Fonts.SemiBold,
-    color: Constants.Colors.Black,
-    fontSize: moderateScale(21),
+    color: Constants.Colors.White,
+    fontSize: moderateScale(16),
     textAlign: "center",
     textAlignVertical: "center"
   },
   subHeaderText: {
     ...Constants.Fonts.SemiBold,
     color: Constants.Colors.White,
-    fontSize: moderateScale(16),
+    fontSize: moderateScale(14),
     textAlign: "center",
     textAlignVertical: "center"
   },

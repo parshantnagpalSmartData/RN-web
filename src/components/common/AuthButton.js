@@ -12,7 +12,8 @@ import {
   Image,
   Text,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
@@ -41,12 +42,7 @@ const Button = props => {
       <LinearGradient
         start={{ x: 1, y: 0 }}
         end={{ x: 0, y: 0 }}
-        colors={
-          gradientColors || [
-            Constants.Colors.Primary,
-            Constants.Colors.Secondary
-          ]
-        }
+        colors={gradientColors || Constants.Colors.ButtonGradients}
         style={[Styles.gradientStyle, gradientStyle]}
       >
         {loading ? (
@@ -68,6 +64,12 @@ const Button = props => {
 
 export default Button;
 const Styles = StyleSheet.create({
+  buttonContainer: {
+    minWidth:
+      Platform.OS === "web"
+        ? Constants.BaseStyle.DEVICE_WIDTH / 3
+        : Constants.BaseStyle.DEVICE_WIDTH / 1.2
+  },
   gradientStyle: {
     borderRadius: moderateScale(50),
     justifyContent: "center",
@@ -79,7 +81,7 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(18),
     fontWeight: "bold",
-    color: Constants.Colors.Yellow,
+    color: Constants.Colors.White,
     textAlignVertical: "center",
     paddingHorizontal: moderateScale(5)
   }
