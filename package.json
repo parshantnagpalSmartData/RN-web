@@ -18,6 +18,12 @@
     "type": "git",
     "url": "https://github.com/ravik2015/react-native-web-Starter-kit.git"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
@@ -25,9 +31,13 @@
     "web-build-dev": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --port 3001 --inline --hot --colors",
     "web-build-prod": "./node_modules/.bin/webpack -p --config ./web/webpack.config.js",
     "watchman-clear": "watchman watch-del-all",
-    "preinstall": "node preinstall.js"
+    "preinstall": "node preinstall.js",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
+    "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
+    "precommit": "npm run rp && lint-staged"
   },
   "dependencies": {
+    "babel-eslint": "^10.0.1",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
     "react-art": "^16.6.3",
@@ -39,6 +49,7 @@
     "react-native-web": "^0.9.9",
     "react-native-web-linear-gradient": "^1.0.5",
     "react-redux": "^6.0.0",
+    "react-responsive": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-immutable-state-invariant": "^2.1.0",
@@ -59,7 +70,12 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-react-native": "4.0.1",
     "babel-preset-stage-0": "6.24.1",
+    "eslint": "^5.10.0",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^1.2.1",
     "jest": "23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
     "react-test-renderer": "16.3.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.27.1",

@@ -16,7 +16,8 @@ let Strings = {
     VaildDigit: "No of persons must be between 1-20"
   },
   Error: {
-    SourceNotSelected: "Pickup location is not specified please select pickup point first"
+    SourceNotSelected:
+      "Pickup location is not specified please select pickup point first"
   },
   PlaceHolder: {
     Pickup: "Enter pick-up location",
@@ -63,9 +64,17 @@ let Strings = {
   },
   Permissions: {
     Locations:
-      "Location access permission is denied for " + AppCosntants.AppName + ",Please enable it from the settings",
-    Camera: "Camera access permission is denied for " + AppCosntants.AppName + ",Please enable it from the settings",
-    Gallery: "Gallery access permission is denied for " + AppCosntants.AppName + ",Please enable it from the settings"
+      "Location access permission is denied for " +
+      AppCosntants.AppName +
+      ",Please enable it from the settings",
+    Camera:
+      "Camera access permission is denied for " +
+      AppCosntants.AppName +
+      ",Please enable it from the settings",
+    Gallery:
+      "Gallery access permission is denied for " +
+      AppCosntants.AppName +
+      ",Please enable it from the settings"
   },
   RideAccepted: {
     ArivalTime: "Arival Time"

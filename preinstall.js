@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-'use strict';
+"use strict";
 
 // Detect if run by NPM and fail
 
-if (process.env.npm_execpath.indexOf('yarn') === -1) {
+if (process.env.npm_execpath.indexOf("yarn") === -1) {
+  // eslint-disable-next-line no-console
   console.log(`
     =============================================
     DO NOT USE NPM TO INSTALL PACKAGES! Use Yarn.

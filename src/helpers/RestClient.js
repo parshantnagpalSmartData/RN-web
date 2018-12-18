@@ -50,7 +50,8 @@ class RestClient {
             })
             .catch(error => {
               fulfill({
-                message: "The server is not reachable right now, sorry for inconvenience."
+                message:
+                  "The server is not reachable right now, sorry for inconvenience."
               });
               console.warn("eroro", error);
             });
@@ -89,7 +90,8 @@ class RestClient {
             })
             .catch(error => {
               fulfill({
-                message: "The server is not reachable right now, sorry for inconvenience."
+                message:
+                  "The server is not reachable right now, sorry for inconvenience."
               });
               console.warn("eroro", error);
             });
@@ -128,7 +130,8 @@ class RestClient {
             })
             .catch(error => {
               fulfill({
-                message: "The server is not reachable right now, sorry for inconvenience."
+                message:
+                  "The server is not reachable right now, sorry for inconvenience."
               });
               console.warn("eroro", error);
             });
@@ -148,7 +151,12 @@ class RestClient {
       context
         .isConnected()
         .then(() => {
-          console.log("url=> ", Connection.getResturl() + url, " requestObject=> ", params);
+          console.log(
+            "url=> ",
+            Connection.getResturl() + url,
+            " requestObject=> ",
+            params
+          );
           fetch(Connection.getResturl() + url, {
             method: "POST",
             timeout: 1000 * 1 * 60,
@@ -171,7 +179,8 @@ class RestClient {
             .catch(error => {
               //   debugger;
               fulfill({
-                message: "The server is not reachable right now, sorry for inconvenience."
+                message:
+                  "The server is not reachable right now, sorry for inconvenience."
               });
               console.warn("eroro", error);
             });

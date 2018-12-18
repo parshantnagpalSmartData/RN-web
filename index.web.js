@@ -1,19 +1,37 @@
-import React from "react";
-import { PersistGate } from 'redux-persist/integration/react'
+import React, { Component } from "react";
+import { PersistGate } from "redux-persist/integration/react";
 
-import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import { AppRegistry } from "react-native";
 import { Provider } from "react-redux";
-import AppData from "./src";
 import setup from "./src/store/setup";
 
 import Routes from "./src/config/routes";
 const { persistor, store } = setup();
-class App extends React.Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deviceWidth: window.innerWidth
+    };
+  }
+  componentDidMount() {
+    // window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+  updateDimensions() {
+    this.setState({ deviceWidth: window.innerWidth });
+  }
+  /**
+   * Remove event listener
+   */
+  componentWillUnmount() {
+    //  window.removeEventListener("resize", this.updateDimensions.bind(this));
+  }
+
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-         <Routes />
+          <Routes />
         </PersistGate>
       </Provider>
     );
