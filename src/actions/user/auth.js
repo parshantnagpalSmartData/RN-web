@@ -25,7 +25,7 @@ export const signIn = (postData, componentId) => {
       })
       .catch(e => {
         dispatch({ type: Types.LOGIN_FAIL });
-        console.warn("error", e); // eslint-disable-line 
+        console.warn("error", e); // eslint-disable-line
       });
   };
 };
@@ -45,7 +45,7 @@ export const forgotPassword = postData => {
       })
       .catch(e => {
         dispatch({ type: Types.FORGOT_FAIL });
-        console.warn("error", e); // eslint-disable-line 
+        console.warn("error", e); // eslint-disable-line
       });
   };
 };
