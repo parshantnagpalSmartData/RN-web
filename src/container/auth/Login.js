@@ -64,7 +64,7 @@ class Login extends Component {
       alert(Constants.Strings.Common.EnterPassword);
       return;
     }
-    
+
     appAction.signIn({ username: email, password: password }, componentId);
   });
 
@@ -151,8 +151,8 @@ class Login extends Component {
             </View>
             <View style={{ flex: 0.25 }}>
               <AuthButton
-                buttonName={"Login"}
-                gradientColors={["#9999D6", "#9999D6"]}
+                buttonName={"Log In"}
+                gradientColors={Constants.Colors.ButtonGradients}
                 textStyle={{ color: "#fff" }}
                 // buttonStyle={Styles.buttonStyle}
                 gradientStyle={Styles.gradientStyle}

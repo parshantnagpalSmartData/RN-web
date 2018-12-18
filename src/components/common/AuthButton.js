@@ -39,6 +39,8 @@ const Button = props => {
       disabled={disabled}
     >
       <LinearGradient
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 0 }}
         colors={
           gradientColors || [
             Constants.Colors.Primary,
@@ -74,8 +76,8 @@ const Styles = StyleSheet.create({
     padding: moderateScale(20)
   },
   buttonText: {
-    ...Constants.Fonts.SemiBold,
-    fontSize: moderateScale(16),
+    ...Constants.Fonts.Medium,
+    fontSize: moderateScale(18),
     fontWeight: "bold",
     color: Constants.Colors.Yellow,
     textAlignVertical: "center",
