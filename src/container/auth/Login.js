@@ -49,7 +49,7 @@ class Login extends Component {
   }
   submitLogin = _.debounce(() => {
     // console.log(this.props);
-    let { appAction, componentId } = this.props;
+    let { appAction } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
       alert(Constants.Strings.Common.EmptyEmailMsg);
@@ -64,7 +64,7 @@ class Login extends Component {
       alert(Constants.Strings.Common.EnterPassword);
       return;
     }
-    appAction.signIn({ username: email, password: password }, componentId);
+    appAction.signIn({ username: email, password: password });
   });
 
   onForgotPassword = () => {

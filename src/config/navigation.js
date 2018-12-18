@@ -27,26 +27,13 @@ export const goHome = () =>
           }
         },
         center: {
-          bottomTabs: {
-            id: "BottomTabsId",
+          stack: {
+            id: "MY_STACK",
             children: [
               {
-                stack: {
-                  id: "MY_STACK",
-                  children: [
-                    {
-                      component: {
-                        name: "Home",
-                        options: {
-                          bottomTab: {
-                            fontSize: 12,
-                            text: "Home",
-                            icon: require("../assets/img/signin.png")
-                          }
-                        }
-                      }
-                    }
-                  ]
+                component: {
+                  name: "Home",
+                  options: {}
                 }
               }
             ]

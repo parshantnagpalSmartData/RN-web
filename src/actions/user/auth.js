@@ -4,7 +4,7 @@ import RestClient from "../../helpers/RestClient";
 import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 
-export const signIn = (postData, componentId) => {
+export const signIn = postData => {
   return dispatch => {
     dispatch({ type: Types.LOGIN_REQUEST });
     RestClient.restCall("users/login", postData)
@@ -14,7 +14,8 @@ export const signIn = (postData, componentId) => {
           dispatch({ type: Types.LOGIN });
           dispatch({ type: Types.SAVE_USER, payload: res.result });
           if (Platform.OS !== "web") {
-            dispatch(AppActions.pushTParticulatScreen(componentId, "Screen2"));
+            // dispatch(AppActions.pushTParticulatScreen(componentId, "Screen2"));
+            dispatch(AppActions.goToHome());
           } else {
             dispatch(AppActions.pushTParticulatScreen("/Screen2"));
           }

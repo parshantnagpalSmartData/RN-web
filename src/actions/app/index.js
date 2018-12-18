@@ -6,6 +6,7 @@ Date : 13 december 2018
 */
 
 import { Navigation } from "react-native-navigation";
+import { goHome } from "../../config/navigation";
 
 export const pushTParticulatScreen = (componentId, screenNAme) => {
   return () => {
@@ -51,5 +52,11 @@ export const setScrenStack = (componentId, screen, visible) => {
         }
       }
     });
+  };
+};
+
+export const goToHome = () => {
+  return () => {
+    goHome();
   };
 };

@@ -6,6 +6,7 @@ import * as AppAction from "../actions";
 import { removeListeners } from "../utilities/listeners";
 // import { handleBackPress } from "../utilities/BackButtonHandling";
 import { Navigation } from "react-native-navigation";
+import Header from "../components/common/Header";
 let removeListener = true;
 class Home extends React.Component {
   /*
@@ -26,15 +27,6 @@ class Home extends React.Component {
       removeListeners();
     }
   }
-  static get options() {
-    return {
-      topBar: {
-        title: {
-          text: "Home"
-        }
-      }
-    };
-  }
 
   logout = () => {
     removeListener = false;
@@ -44,6 +36,13 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header
+          title={"MY SCHEDULE"}
+          hideBack
+          hideDrawer
+          color="#9999D6"
+          headerText={{ color: "#fff" }}
+        />
         <Text>Hello from Home screen.</Text>
         <Button onPress={() => this.logout()} title="Sign Out" />
         <Button
@@ -66,9 +65,7 @@ class Home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
   }
 });
 export default connect(
