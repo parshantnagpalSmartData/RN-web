@@ -17,7 +17,7 @@ export const signIn = postData => {
             // dispatch(AppActions.pushTParticulatScreen(componentId, "Screen2"));
             dispatch(AppActions.goToHome());
           } else {
-            dispatch(AppActions.pushTParticulatScreen("/Screen2"));
+            dispatch(AppActions.pushTParticulatScreen("/Home"));
           }
         } else {
           dispatch({ type: Types.LOGIN_FAIL });

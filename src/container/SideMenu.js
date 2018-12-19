@@ -3,13 +3,18 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList,
+  Image
 } from "react-native";
-var { height, width } = Dimensions.get("window");
+import LinearGradient from "react-native-linear-gradient";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
 import * as AppAction from "../actions";
+import Constants from "../constants";
+import { moderateScale } from "../helpers/ResponsiveFonts";
+import SafeView from "../components/common/SafeView";
 
 class SideMenu extends React.Component {
   constructor(props) {
@@ -19,13 +24,6 @@ class SideMenu extends React.Component {
   }
   hideSideMenu() {
     this.props.appAction.mergeOptions(this.props.componentId, false);
-    // Navigation.mergeOptions(this.props.componentId, {
-    //   sideMenu: {
-    //     left: {
-    //       visible: false
-    //     }
-    //   }
-    // });
   }
 
   setScrenStack(screen, visible) {
@@ -33,70 +31,132 @@ class SideMenu extends React.Component {
     this.hideSideMenu();
   }
 
-  render() {
+  onMenuPress = menu => {
+    this.setScrenStack(menu, true);
+  };
+
+  renderMenu = ({ item, index }) => {
     return (
-      <View style={styles.container}>
-        <View style={[styles.text, styles.marginTop]}>
-          <Text style={styles.welcome}>SideMenu</Text>
-        </View>
-        <View style={styles.text}>
-          <TouchableOpacity
-            onPress={() => {
-              this.setScrenStack("Home", true);
-            }}
-          >
-            <Text style={styles.welcome}>SecondPage</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.text}>
-          <TouchableOpacity
-            onPress={() => {
-              this.setScrenStack("Loader", false);
-            }}
-          >
-            <Text style={styles.welcome}>SecondPage</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.text}>
-          <TouchableOpacity
-            onPress={() => {
-              this.hideSideMenu();
-            }}
-          >
-            <Text style={styles.welcome}>Close</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.text} key={index}>
+        <TouchableOpacity onPress={() => item.onPress(item.key)}>
+          <Text style={styles.welcome}>{item.value}</Text>
+        </TouchableOpacity>
       </View>
+    );
+  };
+
+  render() {
+    let { FirstName, LastName, UserName } = this.props.user;
+    let menuOptions = [
+      { key: "Home", value: "My Schedule", onPress: this.onMenuPress },
+      { key: "Home", value: "Open Shift", onPress: this.onMenuPress },
+      { key: "Home", value: "Potiential Cases", onPress: this.onMenuPress },
+      { key: "Home", value: "Printable Forms", onPress: this.onMenuPress },
+      { key: "Home", value: "Message Center", onPress: this.onMenuPress },
+      { key: "Home", value: "Logout", onPress: this.onMenuPress }
+    ];
+    return (
+      <LinearGradient
+        start={{ x: 1, y: 1 }}
+        end={{ x: 0, y: 0 }}
+        colors={Constants.Colors.ButtonGradients}
+        style={styles.gradientStyle}
+      >
+        <SafeView />
+        <View style={styles.container}>
+          <View
+            style={{
+              borderBottomColor: Constants.Colors.White,
+              borderBottomWidth: 0.2,
+              // padding: moderateScale(20),
+              paddingBottom: moderateScale(10)
+            }}
+          >
+            <View
+              style={{
+                height: moderateScale(80),
+                width: moderateScale(80),
+                backgroundColor: Constants.Colors.White,
+                borderRadius: moderateScale(100),
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Image
+                source={Constants.Images.UserAvatar}
+                style={{
+                  height: moderateScale(80),
+                  width: moderateScale(80)
+                }}
+                resizeMode={"cover"}
+              />
+            </View>
+            <View style={{}}>
+              <Text
+                style={{
+                  ...Constants.Fonts.Regular,
+                  fontSize: moderateScale(18),
+                  color: Constants.Colors.White,
+                  paddingVertical: moderateScale(5)
+                }}
+              >{`${FirstName} ${LastName}`}</Text>
+              <Text
+                style={{
+                  ...Constants.Fonts.Regular,
+                  fontSize: moderateScale(14),
+                  color: Constants.Colors.White,
+                  paddingVertical: moderateScale(5)
+                }}
+              >
+                {UserName}
+              </Text>
+            </View>
+          </View>
+
+          <View />
+          <FlatList
+            data={menuOptions}
+            renderItem={this.renderMenu}
+            scrollEnabled={false}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      </LinearGradient>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  gradientStyle: {
+    flex: 1,
+    justifyContent: "center"
+  },
   welcome: {
-    fontSize: 15
+    ...Constants.Fonts.Regular,
+    fontSize: moderateScale(16),
+    color: Constants.Colors.White
   },
   container: {
-    flex: 1
+    flex: 1,
+    margin: moderateScale(20)
   },
   text: {
-    height: (height * 10) / 100,
-    width: (width * 80) / 100,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "flex-start",
+    marginVertical: moderateScale(11)
   },
-  marginTop: {
-    marginTop: (height * 5) / 100
-  }
+  marginTop: {}
 });
-// const mapStateToProps = state => ({
-//   user: state.user,
-//   app: state.app
-// });
+const mapStateToProps = state => ({
+  user: state.user,
+  app: state.app
+});
 const mapDispatchToProps = dispatch => ({
   appAction: bindActionCreators(AppAction, dispatch)
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SideMenu);

@@ -1,0 +1,43 @@
+/**
+ * Name : Parshant Nagpal
+ * FileName: routes.web.js
+ * Description : contains all routes that we are used inside react router
+ * Date : 12 December 2018
+ */
+import React from "react";
+<<<<<<< HEAD
+import { Router, Route, Switch } from "react-router-dom";
+import SignIn from "../container/auth/Login";
+import ForgotPassword from "../container/auth/ForgotPassword";
+import Screen2 from "../container/Screen2";
+import NotFound from "../container/errors/NotFound";
+
+import history from "../utilities/history";
+=======
+import { Router, Route } from "react-router-dom";
+import SignIn from "../container/auth/Login";
+import ForgotPassword from "../container/auth/ForgotPassword";
+import Screen2 from "../container/Screen2";
+import Home from "../container/Home";
+import history from "../utilities/history";
+
+>>>>>>> dca2c7bdaefa022d5398fc302b02d143da7578ce
+const routes = () => {
+  return (
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" component={SignIn} />
+        <Route exact path="/ForgotPassword" component={ForgotPassword} />
+<<<<<<< HEAD
+        <Route exact path="/Screen2" component={Screen2} />
+        <Route component={NotFound} />
+      </Switch>
+=======
+        <Route path="/Screen2" component={Screen2} />
+        <Route path="/Home" component={Home} />
+      </div>
+>>>>>>> dca2c7bdaefa022d5398fc302b02d143da7578ce
+    </Router>
+  );
+};
+export default routes;
