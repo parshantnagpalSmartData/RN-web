@@ -59,7 +59,9 @@ module.exports = {
     filename: "bundle.web.js",
     path: path.resolve(appDirectory, "dist")
   },
-
+  devServer: {
+    historyApiFallback: true
+  },
   // ...the rest of your config
 
   module: {

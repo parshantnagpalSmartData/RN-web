@@ -12,7 +12,7 @@ import array from "./array";
 import whitelist from "./whitelist";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
-import * as AppAction from "./../actions";
+// import * as AppAction from "./../actions";
 
 const persistConfig = {
   key: "root",
@@ -41,9 +41,9 @@ export default function setup() {
   const persistor = persistStore(store, null, () => {
     // console.log("newstore", store.getState().user.isLoggedIn);
     if (store.getState().user.isLoggedIn) {
-      store.dispatch(AppAction.pushTParticulatScreen("/Screen2"));
+      // store.dispatch(AppAction.pushTParticulatScreen("/Screen2"));
     } else {
-      store.dispatch(AppAction.pushTParticulatScreen("/"));
+      // store.dispatch(AppAction.pushTParticulatScreen("/"));
     }
     // on app loading the persit store loads and we have route from here
     // startApp(store.getState().app.root);
