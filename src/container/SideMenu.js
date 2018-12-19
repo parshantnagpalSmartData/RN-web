@@ -19,15 +19,36 @@ import SafeView from "../components/common/SafeView";
 class SideMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      screen: "Home"
+    };
     this.hideSideMenu = this.hideSideMenu.bind(this);
     this.setScrenStack = this.setScrenStack.bind(this);
   }
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.app && props.app.screen !== state.screen) {
+  //     return { screen: props.app.screen };
+  //   } else {
+  //     return null;
+  //   }
+  // }
   hideSideMenu() {
     this.props.appAction.mergeOptions(this.props.componentId, false);
   }
 
   setScrenStack(screen, visible) {
-    this.props.appAction.setScrenStack("MY_STACK", screen, visible);
+    this.setState(
+      {
+        screen
+      },
+      () => {
+        if (screen === "Logout") {
+          this.props.appAction.logOut();
+        } else {
+          this.props.appAction.setScrenStack("MY_STACK", screen, visible);
+        }
+      }
+    );
     this.hideSideMenu();
   }
 
@@ -36,24 +57,57 @@ class SideMenu extends React.Component {
   };
 
   renderMenu = ({ item, index }) => {
-    return (
-      <View style={styles.text} key={index}>
-        <TouchableOpacity onPress={() => item.onPress(item.key)}>
-          <Text style={styles.welcome}>{item.value}</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    let { screen } = this.state;
+    if (item.key === screen) {
+      return (
+        <LinearGradient
+          key={index}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          colors={Constants.Colors.SelectedMenu}
+          style={styles.gradientStyle}
+        >
+          <View style={styles.text}>
+            <TouchableOpacity onPress={() => item.onPress(item.key)}>
+              <Text style={styles.welcome}>{item.value}</Text>
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
+      );
+    } else {
+      return (
+        <View style={styles.text}>
+          <TouchableOpacity onPress={() => item.onPress(item.key)}>
+            <Text style={styles.welcome}>{item.value}</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   };
 
   render() {
-    let { FirstName, LastName, UserName } = this.props.user;
+    let { user } = this.props;
+    let { FirstName, LastName, UserName } = user;
     let menuOptions = [
       { key: "Home", value: "My Schedule", onPress: this.onMenuPress },
-      { key: "Home", value: "Open Shift", onPress: this.onMenuPress },
-      { key: "Home", value: "Potiential Cases", onPress: this.onMenuPress },
-      { key: "Home", value: "Printable Forms", onPress: this.onMenuPress },
-      { key: "Home", value: "Message Center", onPress: this.onMenuPress },
-      { key: "Home", value: "Logout", onPress: this.onMenuPress }
+      { key: "OpenShift", value: "Open Shift", onPress: this.onMenuPress },
+      {
+        key: "PotientialCases",
+        value: "Potiential Cases",
+        onPress: this.onMenuPress
+      },
+      {
+        key: "PrintableForms",
+        value: "Printable Forms",
+        onPress: this.onMenuPress
+      },
+      { key: "MyProfile", value: "My Profile", onPress: this.onMenuPress },
+      {
+        key: "MessageCenter",
+        value: "Message Center",
+        onPress: this.onMenuPress
+      },
+      { key: "Logout", value: "Logout", onPress: this.onMenuPress }
     ];
     return (
       <LinearGradient
@@ -68,7 +122,7 @@ class SideMenu extends React.Component {
             style={{
               borderBottomColor: Constants.Colors.White,
               borderBottomWidth: 0.2,
-              // padding: moderateScale(20),
+              margin: moderateScale(20),
               paddingBottom: moderateScale(10)
             }}
           >
@@ -120,6 +174,7 @@ class SideMenu extends React.Component {
             scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
+            extraData={this.state.screen}
           />
         </View>
       </LinearGradient>
@@ -138,13 +193,14 @@ const styles = StyleSheet.create({
     color: Constants.Colors.White
   },
   container: {
-    flex: 1,
-    margin: moderateScale(20)
+    flex: 1
+    //  margin: moderateScale(20)
   },
   text: {
     justifyContent: "center",
     alignItems: "flex-start",
-    marginVertical: moderateScale(11)
+    marginVertical: moderateScale(11),
+    marginHorizontal: moderateScale(20)
   },
   marginTop: {}
 });

@@ -24,7 +24,8 @@ let colors = {
   menuItemTxt: "#393B3B",
   fadeBorder: "#e0e0e0",
   FilterBackground: "#EAEAEA",
-  ButtonGradients: ["#3098CF", "#2D3E9D"]
+  ButtonGradients: ["#3098CF", "#2D3E9D"],
+  SelectedMenu: ["#2D3F9E", "#3097CE"]
 };
 
 module.exports = colors;

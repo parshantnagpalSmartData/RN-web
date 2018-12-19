@@ -9,7 +9,7 @@ module.exports = {
   Logo: require("../assets/images/Logo/logo1.png"),
   Email: require("../assets/images/User/user.png"),
   Password: require("../assets/images/Password/padlock.png"),
-  Back: require("../assets/images/Next/next.png"),
+  Back: require("../assets/images/Back/back.png"),
   Drawer: require("../assets/images/Drawer/drawer.png"),
   UserAvatar: require("../assets/images/username/username.png")
 };

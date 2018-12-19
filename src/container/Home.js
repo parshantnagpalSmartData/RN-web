@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet, FlatList, Text, Platform } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+import * as appAction from "../actions";
 import Constants from "../constants";
 import { moderateScale } from "../helpers/ResponsiveFonts";
 import Header from "../components/common/Header";
@@ -9,6 +12,10 @@ class Home extends Component {
   constructor(props) {
     super(props);
   }
+
+  onDrawerPress = () => {
+    this.props.appAction.mergeOptions(this.props.componentId, true);
+  };
 
   renderPatients = ({ item, index }) => {
     return (
@@ -56,6 +63,7 @@ class Home extends Component {
   render() {
     let patitents = [
       {
+        _id: 1,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -63,6 +71,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 2,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -70,6 +79,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 3,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -77,6 +87,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 4,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -84,6 +95,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 5,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -91,6 +103,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 6,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -98,6 +111,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 7,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -105,6 +119,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 8,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -112,6 +127,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 9,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -119,6 +135,7 @@ class Home extends Component {
         date: "Tue 9"
       },
       {
+        _id: 10,
         name: "Suraj Sanwal",
         from: "9",
         to: "11",
@@ -128,9 +145,10 @@ class Home extends Component {
     ];
     return (
       <View style={Styles.containner}>
-        <Header title={"My Schedule"} />
+        <Header title={"My Schedule"} onDrawerPress={this.onDrawerPress} />
         <FlatList
           data={patitents}
+          keyExtractor={item => item._id.toString()}
           renderItem={this.renderPatients}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
@@ -154,5 +172,15 @@ const Styles = StyleSheet.create({
     // /alignItems: "center"
   }
 });
+const mapStateToProps = state => ({
+  user: state.user,
+  app: state.app
+});
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
 
-export default Home;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

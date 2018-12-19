@@ -10,7 +10,7 @@ const initialState = {
   isLoggedIn: false
 };
 
-export default (user = (state = initialState, action) => {
+const user = (state = initialState, action) => {
   switch (action.type) {
     case Types.SAVE_USER:
       return { ...state, ...action.payload };
@@ -18,7 +18,13 @@ export default (user = (state = initialState, action) => {
       return { ...state, isLoggedIn: true };
     case Types.LOGOUT:
       return { ...state, isLoggedIn: false };
+    case Types.RESET_USER:
+      return {
+        ...initialState
+      };
     default:
       return state;
   }
-});
+};
+
+export default user;

@@ -51,6 +51,11 @@ export const forgotPassword = postData => {
   };
 };
 
-export const logOut = () => ({
-  type: Types.LOGOUT
-});
+export const logOut = () => {
+  return dispatch => {
+    dispatch({ type: Types.LOGOUT });
+    dispatch({ type: Types.RESET_USER });
+    dispatch({ type: Types.RESET_APP });
+    dispatch(AppActions.goAuth());
+  };
+};

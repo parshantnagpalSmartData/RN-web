@@ -29,6 +29,43 @@ export const registerScreens = (store, Provider) => {
     store
   );
   Navigation.registerComponentWithRedux(
+    "MessageCenter",
+    () => require("../container/MessageCenter").default,
+    Provider,
+    store
+  );
+  Navigation.registerComponentWithRedux(
+    "MyProfile",
+    () => require("../container/MyProfile").default,
+    Provider,
+    store
+  );
+  Navigation.registerComponentWithRedux(
+    "OpenShift",
+    () => require("../container/OpenShift").default,
+    Provider,
+    store
+  );
+  Navigation.registerComponentWithRedux(
+    "PotientialCases",
+    () => require("../container/PotientialCases").default,
+    Provider,
+    store
+  );
+  Navigation.registerComponentWithRedux(
+    "PrintableForms",
+    () => require("../container/PrintableForms").default,
+    Provider,
+    store
+  );
+  Navigation.registerComponentWithRedux(
+    "ResetPassword",
+    () => require("../container/ResetPassword").default,
+    Provider,
+    store
+  );
+
+  Navigation.registerComponentWithRedux(
     "Tab2",
     () => require("../container/Tab2").default,
     Provider,
