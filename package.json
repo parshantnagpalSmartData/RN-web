@@ -37,7 +37,7 @@
     "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
     "precommit": "npm run rp && lint-staged",
     "serve": "./node_modules/.bin/serve  -s -C dist -p 4401 ",
-    "startWeb": "./node_modules/.bin/http-server ./dist --cors -p 9091"
+    "startWeb": "./node_modules/.bin/http-server ./dist --cors -p 4222"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
