@@ -20,7 +20,7 @@ class OpenShift extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Open Shift"} onDrawerPress={this.onDrawerPress} />
-        <UnderDevelopment />;
+        <UnderDevelopment />
       </View>
     );
   }

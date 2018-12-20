@@ -20,7 +20,7 @@ class PotientialCases extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Potiential Cases"} onDrawerPress={this.onDrawerPress} />
-        <UnderDevelopment />;
+        <UnderDevelopment />
       </View>
     );
   }

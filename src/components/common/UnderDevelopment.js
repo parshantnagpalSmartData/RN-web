@@ -6,7 +6,7 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 const UnderDevelopment = () => {
   return (
     <View style={Styles.containner}>
-      <Text style={Styles.text}>Under UnderDevelopment</Text>
+      <Text style={Styles.text}>Under Development</Text>
     </View>
   );
 };
