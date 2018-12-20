@@ -13,6 +13,7 @@ import whitelist from "./whitelist";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
 // import * as AppAction from "./../actions";
+// import history from "../utilities/history";
 
 const persistConfig = {
   key: "root",
