@@ -2,8 +2,14 @@ export const INITIALIZED = "example.app.INITIALIZED";
 export const ROOT_CHANGED = "example.app.ROOT_CHANGED";
 export const USER_REGISTERATION = "USER_REGISTERATION";
 export const SET_NAVIGATOR = "SET_NAVIGATOR";
+export const SET_COMPONENT = "SET_COMPONENT";
+export const SET_SCREEN = "SET_SCREEN";
+
 export const LOGOUT = "LOGOUT";
 export const LOGIN = "LOGIN";
+
+export const RESET_APP = "RESET_APP";
+export const RESET_USER = "RESET_USER";
 
 export const SAVE_USER = "SAVE_USER";
 

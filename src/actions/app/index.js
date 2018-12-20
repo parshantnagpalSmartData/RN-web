@@ -6,20 +6,23 @@ Date : 13 december 2018
 */
 
 import { Navigation } from "react-native-navigation";
-import { goHome } from "../../config/navigation";
+import { goHome, goToAuth } from "../../config/navigation";
+import * as Types from "../../actionTypes";
 
-export const pushTParticulatScreen = (componentId, screenNAme) => {
-  return () => {
+export const pushTParticulatScreen = (componentId, screenName) => {
+  return dispatch => {
+    dispatch({ type: Types.SET_COMPONENT, payload: componentId });
     Navigation.push(componentId, {
       component: {
-        name: screenNAme
+        name: screenName
       }
     });
   };
 };
 
 export const pop = componentId => {
-  return () => {
+  return dispatch => {
+    dispatch({ type: Types.SET_COMPONENT, payload: componentId });
     Navigation.pop(componentId);
   };
 };
@@ -35,7 +38,9 @@ export const mergeOptions = (componentId, draweropen) => {
   };
 };
 export const setScrenStack = (componentId, screen, visible) => {
-  return () => {
+  return dispatch => {
+    dispatch({ type: Types.SET_COMPONENT, payload: componentId });
+    dispatch({ type: Types.SET_SCREEN, payload: screen });
     Navigation.setStackRoot(componentId, {
       component: {
         name: screen,
@@ -56,7 +61,17 @@ export const setScrenStack = (componentId, screen, visible) => {
 };
 
 export const goToHome = () => {
-  return () => {
+  return dispatch => {
+    dispatch({ type: Types.SET_COMPONENT, payload: "MY_STACK" });
+    dispatch({ type: Types.SET_SCREEN, payload: "Home" });
     goHome();
+  };
+};
+
+export const goAuth = () => {
+  return dispatch => {
+    dispatch({ type: Types.SET_COMPONENT, payload: "App" });
+    dispatch({ type: Types.SET_SCREEN, payload: "SignIn" });
+    goToAuth();
   };
 };

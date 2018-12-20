@@ -40,14 +40,13 @@ export default function setup() {
     window.store = store;
   }
   const persistor = persistStore(store, null, () => {
-    // console.log("newstore", store.getState().user.isLoggedIn);
-    if (store.getState().user.isLoggedIn) {
-      // store.dispatch(AppAction.pushTParticulatScreen("/Screen2"));
-    } else {
-      // store.dispatch(AppAction.pushTParticulatScreen("/"));
-    }
-    // on app loading the persit store loads and we have route from here
-    // startApp(store.getState().app.root);
+    // console.log("newstore", store.getState().user.isLoggedIn,history);
+    // console.log("historyyyy",history)
+    // if (store.getState().user.isLoggedIn &&  history.location.pathname == '/') {
+    //     store.dispatch(AppAction.pushTParticulatScreen("/Home"));
+    // } else if (!store.getState().user.isLoggedIn && (history.location.pathname !== '/' &&  history.location.pathname !== 'ForgotPassword')) {
+    //     store.dispatch(AppAction.pushTParticulatScreen("/"));
+    // }
   });
   return { persistor, store };
 }

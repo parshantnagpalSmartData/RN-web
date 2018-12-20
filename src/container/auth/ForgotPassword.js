@@ -29,8 +29,9 @@ class ForgotPassword extends Component {
       deviceWidth: window.innerWidth
     };
   }
-  static navigatorStyle = {
-    navBarHidden: true
+
+  onBackPress = () => {
+    this.props.appAction.pop(this.props.componentId);
   };
 
   submitEmail = _.debounce(() => {
@@ -52,7 +53,7 @@ class ForgotPassword extends Component {
     let title = "ACT HOME HEALTH SERVICES";
     return (
       <View style={Styles.containner}>
-        <Header title={title} hideDrawer />
+        <Header title={title} hideDrawer onBackPress={this.onBackPress} />
         <KeyboardAwareScrollView
           scrollEnabled={true}
           contentContainerStyle={{
