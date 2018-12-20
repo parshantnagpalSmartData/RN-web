@@ -1507,9 +1507,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flutter.firstapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
 				PRODUCT_NAME = ActNursesportal;
-				PROVISIONING_PROFILE_SPECIFIER = FlutterDev12Jul;
+				PROVISIONING_PROFILE_SPECIFIER = "DEV ACT Nurse Portal";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1529,9 +1529,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flutter.firstapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
 				PRODUCT_NAME = ActNursesportal;
-				PROVISIONING_PROFILE_SPECIFIER = FlutterDev12Jul;
+				PROVISIONING_PROFILE_SPECIFIER = "DEV ACT Nurse Portal";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
