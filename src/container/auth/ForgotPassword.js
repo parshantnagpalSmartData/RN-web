@@ -118,7 +118,8 @@ class ForgotPassword extends Component {
 const Styles = StyleSheet.create({
   containner: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: Constants.Colors.White
   },
   FloatingInputContainer: {
     paddingVertical: moderateScale(40),

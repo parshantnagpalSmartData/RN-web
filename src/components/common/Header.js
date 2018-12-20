@@ -64,7 +64,11 @@ const Header = props => {
             </TouchableOpacity>
           ) : !hideBack ? (
             <TouchableOpacity style={Styles.iconBtn} onPress={onBackPress}>
-              <Image source={Constants.Images.Back} resizeMode={"contain"} />
+              <Image
+                source={Constants.Images.Back}
+                resizeMode={"contain"}
+                style={Styles.iconBtn}
+              />
             </TouchableOpacity>
           ) : (
             <View style={Styles.iconBtn} />
@@ -103,7 +107,11 @@ const Header = props => {
               style={Styles.iconBtn}
               onPress={() => onRightPress()}
             >
-              <Image source={rightIcon} resizeMode={"contain"} />
+              <Image
+                source={rightIcon}
+                resizeMode={"contain"}
+                style={Styles.iconBtn}
+              />
             </TouchableOpacity>
           ) : rightText ? (
             <TouchableOpacity
@@ -125,7 +133,8 @@ export default Header;
 
 const Styles = StyleSheet.create({
   gradientStyle: {
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   container: {
     paddingHorizontal: moderateScale(20),

@@ -18,3 +18,24 @@ export const goBack = () => {
     history.goBack();
   };
 };
+
+export const pop = () => {
+  return () => {
+    history.goBack();
+  };
+};
+
+export const goAuth = () => {
+  return () => {
+    // dispatch({ type: Types.SET_SCREEN, payload: "/" });
+    history.replace("/");
+  };
+};
+/* eslint-disable */
+export const setScrenStack = (componentId = null, screen, visible) => {
+  return () => {
+    // dispatch({ type: Types.SET_COMPONENT, payload: componentId });
+    // dispatch({ type: Types.SET_SCREEN, payload: screen });
+    history.push(`/${screen}`);
+  };
+};

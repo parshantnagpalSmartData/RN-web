@@ -1,4 +1,0 @@
-diff a/src/config/routes.web.js b/src/config/routes.web.js	(rejected hunks)
-@@ -26 +26 @@ const routes = () => {
--}
-+};

@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  Image
+  Image,
+  Platform
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { connect } from "react-redux";
@@ -49,7 +50,9 @@ class SideMenu extends React.Component {
         }
       }
     );
-    this.hideSideMenu();
+    if (Platform.OS !== "web") {
+      this.hideSideMenu();
+    }
   }
 
   onMenuPress = menu => {
@@ -171,7 +174,7 @@ class SideMenu extends React.Component {
           <FlatList
             data={menuOptions}
             renderItem={this.renderMenu}
-            scrollEnabled={false}
+            scrollEnabled={true}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             extraData={this.state.screen}

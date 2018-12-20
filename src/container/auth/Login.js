@@ -89,22 +89,30 @@ class Login extends Component {
         <KeyboardAwareScrollView
           scrollEnabled={true}
           contentContainerStyle={{
-            alignItems: "center"
+            alignItems: "center",
+            //backgroundColor: "red",
+            flex: 1
           }}
         >
           <View
             style={{
-              height:
-                Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT * 0.62
-                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
-              width:
-                Platform.OS === "web"
-                  ? deviceWidth > 600
-                    ? deviceWidth / 2
-                    : deviceWidth
-                  : Constants.BaseStyle.DEVICE_WIDTH,
-              justifyContent: "space-evenly",
+              ...Platform.select({
+                web: {
+                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
+                  justifyContent: "space-evenly",
+                  width: deviceWidth > 600 ? deviceWidth / 2 : deviceWidth
+                },
+                ios: {
+                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
+                  justifyContent: "space-evenly",
+                  width: Constants.BaseStyle.DEVICE_WIDTH
+                },
+                android: {
+                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
+                  width: Constants.BaseStyle.DEVICE_WIDTH,
+                  justifyContent: "space-evenly"
+                }
+              }),
               overflow: "hidden"
             }}
           >

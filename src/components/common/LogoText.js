@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Platform } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import SafeView from "../../components/common/SafeView";
@@ -9,12 +9,23 @@ const LogoText = props => {
   return (
     <View
       style={{
-        flex: 1,
         backgroundColor: Constants.Colors.Transparent,
         flexDirection: "column",
         justifyContent: "space-evenly",
         alignItems: "center",
-        marginTop: moderateScale(25)
+        top: moderateScale(25),
+        //marginTop: moderateScale(25),
+        ...Platform.select({
+          web: {
+            height: moderateScale(150)
+          },
+          ios: {
+            flex: 1
+          },
+          android: {
+            flex: 1
+          }
+        })
       }}
     >
       <SafeView />
