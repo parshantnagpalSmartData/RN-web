@@ -36,8 +36,7 @@
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
     "precommit": "npm run rp && lint-staged",
-    "serve": "./node_modules/.bin/serve  -s -C dist -p 4401 ",
-    "startWeb": "./node_modules/.bin/http-server ./dist --cors -p 4222"
+    "startWeb": "./node_modules/.bin/http-server ./dist --cors -a localhost -p  4223"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
@@ -61,8 +60,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "seamless-immutable": "^7.1.4",
-    "serve": "6.5.8"
+    "seamless-immutable": "^7.1.4"
   },
   "devDependencies": {
     "babel": "6.23.0",

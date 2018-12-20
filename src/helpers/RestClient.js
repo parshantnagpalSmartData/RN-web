@@ -22,7 +22,7 @@ class RestClient {
       });
     });
   }
-  static restCall(url, params, token = null, type = "POST", transToken = null) {
+  static restCall(url, params, token = null, type = "POST") {
     let context = this;
     console.log(type, " call", Connection.getResturl() + url, params, token);
     return new Promise(function(fulfill, reject) {
@@ -35,9 +35,8 @@ class RestClient {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "Cache-Control": "no-cache",
-              Authorization: token,
-              transToken: transToken
+              // "Cache-Control": "no-cache",
+              Authorization: token
             },
             body: JSON.stringify(params)
           })
@@ -77,7 +76,7 @@ class RestClient {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "Cache-Control": "no-cache",
+              // "Cache-Control": "no-cache",
               Authorization: token
             }
           })
@@ -117,7 +116,7 @@ class RestClient {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "Cache-Control": "no-cache",
+              // "Cache-Control": "no-cache",
               Authorization: token
             }
           })
@@ -163,7 +162,7 @@ class RestClient {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "Cache-Control": "no-cache",
+              // "Cache-Control": "no-cache",
               "device-type": deviceType,
               "device-token": deviceToken
             },
