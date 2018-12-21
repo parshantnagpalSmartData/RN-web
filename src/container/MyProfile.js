@@ -28,7 +28,7 @@ class MyProfile extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"My Profile"} onDrawerPress={this.onDrawerPress} />
-        <UnderDevelopment />;
+        <UnderDevelopment />
         <AuthButton
           buttonName={"Reset Password"}
           gradientColors={Constants.Colors.ButtonGradients}

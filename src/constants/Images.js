@@ -11,5 +11,8 @@ module.exports = {
   Password: require("../assets/images/Password/padlock.png"),
   Back: require("../assets/images/Back/back.png"),
   Drawer: require("../assets/images/Drawer/drawer.png"),
-  UserAvatar: require("../assets/images/username/username.png")
+  UserAvatar: require("../assets/images/username/username.png"),
+  Cancel: require("../assets/images/Notification/cross.png"),
+  Error: require("../assets/images/Notification/error.png"),
+  Success: require("../assets/images/Notification/success.png")
 };

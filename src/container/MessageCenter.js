@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import * as appAction from "../actions";
 import Header from "../components/common/Header";
 import UnderDevelopment from "../components/common/UnderDevelopment";
+// import ToastNotification from "../components/common/ToastNotification";
 
 class MessageCenter extends Component {
   constructor(props) {
@@ -20,7 +21,8 @@ class MessageCenter extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Message Center"} onDrawerPress={this.onDrawerPress} />
-        <UnderDevelopment />;
+        {/* <ToastNotification type={2} message={"this is message"} /> */}
+        <UnderDevelopment />
       </View>
     );
   }

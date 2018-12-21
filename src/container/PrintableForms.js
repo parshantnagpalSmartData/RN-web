@@ -20,7 +20,7 @@ class PrintableForms extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Printable Forms"} onDrawerPress={this.onDrawerPress} />
-        <UnderDevelopment />;
+        <UnderDevelopment />
       </View>
     );
   }
