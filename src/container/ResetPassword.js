@@ -33,6 +33,10 @@ class ResetPssword extends Component {
     navBarHidden: true
   };
 
+  focusNext(next) {
+    this[next].focus();
+  }
+
   resetPssword = _.debounce(() => {
     // let { appAction, componentId } = this.props;
     let { oldPassword, newPassword, reNewPass } = this.state;

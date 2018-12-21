@@ -50,6 +50,11 @@ class Login extends Component {
       window.removeEventListener("resize", this.updateDimensions.bind(this));
     }
   }
+
+  focusNext(next) {
+    this[next].focus();
+  }
+
   submitLogin = _.debounce(() => {
     // console.log(this.props);
     let { appAction } = this.props;
