@@ -18,7 +18,9 @@ var Common = {
   //   }
   // },
   Dialog: (msg, buttons) => {
-    Alert.alert("STAV", msg, buttons, { cancelable: true });
+    Alert.alert(Constants.AppCosntants.AppName, msg, buttons, {
+      cancelable: true
+    });
   },
   dateFilter: (startDate, endDate, collection) => {
     let filteredData = collection.filter(function(obj) {

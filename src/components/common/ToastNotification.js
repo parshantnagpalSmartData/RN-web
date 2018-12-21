@@ -11,7 +11,8 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Animated
+  Animated,
+  Platform
 } from "react-native";
 
 import SafeView from "./SafeView";
@@ -44,7 +45,11 @@ const MyToastNotification = props => {
         >
           <View style={{ flexDirection: "row" }}>
             <View style={Styles.imageView}>
-              <Image source={image} resizeMode={"contain"} />
+              <Image
+                style={Styles.image}
+                source={image}
+                resizeMode={"contain"}
+              />
             </View>
             <View
               style={{
@@ -58,7 +63,11 @@ const MyToastNotification = props => {
           </View>
 
           <TouchableOpacity style={Styles.imageView} onPress={closeToast}>
-            <Image source={Constants.Images.Cancel} resizeMode={"contain"} />
+            <Image
+              style={Styles.image}
+              source={Constants.Images.Cancel}
+              resizeMode={"contain"}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -82,7 +91,7 @@ class ToastNotification extends Component {
   closeToast() {
     setTimeout(() => {
       Animated.timing(this.animatedValue, {
-        toValue: -Constants.BaseStyle.DEVICE_HEIGHT,
+        toValue: -100,
         duration: 500
       }).start();
     }, 2000);
@@ -117,7 +126,7 @@ class ToastNotification extends Component {
         <Animated.View
           style={{
             transform: [{ translateY: this.animatedValue }],
-            height: Constants.BaseStyle.DEVICE_HEIGHT,
+            height: 40,
             position: "absolute",
             left: 0,
             top: 0,
@@ -125,7 +134,11 @@ class ToastNotification extends Component {
             justifyContent: "center"
           }}
         >
-          <MyToastNotification type={type} message={message} closeToast />
+          <MyToastNotification
+            type={type}
+            message={message}
+            closeToast={this.closeToast}
+          />
           {/* <Text
             style={{
               marginLeft: 10,
@@ -143,7 +156,7 @@ class ToastNotification extends Component {
 }
 const Styles = StyleSheet.create({
   container: {
-    backgroundColor: Constants.Colors.Transparent,
+    backgroundColor: Constants.Colors.red,
     justifyContent: "center",
     alignItems: "center",
     flex: 1
@@ -152,7 +165,16 @@ const Styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    width: Constants.BaseStyle.DEVICE_WIDTH * 0.8,
+    ...Platform.select({
+      ios: {
+        width: Constants.BaseStyle.DEVICE_WIDTH * 0.8
+      },
+      android: { width: Constants.BaseStyle.DEVICE_WIDTH * 0.8 },
+      web: {
+        width: Constants.BaseStyle.DEVICE_WIDTH / 4
+      }
+    }),
+
     paddingVertical: moderateScale(14),
     paddingHorizontal: moderateScale(20),
     borderRadius: moderateScale(10)
@@ -162,6 +184,16 @@ const Styles = StyleSheet.create({
     width: moderateScale(30),
     alignItems: "flex-end",
     justifyContent: "flex-start"
+  },
+  image: {
+    height: moderateScale(30),
+    width: moderateScale(30),
+    ...Platform.select({
+      web: {
+        height: moderateScale(20),
+        width: moderateScale(20)
+      }
+    })
   },
   heading: {
     ...Constants.Fonts.Medium,

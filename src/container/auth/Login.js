@@ -28,8 +28,8 @@ class Login extends Component {
     super(props);
     this.state = {
       isWide: false,
-      email: "suraj.sanwal@smartdatainc.net",
-      password: "welcome123",
+      email: "",
+      password: "",
       deviceWidth: window.innerWidth
     };
   }
@@ -116,7 +116,7 @@ class Login extends Component {
             <View style={Styles.FloatingInputContainer}>
               <FormTextInput
                 image={Constants.Images.Email}
-                label={"Username"}
+                placeHolderText={"Username"}
                 onChangeText={email => {
                   this.setState({ email });
                 }}
@@ -131,7 +131,7 @@ class Login extends Component {
               />
               <FormTextInput
                 image={Constants.Images.Password}
-                label={"Password"}
+                placeHolderText={"Password"}
                 onChangeText={password => {
                   this.setState({ password });
                 }}

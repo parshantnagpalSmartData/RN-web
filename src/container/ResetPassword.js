@@ -18,7 +18,6 @@ import Header from "../components/common/Header";
 import { moderateScale } from "../helpers/ResponsiveFonts";
 import AuthButton from "../components/common/AuthButton";
 import Constants from "../constants";
-// import Regex from "../helpers/Regex";
 
 class ResetPssword extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class ResetPssword extends Component {
   };
 
   resetPssword = _.debounce(() => {
-    // let { appAction } = this.props;
+    // let { appAction, componentId } = this.props;
     let { oldPassword, newPassword, reNewPass } = this.state;
     if (_.isEmpty(oldPassword.trim())) {
       alert(Constants.Strings.Common.OldPassword);

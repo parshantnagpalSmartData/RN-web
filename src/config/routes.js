@@ -71,4 +71,10 @@ export const registerScreens = (store, Provider) => {
     Provider,
     store
   );
+  // Navigation.registerComponentWithRedux(
+  //   "ToastNotification",
+  //   () => require("../components/common/ToastNotification").default,
+  //   Provider,
+  //   store
+  // );
 };
