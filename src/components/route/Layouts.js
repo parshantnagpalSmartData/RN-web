@@ -6,30 +6,29 @@
  */
 
 import React from "react";
-// import SideBarMenu from './SideBarMenu';
+import { View } from "react-native";
+import SideMenu from "../../container/SideMenu";
 // import Footer from './Footer';
 /*************** Front Layout ***************/
 
-export const frontLayout = props => <div>{props.children}</div>;
+export const frontLayout = props => {
+  return <View style={{ flex: 1 }}>{props.children}</View>;
+};
 
 /*************** Dashboard Layout ***************/
 
 export const dashboardLayout = props => {
-  let {  isLogin } = props.children.props;
+  let { isLogin } = props.children.props;
   return (
-    <div>
+    <View style={{ flex: 1 }}>
       {isLogin ? (
-        <div className="mainOuter afterLogin">
-          <section className="contentarea dashboard contentWrapper">
-            <div>hjydgshjasghjgasjd</div>
-            {/* <SideBarMenu history={history} /> */}
-            <div className="pageContent mainContainer">{props.children}</div>
-          </section>
-        </div>
-      ) : (
-        ""
-      )}
-      {/* <Footer /> */}
-    </div>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={{ flex: 0.3 }}>
+            <SideMenu />
+          </View>
+          <View style={{ flex: 0.7 }}>{props.children}</View>
+        </View>
+      ) : null}
+    </View>
   );
 };

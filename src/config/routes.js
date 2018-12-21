@@ -66,18 +66,6 @@ export const registerScreens = (store, Provider) => {
   );
 
   Navigation.registerComponentWithRedux(
-    "Tab2",
-    () => require("../container/Tab2").default,
-    Provider,
-    store
-  );
-  Navigation.registerComponentWithRedux(
-    "Screen2",
-    () => require("../container/Screen2").default,
-    Provider,
-    store
-  );
-  Navigation.registerComponentWithRedux(
     "SideMenu",
     () => require("../container/SideMenu").default,
     Provider,

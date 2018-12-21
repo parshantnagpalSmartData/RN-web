@@ -17,7 +17,12 @@ import SignIn from "../container/auth/Login";
 import ForgotPassword from "../container/auth/ForgotPassword";
 import NotFound from "../container/errors/NotFound";
 import Home from "../container/Home";
-
+import OpenShift from "../container/OpenShift";
+import PotientialCases from "../container/PotientialCases";
+import PrintableForms from "../container/PrintableForms";
+import MyProfile from "../container/MyProfile";
+import MessageCenter from "../container/MessageCenter";
+import ResetPassword from "../container/ResetPassword";
 // const routes = ({store}) => {
 //   const state = store.getState();
 //   console.log('storestatestatestatestatestate',state)
@@ -62,6 +67,54 @@ class Routes extends Component {
             exact
             path="/Home"
             component={Home}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/OpenShift"
+            component={OpenShift}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/PrintableForms"
+            component={PrintableForms}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/PotientialCases"
+            component={PotientialCases}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/MessageCenter"
+            component={MessageCenter}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/MyProfile"
+            component={MyProfile}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/ResetPassword"
+            component={ResetPassword}
             //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}

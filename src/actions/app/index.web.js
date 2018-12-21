@@ -6,10 +6,10 @@ Date : 13 december 2018
 */
 
 import history from "../../utilities/history";
-
-export const pushTParticulatScreen = screen => {
+// eslint-disable-next-line
+export const pushTParticulatScreen = (componentId = null, screen) => {
   return () => {
-    history.push(screen);
+    history.push(`/${screen}`);
   };
 };
 

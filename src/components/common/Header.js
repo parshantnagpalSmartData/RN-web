@@ -6,7 +6,14 @@ Date : 17 Sept 2018
 */
 
 import React from "react";
-import { TouchableOpacity, View, Image, Text, StyleSheet } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Platform
+} from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 import Constants from "../../constants";
@@ -54,7 +61,7 @@ const Header = props => {
             }
           ]}
         >
-          {!hideDrawer ? (
+          {!hideDrawer && Platform.OS !== "web" ? (
             <TouchableOpacity style={Styles.iconBtn} onPress={onDrawerPress}>
               <Image
                 source={Constants.Images.Drawer}
@@ -62,7 +69,7 @@ const Header = props => {
                 style={Styles.iconBtn}
               />
             </TouchableOpacity>
-          ) : !hideBack ? (
+          ) : !hideBack && Platform.OS !== "web" ? (
             <TouchableOpacity style={Styles.iconBtn} onPress={onBackPress}>
               <Image
                 source={Constants.Images.Back}

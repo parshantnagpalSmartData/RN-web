@@ -72,11 +72,7 @@ class Login extends Component {
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props; // eslint-disable-line
-    if (Platform.OS !== "web") {
-      appAction.pushTParticulatScreen(componentId, "ForgotPassword");
-    } else {
-      appAction.pushTParticulatScreen("/ForgotPassword");
-    }
+    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
   };
 
   render() {
