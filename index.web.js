@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import setup from "./src/store/setup";
 
 import Routes from "./src/config/routes";
+import Loader from "./src/components/common/Loader";
 const { persistor, store } = setup();
 class App extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Routes />
+          <Loader isShowingLoader={true} />
         </PersistGate>
       </Provider>
     );
