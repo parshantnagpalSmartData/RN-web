@@ -89,7 +89,7 @@ class ForgotPassword extends Component {
                 autoCapitalize={"none"}
                 ref={ref => (this.email = ref)}
                 onSubmitEditing={() => {
-                  this.focusNext("password");
+                  this.submitEmail();
                 }}
               />
             </View>

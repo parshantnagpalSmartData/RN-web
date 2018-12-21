@@ -38,23 +38,24 @@ class SideMenu extends React.Component {
   }
 
   setScrenStack(screen, visible) {
-    this.setState(
-      {
-        screen
-      },
-      () => {
-        if (screen === "Logout" && Platform.OS !== "web") {
-          Dialog(Constants.AppCosntants.Alert.Logout, [
-            { text: "Yes", onPress: () => this.props.appAction.logOut() },
-            { text: "No", onPress: () => {} }
-          ]);
-        } else if (screen === "Logout" && Platform.OS === "web") {
-          this.props.appAction.logOut();
-        } else {
-          this.props.appAction.setScrenStack("MY_STACK", screen, visible);
-        }
-      }
-    );
+    
+    if (screen === "Logout" && Platform.OS !== "web") {
+      Dialog(Constants.AppCosntants.Alert.Logout, [
+        { text: "Yes", onPress: () => this.props.appAction.logOut() },
+        { text: "No", onPress: () => {} }
+      ]);
+    } else if (screen === "Logout" && Platform.OS === "web") {
+      this.props.appAction.logOut();
+    } else {
+      this.setState(
+        {
+          screen
+        },
+        () => {
+      this.props.appAction.setScrenStack("MY_STACK", screen, visible);          
+        });
+    }
+
     if (Platform.OS !== "web") {
       this.hideSideMenu();
     }
