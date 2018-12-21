@@ -1,30 +1,41 @@
 /*
  * @file: AppRoute.js
  * @description: Defined all routers
- * @date: 19 Dec 2018
- * @author: Suraj Sanwal
+ * @date: 19 April 2018
+ * @author: Monika Rani
  */
 
-/*********** React Pages according to layouts  ****************/
+/************ React Pages according to layouts  *****************/
 
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 const AppRoute = ({
   component: Component,
   layout: Layout,
-  //   requireAuth: requireAuth,
+  //  requireAuth: requireAuth,
   isLogin: isLogin,
-  //   path: Path,
   ...rest
 }) => {
-  //   console.log("rest", rest, Path);
   return (
     <Route
       {...rest}
       render={props => {
         // requireAuth();
-        // console.log("requiring auth");
+        if (
+          isLogin &&
+          (props.location.pathname === "/" ||
+            props.location.pathname === "/ForgotPassword")
+        ) {
+          return (
+            <Redirect
+              to={{
+                pathname: "/Home",
+                state: { from: props.location }
+              }}
+            />
+          );
+        }
         return (
           <Layout>
             <Component {...props} isLogin={isLogin} />

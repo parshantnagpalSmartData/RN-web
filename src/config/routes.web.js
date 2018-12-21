@@ -5,51 +5,38 @@
  * Date : 12 December 2018
  */
 import React, { Component } from "react";
-import { Router, Switch } from "react-router-dom";
-import { dashboardLayout, frontLayout } from "../container/Layout";
+import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
+import history from "../utilities/history";
+
 import AppRoute from "./AppRoute";
+import { frontLayout, dashboardLayout } from "../components/route/Layouts";
+
 import SignIn from "../container/auth/Login";
 import ForgotPassword from "../container/auth/ForgotPassword";
 import NotFound from "../container/errors/NotFound";
 import Home from "../container/Home";
-import MessageCenter from "../container/MessageCenter";
-import MyProfile from "../container/MyProfile";
-import OpenShift from "../container/OpenShift";
-import PotientialCases from "../container/PotientialCases";
-import PrintableForms from "../container/PrintableForms";
-import ResetPassword from "../container/ResetPassword";
-import history from "../utilities/history";
-/******** Check authentications ********/
-// const requireAuth = () => {
-//   if (!state.user.isLoggedIn && history.location.pathname !== "/") {
-//     history.push("/");
-//   } else if (state.user.isLoggedIn && history.location.pathname === "/Home") {
-//     history.push("/Home");
-//   }
-// };
+
+// const routes = ({store}) => {
+//   const state = store.getState();
+//   console.log('storestatestatestatestatestate',state)
+//   // const requireAuth = () => {
+//   //    console.log('statestatestatestate',state)
+// 	// 	// if (!state.user.isLoggedIn && history.location.pathname !== '/') {
+//   //   //   console.log('workinggggggggg')
+//   //   //   // history.push('/');
+//   //   // }else if (
+// 	// 	// 	state.user.isLoggedIn &&
+// 	// 	// 	(history.location.pathname === '/' || history.location.pathname === '/admin')
+// 	// 	// ) {
+// 	// 	// 	// history.push('/Home');
+// 	// 	// }
+//   // };
+
 class Routes extends Component {
-  constructor(props) {
-    super(props);
-  }
-  requireAuth = () => {
-    let { isLoggedIn } = this.props.user;
-    // console.log("pathname", history.location.pathname);
-    if (!isLoggedIn && history.location.pathname !== "/") {
-      history.push("/");
-    } else if (
-      isLoggedIn &&
-      (history.location.pathname === "/" ||
-        history.location.pathname === "/Home")
-    ) {
-      history.push("/Home");
-    } else if (isLoggedIn && history.location.pathname !== "/Home") {
-      history.push(history.location.pathname);
-    }
-  };
   render() {
-    let { isLoggedIn } = this.props.user;
+    let { isLoggedIn } = this.props;
     return (
       <Router history={history}>
         <Switch>
@@ -57,98 +44,37 @@ class Routes extends Component {
             exact
             path="/"
             component={SignIn}
-            requireAuth={this.requireAuth}
+            // requireAuth={requireAuth}
             layout={frontLayout}
-            // isLogin={isLoggedIn}
+            isLogin={isLoggedIn}
           />
           <AppRoute
             exact
             path="/ForgotPassword"
             component={ForgotPassword}
-            requireAuth={this.requireAuth}
+            // requireAuth={requireAuth}
             layout={frontLayout}
-            // isLogin={isLoggedIn}
+            isLogin={isLoggedIn}
           />
+          {/* <Route exact path="/" component={SignIn} /> */}
+          {/* <Route exact path="/ForgotPassword" component={ForgotPassword} /> */}
           <AppRoute
             exact
             path="/Home"
             component={Home}
-            requireAuth={this.requireAuth}
+            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
-          <AppRoute
-            exact
-            path="/MessageCenter"
-            component={MessageCenter}
-            requireAuth={this.requireAuth}
-            layout={dashboardLayout}
-            isLogin={isLoggedIn}
-          />
-          <AppRoute
-            exact
-            path="/MyProfile"
-            component={MyProfile}
-            requireAuth={this.requireAuth}
-            layout={dashboardLayout}
-            isLogin={isLoggedIn}
-          />
-          <AppRoute
-            exact
-            path="/OpenShift"
-            component={OpenShift}
-            requireAuth={this.requireAuth}
-            layout={dashboardLayout}
-            isLogin={isLoggedIn}
-          />{" "}
-          <AppRoute
-            exact
-            path="/PotientialCases"
-            component={PotientialCases}
-            requireAuth={this.requireAuth}
-            layout={dashboardLayout}
-            isLogin={isLoggedIn}
-          />{" "}
-          <AppRoute
-            exact
-            path="/PrintableForms"
-            component={PrintableForms}
-            requireAuth={this.requireAuth}
-            layout={dashboardLayout}
-            isLogin={isLoggedIn}
-          />{" "}
-          <AppRoute
-            exact
-            path="/ResetPassword"
-            component={ResetPassword}
-            requireAuth={this.requireAuth}
-            layout={dashboardLayout}
-            isLogin={isLoggedIn}
-          />
-          <AppRoute
-            component={NotFound}
-            layout={frontLayout}
-            isLogin={isLoggedIn}
-            requireAuth={this.requireAuth}
-          />
-          {/* <AppRoute
-            component={NotFound}
-            layout={frontLayout}
-            isLogin={isLoggedIn}
-            requireAuth={this.requireAuth}
-          /> */}
-          {/* <Route exact path="/" component={SignIn} />
-          <Route exact path="/" component={} />
-          <Route exact path="/Screen2" component={Screen2} />
-          <Route exact path="/Home" component={Home} /> */}
-          {/* <Route component={NotFound} /> */}
+          {/* <Route exact path="/DashBoard" component={Screen2} /> */}
+          <Route component={NotFound} />
         </Switch>
       </Router>
     );
   }
 }
 const mapStateToProps = state => ({
-  user: state.user
+  isLoggedIn: state.user.isLoggedIn
 });
 
 export default connect(

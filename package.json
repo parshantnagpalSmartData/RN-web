@@ -36,11 +36,11 @@
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
     "precommit": "npm run rp && lint-staged",
-    "serve": "./node_modules/.bin/serve -s dist",
-    "startWeb": "./node_modules/.bin/http-server ./dist --cors -p 8000"
+    "startWeb": "./node_modules/.bin/http-server ./dist --cors -a localhost -p  4223"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
+    "cors-server": "^1.0.4",
     "http-server": "^0.11.1",
     "lodash": "^4.17.11",
     "react": "^16.6.3",

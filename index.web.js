@@ -14,18 +14,18 @@ class App extends Component {
       deviceWidth: window.innerWidth
     };
   }
-  componentDidMount() {
-    // window.addEventListener("resize", this.updateDimensions.bind(this));
-  }
-  updateDimensions() {
-    this.setState({ deviceWidth: window.innerWidth });
-  }
-  /**
-   * Remove event listener
-   */
-  componentWillUnmount() {
-    //  window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
+  // componentDidMount() {
+  //   // window.addEventListener("resize", this.updateDimensions.bind(this));
+  // }
+  // // updateDimensions() {
+  // //   this.setState({ deviceWidth: window.innerWidth });
+  // // }
+  // /**
+  //  * Remove event listener
+  //  */
+  // componentWillUnmount() {
+  //   //  window.removeEventListener("resize", this.updateDimensions.bind(this));
+  // }
 
   render() {
     return (
