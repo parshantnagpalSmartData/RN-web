@@ -6,6 +6,7 @@ Date : 13 december 2018
 */
 
 import history from "../../utilities/history";
+import * as Types from "../../actionTypes";
 // eslint-disable-next-line
 export const pushTParticulatScreen = (componentId = null, screen) => {
   return () => {
@@ -22,6 +23,16 @@ export const goBack = () => {
 export const pop = () => {
   return () => {
     history.goBack();
+  };
+};
+export const startLoader = () => {
+  return dispatch => {
+    dispatch({ type: Types.START_LOADER });
+  };
+};
+export const stopLoader = () => {
+  return dispatch => {
+    dispatch({ type: Types.STOP_LOADER });
   };
 };
 

@@ -21,6 +21,7 @@ import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
 import LogoText from "../../components/common/LogoText";
+import Loader from "../../components/common/Loader";
 
 class Login extends Component {
   constructor(props) {
@@ -179,6 +180,7 @@ class Login extends Component {
             </View>
           </View>
         </KeyboardAwareScrollView>
+        <Loader />
       </View>
     );
   }

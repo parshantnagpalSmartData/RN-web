@@ -6,11 +6,13 @@ import * as AppActions from "../app";
 
 export const signIn = postData => {
   return dispatch => {
-    dispatch({ type: Types.LOGIN_REQUEST });
+    dispatch(AppActions.startLoader());
+    // dispatch({ type: Types.LOGIN_REQUEST });
     RestClient.restCall("users/login", postData)
       .then(res => {
         if (res.status) {
-          dispatch({ type: Types.LOGIN_SUCESS });
+          dispatch(AppActions.stopLoader());
+          // dispatch({ type: Types.LOGIN_SUCESS });
           dispatch({ type: Types.LOGIN });
           dispatch({ type: Types.SAVE_USER, payload: res.result });
           if (Platform.OS !== "web") {
@@ -20,12 +22,14 @@ export const signIn = postData => {
             dispatch(AppActions.pushTParticulatScreen(null, "/Home"));
           }
         } else {
-          dispatch({ type: Types.LOGIN_FAIL });
+          dispatch(AppActions.stopLoader());
+          // dispatch({ type: Types.LOGIN_FAIL });
           alert(res.message);
         }
       })
       .catch(e => {
-        dispatch({ type: Types.LOGIN_FAIL });
+        dispatch(AppActions.stopLoader());
+        // dispatch({ type: Types.LOGIN_FAIL });
         console.warn("error", e); // eslint-disable-line
       });
   };
@@ -53,9 +57,11 @@ export const forgotPassword = postData => {
 
 export const logOut = () => {
   return dispatch => {
+    dispatch(AppActions.startLoader());
     dispatch({ type: Types.LOGOUT });
     dispatch({ type: Types.RESET_USER });
     dispatch({ type: Types.RESET_APP });
     dispatch(AppActions.goAuth());
+    dispatch(AppActions.stopLoader());
   };
 };

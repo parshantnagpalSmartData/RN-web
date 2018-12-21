@@ -75,3 +75,14 @@ export const goAuth = () => {
     goToAuth();
   };
 };
+
+export const startLoader = () => {
+  return dispatch => {
+    dispatch({ type: Types.START_LOADER });
+  };
+};
+export const stopLoader = () => {
+  return dispatch => {
+    dispatch({ type: Types.STOP_LOADER });
+  };
+};

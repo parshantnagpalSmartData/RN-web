@@ -4,11 +4,22 @@ import Immutable from "seamless-immutable";
 const initialState = Immutable({
   root: "login", // 'login' / 'after-login'
   componentId: "",
-  screen: "Home"
+  screen: "Home",
+  loading: false
 });
 
 export default function app(state = initialState, action = {}) {
   switch (action.type) {
+    case Types.START_LOADER:
+      return {
+        ...state,
+        loading: true
+      };
+    case Types.STOP_LOADER:
+      return {
+        ...state,
+        loading: false
+      };
     case Types.ROOT_CHANGED:
       return {
         ...state,
