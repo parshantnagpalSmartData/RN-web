@@ -6,6 +6,7 @@ Date : 13 december 2018
 */
 
 import history from "../../utilities/history";
+import * as Types from "../../actionTypes";
 // eslint-disable-next-line
 export const pushTParticulatScreen = (componentId = null, screen) => {
   return () => {
@@ -33,9 +34,9 @@ export const goAuth = () => {
 };
 /* eslint-disable */
 export const setScrenStack = (componentId = null, screen, visible) => {
-  return () => {
+  return dispatch => {
     // dispatch({ type: Types.SET_COMPONENT, payload: componentId });
-    // dispatch({ type: Types.SET_SCREEN, payload: screen });
+    dispatch({ type: Types.SET_SCREEN, payload: screen });
     history.push(`/${screen}`);
   };
 };

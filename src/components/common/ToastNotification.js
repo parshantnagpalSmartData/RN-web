@@ -91,7 +91,7 @@ class ToastNotification extends Component {
   closeToast() {
     setTimeout(() => {
       Animated.timing(this.animatedValue, {
-        toValue: -70,
+        toValue: -100,
         duration: 500
       }).start();
     }, 2000);

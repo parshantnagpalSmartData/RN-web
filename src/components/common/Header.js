@@ -66,7 +66,7 @@ const Header = props => {
               <Image
                 source={Constants.Images.Drawer}
                 resizeMode={"contain"}
-                style={Styles.iconBtn}
+                style={Styles.icon}
               />
             </TouchableOpacity>
           ) : !hideBack && Platform.OS !== "web" ? (
@@ -74,7 +74,7 @@ const Header = props => {
               <Image
                 source={Constants.Images.Back}
                 resizeMode={"contain"}
-                style={Styles.iconBtn}
+                style={Styles.icon}
               />
             </TouchableOpacity>
           ) : (
@@ -117,7 +117,7 @@ const Header = props => {
               <Image
                 source={rightIcon}
                 resizeMode={"contain"}
-                style={Styles.iconBtn}
+                style={Styles.icon}
               />
             </TouchableOpacity>
           ) : rightText ? (
@@ -154,6 +154,10 @@ const Styles = StyleSheet.create({
     width: moderateScale(40),
     justifyContent: "center",
     alignItems: "center"
+  },
+  icon: {
+    height: moderateScale(20),
+    width: moderateScale(20)
   },
   header: {
     justifyContent: "center",

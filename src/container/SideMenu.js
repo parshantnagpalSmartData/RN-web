@@ -16,7 +16,7 @@ import * as AppAction from "../actions";
 import Constants from "../constants";
 import { moderateScale } from "../helpers/ResponsiveFonts";
 import SafeView from "../components/common/SafeView";
-
+import { Dialog } from "../helpers/common";
 class SideMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +43,12 @@ class SideMenu extends React.Component {
         screen
       },
       () => {
-        if (screen === "Logout") {
+        if (screen === "Logout" && Platform.OS !== "web") {
+          Dialog(Constants.AppCosntants.Alert.Logout, [
+            { text: "Yes", onPress: () => this.props.appAction.logOut() },
+            { text: "No", onPress: () => {} }
+          ]);
+        } else if (screen === "Logout" && Platform.OS === "web") {
           this.props.appAction.logOut();
         } else {
           this.props.appAction.setScrenStack("MY_STACK", screen, visible);
@@ -68,7 +73,7 @@ class SideMenu extends React.Component {
           start={{ x: 1, y: 1 }}
           end={{ x: 0, y: 0 }}
           colors={Constants.Colors.SelectedMenu}
-          style={styles.gradientStyle}
+          //  style={styles.gradientStyle}
         >
           <View style={styles.text}>
             <TouchableOpacity onPress={() => item.onPress(item.key)}>
@@ -154,7 +159,7 @@ class SideMenu extends React.Component {
                   ...Constants.Fonts.Regular,
                   fontSize: moderateScale(18),
                   color: Constants.Colors.White,
-                  paddingVertical: moderateScale(5)
+                  paddingVertical: moderateScale(3)
                 }}
               >{`${FirstName} ${LastName}`}</Text>
               <Text
@@ -162,15 +167,13 @@ class SideMenu extends React.Component {
                   ...Constants.Fonts.Regular,
                   fontSize: moderateScale(14),
                   color: Constants.Colors.White,
-                  paddingVertical: moderateScale(5)
+                  paddingVertical: moderateScale(3)
                 }}
               >
                 {UserName}
               </Text>
             </View>
           </View>
-
-          <View />
           <FlatList
             data={menuOptions}
             renderItem={this.renderMenu}
@@ -196,8 +199,8 @@ const styles = StyleSheet.create({
     color: Constants.Colors.White
   },
   container: {
-    flex: 1
-    //  margin: moderateScale(20)
+    flex: 1,
+    justifyContent: "space-between"
   },
   text: {
     justifyContent: "center",

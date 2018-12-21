@@ -23,6 +23,7 @@ import PrintableForms from "../container/PrintableForms";
 import MyProfile from "../container/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
+// import ToastNotification from "../components/common/ToastNotification";
 // const routes = ({store}) => {
 //   const state = store.getState();
 //   console.log('storestatestatestatestatestate',state)
@@ -121,6 +122,7 @@ class Routes extends Component {
           />
           {/* <Route exact path="/DashBoard" component={Screen2} /> */}
           <Route component={NotFound} />
+          {/* <Route path="/ToastNotification" component={ToastNotification} /> */}
         </Switch>
       </Router>
     );

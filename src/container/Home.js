@@ -7,6 +7,7 @@ import * as appAction from "../actions";
 import Constants from "../constants";
 import { moderateScale } from "../helpers/ResponsiveFonts";
 import Header from "../components/common/Header";
+import UnderDevelopment from "../components/common/UnderDevelopment";
 
 class Home extends Component {
   constructor(props) {
@@ -146,20 +147,32 @@ class Home extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"My Schedule"} onDrawerPress={this.onDrawerPress} />
-        <FlatList
-          data={patitents}
-          keyExtractor={item => item._id.toString()}
-          renderItem={this.renderPatients}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          style={{
-            ...Platform.select({
-              web: {
-                overflow: "hidden"
-              }
-            })
-          }}
-        />
+        {Platform.OS !== "web" ? (
+          <FlatList
+            data={patitents}
+            keyExtractor={item => item._id.toString()}
+            renderItem={this.renderPatients}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            style={{
+              ...Platform.select({
+                web: {
+                  overflow: "hidden"
+                  //width: Constants.BaseStyle.DEVICE_WIDTH
+                }
+              })
+            }}
+            contentContainerStyle={{
+              ...Platform.select({
+                web: {
+                  justifyContent: "center"
+                }
+              })
+            }}
+          />
+        ) : (
+          <UnderDevelopment />
+        )}
       </View>
     );
   }
@@ -167,9 +180,7 @@ class Home extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1,
-    justifyContent: "center"
-    // /alignItems: "center"
+    flex: 1
   }
 });
 const mapStateToProps = state => ({
