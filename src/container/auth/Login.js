@@ -138,10 +138,10 @@ class Login extends Component {
                 value={this.state.password}
                 returnKey="done"
                 onSubmitEditing={() => {
-                  this.onLoginPress();
+                  this.submitLogin();
                 }}
                 autoCapitalize={"none"}
-                secureTextEntry
+                secureText
                 ref={ref => (this.password = ref)}
               />
             </View>

@@ -108,7 +108,7 @@ class ResetPssword extends Component {
                 value={this.state.oldPassword}
                 returnKeyType={"next"}
                 autoCapitalize={"none"}
-                secureTextEntry
+                secureText
                 ref={ref => (this.oldPassword = ref)}
                 onSubmitEditing={() => {
                   this.focusNext("newPassword");
@@ -123,7 +123,7 @@ class ResetPssword extends Component {
                 value={this.state.newPassword}
                 returnKeyType={"next"}
                 autoCapitalize={"none"}
-                secureTextEntry
+                secureText
                 ref={ref => (this.newPassword = ref)}
                 onSubmitEditing={() => {
                   this.focusNext("reNewPass");
@@ -138,7 +138,7 @@ class ResetPssword extends Component {
                 value={this.state.reNewPass}
                 returnKeyType={"return"}
                 autoCapitalize={"none"}
-                secureTextEntry
+                secureText
                 ref={ref => (this.reNewPass = ref)}
                 onSubmitEditing={() => {
                   this.resetPssword();
