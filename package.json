@@ -37,7 +37,8 @@
     "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
     "precommit": "npm run rp && lint-staged",
     "startWeb": "./node_modules/.bin/http-server ./dist --cors -a localhost -p  4223",
-    "android-build": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean && ./gradlew assembleRelease"
+    "android-build": "watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean && ./gradlew assembleRelease",
+    "reset-cache": "watchman watch-del-all && react-native start --reset-cache"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",

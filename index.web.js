@@ -8,7 +8,7 @@ import setup from "./src/store/setup";
 import Routes from "./src/config/routes";
 import Loader from "./src/components/common/Loader";
 const { persistor, store } = setup();
-import  "./src/container/html/style.css";
+import "./src/container/html/style.css";
 class App extends Component {
   constructor(props) {
     super(props);

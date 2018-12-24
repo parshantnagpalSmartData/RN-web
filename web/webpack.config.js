@@ -50,18 +50,18 @@ const cssLoaderConfiguration = {
   test: /\.css$/,
   use: [
     {
-      loader: 'style-loader',
+      loader: "style-loader"
     },
     {
-      loader: 'css-loader',
+      loader: "css-loader",
       options: {
         modules: true,
         importLoaders: 1,
-        sourceMap: true,
-      },
-    }]
+        sourceMap: true
+      }
+    }
+  ]
 };
-
 
 module.exports = {
   entry: [
@@ -82,7 +82,11 @@ module.exports = {
   // ...the rest of your config
 
   module: {
-    rules: [babelLoaderConfiguration, imageLoaderConfiguration, cssLoaderConfiguration]
+    rules: [
+      babelLoaderConfiguration,
+      imageLoaderConfiguration,
+      cssLoaderConfiguration
+    ]
   },
 
   resolve: {
