@@ -1510,7 +1510,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.futuredms.shyft;
 				PRODUCT_NAME = ActNursesportal;
-				PROVISIONING_PROFILE = "60fe321a-5cd8-4f57-854e-5e190670ce32";
+				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
 				PROVISIONING_PROFILE_SPECIFIER = ShyftAppDevelopment;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

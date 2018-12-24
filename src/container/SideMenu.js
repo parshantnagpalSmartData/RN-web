@@ -38,7 +38,6 @@ class SideMenu extends React.Component {
   }
 
   setScrenStack(screen, visible) {
-    
     if (screen === "Logout" && Platform.OS !== "web") {
       Dialog(Constants.AppCosntants.Alert.Logout, [
         { text: "Yes", onPress: () => this.props.appAction.logOut() },
@@ -52,8 +51,9 @@ class SideMenu extends React.Component {
           screen
         },
         () => {
-      this.props.appAction.setScrenStack("MY_STACK", screen, visible);          
-        });
+          this.props.appAction.setScrenStack("MY_STACK", screen, visible);
+        }
+      );
     }
 
     if (Platform.OS !== "web") {
