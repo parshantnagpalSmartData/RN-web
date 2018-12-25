@@ -11,6 +11,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import _ from "lodash";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {Toast} from "react-native-redux-toast";
 
 import * as appAction from "../../actions";
 // import FloatingInput from "../../components/common/FloatingInput";
@@ -28,8 +29,11 @@ class Login extends Component {
     super(props);
     this.state = {
       isWide: false,
-      email: "",
-      password: "",
+      email:
+        global.isDebuggingInChrome || __DEV__ // eslint-disable-line
+          ? "suraj.sanwal@smartdatainc.net"
+          : "",
+      password: global.isDebuggingInChrome || __DEV__ ? "welcome123" : "", // eslint-disable-line
       deviceWidth: window.innerWidth
     };
   }
@@ -77,8 +81,9 @@ class Login extends Component {
   });
 
   onForgotPassword = () => {
-    let { appAction, componentId } = this.props; // eslint-disable-line
-    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    let { appAction, componentId } = this.props; // eslint-disable-line OTPScreen
+    // appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    appAction.pushTParticulatScreen(componentId, "OTPScreen");
   };
 
   render() {
@@ -92,7 +97,6 @@ class Login extends Component {
           scrollEnabled={true}
           contentContainerStyle={{
             alignItems: "center",
-            //backgroundColor: "red",
             flex: 1
           }}
         >
@@ -186,6 +190,7 @@ class Login extends Component {
           </View>
         </KeyboardAwareScrollView>
         <Loader />
+        <Toast messageStyle={{ color: "red" }} />
       </View>
     );
   }

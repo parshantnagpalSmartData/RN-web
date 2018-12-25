@@ -23,6 +23,7 @@ import PrintableForms from "../container/PrintableForms";
 import MyProfile from "../container/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
+import OTPScreen from "../container/auth/OTPScreen";
 // import ToastNotification from "../components/common/ToastNotification";
 // const routes = ({store}) => {
 //   const state = store.getState();
@@ -66,6 +67,14 @@ class Routes extends Component {
           {/* <Route exact path="/ForgotPassword" component={ForgotPassword} /> */}
           <AppRoute
             exact
+            path="/OTPScreen"
+            component={OTPScreen}
+            //  requireAuth={requireAuth}
+            layout={frontLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
             path="/Home"
             component={Home}
             //  requireAuth={requireAuth}
@@ -104,6 +113,7 @@ class Routes extends Component {
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
+
           <AppRoute
             exact
             path="/MyProfile"

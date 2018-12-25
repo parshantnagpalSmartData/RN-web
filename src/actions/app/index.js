@@ -41,22 +41,32 @@ export const setScrenStack = (componentId, screen, visible) => {
   return dispatch => {
     dispatch({ type: Types.SET_COMPONENT, payload: componentId });
     dispatch({ type: Types.SET_SCREEN, payload: screen });
-    Navigation.setStackRoot(componentId, {
-      component: {
-        name: screen,
-        options: {
-          topBar: {
-            title: {
-              text: "Pushed 1"
-            }
+    Navigation.setStackRoot(componentId, [
+      {
+        component: {
+          name: screen,
+          passProps: {
+            text: "Root screen"
           },
-          bottomTabs: {
-            visible,
-            drawBehind: true
+          options: {
+            animations: {
+              setStackRoot: {
+                enabled: true
+              }
+            },
+            topBar: {
+              title: {
+                text: "Pushed 1"
+              }
+            },
+            bottomTabs: {
+              visible,
+              drawBehind: true
+            }
           }
         }
       }
-    });
+    ]);
   };
 };
 

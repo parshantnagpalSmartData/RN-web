@@ -7,7 +7,8 @@ import * as appAction from "../actions";
 import Constants from "../constants";
 import { moderateScale } from "../helpers/ResponsiveFonts";
 import Header from "../components/common/Header";
-import UnderDevelopment from "../components/common/UnderDevelopment";
+import Loader from "../components/common/Loader";
+import { Toast } from "react-native-redux-toast";
 
 class Home extends Component {
   constructor(props) {
@@ -147,32 +148,30 @@ class Home extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"My Schedule"} onDrawerPress={this.onDrawerPress} />
-        {Platform.OS !== "web" ? (
-          <FlatList
-            data={patitents}
-            keyExtractor={item => item._id.toString()}
-            renderItem={this.renderPatients}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            style={{
-              ...Platform.select({
-                web: {
-                  overflow: "hidden"
-                  //width: Constants.BaseStyle.DEVICE_WIDTH
-                }
-              })
-            }}
-            contentContainerStyle={{
-              ...Platform.select({
-                web: {
-                  justifyContent: "center"
-                }
-              })
-            }}
-          />
-        ) : (
-          <UnderDevelopment />
-        )}
+        <FlatList
+          data={patitents}
+          keyExtractor={item => item._id.toString()}
+          renderItem={this.renderPatients}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          style={{
+            ...Platform.select({
+              web: {
+                overflow: "hidden"
+                //width: Constants.BaseStyle.DEVICE_WIDTH
+              }
+            })
+          }}
+          contentContainerStyle={{
+            ...Platform.select({
+              web: {
+                justifyContent: "center"
+              }
+            })
+          }}
+        />
+        <Loader />
+        <Toast messageStyle={{ color: "red" }} />
       </View>
     );
   }

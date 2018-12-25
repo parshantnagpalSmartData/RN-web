@@ -1,80 +1,98 @@
+import React from "react";
+import { View } from "react-native";
 import { Navigation } from "react-native-navigation";
+import { Toast } from "react-native-redux-toast";
+import { Provider } from "react-redux";
+import setup from "../store/setup";
 
-export const registerScreens = (store, Provider) => {
+import SignIn from "../container/auth/Login";
+import ForgotPassword from "../container/auth/ForgotPassword";
+import Loader from "../container/Loader";
+import Loading from "../components/common/Loader";
+import Home from "../container/Home";
+import OpenShift from "../container/OpenShift";
+import PotientialCases from "../container/PotientialCases";
+import PrintableForms from "../container/PrintableForms";
+import MyProfile from "../container/MyProfile";
+import MessageCenter from "../container/MessageCenter";
+import ResetPassword from "../container/ResetPassword";
+import OTPScreen from "../container/auth/OTPScreen";
+import SideMenu from "../container/SideMenu";
+
+const store = setup();
+
+/* eslint-disable */
+const LoadReducxSceen = ReduxScreen => props => (
+  <Provider store={store}>
+    <View style={{ flex: 1 }}>
+      <ReduxScreen {...props} />
+      <Loading />
+      <Toast messageStyle={{ color: "white" }} />
+    </View>
+  </Provider>
+);
+
+/* eslint-enable */
+
+export const registerScreens = () => {
   // Loader Stack
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "Loader",
-    () => require("../container/Loader").default,
-    Provider,
-    store
+    () => LoadReducxSceen(Loader),
+    () => Loader
   );
   // Auth stack
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "SignIn",
-    () => require("../container/auth/Login").default,
-    Provider,
-    store
+    () => LoadReducxSceen(SignIn),
+    () => SignIn
   );
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "ForgotPassword",
-    () => require("../container/auth/ForgotPassword").default,
-    Provider,
-    store
+    () => LoadReducxSceen(ForgotPassword),
+    () => ForgotPassword
   );
   // Dashboard Stack
-  Navigation.registerComponentWithRedux(
-    "Home",
-    () => require("../container/Home").default,
-    Provider,
-    store
-  );
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent("Home", () => LoadReducxSceen(Home), () => Home);
+  Navigation.registerComponent(
     "MessageCenter",
-    () => require("../container/MessageCenter").default,
-    Provider,
-    store
+    () => LoadReducxSceen(MessageCenter),
+    () => MessageCenter
   );
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "MyProfile",
-    () => require("../container/MyProfile").default,
-    Provider,
-    store
+    () => LoadReducxSceen(MyProfile),
+    () => MyProfile
   );
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "OpenShift",
-    () => require("../container/OpenShift").default,
-    Provider,
-    store
+    () => LoadReducxSceen(OpenShift),
+    () => OpenShift
   );
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "PotientialCases",
-    () => require("../container/PotientialCases").default,
-    Provider,
-    store
+    () => LoadReducxSceen(PotientialCases),
+    () => PotientialCases
   );
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "PrintableForms",
-    () => require("../container/PrintableForms").default,
-    Provider,
-    store
+    () => LoadReducxSceen(PrintableForms),
+    () => PrintableForms
   );
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "ResetPassword",
-    () => require("../container/ResetPassword").default,
-    Provider,
-    store
+    () => LoadReducxSceen(ResetPassword),
+    () => ResetPassword
   );
 
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "SideMenu",
-    () => require("../container/SideMenu").default,
-    Provider,
-    store
+    () => LoadReducxSceen(SideMenu),
+    () => SideMenu
   );
-  // Navigation.registerComponentWithRedux(
-  //   "ToastNotification",
-  //   () => require("../components/common/ToastNotification").default,
-  //   Provider,
-  //   store
-  // );
+  Navigation.registerComponent(
+    "OTPScreen",
+    () => LoadReducxSceen(OTPScreen),
+    () => OTPScreen
+  );
 };
