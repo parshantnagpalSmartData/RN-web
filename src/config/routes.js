@@ -27,7 +27,10 @@ const LoadReducxSceen = ReduxScreen => props => (
     <View style={{ flex: 1 }}>
       <ReduxScreen {...props} />
       <Loading />
-      <Toast messageStyle={{ color: "white" }} />
+      <Toast
+        messageStyle={{ color: "white" }}
+        containerStyle={{ top: 100, backgroundColor: "red", flex: 1 }}
+      />
     </View>
   </Provider>
 );

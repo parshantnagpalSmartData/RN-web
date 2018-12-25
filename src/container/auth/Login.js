@@ -11,7 +11,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import _ from "lodash";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {Toast} from "react-native-redux-toast";
+import { Toast } from "react-native-redux-toast";
 
 import * as appAction from "../../actions";
 // import FloatingInput from "../../components/common/FloatingInput";
