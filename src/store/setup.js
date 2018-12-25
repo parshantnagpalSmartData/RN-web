@@ -5,6 +5,7 @@
  */
 import { applyMiddleware, createStore, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
+import SplashScreen from "react-native-splash-screen";
 import * as reducers from "./../reducers";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
@@ -50,6 +51,7 @@ export default function setup() {
     } else {
       goToAuth();
     }
+    SplashScreen.hide();
     // on app loading the persit store loads and we have route from here
     // startApp(store.getState().app.root);
   });
