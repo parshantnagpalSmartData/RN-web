@@ -86,11 +86,10 @@ export const registerScreens = () => {
     () => ResetPassword
   );
 
-  Navigation.registerComponentWithRedux(
+  Navigation.registerComponent(
     "SideMenu",
-    () => SideMenu,
-    Provider,
-    store
+    () => LoadReducxSceen(SideMenu),
+    () => SideMenu
   );
   Navigation.registerComponent(
     "OTPScreen",

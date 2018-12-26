@@ -38,23 +38,35 @@ class ResetPssword extends Component {
   }
 
   resetPssword = _.debounce(() => {
-    // let { appAction, componentId } = this.props;
+    let { appAction } = this.props;
     let { oldPassword, newPassword, reNewPass } = this.state;
     if (_.isEmpty(oldPassword.trim())) {
-      alert(Constants.Strings.Common.OldPassword);
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.OldPassword
+      );
       return;
     }
     if (_.isEmpty(newPassword.trim())) {
-      alert(Constants.Strings.Common.NewPassword);
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.NewPassword
+      );
       return;
     }
     if (_.isEmpty(reNewPass.trim())) {
-      alert(Constants.Strings.Common.confirmPassword);
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.confirmPassword
+      );
       return;
     }
 
     if (newPassword !== reNewPass) {
-      alert(Constants.Strings.Common.PasswordNotMatched);
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.PasswordNotMatched
+      );
       return;
     }
     // appAction.ResetPssword({ username: email });

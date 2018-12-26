@@ -10,12 +10,13 @@ import { connect } from "react-redux";
 import OtpInputs from "react-native-otp-inputs";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import _ from "lodash";
+import { bindActionCreators } from "redux";
 
+import * as appAction from "../../actions";
 import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Header from "../../components/common/Header";
 import LogoText from "../../components/common/LogoText";
-import * as appActions from "../../actions";
 // import Button from "../../components/common/Button";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
@@ -31,29 +32,30 @@ class OTPScreen extends Component {
     navBarHidden: true
   };
   onBackPress = () => {
-    this.props.dispatch(appActions.pop(this.props.componentId));
+    this.props.appActions.pop(this.props.componentId);
   };
+
   resendOTP = _.debounce(() => {
     let { _id } = this.props.user;
     let { navigator } = this.props;
-    this.props.dispatch(appActions.resendOTP({ userId: _id }, navigator));
+    this.props.appActions.resendOTP({ userId: _id }, navigator);
   });
 
   verifyOTP = _.debounce(() => {
     let { otp } = this.state;
-    let { _id } = this.props.user;
+    let { user, appAction } = this.props;
+    let { _id } = user;
     if (_.isEmpty(otp)) {
-      //   toastMessage(this.props.navigator, {
-      //     type: Constants.AppCosntants.Notificaitons.Error,
-      //     message: "Please enter OTP, Sent on your number."
-      //   });
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.EnterOTP
+      );
       return;
     }
-    this.props.dispatch(
-      appActions.verifyOTP(
-        { otpValue: parseInt(otp), userId: _id },
-        this.props.navigator
-      )
+
+    appAction.verifyOTP(
+      { otpValue: parseInt(otp), userId: _id },
+      this.props.navigator
     );
   });
 
@@ -120,12 +122,6 @@ class OTPScreen extends Component {
 }
 
 // which props do we want to inject, given the global state?
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    loader: state.loader
-  };
-}
 
 const Styles = StyleSheet.create({
   container: {
@@ -227,5 +223,18 @@ const Styles = StyleSheet.create({
     paddingVertical: moderateScale(10)
   }
 });
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    loader: state.loader
+  };
+}
 
-export default connect(mapStateToProps)(OTPScreen);
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OTPScreen);

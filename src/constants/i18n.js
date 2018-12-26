@@ -10,6 +10,7 @@ let Strings = {
     EmptyEmailMsg: "Please enter an email address.",
     ValidEmailAddress: "Please enter a valid email address.",
     EnterPassword: "Please enter a password.",
+    EnterOTP: "Please enter a OTP.",
     MinPersonRide: "Please enter number of persons to continue ride.",
     MaxPersonRide: "Minimum 1 and maximum 20 person can travelle in a ride",
     VaildDigit: "No of persons must be between 1-20",

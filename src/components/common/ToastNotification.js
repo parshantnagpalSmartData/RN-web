@@ -19,7 +19,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import SafeView from "./SafeView";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
@@ -37,7 +36,6 @@ const MyToastNotification = props => {
     type == Constants.AppCosntants.Notificaitons.Success ? "Sucess" : "Error";
   return (
     <View style={Styles.container}>
-      <SafeView />
       <View
         style={{
           alignItems: "center",
@@ -83,7 +81,7 @@ const MyToastNotification = props => {
 class ToastNotification extends Component {
   constructor(props) {
     super(props);
-    this.animatedValue = new Animated.Value(100);
+    this.animatedValue = new Animated.Value(-100);
   }
 
   callToast() {
@@ -105,9 +103,9 @@ class ToastNotification extends Component {
   }
 
   hideToast = () => {
-    setTimeout(() => {
-      this.props.appAction.hideToast();
-    }, 100);
+    // setTimeout(() => {
+    this.props.appAction.hideToast();
+    // }, 100);
   };
 
   render() {
@@ -128,11 +126,14 @@ class ToastNotification extends Component {
               justifyContent: "center",
               backgroundColor: Constants.Colors.Transparent,
               alignItems: "center",
-              zIndex: 99,
+              zIndex: 999,
               ...Platform.select({
                 android: {
                   height: 200,
                   opacity: 1
+                },
+                web: {
+                  position: "absolute"
                 }
               })
             }
@@ -141,7 +142,7 @@ class ToastNotification extends Component {
           <MyToastNotification
             type={type}
             message={message}
-            closeToast={this.closeToast}
+            closeToast={this.hideToast}
           />
         </Animated.View>
       );

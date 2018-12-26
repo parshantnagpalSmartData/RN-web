@@ -27,11 +27,8 @@ class Login extends Component {
     super(props);
     this.state = {
       isWide: false,
-      email:
-        global.isDebuggingInChrome || __DEV__ // eslint-disable-line
-          ? "suraj.sanwal@smartdatainc.net"
-          : "",
-      password: global.isDebuggingInChrome || __DEV__ ? "welcome123" : "", // eslint-disable-line
+      email: "",
+      password: "",
       deviceWidth: window.innerWidth
     };
   }
@@ -62,16 +59,25 @@ class Login extends Component {
     let { appAction } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
-      alert(Constants.Strings.Common.EmptyEmailMsg);
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.EmptyEmailMsg
+      );
       return;
     }
 
     if (!Regex.validateEmail(email.trim())) {
-      alert(Constants.Strings.Common.ValidEmailAddress);
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.ValidEmailAddress
+      );
       return;
     }
     if (_.isEmpty(password.trim())) {
-      alert(Constants.Strings.Common.EnterPassword);
+      appAction.showToast(
+        Constants.AppCosntants.Notificaitons.Error,
+        Constants.Strings.Common.EnterPassword
+      );
       return;
     }
 
