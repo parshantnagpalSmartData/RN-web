@@ -114,37 +114,37 @@ class ToastNotification extends Component {
     let { notification } = this.props;
     let { isVisible, type, message } = notification;
     if (isVisible) {
-    this.callToast();
-    return (
-      <Animated.View
-        style={[
-          {
-            transform: [{ translateY: this.animatedValue }],
-            height: 0,
-            position: "relative",
-            left: 0,
-            top: 0,
-            right: 0,
-            justifyContent: "center",
-            backgroundColor: Constants.Colors.Transparent,
-            alignItems: "center",
-            zIndex: 99,
-            ...Platform.select({
-              android: {
-                height: 200,
-                opacity: 1
-              }
-            })
-          }
-        ]}
-      >
-        <MyToastNotification
-          type={type}
-          message={message}
-          closeToast={this.closeToast}
-        />
-      </Animated.View>
-    );
+      this.callToast();
+      return (
+        <Animated.View
+          style={[
+            {
+              transform: [{ translateY: this.animatedValue }],
+              height: 0,
+              position: "relative",
+              left: 0,
+              top: 0,
+              right: 0,
+              justifyContent: "center",
+              backgroundColor: Constants.Colors.Transparent,
+              alignItems: "center",
+              zIndex: 99,
+              ...Platform.select({
+                android: {
+                  height: 200,
+                  opacity: 1
+                }
+              })
+            }
+          ]}
+        >
+          <MyToastNotification
+            type={type}
+            message={message}
+            closeToast={this.closeToast}
+          />
+        </Animated.View>
+      );
     } else {
       return null;
     }
