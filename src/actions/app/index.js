@@ -96,3 +96,21 @@ export const stopLoader = () => {
     dispatch({ type: Types.STOP_LOADER });
   };
 };
+
+export const showToast = (type, message) => {
+  return dispatch => {
+    dispatch({
+      type: Types.SHOW_TOAST,
+      payload: { type, message, isVisible: true }
+    });
+  };
+};
+
+export const hideToast = () => {
+  return dispatch => {
+    dispatch({
+      type: Types.HIDE_TOAST,
+      payload: { isVisible: false }
+    });
+  };
+};

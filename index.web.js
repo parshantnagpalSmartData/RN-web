@@ -7,8 +7,8 @@ import setup from "./src/store/setup";
 
 import Routes from "./src/config/routes";
 import Loader from "./src/components/common/Loader";
-import { Toast } from "react-native-redux-toast";
-// import ToastNotification from "./src/components/common/ToastNotification";
+// import { Toast } from "react-native-redux-toast";
+import ToastNotification from "./src/components/common/ToastNotification";
 
 const { persistor, store } = setup();
 class App extends Component {
@@ -36,8 +36,8 @@ class App extends Component {
       <Provider store={store}>
         <PersistGate loading={<Loader />} persistor={persistor}>
           <Routes />
+          <ToastNotification />
           <Loader />
-          <Toast messageStyle={{ color: "white" }} />
         </PersistGate>
       </Provider>
     );

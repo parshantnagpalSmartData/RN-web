@@ -27,11 +27,11 @@ export default function setup() {
 
   const middleware = [applyMiddleware(...[thunk, promise, array, logger])];
 
-  if (isDev) {
-    middleware.push(
-      applyMiddleware(require("redux-immutable-state-invariant").default())
-    );
-  }
+  // if (isDev) {
+  //   middleware.push(
+  //     applyMiddleware(require("redux-immutable-state-invariant").default())
+  //   );
+  // }
   const reducer = combineReducers(reducers);
 
   const persistedReducer = persistReducer(persistConfig, reducer);
@@ -39,10 +39,10 @@ export default function setup() {
   const store = createStore(persistedReducer, {}, compose(...middleware));
 
   // Attach the store to the Chrome debug window
-  if (global.isDebuggingInChrome) {
-    // eslint-disable-line
-    window.store = store;
-  }
+  // if (global.isDebuggingInChrome) {
+  //   // eslint-disable-line
+  //   window.store = store;
+  // }
   persistStore(store, null, () => {
     // console.log("newstore", store.getState().app.root);
     if (store.getState().user.isLoggedIn) {

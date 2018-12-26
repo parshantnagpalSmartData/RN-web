@@ -5,7 +5,10 @@ const initialState = Immutable({
   root: "login", // 'login' / 'after-login'
   componentId: "",
   screen: "Home",
-  loading: false
+  loading: false,
+  notification: {
+    isVisible: false
+  }
 });
 
 export default function app(state = initialState, action = {}) {
@@ -34,6 +37,16 @@ export default function app(state = initialState, action = {}) {
       return {
         ...state,
         screen: action.payload
+      };
+    case Types.SHOW_TOAST:
+      return {
+        ...state,
+        notification: action.payload
+      };
+    case Types.HIDE_TOAST:
+      return {
+        ...state,
+        notification: action.payload
       };
     case Types.RESET_APP:
       return {

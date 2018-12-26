@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { Navigation } from "react-native-navigation";
-import { Toast } from "react-native-redux-toast";
+
 import { Provider } from "react-redux";
 import setup from "../store/setup";
 
@@ -18,6 +18,7 @@ import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/auth/OTPScreen";
 import SideMenu from "../container/SideMenu";
+import ToastNotification from "../components/common/ToastNotification";
 
 const store = setup();
 
@@ -26,11 +27,12 @@ const LoadReducxSceen = ReduxScreen => props => (
   <Provider store={store}>
     <View style={{ flex: 1 }}>
       <ReduxScreen {...props} />
+      <ToastNotification />
       <Loading />
-      <Toast
-        messageStyle={{ color: "white" }}
-        containerStyle={{ top: 100, backgroundColor: "red", flex: 1 }}
-      />
+      {/* <Toast
+        messageStyle={{ color: "red" }}
+        // containerStyle={{ top: 100, backgroundColor: "red", flex: 1 }}
+      /> */}
     </View>
   </Provider>
 );
@@ -88,10 +90,11 @@ export const registerScreens = () => {
     () => ResetPassword
   );
 
-  Navigation.registerComponent(
+  Navigation.registerComponentWithRedux(
     "SideMenu",
-    () => LoadReducxSceen(SideMenu),
-    () => SideMenu
+    () => SideMenu,
+    Provider,
+    store
   );
   Navigation.registerComponent(
     "OTPScreen",
