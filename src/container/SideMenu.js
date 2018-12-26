@@ -51,7 +51,11 @@ class SideMenu extends React.Component {
           screen
         },
         () => {
-          this.props.appAction.setScrenStack("MY_STACK", screen, visible);
+          this.props.appAction.setScrenStack(
+            this.props.componentId,
+            screen,
+            visible
+          );
         }
       );
     }

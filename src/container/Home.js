@@ -7,8 +7,6 @@ import * as appAction from "../actions";
 import Constants from "../constants";
 import { moderateScale } from "../helpers/ResponsiveFonts";
 import Header from "../components/common/Header";
-import Loader from "../components/common/Loader";
-import { Toast } from "react-native-redux-toast";
 
 class Home extends Component {
   constructor(props) {
@@ -170,8 +168,6 @@ class Home extends Component {
             })
           }}
         />
-        <Loader />
-        <Toast messageStyle={{ color: "red" }} />
       </View>
     );
   }

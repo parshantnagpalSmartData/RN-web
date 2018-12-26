@@ -11,7 +11,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import _ from "lodash";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Toast } from "react-native-redux-toast";
 
 import * as appAction from "../../actions";
 // import FloatingInput from "../../components/common/FloatingInput";
@@ -22,7 +21,6 @@ import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
 import LogoText from "../../components/common/LogoText";
-import Loader from "../../components/common/Loader";
 
 class Login extends Component {
   constructor(props) {
@@ -189,8 +187,6 @@ class Login extends Component {
             </View>
           </View>
         </KeyboardAwareScrollView>
-        <Loader />
-        <Toast messageStyle={{ color: "red" }} />
       </View>
     );
   }

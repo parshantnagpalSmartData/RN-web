@@ -83,7 +83,7 @@ const MyToastNotification = props => {
 class ToastNotification extends Component {
   constructor(props) {
     super(props);
-    this.animatedValue = new Animated.Value(-100);
+    this.animatedValue = new Animated.Value(100);
   }
 
   callToast() {

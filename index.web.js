@@ -7,7 +7,6 @@ import setup from "./src/store/setup";
 
 import Routes from "./src/config/routes";
 import Loader from "./src/components/common/Loader";
-// import { Toast } from "react-native-redux-toast";
 import ToastNotification from "./src/components/common/ToastNotification";
 
 const { persistor, store } = setup();

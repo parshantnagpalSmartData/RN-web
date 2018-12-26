@@ -72,7 +72,7 @@ export const setScrenStack = (componentId, screen, visible) => {
 
 export const goToHome = () => {
   return dispatch => {
-    dispatch({ type: Types.SET_COMPONENT, payload: "MY_STACK" });
+    // dispatch({ type: Types.SET_COMPONENT, payload: "MY_STACK" });
     dispatch({ type: Types.SET_SCREEN, payload: "Home" });
     goHome();
   };
