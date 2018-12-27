@@ -18,7 +18,7 @@ var Common = {
   //   }
   // },
   Dialog: (msg, buttons) => {
-    Alert.alert(Constants.AppCosntants.AppName, msg, buttons, {
+    Alert.alert(Constants.AppConstants.AppName, msg, buttons, {
       cancelable: true
     });
   },

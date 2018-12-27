@@ -62,7 +62,12 @@ class SideMenu extends React.Component {
   }
 
   onMenuPress = menu => {
-    this.setScrenStack(menu, true);
+    let { screen } = this.state;
+    if (screen === menu && Platform.OS !== "web") {
+      this.hideSideMenu();
+    } else {
+      this.setScrenStack(menu, true);
+    }
   };
 
   renderMenu = ({ item, index }) => {
@@ -76,20 +81,22 @@ class SideMenu extends React.Component {
           colors={Constants.Colors.SelectedMenu}
           //  style={styles.gradientStyle}
         >
-          <View style={styles.text}>
-            <TouchableOpacity onPress={() => item.onPress(item.key)}>
-              <Text style={styles.welcome}>{item.value}</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.text}
+            onPress={() => item.onPress(item.key)}
+          >
+            <Text style={styles.welcome}>{item.value}</Text>
+          </TouchableOpacity>
         </LinearGradient>
       );
     } else {
       return (
-        <View style={styles.text}>
-          <TouchableOpacity onPress={() => item.onPress(item.key)}>
-            <Text style={styles.welcome}>{item.value}</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.text}
+          onPress={() => item.onPress(item.key)}
+        >
+          <Text style={styles.welcome}>{item.value}</Text>
+        </TouchableOpacity>
       );
     }
   };
