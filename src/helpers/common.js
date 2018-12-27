@@ -1,7 +1,9 @@
 /* eslint-disable */
 "use strict";
 //import Toast from "react-native-root-toast";
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import Constants from "../constants";
 var Common = {
   // ShowToast: val => {
@@ -18,9 +20,17 @@ var Common = {
   //   }
   // },
   Dialog: (msg, buttons) => {
-    Alert.alert(Constants.AppConstants.AppName, msg, buttons, {
-      cancelable: true
-    });
+    if (Platform.OS !== "web") {
+      Alert.alert(Constants.AppConstants.AppName, msg, buttons, {
+        cancelable: true
+      });
+    } else {
+      confirmAlert({
+        title: Constants.AppConstants.AppName,
+        message: msg,
+        buttons
+      });
+    }
   },
   dateFilter: (startDate, endDate, collection) => {
     let filteredData = collection.filter(function(obj) {

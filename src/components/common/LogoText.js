@@ -2,7 +2,6 @@ import React from "react";
 import { View, Image, Text, Platform } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import SafeView from "../../components/common/SafeView";
 
 const LogoText = props => {
   let { logo, text, heading, message, containerStyle } = props;
@@ -12,13 +11,12 @@ const LogoText = props => {
         {
           backgroundColor: Constants.Colors.Transparent,
           flexDirection: "column",
-          justifyContent: "space-evenly",
+          justifyContent: "space-between",
           alignItems: "center",
-          top: moderateScale(10),
-          //marginTop: moderateScale(25),
           ...Platform.select({
             web: {
-              height: moderateScale(150)
+              height: moderateScale(150),
+              paddingVertical: moderateScale(25)
             },
             ios: {
               flex: 1
@@ -31,7 +29,6 @@ const LogoText = props => {
         containerStyle
       ]}
     >
-      <SafeView />
       <Image
         style={{
           height: moderateScale(100),
@@ -41,11 +38,11 @@ const LogoText = props => {
       />
       <View
         style={{
-          flex: 0.5,
+          //flex: 0.5,
           justifyContent: "center",
           alignItems: "center",
           top: moderateScale(20)
-          // backgroundColor: "green"
+          //backgroundColor: "green"
         }}
       >
         {heading ? (

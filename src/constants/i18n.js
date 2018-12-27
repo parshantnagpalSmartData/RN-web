@@ -17,7 +17,8 @@ let Strings = {
     OldPassword: "Please enter old password.",
     NewPassword: "Please enter new password.",
     confirmPassword: "Please confirm new password.",
-    PasswordNotMatched: "Your new Password Not Matched."
+    PasswordNotMatched: "Your new Password Not Matched.",
+    OTPDigit: "OTP must be 4 digit."
   },
   Error: {},
   Permissions: {

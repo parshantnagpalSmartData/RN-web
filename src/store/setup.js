@@ -28,11 +28,11 @@ export default function setup() {
 
   const middleware = [applyMiddleware(...[thunk, promise, array, logger])];
 
-  // if (isDev) {
-  //   middleware.push(
-  //     applyMiddleware(require("redux-immutable-state-invariant").default())
-  //   );
-  // }
+  if (isDev) {
+    middleware.push(
+      applyMiddleware(require("redux-immutable-state-invariant").default())
+    );
+  }
   const reducer = combineReducers(reducers);
 
   const persistedReducer = persistReducer(persistConfig, reducer);

@@ -34,10 +34,11 @@ const LoadReducxSceen = ReduxScreen => props => (
 
 export const registerScreens = () => {
   // Loader Stack
-  Navigation.registerComponent(
+  Navigation.registerComponentWithRedux(
     "Loader",
-    () => LoadReducxSceen(Loader),
-    () => Loader
+    () => Loader,
+    Provider,
+    store
   );
   // Auth stack
   Navigation.registerComponent(
@@ -83,10 +84,11 @@ export const registerScreens = () => {
     () => ResetPassword
   );
 
-  Navigation.registerComponent(
+  Navigation.registerComponentWithRedux(
     "SideMenu",
-    () => LoadReducxSceen(SideMenu),
-    () => SideMenu
+    () => SideMenu,
+    Provider,
+    store
   );
   Navigation.registerComponent(
     "OTPScreen",

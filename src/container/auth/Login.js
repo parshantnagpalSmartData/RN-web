@@ -80,23 +80,22 @@ class Login extends Component {
       );
       return;
     }
-
     appAction.signIn({ username: email, password: password });
   });
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props; // eslint-disable-line OTPScreen
-    // appAction.pushTParticulatScreen(componentId, "ForgotPassword");
-    appAction.pushTParticulatScreen(componentId, "OTPScreen");
+    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    // appAction.pushTParticulatScreen(componentId, "OTPScreen");
   };
 
   render() {
     let { deviceWidth } = this.state;
     return (
       <View style={Styles.containner}>
-        <View style={{ flex: 0.5, justifyContent: "center" }}>
-          <LogoText text={"ACT Home Health Services"} />
-        </View>
+        {/* <View style={{ flex: 0.5, justifyContent: "center" }}> */}
+        <LogoText text={"ACT Home Health Services"} />
+        {/* </View> */}
         <KeyboardAwareScrollView
           scrollEnabled={true}
           contentContainerStyle={{

@@ -24,7 +24,7 @@ import MyProfile from "../container/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/auth/OTPScreen";
-// import ToastNotification from "../components/common/ToastNotification";
+
 // const routes = ({store}) => {
 //   const state = store.getState();
 //   console.log('storestatestatestatestatestate',state)

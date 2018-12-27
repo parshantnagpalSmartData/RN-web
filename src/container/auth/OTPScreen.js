@@ -17,7 +17,6 @@ import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Header from "../../components/common/Header";
 import LogoText from "../../components/common/LogoText";
-// import Button from "../../components/common/Button";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 class OTPScreen extends Component {
@@ -32,13 +31,13 @@ class OTPScreen extends Component {
     navBarHidden: true
   };
   onBackPress = () => {
-    this.props.appActions.pop(this.props.componentId);
+    this.props.appAction.pop(this.props.componentId);
   };
 
   resendOTP = _.debounce(() => {
     let { _id } = this.props.user;
     let { navigator } = this.props;
-    this.props.appActions.resendOTP({ userId: _id }, navigator);
+    this.props.appAction.resendOTP({ userId: _id }, navigator);
   });
 
   verifyOTP = _.debounce(() => {
@@ -47,16 +46,12 @@ class OTPScreen extends Component {
     let { _id } = user;
     if (_.isEmpty(otp)) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.EnterOTP
       );
       return;
     }
-
-    appAction.verifyOTP(
-      { otpValue: parseInt(otp), userId: _id },
-      this.props.navigator
-    );
+    appAction.verifyOTP({ otpValue: parseInt(otp), userId: _id });
   });
 
   render() {
@@ -73,47 +68,43 @@ class OTPScreen extends Component {
         <KeyboardAwareScrollView
           scrollEnabled={false}
           contentContainerStyle={{
+            justifyContent: "space-between",
+            height: Constants.BaseStyle.DEVICE_HEIGHT * 0.45,
             alignItems: "center",
-            flex: 1
+            ...Platform.select({
+              web: { top: moderateScale(100) }
+            })
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "flex-start",
+          <OtpInputs
+            handleChange={otp => {
+              this.setState({ otp });
+            }}
+            numberOfInputs={4}
+            keyboardType={"numeric"}
+            inputContainerStyles={Styles.inputContainerStyles}
+            underlineColorAndroid={Constants.Colors.Gray}
+            inputTextErrorColor={Constants.Colors.Primary}
+            focusedBorderColor={Constants.Colors.Gray}
+            inputStyles={{ color: Constants.Colors.Primary }}
+          />
+          <AuthButton
+            gradientColors={Constants.Colors.ButtonGradients}
+            buttonName={"Verify"}
+            buttonStyle={{
               ...Platform.select({
-                web: { top: moderateScale(50) }
+                web: {
+                  top: moderateScale(15)
+                }
               })
             }}
-          >
-            <OtpInputs
-              handleChange={otp => {
-                this.setState({ otp });
-              }}
-              numberOfInputs={4}
-              keyboardType={"numeric"}
-              inputContainerStyles={Styles.inputContainerStyles}
-              underlineColorAndroid={Constants.Colors.Gray}
-              inputTextErrorColor={Constants.Colors.Primary}
-              focusedBorderColor={Constants.Colors.Gray}
-              inputStyles={{ color: Constants.Colors.Primary }}
-            />
-            <AuthButton
-              gradientColors={Constants.Colors.ButtonGradients}
-              buttonName={"Verify"}
-              buttonStyle={{
-                ...Platform.select({
-                  web: {}
-                })
-              }}
-              onPress={() => {
-                this.verifyOTP();
-              }}
-            />
-            <View style={Styles.resendOTP}>
-              <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
-              <Text style={Styles.resend}>{"Resend"}</Text>
-            </View>
+            onPress={() => {
+              this.verifyOTP();
+            }}
+          />
+          <View style={Styles.resendOTP}>
+            <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
+            <Text style={Styles.resend}>{"Resend"}</Text>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -160,8 +151,7 @@ const Styles = StyleSheet.create({
     ...Platform.select({
       web: {
         backgroundColor: Constants.Colors.Gray,
-        borderColor: Constants.Colors.Primary,
-        bottom: 10
+        borderColor: Constants.Colors.Primary
       }
     })
   },

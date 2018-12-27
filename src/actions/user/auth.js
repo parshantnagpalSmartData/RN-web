@@ -20,7 +20,7 @@ export const signIn = postData => {
             // dispatch(AppActions.pushTParticulatScreen(componentId, "Screen2"));
             dispatch(AppActions.goToHome());
           } else {
-            dispatch(AppActions.pushTParticulatScreen(null, "/Home"));
+            dispatch(AppActions.pushTParticulatScreen(null, "OTPScreen"));
           }
           dispatch(
             AppActions.showToast(
@@ -75,10 +75,41 @@ export const forgotPassword = postData => {
 export const logOut = () => {
   return dispatch => {
     dispatch(AppActions.startLoader());
-    dispatch({ type: Types.LOGOUT });
-    dispatch({ type: Types.RESET_USER });
-    dispatch({ type: Types.RESET_APP });
-    dispatch(AppActions.goAuth());
-    dispatch(AppActions.stopLoader());
+    setTimeout(() => {
+      dispatch({ type: Types.LOGOUT });
+      dispatch({ type: Types.RESET_USER });
+      dispatch({ type: Types.RESET_APP });
+      dispatch(AppActions.goAuth());
+      dispatch(AppActions.stopLoader());
+    }, 1000);
+  };
+};
+
+export const verifyOTP = postData => {
+  return dispatch => {
+    setTimeout(() => {
+      if (postData.otpValue === 1234) {
+        dispatch(
+          AppActions.showToast(
+            Constants.AppConstants.Notificaitons.Success,
+            "OTP Verified Sucessfully"
+          )
+        );
+        if (Platform.OS !== "web") {
+          dispatch(AppActions.goToHome());
+        } else {
+          dispatch(AppActions.pushTParticulatScreen(null, "Home"));
+        }
+      } else {
+        dispatch(
+          AppActions.showToast(
+            Constants.AppConstants.Notificaitons.Error,
+            "Invalid OTP"
+          )
+        );
+      }
+      dispatch(AppActions.stopLoader());
+    }, 500);
+    dispatch(AppActions.startLoader());
   };
 };

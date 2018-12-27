@@ -99,13 +99,11 @@ class ToastNotification extends Component {
         easing: Easing.linear
       }).start();
       this.hideToast();
-    }, 2000);
+    }, 3000);
   }
 
   hideToast = () => {
-    // setTimeout(() => {
     this.props.appAction.hideToast();
-    // }, 100);
   };
 
   render() {
@@ -160,8 +158,8 @@ const Styles = StyleSheet.create({
     zIndex: 99,
     ...Platform.select({
       web: {
-        top: moderateScale(100),
-        right: moderateScale(20)
+        top: moderateScale(50),
+        right: moderateScale(0)
       },
       ios: {
         bottom: moderateScale(50)
