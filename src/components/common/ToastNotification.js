@@ -57,11 +57,22 @@ const MyToastNotification = props => {
             <View
               style={{
                 alignItems: "flex-start",
-                justifyContent: "flex-start"
+                justifyContent: "flex-start",
+                ...Platform.select({
+                  web: {
+                    width: moderateScale(170)
+                  }
+                })
               }}
             >
               <Text style={Styles.heading}>{heading}</Text>
-              <Text style={Styles.message}>{message}</Text>
+              <Text
+                numberOfLines={2}
+                ellipsizeMode="tail"
+                style={Styles.message}
+              >
+                {message}
+              </Text>
             </View>
           </View>
 
@@ -211,6 +222,7 @@ const Styles = StyleSheet.create({
   },
   message: {
     ...Constants.Fonts.Regular,
+    flexWrap: "wrap",
     fontSize: moderateScale(11),
     color: Constants.Colors.White,
     paddingHorizontal: moderateScale(10),

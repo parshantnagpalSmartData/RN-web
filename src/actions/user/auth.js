@@ -49,14 +49,17 @@ export const signIn = postData => {
 
 export const forgotPassword = postData => {
   return dispatch => {
-    dispatch({ type: Types.FORGOT_REQUEST });
+    dispatch(AppActions.startLoader());
     RestClient.restCall("users/forgotpassword", postData)
       .then(res => {
         if (res.status) {
-          dispatch({ type: Types.FORGOT_SUCESS });
-          alert(res.message);
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Success,
+              res.message
+            )
+          );
         } else {
-          dispatch({ type: Types.FORGOT_FAIL });
           dispatch(
             AppActions.showToast(
               Constants.AppConstants.Notificaitons.Error,
@@ -64,6 +67,7 @@ export const forgotPassword = postData => {
             )
           );
         }
+        dispatch(AppActions.stopLoader());
       })
       .catch(e => {
         dispatch({ type: Types.FORGOT_FAIL });
