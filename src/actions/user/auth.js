@@ -24,7 +24,7 @@ export const signIn = postData => {
           }
           dispatch(
             AppActions.showToast(
-              Constants.AppCosntants.Notificaitons.Success,
+              Constants.AppConstants.Notificaitons.Success,
               res.message
             )
           );
@@ -33,7 +33,7 @@ export const signIn = postData => {
           // dispatch({ type: Types.LOGIN_FAIL });
           dispatch(
             AppActions.showToast(
-              Constants.AppCosntants.Notificaitons.Error,
+              Constants.AppConstants.Notificaitons.Error,
               res.message
             )
           );
@@ -59,7 +59,7 @@ export const forgotPassword = postData => {
           dispatch({ type: Types.FORGOT_FAIL });
           dispatch(
             AppActions.showToast(
-              Constants.AppCosntants.Notificaitons.Error,
+              Constants.AppConstants.Notificaitons.Error,
               res.message
             )
           );

@@ -39,14 +39,14 @@ class ForgotPassword extends Component {
     let { email } = this.state;
     if (_.isEmpty(email.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.EmptyEmailMsg
       );
       return;
     }
     if (!Regex.validateEmail(email.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.ValidEmailAddress
       );
       return;

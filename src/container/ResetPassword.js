@@ -42,21 +42,21 @@ class ResetPssword extends Component {
     let { oldPassword, newPassword, reNewPass } = this.state;
     if (_.isEmpty(oldPassword.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.OldPassword
       );
       return;
     }
     if (_.isEmpty(newPassword.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.NewPassword
       );
       return;
     }
     if (_.isEmpty(reNewPass.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.confirmPassword
       );
       return;
@@ -64,7 +64,7 @@ class ResetPssword extends Component {
 
     if (newPassword !== reNewPass) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.PasswordNotMatched
       );
       return;

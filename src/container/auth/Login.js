@@ -60,7 +60,7 @@ class Login extends Component {
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.EmptyEmailMsg
       );
       return;
@@ -68,14 +68,14 @@ class Login extends Component {
 
     if (!Regex.validateEmail(email.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.ValidEmailAddress
       );
       return;
     }
     if (_.isEmpty(password.trim())) {
       appAction.showToast(
-        Constants.AppCosntants.Notificaitons.Error,
+        Constants.AppConstants.Notificaitons.Error,
         Constants.Strings.Common.EnterPassword
       );
       return;

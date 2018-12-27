@@ -25,15 +25,15 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 const MyToastNotification = props => {
   let { type, message, closeToast } = props; // type 1 for error, 2=for Notification
   let primaryColor =
-    type == Constants.AppCosntants.Notificaitons.Error
+    type == Constants.AppConstants.Notificaitons.Error
       ? Constants.Colors.Error
       : Constants.Colors.Sucess;
   let image =
-    type == Constants.AppCosntants.Notificaitons.Error
+    type == Constants.AppConstants.Notificaitons.Error
       ? Constants.Images.Error
       : Constants.Images.Success;
   let heading =
-    type == Constants.AppCosntants.Notificaitons.Success ? "Sucess" : "Error";
+    type == Constants.AppConstants.Notificaitons.Success ? "Sucess" : "Error";
   return (
     <View style={Styles.container}>
       <View

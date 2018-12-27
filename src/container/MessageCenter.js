@@ -3,7 +3,6 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { connect } from "react-redux";
 
 import { bindActionCreators } from "redux";
-// import { ToastActionsCreators } from "react-native-redux-toast";
 import * as appAction from "../actions";
 import Header from "../components/common/Header";
 // import UnderDevelopment from "../components/common/UnderDevelopment";
