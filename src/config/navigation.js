@@ -32,7 +32,7 @@ export const goHome = () =>
             children: [
               {
                 component: {
-                  name: "OTPScreen",
+                  name: "Home",
                   options: {}
                 }
               }

@@ -56,7 +56,7 @@ class Login extends Component {
 
   submitLogin = _.debounce(() => {
     // console.log(this.props);
-    let { appAction } = this.props;
+    let { componentId, appAction } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
       appAction.showToast(
@@ -80,7 +80,7 @@ class Login extends Component {
       );
       return;
     }
-    appAction.signIn({ username: email, password: password });
+    appAction.signIn({ username: email, password: password },componentId);
   });
 
   onForgotPassword = () => {
