@@ -21,7 +21,6 @@ import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
 import LogoText from "../../components/common/LogoText";
-import Loader from "../../components/common/Loader";
 
 class Login extends Component {
   constructor(props) {
@@ -60,16 +59,25 @@ class Login extends Component {
     let { appAction } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
-      alert(Constants.Strings.Common.EmptyEmailMsg);
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.EmptyEmailMsg
+      );
       return;
     }
 
     if (!Regex.validateEmail(email.trim())) {
-      alert(Constants.Strings.Common.ValidEmailAddress);
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.ValidEmailAddress
+      );
       return;
     }
     if (_.isEmpty(password.trim())) {
-      alert(Constants.Strings.Common.EnterPassword);
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.EnterPassword
+      );
       return;
     }
 
@@ -77,8 +85,9 @@ class Login extends Component {
   });
 
   onForgotPassword = () => {
-    let { appAction, componentId } = this.props; // eslint-disable-line
-    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    let { appAction, componentId } = this.props; // eslint-disable-line OTPScreen
+    // appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    appAction.pushTParticulatScreen(componentId, "OTPScreen");
   };
 
   render() {
@@ -92,7 +101,6 @@ class Login extends Component {
           scrollEnabled={true}
           contentContainerStyle={{
             alignItems: "center",
-            //backgroundColor: "red",
             flex: 1
           }}
         >
@@ -185,7 +193,6 @@ class Login extends Component {
             </View>
           </View>
         </KeyboardAwareScrollView>
-        <Loader />
       </View>
     );
   }

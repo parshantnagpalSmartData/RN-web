@@ -18,6 +18,8 @@ const babelLoaderConfiguration = {
     path.resolve(appDirectory, "src"),
     path.resolve(appDirectory, "node_modules/react-native-uncompiled"),
     path.resolve(appDirectory, "node_modules/lodash"),
+    path.resolve(appDirectory, "node_modules/react-native-otp-inputs"),
+    // path.resolve(appDirectory, "node_modules/react-native-redux-toast"),
     path.resolve(
       appDirectory,
       "node_modules/react-native-keyboard-aware-scroll-view"
@@ -94,6 +96,8 @@ module.exports = {
     alias: {
       "react-native$": "react-native-web",
       "react-native-linear-gradient": "react-native-web-linear-gradient"
+      // "react-native-redux-toast": "react-redux-toastr"
+      // "react-native-otp-inputs": "react-otp-input"
     },
     // If you're working on a multi-platform React Native app, web-specific
     // module implementations should be written in files using the extension

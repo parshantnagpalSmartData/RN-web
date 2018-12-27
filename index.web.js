@@ -7,6 +7,8 @@ import setup from "./src/store/setup";
 
 import Routes from "./src/config/routes";
 import Loader from "./src/components/common/Loader";
+import ToastNotification from "./src/components/common/ToastNotification";
+
 const { persistor, store } = setup();
 import "./src/container/html/style.css";
 class App extends Component {
@@ -34,6 +36,7 @@ class App extends Component {
       <Provider store={store}>
         <PersistGate loading={<Loader />} persistor={persistor}>
           <Routes />
+          <ToastNotification />
           <Loader />
         </PersistGate>
       </Provider>

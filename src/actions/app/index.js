@@ -41,28 +41,38 @@ export const setScrenStack = (componentId, screen, visible) => {
   return dispatch => {
     dispatch({ type: Types.SET_COMPONENT, payload: componentId });
     dispatch({ type: Types.SET_SCREEN, payload: screen });
-    Navigation.setStackRoot(componentId, {
-      component: {
-        name: screen,
-        options: {
-          topBar: {
-            title: {
-              text: "Pushed 1"
-            }
+    Navigation.setStackRoot(componentId, [
+      {
+        component: {
+          name: screen,
+          passProps: {
+            text: "Root screen"
           },
-          bottomTabs: {
-            visible,
-            drawBehind: true
+          options: {
+            animations: {
+              setStackRoot: {
+                enabled: true
+              }
+            },
+            topBar: {
+              title: {
+                text: "Pushed 1"
+              }
+            },
+            bottomTabs: {
+              visible,
+              drawBehind: true
+            }
           }
         }
       }
-    });
+    ]);
   };
 };
 
 export const goToHome = () => {
   return dispatch => {
-    dispatch({ type: Types.SET_COMPONENT, payload: "MY_STACK" });
+    // dispatch({ type: Types.SET_COMPONENT, payload: "MY_STACK" });
     dispatch({ type: Types.SET_SCREEN, payload: "Home" });
     goHome();
   };
@@ -84,5 +94,23 @@ export const startLoader = () => {
 export const stopLoader = () => {
   return dispatch => {
     dispatch({ type: Types.STOP_LOADER });
+  };
+};
+
+export const showToast = (type, message) => {
+  return dispatch => {
+    dispatch({
+      type: Types.SHOW_TOAST,
+      payload: { type, message, isVisible: true }
+    });
+  };
+};
+
+export const hideToast = () => {
+  return dispatch => {
+    dispatch({
+      type: Types.HIDE_TOAST,
+      payload: { isVisible: false }
+    });
   };
 };

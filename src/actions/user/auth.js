@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 import RestClient from "../../helpers/RestClient";
 import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
+import Constants from "../../constants";
 
 export const signIn = postData => {
   return dispatch => {
@@ -21,10 +22,21 @@ export const signIn = postData => {
           } else {
             dispatch(AppActions.pushTParticulatScreen(null, "/Home"));
           }
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Success,
+              res.message
+            )
+          );
         } else {
           dispatch(AppActions.stopLoader());
           // dispatch({ type: Types.LOGIN_FAIL });
-          alert(res.message);
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
         }
       })
       .catch(e => {
@@ -45,7 +57,12 @@ export const forgotPassword = postData => {
           alert(res.message);
         } else {
           dispatch({ type: Types.FORGOT_FAIL });
-          alert(res.message);
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
         }
       })
       .catch(e => {

@@ -38,15 +38,31 @@ export const stopLoader = () => {
 
 export const goAuth = () => {
   return () => {
-    // dispatch({ type: Types.SET_SCREEN, payload: "/" });
     history.replace("/");
   };
 };
-/* eslint-disable */
+/* eslint-disable  */
 export const setScrenStack = (componentId = null, screen, visible) => {
   return dispatch => {
-    // dispatch({ type: Types.SET_COMPONENT, payload: componentId });
     dispatch({ type: Types.SET_SCREEN, payload: screen });
     history.push(`/${screen}`);
+  };
+};
+
+export const showToast = (type, message) => {
+  return dispatch => {
+    dispatch({
+      type: Types.SHOW_TOAST,
+      payload: { type, message, isVisible: true }
+    });
+  };
+};
+
+export const hideToast = () => {
+  return dispatch => {
+    dispatch({
+      type: Types.HIDE_TOAST,
+      payload: { isVisible: false }
+    });
   };
 };

@@ -12,32 +12,35 @@ import {
   StyleSheet,
   TouchableOpacity,
   Animated,
-  Platform
+  Platform,
+  Easing
 } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import SafeView from "./SafeView";
+import * as appAction from "../../actions";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 const MyToastNotification = props => {
   let { type, message, closeToast } = props; // type 1 for error, 2=for Notification
   let primaryColor =
-    type == Constants.AppCosntants.Notificaitons.Error
+    type == Constants.AppConstants.Notificaitons.Error
       ? Constants.Colors.Error
       : Constants.Colors.Sucess;
   let image =
-    type == Constants.AppCosntants.Notificaitons.Error
+    type == Constants.AppConstants.Notificaitons.Error
       ? Constants.Images.Error
       : Constants.Images.Success;
   let heading =
-    type == Constants.AppCosntants.Notificaitons.Success ? "Sucess" : "Error";
+    type == Constants.AppConstants.Notificaitons.Success ? "Sucess" : "Error";
   return (
     <View style={Styles.container}>
-      <SafeView />
       <View
         style={{
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
+          marginHorizontal: moderateScale(40)
         }}
       >
         <View
@@ -78,13 +81,13 @@ const MyToastNotification = props => {
 class ToastNotification extends Component {
   constructor(props) {
     super(props);
-    this.animatedValue = new Animated.Value(-70);
+    this.animatedValue = new Animated.Value(-100);
   }
 
   callToast() {
     Animated.timing(this.animatedValue, {
       toValue: 0,
-      duration: 500
+      duration: 100
     }).start(this.closeToast());
   }
 
@@ -92,74 +95,80 @@ class ToastNotification extends Component {
     setTimeout(() => {
       Animated.timing(this.animatedValue, {
         toValue: -100,
-        duration: 500
+        duration: 100,
+        easing: Easing.linear
       }).start();
+      this.hideToast();
     }, 2000);
   }
 
-  componentDidMount() {
-    this.callToast();
-  }
+  hideToast = () => {
+    // setTimeout(() => {
+    this.props.appAction.hideToast();
+    // }, 100);
+  };
 
   render() {
-    let { type, message } = this.props;
-    return (
-      <View>
-        {/* <View style={styles.container}>
-          <View style={styles.buttonContainer}>
-            <TouchableHighlight
-              onPress={() => this.callToast()}
-              underlayColor="#ddd"
-              style={{
-                height: 60,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#ededed",
-                borderWidth: 1,
-                borderColor: "#ddd"
-              }}
-            >
-              <Text>Open Success Toast</Text>
-            </TouchableHighlight>
-          </View>
-        </View> */}
+    let { notification } = this.props;
+    let { isVisible, type, message } = notification;
+    if (isVisible) {
+      this.callToast();
+      return (
         <Animated.View
-          style={{
-            transform: [{ translateY: this.animatedValue }],
-            height: 40,
-            position: "absolute",
-            left: 0,
-            top: 0,
-            right: 0,
-            justifyContent: "center"
-          }}
+          style={[
+            {
+              transform: [{ translateY: this.animatedValue }],
+              height: 0,
+              position: "relative",
+              left: 0,
+              top: 0,
+              right: 0,
+              justifyContent: "center",
+              backgroundColor: Constants.Colors.Transparent,
+              alignItems: "center",
+              zIndex: 999,
+              ...Platform.select({
+                android: {
+                  height: 200,
+                  opacity: 1
+                },
+                web: {
+                  position: "absolute"
+                }
+              })
+            }
+          ]}
         >
           <MyToastNotification
             type={type}
             message={message}
-            closeToast={this.closeToast}
+            closeToast={this.hideToast}
           />
-          {/* <Text
-            style={{
-              marginLeft: 10,
-              color: "white",
-              fontSize: 16,
-              fontWeight: "bold"
-            }}
-          >
-            Hello from Toast!
-          </Text> */}
         </Animated.View>
-      </View>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 const Styles = StyleSheet.create({
   container: {
-    backgroundColor: Constants.Colors.red,
+    backgroundColor: Constants.Colors.Transparent,
     justifyContent: "center",
     alignItems: "center",
-    flex: 1
+    position: "absolute",
+    zIndex: 99,
+    ...Platform.select({
+      web: {
+        top: moderateScale(100),
+        right: moderateScale(20)
+      },
+      ios: {
+        bottom: moderateScale(50)
+      },
+      android: { bottom: moderateScale(50) }
+    })
+    // flex: 1
   },
   notificationView: {
     flexDirection: "row",
@@ -211,4 +220,14 @@ const Styles = StyleSheet.create({
   }
 });
 
-export default ToastNotification;
+const mapStateToProps = state => ({
+  notification: state.app.notification
+});
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ToastNotification);

@@ -38,11 +38,17 @@ class ForgotPassword extends Component {
     let { appAction } = this.props;
     let { email } = this.state;
     if (_.isEmpty(email.trim())) {
-      alert(Constants.Strings.Common.EmptyEmailMsg);
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.EmptyEmailMsg
+      );
       return;
     }
     if (!Regex.validateEmail(email.trim())) {
-      alert(Constants.Strings.Common.ValidEmailAddress);
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.ValidEmailAddress
+      );
       return;
     }
     appAction.forgotPassword({ username: email });

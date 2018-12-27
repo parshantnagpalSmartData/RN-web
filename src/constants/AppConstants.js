@@ -1,4 +1,4 @@
-let AppCosntants = {
+let AppConstants = {
   AppName: "ACT Nurses Portal",
   Notificaitons: {
     Error: 1,
@@ -14,4 +14,4 @@ let AppCosntants = {
   }
 };
 
-module.exports = AppCosntants;
+module.exports = AppConstants;

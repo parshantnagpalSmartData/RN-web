@@ -1034,7 +1034,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 4K794ZPJS4;
+						DevelopmentTeam = 33P3VUARHV;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1704,15 +1704,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gurdev Singh (D7U7UA76D8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 4K794ZPJS4;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
-				);
+				DEVELOPMENT_TEAM = 33P3VUARHV;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/React/**";
 				INFOPLIST_FILE = ActNursesportal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1720,10 +1717,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.futuredms.shyft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
 				PRODUCT_NAME = ActNursesportal;
-				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = ShyftAppDevelopment;
+				PROVISIONING_PROFILE = "60fe321a-5cd8-4f57-854e-5e190670ce32";
+				PROVISIONING_PROFILE_SPECIFIER = "DEV ACT Nurse Portal";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1733,14 +1730,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gurdev Singh (D7U7UA76D8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4K794ZPJS4;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
-				);
+				DEVELOPMENT_TEAM = 33P3VUARHV;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/React/**";
 				INFOPLIST_FILE = ActNursesportal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1748,10 +1742,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.futuredms.shyft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
 				PRODUCT_NAME = ActNursesportal;
 				PROVISIONING_PROFILE = "60fe321a-5cd8-4f57-854e-5e190670ce32";
-				PROVISIONING_PROFILE_SPECIFIER = ShyftAppDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = "DEV ACT Nurse Portal";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

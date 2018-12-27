@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default class Loader extends React.Component {
+class Loader extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -21,3 +21,5 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
+
+export default Loader;

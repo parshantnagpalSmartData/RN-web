@@ -27,3 +27,6 @@ export const CHANGE_PASSWORD_FAIL = "CHANGE_PASSWORD_FAIL";
 
 export const START_LOADER = "START_LOADER";
 export const STOP_LOADER = "STOP_LOADER";
+
+export const SHOW_TOAST = "SHOW_TOAST";
+export const HIDE_TOAST = "HIDE_TOAST";

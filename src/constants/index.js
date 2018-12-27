@@ -3,7 +3,7 @@ import Colors from "./Colors";
 import BaseStyle from "./BaseStyle";
 import Fonts from "./Fonts";
 import Images from "./Images";
-import AppCosntants from "./AppConstants";
+import AppConstants from "./AppConstants";
 import Strings from "./i18n";
 import DevKeys from "./DevKeys";
 
@@ -12,7 +12,7 @@ export default {
   BaseStyle,
   Fonts,
   Images,
-  AppCosntants,
+  AppConstants,
   Strings,
   DevKeys
 };
