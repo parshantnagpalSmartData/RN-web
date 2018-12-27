@@ -69,6 +69,10 @@ class ResetPssword extends Component {
       );
       return;
     }
+    appAction.showToast(
+      Constants.AppConstants.Notificaitons.Error,
+      "Under Development"
+    );
     // appAction.ResetPssword({ username: email });
   });
 

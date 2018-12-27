@@ -6,9 +6,9 @@ import { bindActionCreators } from "redux";
 import * as appAction from "../actions";
 import Header from "../components/common/Header";
 import UnderDevelopment from "../components/common/UnderDevelopment";
-// import AuthButton from "../components/common/AuthButton";
-// import Constants from "../constants";
-// import { moderateScale } from "../helpers/ResponsiveFonts";
+import AuthButton from "../components/common/AuthButton";
+import Constants from "../constants";
+import { moderateScale } from "../helpers/ResponsiveFonts";
 
 class MyProfile extends Component {
   constructor(props) {
@@ -29,12 +29,12 @@ class MyProfile extends Component {
       <View style={Styles.containner}>
         <Header title={"My Profile"} onDrawerPress={this.onDrawerPress} />
         <UnderDevelopment />
-        {/* <AuthButton
+        <AuthButton
           buttonName={"Reset Password"}
           gradientColors={Constants.Colors.ButtonGradients}
           onPress={this.resetPassword}
           gradientStyle={{ borderRadius: moderateScale(10) }}
-        /> */}
+        />
       </View>
     );
   }
