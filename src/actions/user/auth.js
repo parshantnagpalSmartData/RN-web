@@ -5,7 +5,7 @@ import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 import Constants from "../../constants";
 
-export const signIn = (postData,componentId) => {
+export const signIn = (postData, componentId) => {
   return dispatch => {
     dispatch(AppActions.startLoader());
     // dispatch({ type: Types.LOGIN_REQUEST });
@@ -16,7 +16,7 @@ export const signIn = (postData,componentId) => {
           // dispatch({ type: Types.LOGIN_SUCESS });
           dispatch({ type: Types.LOGIN });
           dispatch({ type: Types.SAVE_USER, payload: res.result });
-            dispatch(AppActions.pushTParticulatScreen(componentId, "OTPScreen"));
+          dispatch(AppActions.pushTParticulatScreen(componentId, "OTPScreen"));
           dispatch(
             AppActions.showToast(
               Constants.AppConstants.Notificaitons.Success,

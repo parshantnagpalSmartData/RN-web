@@ -28,3 +28,9 @@ https://codesandbox.io/s/l5mxv6v59z
 
 
   "serve": "./node_modules/.bin/serve  -s -C dist -p 4401 ",
+
+<key>UISupportsDocumentBrowser</key>
+	<true/>
+
+
+  com.smartdata.ACTNursePortal

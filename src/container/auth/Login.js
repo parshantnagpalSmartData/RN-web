@@ -80,7 +80,7 @@ class Login extends Component {
       );
       return;
     }
-    appAction.signIn({ username: email, password: password },componentId);
+    appAction.signIn({ username: email, password: password }, componentId);
   });
 
   onForgotPassword = () => {
