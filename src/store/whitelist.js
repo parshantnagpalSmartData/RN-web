@@ -1,3 +1,1 @@
-// import loginReducer from "../reducers/auth/LoginReducer";
-
-export default ["user"];
+export default ["user", "mySchedules", "app"];

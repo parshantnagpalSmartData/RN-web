@@ -1,6 +1,6 @@
 import { Navigation } from "react-native-navigation";
 import { registerScreens } from "./src/config/routes";
-import { addListeners } from "./src/utilities/listeners";
+import { addListeners } from "./src/helpers/listeners";
 // import { Provider } from "react-redux";
 // import setup from "./src/store/setup";
 import Events from "./src/helpers/registerevents";

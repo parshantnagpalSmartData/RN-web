@@ -30,7 +30,7 @@ const AppRoute = ({
           return (
             <Redirect
               to={{
-                pathname: "/OTPScreen",
+                pathname: "/Home",
                 state: { from: props.location }
               }}
             />

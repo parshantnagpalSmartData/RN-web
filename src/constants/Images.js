@@ -16,5 +16,7 @@ module.exports = {
   Close: require("../assets/images/Cancel/cancel.png"),
   Error: require("../assets/images/Notification/error.png"),
   UserImage: require("../assets/images/username/username.png"),
-  Success: require("../assets/images/Notification/success.png")
+  Success: require("../assets/images/Notification/success.png"),
+  Next: require("../assets/images/Next/next.png"),
+  Previous: require("../assets/images/Previous/previous.png")
 };

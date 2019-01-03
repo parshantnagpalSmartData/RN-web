@@ -5,7 +5,7 @@ Description: Conatins all navigation actions for App
 Date : 13 december 2018
 */
 
-import history from "../../utilities/history";
+import history from "../../helpers/history";
 import * as Types from "../../actionTypes";
 // eslint-disable-next-line
 export const pushTParticulatScreen = (componentId = null, screen) => {
