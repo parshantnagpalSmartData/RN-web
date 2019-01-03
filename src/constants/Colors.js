@@ -22,6 +22,7 @@ let colors = {
   Red: "#C74139",
   orange: "orange",
   Gray: "#9C9C9C",
+  LightGrey: "#C0C0C0",
   MenuItemTxt: "#393B3B",
   FadeBorder: "#e0e0e0",
   FilterBackground: "#EAEAEA",

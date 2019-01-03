@@ -13,6 +13,8 @@ module.exports = {
   Drawer: require("../assets/images/Drawer/drawer.png"),
   UserAvatar: require("../assets/images/username/username.png"),
   Cancel: require("../assets/images/Notification/cross.png"),
+  Close: require("../assets/images/Cancel/cancel.png"),
   Error: require("../assets/images/Notification/error.png"),
+  UserImage: require("../assets/images/username/username.png"),
   Success: require("../assets/images/Notification/success.png")
 };

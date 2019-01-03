@@ -19,6 +19,8 @@ const babelLoaderConfiguration = {
     path.resolve(appDirectory, "node_modules/react-native-uncompiled"),
     path.resolve(appDirectory, "node_modules/lodash"),
     path.resolve(appDirectory, "node_modules/react-native-otp-inputs"),
+    path.resolve(appDirectory, "node_modules/react-native-modal"),
+    path.resolve(appDirectory, "node_modules/react-native-animatable"),
     // path.resolve(appDirectory, "node_modules/react-native-redux-toast"),
     path.resolve(
       appDirectory,
