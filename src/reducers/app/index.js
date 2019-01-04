@@ -48,7 +48,7 @@ export default function app(state = initialState, action = {}) {
         ...state,
         notification: action.payload
       };
-    case Types.RESET_APP:
+    case Types.RESET_USER:
       return {
         ...initialState
       };

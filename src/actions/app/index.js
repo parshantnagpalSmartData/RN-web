@@ -50,15 +50,15 @@ export const setScrenStack = (componentId, screen, visible) => {
           },
           options: {
             animations: {
-              push: {
-                waitForRender: true,
-                content: {
-                  startAlpha: 0,
-                  endAlpha: 1,
-                  duration: 1,
-                  interpolation: "accelerate"
-                }
-              },
+              // push: {
+              //   waitForRender: true,
+              //   content: {
+              //     startAlpha: 0,
+              //     endAlpha: 1,
+              //     duration: 1,
+              //     interpolation: "accelerate"
+              //   }
+              // },
               setStackRoot: {
                 enabled: true
               }

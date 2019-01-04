@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
  * declare prop's specific JS type.
  * */
 Avatar.propTypes = {
-  source: PropTypes.string,
+  source: PropTypes.number,
   text: PropTypes.string,
   backgroundColor: PropTypes.string,
   showName: PropTypes.bool,

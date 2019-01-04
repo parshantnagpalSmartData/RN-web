@@ -36,8 +36,22 @@ class Home extends Component {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
+  patientDetails = () => {
+    //  alert(patient);
+  };
+
+  fetchPatientDetails = patientId => {
+    this.props.appAction.fetchPatientDetails(patientId, this.patientDetails);
+  };
+
   renderPatients = ({ item, index }) => {
-    return <MySchedule item={item} index={index} />;
+    return (
+      <MySchedule
+        item={item}
+        index={index}
+        onPatientPress={this.fetchPatientDetails}
+      />
+    );
   };
   closeModal() {
     this.setState({ isVisible: false });

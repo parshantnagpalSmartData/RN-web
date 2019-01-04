@@ -16,12 +16,23 @@ export const fetchOpenShift = () => {
           dispatch({ type: Types.OPEN_SHIFTS, payload: res.result.data });
         } else {
           dispatch(AppActions.stopLoader());
-          dispatch(
-            AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Error,
-              res.message
-            )
-          );
+          if (res.error === "Token expired") {
+            dispatch(
+              AppActions.showToast(
+                Constants.AppConstants.Notificaitons.Error,
+                res.error
+              )
+            );
+            dispatch({ type: Types.RESET_USER });
+            dispatch(AppActions.goAuth());
+          } else {
+            dispatch(
+              AppActions.showToast(
+                Constants.AppConstants.Notificaitons.Error,
+                res.message
+              )
+            );
+          }
         }
       })
       .catch(e => {

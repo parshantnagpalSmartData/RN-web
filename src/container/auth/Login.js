@@ -94,15 +94,15 @@ class Login extends Component {
     return (
       <View style={Styles.containner}>
         {/* <View style={{ flex: 0.5, justifyContent: "center" }}> */}
-        <LogoText text={"ACT Home Health Services"} />
         {/* </View> */}
         <KeyboardAwareScrollView
           scrollEnabled={true}
           contentContainerStyle={{
-            alignItems: "center",
-            flex: 1
+            alignItems: "center"
           }}
+          style={{ height: Constants.BaseStyle.DEVICE_HEIGHT }}
         >
+          <LogoText text={"ACT Home Health Services"} />
           <View
             style={{
               ...Platform.select({

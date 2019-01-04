@@ -62,7 +62,7 @@ class FormTextInput extends Component {
       placeHolderColor,
       keyboard,
       secureText,
-      returnKey,
+      returnKeyType,
       onSubmitEditing,
       isPassword,
       multiline,
@@ -109,7 +109,7 @@ class FormTextInput extends Component {
           editable={editable}
           onChangeText={onChangeText}
           onChange={event => this.onChange(event)}
-          returnKeyType={returnKey}
+          returnKeyType={returnKeyType}
           autoCorrect={false}
           onSubmitEditing={onSubmitEditing}
           onFocus={() => this.onFocus()}

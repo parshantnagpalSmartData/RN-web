@@ -70,7 +70,7 @@ const LogoText = props => {
               color: Constants.Colors.Primary,
               textAlign: "center",
               textAlignVertical: "center",
-              top: 40
+              top: Platform.OS == "android" ? 20 : 40
             }}
           >
             {text}
