@@ -28,7 +28,11 @@ const PatientsCompo = props => {
     <View style={Styles.container}>
       <View style={Styles.heading}>
         <Text style={Styles.skill}>Skill</Text>
-        <Favourite isSelected={isSelected} onLikePress={onLikePress} />
+        <Favourite
+          isSelected={isSelected}
+          onLikePress={onLikePress}
+          patient={patient}
+        />
       </View>
       <FlatList
         contentContainerStyle={{

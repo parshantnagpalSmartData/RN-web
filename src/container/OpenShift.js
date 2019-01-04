@@ -15,12 +15,14 @@ class OpenShift extends Component {
     super(props);
     this.state = {
       showAll: false,
-      currentIndex: null
+      currentIndex: null,
+      prevDate: "01/03/2018",
+      nextDate: "12/27/2018"
     };
   }
 
   componentDidMount() {
-    this.props.appAction.fetchOpenShift();
+    this.getLikeUpdate();
   }
 
   onDrawerPress = () => {
@@ -43,25 +45,26 @@ class OpenShift extends Component {
     }
   };
 
-  onIconPress = () => {
-    this.setState({ like: !this.state.like });
+  getLikeUpdate = () => {
+    let { prevDate, nextDate } = this.state;
+    this.props.appAction.fetchOpenShift(prevDate, nextDate);
+  };
+
+  onIconPress = scheduleId => {
+    this.props.appAction.openshiftsLike(scheduleId, this.getLikeUpdate);
   };
 
   render() {
     let { openShift } = this.props.schedule;
-    let { showAll, currentIndex } = this.state;
+    let { showAll, currentIndex, prevDate, nextDate } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Open Shift"} onDrawerPress={this.onDrawerPress} />
         <Filter
-          prevDate={moment(new Date()).format("ddd DD MMMM")}
-          nextDate={moment(new Date()).format("DD MMMM YYYY")}
-          prevPress={() => {
-            alert(123);
-          }}
-          nextPress={() => {
-            alert("232");
-          }}
+          prevDate={moment(prevDate).format("ddd DD MMMM")}
+          nextDate={moment(nextDate).format("DD MMMM YYYY")}
+          prevPress={() => {}}
+          nextPress={() => {}}
         />
         {/* <UnderDevelopment /> */}
         <FlatList

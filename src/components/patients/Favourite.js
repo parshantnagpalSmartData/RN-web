@@ -10,9 +10,12 @@ import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 const Favourite = props => {
-  let { isSelected, onLikePress } = props;
+  let { isSelected, onLikePress, patient } = props;
   return (
-    <TouchableOpacity style={Styles.buttonStyle} onPress={() => onLikePress()}>
+    <TouchableOpacity
+      style={Styles.buttonStyle}
+      onPress={() => onLikePress(patient.SchedID)}
+    >
       {isSelected ? (
         <Image
           source={Constants.Images.Like}
