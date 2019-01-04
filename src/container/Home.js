@@ -24,12 +24,16 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: false
+      isVisible: false,
+      prevDate: "12/1/2018",
+      nextDate: "12/27/2018"
     };
     this.closeModal = this.closeModal.bind(this);
   }
   componentDidMount() {
-    this.props.appAction.fetchMySchedules();
+    // console.log("componendidmount");
+    let { prevDate, nextDate } = this.state;
+    this.props.appAction.fetchMySchedules(prevDate, nextDate);
   }
 
   onDrawerPress = () => {
@@ -58,7 +62,7 @@ class Home extends Component {
   }
 
   render() {
-    let { isVisible } = this.state,
+    let { isVisible, nextDate, prevDate } = this.state,
       { mySchedules } = this.props,
       { Close, UserImage } = Constants.Images;
 
@@ -66,14 +70,10 @@ class Home extends Component {
       <View style={Styles.containner}>
         <Header title={"MY SCHEDULE"} onDrawerPress={this.onDrawerPress} />
         <Filter
-          prevDate={moment(new Date()).format("ddd DD MMMM")}
-          nextDate={moment(new Date()).format("DD MMMM YYYY")}
-          prevPress={() => {
-            alert(123);
-          }}
-          nextPress={() => {
-            alert("232");
-          }}
+          prevDate={moment(new Date(prevDate)).format("ddd DD MMMM")}
+          nextDate={moment(new Date(nextDate)).format("DD MMMM YYYY")}
+          prevPress={() => {}}
+          nextPress={() => {}}
         />
         <MyScheduleList
           patitents={mySchedules}

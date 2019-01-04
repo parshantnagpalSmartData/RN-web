@@ -6,7 +6,14 @@
  */
 
 import React from "react";
-import { View, TouchableOpacity, Text, Image, StyleSheet,Platform } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  StyleSheet,
+  Platform
+} from "react-native";
 import PropTypes from "prop-types";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
@@ -17,7 +24,11 @@ const Filter = ({ prevDate, prevPress, nextDate, nextPress }) => {
       <TouchableOpacity onPress={() => prevPress()}>
         <Image
           style={Styles.imageNextPrevious}
-          source={Constants.Images.Next}
+          source={
+            Platform.OS == "web"
+              ? Constants.Images.BlackPrevious
+              : Constants.Images.Next
+          }
           resizeMode={"contain"}
         />
       </TouchableOpacity>
@@ -27,7 +38,11 @@ const Filter = ({ prevDate, prevPress, nextDate, nextPress }) => {
       <TouchableOpacity onPress={() => nextPress()}>
         <Image
           style={Styles.imageNextPrevious}
-          source={Constants.Images.Previous}
+          source={
+            Platform.OS == "web"
+              ? Constants.Images.BlackNext
+              : Constants.Images.Previous
+          }
           resizeMode={"contain"}
         />
       </TouchableOpacity>
@@ -50,7 +65,7 @@ const Styles = StyleSheet.create({
     fontWeight: "500",
     ...Platform.select({
       web: {
-        color: Constants.Colors.Black,
+        color: Constants.Colors.Black
       }
     })
   }

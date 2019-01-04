@@ -20,5 +20,7 @@ module.exports = {
   Like: require("../assets/images/Likes/selectedLike.png"),
   UnLike: require("../assets/images/Likes/unselectedLike.png"),
   Next: require("../assets/images/Next/next.png"),
-  Previous: require("../assets/images/Previous/previous.png")
+  Previous: require("../assets/images/Previous/previous.png"),
+  BlackPrevious: require("../assets/images/BlackPrevious/previous.png"),
+  BlackNext: require("../assets/images/BlackNext/next.png")
 };

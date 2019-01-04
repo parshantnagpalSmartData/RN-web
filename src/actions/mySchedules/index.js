@@ -3,12 +3,12 @@ import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 import Constants from "../../constants";
 
-export const fetchMySchedules = () => {
+export const fetchMySchedules = (prevDate, nextDate) => {
   return (dispatch, getState) => {
     dispatch(AppActions.startLoader());
     // dispatch({ type: Types.LOGIN_REQUEST });
     RestClient.getCall(
-      "nurses/schedules?startDate=12/1/2018&endDate=12/27/2018",
+      "nurses/schedules?startDate=" + prevDate + "&endDate=" + nextDate,
       getState().user.token
     )
       .then(res => {
