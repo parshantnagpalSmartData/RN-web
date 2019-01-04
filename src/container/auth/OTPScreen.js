@@ -66,7 +66,7 @@ class OTPScreen extends Component {
           message="We have sent OTP in your mobile number. Please enter below"
         />
         <KeyboardAwareScrollView
-          scrollEnabled={false}
+          scrollEnabled={true}
           contentContainerStyle={{
             justifyContent: "space-between",
             height: Constants.BaseStyle.DEVICE_HEIGHT * 0.45,

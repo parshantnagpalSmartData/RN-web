@@ -36,8 +36,22 @@ class Home extends Component {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
+  patientDetails = () => {
+    //  alert(patient);
+  };
+
+  fetchPatientDetails = patientId => {
+    this.props.appAction.fetchPatientDetails(patientId, this.patientDetails);
+  };
+
   renderPatients = ({ item, index }) => {
-    return <MySchedule item={item} index={index} />;
+    return (
+      <MySchedule
+        item={item}
+        index={index}
+        onPatientPress={this.fetchPatientDetails}
+      />
+    );
   };
   closeModal() {
     this.setState({ isVisible: false });
@@ -181,7 +195,7 @@ const Styles = StyleSheet.create({
 const mapStateToProps = state => ({
   user: state.user,
   app: state.app,
-  mySchedules: state.mySchedules.mySchedules
+  mySchedules: state.schedule.mySchedules
 });
 const mapDispatchToProps = dispatch => ({
   appAction: bindActionCreators(appAction, dispatch)

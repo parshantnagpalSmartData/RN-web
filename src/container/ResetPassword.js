@@ -90,7 +90,7 @@ class ResetPssword extends Component {
           onBackPress={this.onBackPress}
         />
         <KeyboardAwareScrollView
-          scrollEnabled={false}
+          scrollEnabled={true}
           contentContainerStyle={{
             alignItems: "center"
           }}

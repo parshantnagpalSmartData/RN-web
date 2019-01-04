@@ -31,4 +31,5 @@ export const STOP_LOADER = "STOP_LOADER";
 export const SHOW_TOAST = "SHOW_TOAST";
 export const HIDE_TOAST = "HIDE_TOAST";
 
+export const OPEN_SHIFTS = "OPEN_SHIFTS";
 export const ADD_MYSCHEDULE = "ADD_MYSCHEDULE";

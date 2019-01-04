@@ -5,15 +5,24 @@
  */
 
 import React from "react";
-import { View, StyleSheet, Platform, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Platform,
+  Text,
+  TouchableOpacity
+} from "react-native";
 import moment from "moment";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
 
-const MySchedule = ({ item, index }) => {
+const MySchedule = ({ item, index, onPatientPress }) => {
   return (
-    <View style={Styles.containner}>
+    <TouchableOpacity
+      style={Styles.containner}
+      onPress={() => onPatientPress(item.SchedID)}
+    >
       <View style={Styles.leftDateContainer}>
         <Text style={[Styles.commonFontColor, Styles.dateText]}>
           {moment(item.SchedDate).format("DD")}
@@ -46,7 +55,7 @@ const MySchedule = ({ item, index }) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

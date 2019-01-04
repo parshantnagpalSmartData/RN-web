@@ -20,7 +20,6 @@ import SideMenu from "../container/SideMenu";
 import ToastNotification from "../components/common/ToastNotification";
 
 const store = setup();
-
 /* eslint-disable */
 const LoadReducxSceen = ReduxScreen => props => (
   <Provider store={store}>

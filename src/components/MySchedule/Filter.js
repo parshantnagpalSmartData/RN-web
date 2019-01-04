@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, Image, StyleSheet,Platform } from "react-native";
 import PropTypes from "prop-types";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
@@ -47,7 +47,12 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.Primary,
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(15),
-    fontWeight: "500"
+    fontWeight: "500",
+    ...Platform.select({
+      web: {
+        color: Constants.Colors.Black,
+      }
+    })
   }
 });
 

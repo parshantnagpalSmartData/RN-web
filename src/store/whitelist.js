@@ -1,1 +1,1 @@
-export default ["user", "mySchedules", "app"];
+export default ["user", "schedule"];
