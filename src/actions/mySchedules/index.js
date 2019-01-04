@@ -15,32 +15,32 @@ export const fetchMySchedules = () => {
         if (res.status) {
           dispatch(AppActions.stopLoader());
           dispatch({ type: Types.ADD_MYSCHEDULE, payload: res.result.data });
-          // console.log("response", res);
-          // dispatch({ type: Types.LOGIN_SUCESS });
-          // dispatch({ type: Types.LOGIN });
-          // dispatch({ type: Types.SAVE_USER, payload: res.result });
-          // dispatch(AppActions.pushTParticulatScreen(componentId, "OTPScreen"));
-          // dispatch(
-          //   AppActions.showToast(
-          //     Constants.AppConstants.Notificaitons.Success,
-          //     res.message
-          //   )
-          // );
         } else {
+          if (res.error === "Token expired") {
+            dispatch(
+              AppActions.showToast(
+                Constants.AppConstants.Notificaitons.Error,
+                res.error
+              )
+            );
+            dispatch({ type: Types.RESET_USER });
+            dispatch(AppActions.goAuth());
+          } else {
+            dispatch(
+              AppActions.showToast(
+                Constants.AppConstants.Notificaitons.Error,
+                res.message
+              )
+            );
+          }
           dispatch(AppActions.stopLoader());
           // dispatch({ type: Types.LOGIN_FAIL });
-          dispatch(
-            AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Error,
-              res.message
-            )
-          );
         }
       })
       .catch(e => {
         dispatch(AppActions.stopLoader());
         // dispatch({ type: Types.LOGIN_FAIL });
-         console.warn("error", e); // eslint-disable-line
+        console.warn("error", e); // eslint-disable-line
       });
   };
 };

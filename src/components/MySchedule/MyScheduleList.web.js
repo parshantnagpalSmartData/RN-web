@@ -2,76 +2,97 @@
 
 import React from "react";
 import ReactTable from "react-table";
+import { StyleSheet } from "react-native";
 import moment from "moment";
 // import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 // import 'react-table/react-table.css'
 
+let spanHeaderStyle = {
+    height: moderateScale(32),
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#545d62"
+  },
+  headerStyle = {
+    backgroundColor: "#e2ebf0",
+    borderWidth: 0,
+    fontWeight: "bold",
+    fontSize: moderateScale(10)
+  },
+  cellStyle = {
+    style: {
+      textAlign: "center",
+      color: "#848484",
+      fontSize: moderateScale(10)
+    }
+  },
+  scheduleColor = { color: "green" },
+  nonScheduleColor = { color: "red" };
 const MyScheduleList = ({ patitents }) => {
   return (
-    <div>
+    <div className={"abcccc"}>
       <ReactTable
+        style={{
+          marginLeft: moderateScale(18),
+          marginRight: moderateScale(18)
+        }}
         data={patitents}
         columns={[
           {
-            Header: "Date",
+            // Header: "Date",
+            Header: props => <span style={spanHeaderStyle}>Date</span>,
             accessor: "SchedDate",
-            headerStyle: {
-              backgroundColor: "#e2ebf0",
-              height: moderateScale(32)
-            },
-            getProps: () => ({
-              style: {
-                textAlign: "center"
-              }
-            }),
+            headerStyle: headerStyle,
+            getProps: () => cellStyle,
             Cell: props => (
               <span className="number">
                 {moment(props.value).format("DD MMM YYYY")}
               </span>
-            ) // Custom cell components!
+            )
           },
           {
-            Header: "Name",
+            // Header: "Name",
+            Header: props => <span style={spanHeaderStyle}>Name</span>,
             accessor: "Pat_LName",
-            headerStyle: {
-              backgroundColor: "#e2ebf0",
-              height: moderateScale(32)
-            },
-            getProps: () => ({
-              style: {
-                textAlign: "center"
-              }
-            })
+            headerStyle: headerStyle,
+            getProps: () => cellStyle
           },
           {
-            Header: "Time",
+            // Header: "Time",
+            Header: props => <span style={spanHeaderStyle}>Time</span>,
             accessor: "StartTime",
-            headerStyle: {
-              backgroundColor: "#e2ebf0",
-              height: moderateScale(32)
-            },
-            getProps: () => ({
-              style: {
-                textAlign: "center"
-              }
-            })
+            headerStyle: headerStyle,
+            getProps: () => cellStyle
           },
           {
-            Header: "Status",
+            // Header: "Status",
+            Header: props => <span style={spanHeaderStyle}>Status</span>,
             accessor: "StatusName",
-            headerStyle: {
-              backgroundColor: "#e2ebf0",
-              height: moderateScale(32)
-            },
-            getProps: () => ({
-              style: {
-                textAlign: "center"
-              }
-            })
+            headerStyle: headerStyle,
+            getProps: () => cellStyle,
+            Cell: props => (
+              <span
+                style={
+                  props.value == "Scheduled" ? scheduleColor : nonScheduleColor
+                }
+              >
+                {props.value}
+              </span>
+            )
           }
         ]}
+        showPagination={true}
+        getFooterProps={(state, rowInfo, column, instance) => ({
+          color: "red"
+        })}
         defaultPageSize={10}
+        previousText={"Previous"}
+        nextText={"Next"}
+        loadingText={"Loading..."}
+        noDataText={"No rows found"}
+        // NextComponent={Button}
         className="-striped -highlight"
       />
     </div>

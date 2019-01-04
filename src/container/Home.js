@@ -24,7 +24,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: true
+      isVisible: false
     };
     this.closeModal = this.closeModal.bind(this);
   }
