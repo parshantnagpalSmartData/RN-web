@@ -1,15 +1,19 @@
 import RestClient from "../../helpers/RestClient";
-// import * as Types from "../../actionTypes";
+import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 import Constants from "../../constants";
 
-export const fetchMySchedules = token => {
-  return dispatch => {
+export const fetchOpenShift = () => {
+  return (dispatch, getState) => {
     dispatch(AppActions.startLoader());
-    RestClient.getCall("nurses/schedules", token)
+    RestClient.getCall(
+      "nurses/openshifts?startDate=01/03/2018&enddate=12/27/2018",
+      getState().user.token
+    )
       .then(res => {
         if (res.status) {
           dispatch(AppActions.stopLoader());
+          dispatch({ type: Types.OPEN_SHIFTS, payload: res.result.data });
         } else {
           dispatch(AppActions.stopLoader());
           dispatch(

@@ -126,5 +126,4 @@ const Styles = StyleSheet.create({
   }
 });
 
-
 export default MySchedule;
