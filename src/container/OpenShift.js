@@ -2,11 +2,13 @@ import React, { Component } from "React";
 import { View, StyleSheet, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import moment from "moment";
 
 import * as appAction from "../actions";
 import Header from "../components/common/Header";
 // import UnderDevelopment from "../components/common/UnderDevelopment";
 import PatientsCompo from "../components/patients/PatientsCompo";
+import Filter from "../components/MySchedule/Filter";
 
 class OpenShift extends Component {
   constructor(props) {
@@ -51,6 +53,16 @@ class OpenShift extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Open Shift"} onDrawerPress={this.onDrawerPress} />
+        <Filter
+          prevDate={moment(new Date()).format("ddd DD MMMM")}
+          nextDate={moment(new Date()).format("DD MMMM YYYY")}
+          prevPress={() => {
+            alert(123);
+          }}
+          nextPress={() => {
+            alert("232");
+          }}
+        />
         {/* <UnderDevelopment /> */}
         <FlatList
           // numColumns={Platform.OS === "web" ? 2 : 1}

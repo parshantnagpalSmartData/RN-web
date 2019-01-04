@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   View,
   StyleSheet,
-  FlatList,
   Text,
   Platform,
   TouchableOpacity,
@@ -10,7 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import moment from "moment";
 import * as appAction from "../actions";
 import Constants from "../constants";
 import { moderateScale } from "../helpers/ResponsiveFonts";
@@ -18,6 +17,8 @@ import Header from "../components/common/Header";
 import MySchedule from "../components/MySchedule";
 import Avtar from "../components/common/Avatar";
 import CustomModal from "../components/customModal";
+import Filter from "../components/MySchedule/Filter";
+import MyScheduleList from "../components/MySchedule/MyScheduleList";
 
 class Home extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Home extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
   componentDidMount() {
-    this.props.appAction.fetchMySchedules(this.props.user.token);
+    this.props.appAction.fetchMySchedules();
   }
 
   onDrawerPress = () => {
@@ -43,125 +44,26 @@ class Home extends Component {
   }
 
   render() {
-    let patitents = [
-        {
-          _id: 1,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 2,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 3,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 4,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 5,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 6,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 7,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 8,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 9,
-          name: "Suraj Sanwal",
-          from: "9 am",
-          to: "11 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        },
-        {
-          _id: 10,
-          name: "Suraj Sanwal",
-          from: "12 am",
-          to: "13 pm",
-          type: "scheduled",
-          date: "9",
-          day: "Tue"
-        }
-      ],
-      { isVisible } = this.state,
+    let { isVisible } = this.state,
+      { mySchedules } = this.props,
       { Close, UserImage } = Constants.Images;
+
     return (
       <View style={Styles.containner}>
-        <Header title={"My Schedule"} onDrawerPress={this.onDrawerPress} />
-        <FlatList
-          data={patitents}
-          keyExtractor={item => item._id.toString()}
+        <Header title={"MY SCHEDULE"} onDrawerPress={this.onDrawerPress} />
+        <Filter
+          prevDate={moment(new Date()).format("ddd DD MMMM")}
+          nextDate={moment(new Date()).format("DD MMMM YYYY")}
+          prevPress={() => {
+            alert(123);
+          }}
+          nextPress={() => {
+            alert("232");
+          }}
+        />
+        <MyScheduleList
+          patitents={mySchedules}
           renderItem={this.renderPatients}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          style={{
-            ...Platform.select({
-              web: {
-                overflow: "hidden"
-                //width: Constants.BaseStyle.DEVICE_WIDTH
-              }
-            })
-          }}
-          contentContainerStyle={{
-            ...Platform.select({
-              web: {
-                // backgroundColor : 'red'
-                //   justifyContent: "center",
-              }
-            })
-          }}
         />
         <CustomModal
           isVisible={isVisible}
@@ -278,7 +180,8 @@ const Styles = StyleSheet.create({
 });
 const mapStateToProps = state => ({
   user: state.user,
-  app: state.app
+  app: state.app,
+  mySchedules: state.schedule.mySchedules
 });
 const mapDispatchToProps = dispatch => ({
   appAction: bindActionCreators(appAction, dispatch)

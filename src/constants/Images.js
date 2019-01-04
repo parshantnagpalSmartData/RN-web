@@ -18,5 +18,7 @@ module.exports = {
   UserImage: require("../assets/images/username/username.png"),
   Success: require("../assets/images/Notification/success.png"),
   Like: require("../assets/images/Likes/selectedLike.png"),
-  UnLike: require("../assets/images/Likes/unselectedLike.png")
+  UnLike: require("../assets/images/Likes/unselectedLike.png"),
+  Next: require("../assets/images/Next/next.png"),
+  Previous: require("../assets/images/Previous/previous.png")
 };

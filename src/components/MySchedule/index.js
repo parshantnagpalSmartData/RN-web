@@ -6,17 +6,21 @@
 
 import React from "react";
 import { View, StyleSheet, Platform, Text } from "react-native";
+import moment from "moment";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
 
 const MySchedule = ({ item, index }) => {
   return (
     <View style={Styles.containner}>
       <View style={Styles.leftDateContainer}>
         <Text style={[Styles.commonFontColor, Styles.dateText]}>
-          {item.date}
+          {moment(item.SchedDate).format("DD")}
         </Text>
-        <Text style={[Styles.commonFontColor, Styles.dayText]}>{item.day}</Text>
+        <Text style={[Styles.commonFontColor, Styles.dayText]}>
+          {daysOfWeek[moment(item.SchedDate).day()]}
+        </Text>
       </View>
       <View style={Styles.rightContainer}>
         <View
@@ -26,17 +30,17 @@ const MySchedule = ({ item, index }) => {
           <View>
             <View>
               <Text style={[Styles.commonFontColor, Styles.itemName]}>
-                {item.name}
+                {item.Pat_LName}
               </Text>
             </View>
             <View>
               <Text style={[Styles.commonFontColor, Styles.itemToFrom]}>
-                {item.from} - {item.to}
+                {item.StartTime} - {item.EndTime}
               </Text>
             </View>
             <View>
               <Text style={[Styles.commonFontColor, Styles.itemType]}>
-                {item.type}
+                {item.StatusName}
               </Text>
             </View>
           </View>
