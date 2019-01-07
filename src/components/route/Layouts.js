@@ -29,12 +29,12 @@ export const dashboardLayout = props => {
             justifyContent: "space-between"
           }}
         >
-          <View style={{ flex: 0.3 }}>
+          <View style={{ flex: 0.2, overflow: "hidden" }}>
             <SideMenu />
           </View>
           <View
             style={{
-              flex: 0.7,
+              flex: 0.8,
               justifyContent: "center"
             }}
           >

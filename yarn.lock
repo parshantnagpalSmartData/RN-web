@@ -6494,6 +6494,11 @@ react-clone-referenced-element@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-clone-referenced-element/-/react-clone-referenced-element-1.1.0.tgz#9cdda7f2aeb54fea791f3ab8c6ab96c7a77d0158"
 
+react-confirm-alert@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-2.0.7.tgz#f30fe17f8e082ca9eb8ff867cb4ce414159a63a9"
+  integrity sha512-tpCL/8oK11VlyMZJIFLHe5ytPdwiJMPZYHYIdVMECUavCUWGJTOSVZvtzjwWBcAbivo4ADMIa+mcf2u4HGOzHQ==
+
 react-deep-force-update@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.1.2.tgz#3d2ae45c2c9040cbb1772be52f8ea1ade6ca2ee1"

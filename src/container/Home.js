@@ -24,9 +24,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      patient: {},
       isVisible: false,
-      prevDate: "12/1/2018",
-      nextDate: "12/27/2018"
+      prevDate: moment().format("MM/DD/YYYY"),
+      nextDate: moment()
+        .add(7, "d")
+        .format("MM/DD/YYYY")
     };
     this.closeModal = this.closeModal.bind(this);
   }
@@ -44,8 +47,8 @@ class Home extends Component {
     //  alert(patient);
   };
 
-  fetchPatientDetails = patientId => {
-    this.props.appAction.fetchPatientDetails(patientId, this.patientDetails);
+  fetchPatientDetails = schedule => {
+    this.setState({ patient: schedule, isVisible: true });
   };
 
   renderPatients = ({ item, index }) => {
@@ -61,8 +64,20 @@ class Home extends Component {
     this.setState({ isVisible: false });
   }
 
+  onDateChange = (prevDate, nextDate) => {
+    this.setState(
+      {
+        prevDate,
+        nextDate
+      },
+      () => {
+        this.props.appAction.fetchMySchedules(prevDate, nextDate);
+      }
+    );
+  };
+
   render() {
-    let { isVisible, nextDate, prevDate } = this.state,
+    let { isVisible, nextDate, prevDate, patient } = this.state,
       { mySchedules } = this.props,
       { Close, UserImage } = Constants.Images;
 
@@ -70,15 +85,29 @@ class Home extends Component {
       <View style={Styles.containner}>
         <Header title={"MY SCHEDULE"} onDrawerPress={this.onDrawerPress} />
         <Filter
-          prevDate={moment(new Date(prevDate)).format("ddd DD MMMM")}
-          nextDate={moment(new Date(nextDate)).format("DD MMMM YYYY")}
-          prevPress={() => {}}
-          nextPress={() => {}}
+          prevDate={new Date(prevDate)}
+          nextDate={new Date(nextDate)}
+          onDateChange={(prevDate, nextDate) =>
+            this.onDateChange(prevDate, nextDate)
+          }
         />
-        <MyScheduleList
-          patitents={mySchedules}
-          renderItem={this.renderPatients}
-        />
+        {mySchedules.length ? (
+          <MyScheduleList
+            patitents={mySchedules}
+            renderItem={this.renderPatients}
+            onPatientPress={this.fetchPatientDetails}
+          />
+        ) : (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text
+              style={{ ...Constants.Fonts.Medium, fontSize: moderateScale(20) }}
+            >
+              No Schedule Found
+            </Text>
+          </View>
+        )}
         <CustomModal
           isVisible={isVisible}
           onBackdropPress={() => this.closeModal()}
@@ -94,10 +123,12 @@ class Home extends Component {
             </TouchableOpacity>
             <Avtar source={UserImage} />
             <Text style={[Styles.commonFontColor, Styles.BoldText]}>
-              Jane Doe
+              {`${patient.Pat_FName} ${patient.Pat_LName}`}
             </Text>
             <Text style={[Styles.commonFontColor, Styles.smallOne]}>
-              123 Main Rd. Philadephia Pa 19103
+              {`${patient.Patient_Address}, ${patient.Patient_City} ${
+                patient.Patient_State
+              } ${patient.Patient_Zip}`}
             </Text>
             <Text
               style={[
@@ -106,7 +137,7 @@ class Home extends Component {
                 Styles.paddingTop
               ]}
             >
-              Schedular Name{" "}
+              {`${patient.Scheduler_FirstName} ${patient.Scheduler_LastName}`}
             </Text>
             <Text style={[Styles.commonFontColorBold, Styles.smallOne]}>
               P{" "}
@@ -114,7 +145,7 @@ class Home extends Component {
               Ext <Text style={Styles.commonFontColor}> : 411</Text>
             </Text>
             <Text style={[Styles.commonFontColor, Styles.smallOne]}>
-              actHomeHealth@yopmail.com
+              {patient.Scheduler_Email}
             </Text>
           </View>
         </CustomModal>

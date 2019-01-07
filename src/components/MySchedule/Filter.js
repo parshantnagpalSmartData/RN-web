@@ -17,11 +17,22 @@ import {
 import PropTypes from "prop-types";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-
-const Filter = ({ prevDate, prevPress, nextDate, nextPress }) => {
+import moment from "moment";
+const Filter = ({ prevDate, nextDate, onDateChange }) => {
   return (
     <View style={Styles.mainView}>
-      <TouchableOpacity onPress={() => prevPress()}>
+      <TouchableOpacity
+        onPress={() => {
+          onDateChange(
+            moment(prevDate)
+              .subtract(7, "d")
+              .format("MM/DD/YYYY"),
+            moment(nextDate)
+              .subtract(7, "d")
+              .format("MM/DD/YYYY")
+          );
+        }}
+      >
         <Image
           style={Styles.imageNextPrevious}
           source={
@@ -33,9 +44,22 @@ const Filter = ({ prevDate, prevPress, nextDate, nextPress }) => {
         />
       </TouchableOpacity>
       <Text style={[Styles.commonFontColor]}>
-        {prevDate + " - " + nextDate}{" "}
+        {moment(prevDate).format("ddd DD MMM") +
+          " - " +
+          moment(nextDate).format("DD MMM YYYY")}
       </Text>
-      <TouchableOpacity onPress={() => nextPress()}>
+      <TouchableOpacity
+        onPress={() => {
+          onDateChange(
+            moment(prevDate)
+              .add(7, "d")
+              .format("MM/DD/YYYY"),
+            moment(nextDate)
+              .add(7, "d")
+              .format("MM/DD/YYYY")
+          );
+        }}
+      >
         <Image
           style={Styles.imageNextPrevious}
           source={
@@ -72,15 +96,13 @@ const Styles = StyleSheet.create({
 });
 
 Filter.propTypes = {
-  prevDate: PropTypes.string,
-  prevPress: PropTypes.func,
-  nextDate: PropTypes.string,
-  nextPress: PropTypes.func
+  prevDate: PropTypes.date,
+  onDateChange: PropTypes.func,
+  nextDate: PropTypes.date
 };
 Filter.defaultProps = {
   prevDate: null,
-  prevPress: null,
-  nextDate: null,
-  nextPress: null
+  onDateChange: null,
+  nextDate: null
 };
 export default Filter;

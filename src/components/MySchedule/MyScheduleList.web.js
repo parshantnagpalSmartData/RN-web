@@ -30,7 +30,7 @@ let spanHeaderStyle = {
   },
   scheduleColor = { color: "green" },
   nonScheduleColor = { color: "red" };
-const MyScheduleList = ({ patitents }) => {
+const MyScheduleList = ({ patitents, onPatientPress }) => {
   return (
     <div className={"abcccc"}>
       <ReactTable
@@ -94,6 +94,13 @@ const MyScheduleList = ({ patitents }) => {
         noDataText={"No rows found"}
         // NextComponent={Button}
         className="-striped -highlight"
+        getTrProps={(state, rowInfo, column) => {
+          return {
+            onClick: () => {
+              onPatientPress(rowInfo.original);
+            }
+          };
+        }}
       />
     </div>
   );
