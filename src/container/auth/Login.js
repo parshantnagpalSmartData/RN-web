@@ -85,8 +85,8 @@ class Login extends Component {
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props; // eslint-disable-line OTPScreen
-    // appAction.pushTParticulatScreen(componentId, "ForgotPassword");
-    appAction.pushTParticulatScreen(componentId, "OTPScreen");
+    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    // appAction.pushTParticulatScreen(componentId, "OTPScreen");
   };
 
   render() {
@@ -96,7 +96,8 @@ class Login extends Component {
         {/* <View style={{ flex: 0.5, justifyContent: "center" }}> */}
         {/* </View> */}
         <KeyboardAwareScrollView
-          scrollEnabled={true}
+          keyboardShouldPersistTaps={true}
+          scrollEnabled={false}
           contentContainerStyle={{
             alignItems: "center"
           }}

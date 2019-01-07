@@ -61,36 +61,64 @@ class OTPScreen extends Component {
           <Header hideDrawer onBackPress={this.onBackPress} />
         ) : null}
         <KeyboardAwareScrollView
-          scrollEnabled={true}
-          contentContainerStyle={{
-            height:
-              Platform.OS === "web"
-                ? Constants.BaseStyle.DEVICE_HEIGHT
-                : Constants.BaseStyle.DEVICE_HEIGHT * 0.2,
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
+          scrollEnabled={false}
+          style={
+            {
+              // height:
+              //   Platform.OS === "web"
+              //     ? Constants.BaseStyle.DEVICE_HEIGHT
+              //     : Platform.OS === "ios"
+              //     ? Constants.BaseStyle.DEVICE_HEIGHT * 0.1
+              //     : Constants.BaseStyle.DEVICE_HEIGHT
+            }
+          }
         >
-          <LogoText
-            containerStyle={Styles.logoStyle}
-            heading="Verification"
-            message="We have sent OTP in your mobile number. Please enter below"
-          />
-          <View>
-            <OtpInputs
-              handleChange={otp => {
-                this.setState({ otp });
-              }}
-              numberOfInputs={4}
-              keyboardType={"numeric"}
-              inputContainerStyles={Styles.inputContainerStyles}
-              underlineColorAndroid={Constants.Colors.Gray}
-              inputTextErrorColor={Constants.Colors.Primary}
-              focusedBorderColor={Constants.Colors.Gray}
-              inputStyles={{ color: Constants.Colors.Primary }}
+          <View
+            style={{
+              height:
+                Platform.OS === "web"
+                  ? Constants.BaseStyle.DEVICE_HEIGHT
+                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
+              justifyContent:
+                Platform.OS === "android" ? "flex-start" : "space-between",
+              alignItems: "center"
+            }}
+          >
+            <LogoText
+              containerStyle={Styles.logoStyle}
+              heading="Verification"
+              message="We have sent OTP in your mobile number. Please enter below"
             />
-          </View>
-          <View>
+            {Platform.OS === "web" ? (
+              <View style={{}}>
+                <OtpInputs
+                  handleChange={otp => {
+                    this.setState({ otp });
+                  }}
+                  numberOfInputs={4}
+                  keyboardType={"numeric"}
+                  inputContainerStyles={Styles.inputContainerStyles}
+                  underlineColorAndroid={Constants.Colors.Gray}
+                  inputTextErrorColor={Constants.Colors.Primary}
+                  focusedBorderColor={Constants.Colors.Gray}
+                  inputStyles={{ color: Constants.Colors.Primary }}
+                />
+              </View>
+            ) : (
+              <OtpInputs
+                handleChange={otp => {
+                  this.setState({ otp });
+                }}
+                numberOfInputs={4}
+                keyboardType={"numeric"}
+                inputContainerStyles={Styles.inputContainerStyles}
+                underlineColorAndroid={Constants.Colors.Gray}
+                inputTextErrorColor={Constants.Colors.Primary}
+                focusedBorderColor={Constants.Colors.Gray}
+                inputStyles={{ color: Constants.Colors.Primary }}
+              />
+            )}
+            {/* <View style={{}}> */}
             <AuthButton
               gradientColors={Constants.Colors.ButtonGradients}
               buttonName={"Verify"}
@@ -105,11 +133,11 @@ class OTPScreen extends Component {
                 this.verifyOTP();
               }}
             />
-          </View>
-
-          <View style={Styles.resendOTP}>
-            <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
-            <Text style={Styles.resend}>{"Resend"}</Text>
+            {/* </View> */}
+            <View style={Styles.resendOTP}>
+              <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
+              <Text style={Styles.resend}>{"Resend"}</Text>
+            </View>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -123,32 +151,13 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  wrapperScroll: {
-    // flex: 1,
-    paddingHorizontal: moderateScale(30),
-    justifyContent: "space-between"
-  },
-  wrapperContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center"
-  },
   logoStyle: {},
-  scrollHeight: {
-    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.52,
-    flexDirection: "column",
-    justifyContent: "space-between"
-  },
-  wrapper: { zIndex: 999, flex: 0.9 },
   resendOTP: {
     // justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "column"
   },
-  FloatingInputContainer: {
-    flex: 0.4,
-    justifyContent: "center"
-  },
+
   inputContainerStyles: {
     backgroundColor: Constants.Colors.White,
     borderBottomColor: Constants.Colors.Gray,
@@ -160,42 +169,7 @@ const Styles = StyleSheet.create({
       }
     })
   },
-  otpImage: {
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flex: 0.8
-  },
-  otpText: {
-    ...Constants.Fonts.Regular,
-    fontSize: moderateScale(20),
-    color: Constants.Colors.Primary
-  },
-  authPolicyContainer: {
-    flex: 0.1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: moderateScale(5)
-  },
   buttonStyle: { flex: 1 },
-  signBtn: { flexDirection: "row", alignItems: "center" },
-  signBtnStyle: {},
-  signTxtStyle: {
-    ...Constants.Fonts.Bold,
-    fontSize: moderateScale(18),
-    color: Constants.Colors.Primary,
-    textDecorationLine: "underline"
-  },
-  policy: {
-    justifyContent: "center"
-  },
-  policyText: {
-    ...Constants.Fonts.Regular,
-    fontSize: moderateScale(16),
-    color: Constants.Colors.Primary,
-    textAlign: "right",
-    textAlignVertical: "center"
-  },
   newUser: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(14),
