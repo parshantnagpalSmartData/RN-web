@@ -23,6 +23,6 @@ export function openLinkingURL(checkone, url) {
       }
     })
     .catch(err => {
-        console.log(err);// eslint-disable-line
+      console.log(err); // eslint-disable-line
     });
 }
