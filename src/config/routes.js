@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigation } from "react-native-navigation";
-
+import {View} from "react-native";
 import { Provider } from "react-redux";
 import setup from "../store/setup";
 
@@ -23,9 +23,11 @@ const store = setup();
 /* eslint-disable */
 const LoadReducxSceen = ReduxScreen => props => (
   <Provider store={store}>
+    <View style={{flex: 1}}>
     <ReduxScreen {...props} />
     <ToastNotification />
     <Loading />
+    </View>
   </Provider>
 );
 

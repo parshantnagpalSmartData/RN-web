@@ -3,3 +3,7 @@
     height: 71px;
 }
 
+.contentScroll{height: calc(100vh - 115px); overflow: auto;}
+
+.leftContainer{flex:0 0 25%; max-width: 25%;}
+.rightContentContainer{flex:0 0 75%; max-width: 75%;}

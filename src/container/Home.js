@@ -31,7 +31,6 @@ class Home extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
   componentDidMount() {
-    // console.log("componendidmount");
     let { prevDate, nextDate } = this.state;
     this.props.appAction.fetchMySchedules(prevDate, nextDate);
   }

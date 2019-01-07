@@ -138,7 +138,14 @@ class SideMenu extends React.Component {
               borderBottomColor: Constants.Colors.White,
               borderBottomWidth: 0.2,
               margin: moderateScale(20),
-              paddingBottom: moderateScale(10)
+              paddingBottom: moderateScale(10),
+              ...Platform.select({
+                web: {
+                  justifyContent: "center",
+                  alignItems: "center"
+                }
+              })
+                          
             }}
           >
             <View
@@ -166,7 +173,12 @@ class SideMenu extends React.Component {
                   ...Constants.Fonts.Regular,
                   fontSize: moderateScale(18),
                   color: Constants.Colors.White,
-                  paddingVertical: moderateScale(3)
+                  paddingVertical: moderateScale(3),
+                  ...Platform.select({
+                    web: {
+                     textAlign : "center"
+                    }
+                  })
                 }}
               >{`${FirstName} ${LastName}`}</Text>
               <Text
@@ -174,7 +186,12 @@ class SideMenu extends React.Component {
                   ...Constants.Fonts.Regular,
                   fontSize: moderateScale(14),
                   color: Constants.Colors.White,
-                  paddingVertical: moderateScale(3)
+                  paddingVertical: moderateScale(3),
+                  ...Platform.select({
+                    web: {
+                     textAlign : "center"
+                    }
+                  })
                 }}
               >
                 {UserName}

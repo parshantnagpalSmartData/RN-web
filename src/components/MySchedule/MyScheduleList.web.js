@@ -32,7 +32,7 @@ let spanHeaderStyle = {
   nonScheduleColor = { color: "red" };
 const MyScheduleList = ({ patitents }) => {
   return (
-    <div className={"abcccc"}>
+    <div className={"contentScroll"}>
       <ReactTable
         style={{
           marginLeft: moderateScale(18),
