@@ -92,7 +92,7 @@ class Login extends Component {
   render() {
     let { deviceWidth } = this.state;
     return (
-      <View  style={Styles.containner} >
+      <View style={Styles.containner}>
         {/* <View style={{ flex: 0.5, justifyContent: "center" }}> */}
         <LogoText text={"ACT Home Health Services"} />
         {/* </View> */}
@@ -125,7 +125,7 @@ class Login extends Component {
               overflow: "hidden"
             }}
           >
-            <View className='djshfjdsjk' style={Styles.FloatingInputContainer}>
+            <View className="djshfjdsjk" style={Styles.FloatingInputContainer}>
               <FormTextInput
                 image={Constants.Images.Email}
                 placeHolderText={"Username"}

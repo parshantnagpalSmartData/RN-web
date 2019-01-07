@@ -161,7 +161,6 @@ class SideMenu extends React.Component {
                   alignItems: "center"
                 }
               })
-                          
             }}
           >
             <View
@@ -192,7 +191,7 @@ class SideMenu extends React.Component {
                   paddingVertical: moderateScale(3),
                   ...Platform.select({
                     web: {
-                     textAlign : "center"
+                      textAlign: "center"
                     }
                   })
                 }}
@@ -205,7 +204,7 @@ class SideMenu extends React.Component {
                   paddingVertical: moderateScale(3),
                   ...Platform.select({
                     web: {
-                     textAlign : "center"
+                      textAlign: "center"
                     }
                   })
                 }}

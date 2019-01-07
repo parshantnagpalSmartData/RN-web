@@ -19,7 +19,8 @@ import Avtar from "../components/common/Avatar";
 import CustomModal from "../components/customModal";
 import Filter from "../components/MySchedule/Filter";
 import MyScheduleList from "../components/MySchedule/MyScheduleList";
-
+import { googleMapNavigate } from "../helpers/MapDirections";
+import { openLinkingURL } from "../helpers/Linking";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +33,8 @@ class Home extends Component {
         .format("MM/DD/YYYY")
     };
     this.closeModal = this.closeModal.bind(this);
+    this.openEmail = this.openEmail.bind(this);
+    this.openTelephone = this.openTelephone.bind(this);
   }
   componentDidMount() {
     let { prevDate, nextDate } = this.state;
@@ -74,6 +77,34 @@ class Home extends Component {
       }
     );
   };
+
+  /*
+   * Method to open the telephone number
+   */
+  openTelephone() {
+    openLinkingURL("tel", "+919041908802");
+  }
+  /*
+   * Method to open the telephone number
+   */
+  openEmail() {
+    openLinkingURL("email", "nagpal.parshant8@gmail.com");
+  }
+  /**
+   * Method to open the google maps
+   *
+   */
+  openMaps() {
+    let source = {
+      latitude: 30.7046,
+      longitude: 76.7179
+    };
+    let destination = {
+      latitude: 30.7063633,
+      longitude: 76.7047791
+    };
+    googleMapNavigate(source, destination);
+  }
 
   render() {
     let { isVisible, nextDate, prevDate, patient } = this.state,
@@ -124,7 +155,10 @@ class Home extends Component {
             <Text style={[Styles.commonFontColor, Styles.BoldText]}>
               {`${patient.Pat_FName} ${patient.Pat_LName}`}
             </Text>
-            <Text style={[Styles.commonFontColor, Styles.smallOne]}>
+            <Text
+              style={[Styles.commonFontColor, Styles.smallOne]}
+              onPress={() => this.openMaps()}
+            >
               {`${patient.Patient_Address}, ${patient.Patient_City} ${
                 patient.Patient_State
               } ${patient.Patient_Zip}`}
@@ -138,12 +172,18 @@ class Home extends Component {
             >
               {`${patient.Scheduler_FirstName} ${patient.Scheduler_LastName}`}
             </Text>
-            <Text style={[Styles.commonFontColorBold, Styles.smallOne]}>
+            <Text
+              style={[Styles.commonFontColorBold, Styles.smallOne]}
+              onPress={() => this.openTelephone()}
+            >
               P{" "}
               <Text style={Styles.commonFontColor}>: +1(215) 389 -1800 /</Text>
               Ext <Text style={Styles.commonFontColor}> : 411</Text>
             </Text>
-            <Text style={[Styles.commonFontColor, Styles.smallOne]}>
+            <Text
+              style={[Styles.commonFontColor, Styles.smallOne]}
+              onPress={() => this.openEmail()}
+            >
               {patient.Scheduler_Email}
             </Text>
           </View>

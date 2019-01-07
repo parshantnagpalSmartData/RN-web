@@ -10,7 +10,7 @@ import Loader from "./src/components/common/Loader";
 import ToastNotification from "./src/components/common/ToastNotification";
 
 const { persistor, store } = setup();
-import "./src/container/html/style.css";
+// import "./src/container/html/style.css";
 class App extends Component {
   constructor(props) {
     super(props);
