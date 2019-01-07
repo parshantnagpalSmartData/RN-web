@@ -21,7 +21,7 @@ const MySchedule = ({ item, index, onPatientPress }) => {
   return (
     <TouchableOpacity
       style={Styles.containner}
-      onPress={() => onPatientPress(item.SchedID)}
+      onPress={() => onPatientPress(item)}
     >
       <View style={Styles.leftDateContainer}>
         <Text style={[Styles.commonFontColor, Styles.dateText]}>

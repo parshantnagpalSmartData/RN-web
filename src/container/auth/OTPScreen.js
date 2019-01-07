@@ -60,48 +60,53 @@ class OTPScreen extends Component {
         {Platform.OS !== "web" ? (
           <Header hideDrawer onBackPress={this.onBackPress} />
         ) : null}
-        <LogoText
-          containerStyle={Styles.logoStyle}
-          heading="Verification"
-          message="We have sent OTP in your mobile number. Please enter below"
-        />
         <KeyboardAwareScrollView
           scrollEnabled={true}
           contentContainerStyle={{
+            height:
+              Platform.OS === "web"
+                ? Constants.BaseStyle.DEVICE_HEIGHT
+                : Constants.BaseStyle.DEVICE_HEIGHT * 0.2,
             justifyContent: "space-between",
-            height: Constants.BaseStyle.DEVICE_HEIGHT * 0.45,
-            alignItems: "center",
-            ...Platform.select({
-              web: { top: moderateScale(100) }
-            })
+            alignItems: "center"
           }}
         >
-          <OtpInputs
-            handleChange={otp => {
-              this.setState({ otp });
-            }}
-            numberOfInputs={4}
-            keyboardType={"numeric"}
-            inputContainerStyles={Styles.inputContainerStyles}
-            underlineColorAndroid={Constants.Colors.Gray}
-            inputTextErrorColor={Constants.Colors.Primary}
-            focusedBorderColor={Constants.Colors.Gray}
-            inputStyles={{ color: Constants.Colors.Primary }}
+          <LogoText
+            containerStyle={Styles.logoStyle}
+            heading="Verification"
+            message="We have sent OTP in your mobile number. Please enter below"
           />
-          <AuthButton
-            gradientColors={Constants.Colors.ButtonGradients}
-            buttonName={"Verify"}
-            buttonStyle={{
-              ...Platform.select({
-                web: {
-                  top: moderateScale(15)
-                }
-              })
-            }}
-            onPress={() => {
-              this.verifyOTP();
-            }}
-          />
+          <View>
+            <OtpInputs
+              handleChange={otp => {
+                this.setState({ otp });
+              }}
+              numberOfInputs={4}
+              keyboardType={"numeric"}
+              inputContainerStyles={Styles.inputContainerStyles}
+              underlineColorAndroid={Constants.Colors.Gray}
+              inputTextErrorColor={Constants.Colors.Primary}
+              focusedBorderColor={Constants.Colors.Gray}
+              inputStyles={{ color: Constants.Colors.Primary }}
+            />
+          </View>
+          <View>
+            <AuthButton
+              gradientColors={Constants.Colors.ButtonGradients}
+              buttonName={"Verify"}
+              buttonStyle={{
+                ...Platform.select({
+                  web: {
+                    top: moderateScale(15)
+                  }
+                })
+              }}
+              onPress={() => {
+                this.verifyOTP();
+              }}
+            />
+          </View>
+
           <View style={Styles.resendOTP}>
             <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
             <Text style={Styles.resend}>{"Resend"}</Text>
@@ -136,7 +141,7 @@ const Styles = StyleSheet.create({
   },
   wrapper: { zIndex: 999, flex: 0.9 },
   resendOTP: {
-    justifyContent: "flex-end",
+    // justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "column"
   },
@@ -197,7 +202,7 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.Gray,
     textAlign: "right",
     textAlignVertical: "center",
-    paddingTop: moderateScale(60),
+    // paddingTop: moderateScale(60),
     ...Platform.select({
       web: {
         paddingTop: moderateScale(20)

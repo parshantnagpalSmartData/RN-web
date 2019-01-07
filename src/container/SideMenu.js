@@ -16,6 +16,8 @@ import Constants from "../constants";
 import { moderateScale } from "../helpers/ResponsiveFonts";
 import SafeView from "../components/common/SafeView";
 import { Dialog } from "../helpers/common";
+import { confirmAlert } from "react-confirm-alert";
+
 class SideMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -39,10 +41,24 @@ class SideMenu extends React.Component {
   setScrenStack(screen, visible) {
     if (screen === "Logout" && Platform.OS !== "web") {
       Dialog(Constants.AppConstants.Alert.Logout, [
-        { text: "Yes", onPress: () => this.props.appAction.logOut() },
-        { text: "No", onPress: () => {} }
+        { text: "Cancel", onPress: () => {} },
+        { text: "Ok", onPress: () => this.props.appAction.logOut() }
       ]);
     } else if (screen === "Logout" && Platform.OS === "web") {
+      confirmAlert({
+        title: Constants.AppConstants.AppName,
+        message: Constants.AppConstants.Alert.Logout,
+        buttons: [
+          {
+            label: "Cancel",
+            onClick: () => {}
+          },
+          {
+            label: "Ok",
+            onClick: () => this.props.appAction.logOut()
+          }
+        ]
+      });
       this.props.appAction.logOut();
     } else {
       this.setState(
@@ -55,7 +71,7 @@ class SideMenu extends React.Component {
       );
     }
 
-    if (Platform.OS !== "web") {
+    if ((Platform.OS !== "web") & (screen !== "Logout")) {
       this.hideSideMenu();
     }
   }
@@ -205,6 +221,10 @@ class SideMenu extends React.Component {
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             extraData={this.state.screen}
+            style={{
+              overscrollBehaviorY: "auto",
+              touchAction: "auto"
+            }}
           />
         </View>
       </LinearGradient>
@@ -224,7 +244,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    overflow: "hidden"
   },
   text: {
     justifyContent: "center",

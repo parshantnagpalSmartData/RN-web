@@ -5,18 +5,25 @@
  */
 
 import React from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator
+} from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 const Favourite = props => {
-  let { isSelected, onLikePress, patient } = props;
+  let { isSelected, onLikePress, patient, loading, scheduleId } = props;
   return (
     <TouchableOpacity
       style={Styles.buttonStyle}
       onPress={() => onLikePress(patient.SchedID)}
     >
-      {isSelected ? (
+      {loading && patient.SchedID === scheduleId ? (
+        <ActivityIndicator />
+      ) : isSelected ? (
         <Image
           source={Constants.Images.Like}
           resizeMode={"contain"}

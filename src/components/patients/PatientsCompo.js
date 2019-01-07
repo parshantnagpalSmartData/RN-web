@@ -19,7 +19,9 @@ const PatientsCompo = props => {
     onSkillPress,
     showAll,
     isSelected,
-    onLikePress
+    onLikePress,
+    loading,
+    scheduleId
   } = props;
   if (showAll) {
     skills[skills.length + 1] = "Hide less";
@@ -27,11 +29,13 @@ const PatientsCompo = props => {
   return (
     <View style={Styles.container}>
       <View style={Styles.heading}>
-        <Text style={Styles.skill}>Skill</Text>
+        <Text style={Styles.skill}>Skills</Text>
         <Favourite
           isSelected={isSelected}
           onLikePress={onLikePress}
           patient={patient}
+          loading={loading}
+          scheduleId={scheduleId}
         />
       </View>
       <FlatList

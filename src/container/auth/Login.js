@@ -85,8 +85,8 @@ class Login extends Component {
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props; // eslint-disable-line OTPScreen
-    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
-    // appAction.pushTParticulatScreen(componentId, "OTPScreen");
+    // appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    appAction.pushTParticulatScreen(componentId, "OTPScreen");
   };
 
   render() {

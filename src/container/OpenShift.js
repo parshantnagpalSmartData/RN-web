@@ -1,5 +1,5 @@
 import React, { Component } from "React";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, Text } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -9,15 +9,21 @@ import Header from "../components/common/Header";
 // import UnderDevelopment from "../components/common/UnderDevelopment";
 import PatientsCompo from "../components/patients/PatientsCompo";
 import Filter from "../components/MySchedule/Filter";
+import { moderateScale } from "../helpers/ResponsiveFonts";
+import Constants from "../constants";
 
 class OpenShift extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      scheduleId: null,
       showAll: false,
       currentIndex: null,
-      prevDate: "01/03/2018",
-      nextDate: "12/27/2018"
+      loading: false,
+      prevDate: moment().format("MM/DD/YYYY"),
+      nextDate: moment()
+        .add(7, "d")
+        .format("MM/DD/YYYY")
     };
   }
 
@@ -45,52 +51,98 @@ class OpenShift extends Component {
     }
   };
 
-  getLikeUpdate = () => {
+  getLikeUpdate = loader => {
     let { prevDate, nextDate } = this.state;
-    this.props.appAction.fetchOpenShift(prevDate, nextDate);
+    this.props.appAction.fetchOpenShift(prevDate, nextDate, loader);
+    this.setState({ loading: false, scheduleId: null });
   };
 
   onIconPress = scheduleId => {
-    this.props.appAction.openshiftsLike(scheduleId, this.getLikeUpdate);
+    this.setState(
+      {
+        loading: true,
+        scheduleId
+      },
+      () => {
+        this.props.appAction.openshiftsLike(scheduleId, () => {
+          this.getLikeUpdate(false);
+        });
+      }
+    );
+  };
+
+  onDateChange = (prevDate, nextDate) => {
+    this.setState(
+      {
+        prevDate,
+        nextDate
+      },
+      () => {
+        this.getLikeUpdate();
+      }
+    );
   };
 
   render() {
     let { openShift } = this.props.schedule;
-    let { showAll, currentIndex, prevDate, nextDate } = this.state;
+    let {
+      showAll,
+      currentIndex,
+      prevDate,
+      nextDate,
+      loading,
+      scheduleId
+    } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Open Shift"} onDrawerPress={this.onDrawerPress} />
         <Filter
-          prevDate={moment(prevDate).format("ddd DD MMMM")}
-          nextDate={moment(nextDate).format("DD MMMM YYYY")}
-          prevPress={() => {}}
-          nextPress={() => {}}
+          prevDate={new Date(prevDate)}
+          nextDate={new Date(nextDate)}
+          onDateChange={(prevDate, nextDate) =>
+            this.onDateChange(prevDate, nextDate)
+          }
         />
         {/* <UnderDevelopment /> */}
-        <FlatList
-          // numColumns={Platform.OS === "web" ? 2 : 1}
-          data={openShift}
-          extraData={this.state.showAll}
-          keyExtractor={item =>
-            item.SchedID.toString() + Math.random().toString()
-          }
-          renderItem={({ item, index }) => {
-            let skills = item.SkillsRequired && item.SkillsRequired.split(",");
-            return (
-              <PatientsCompo
-                key={index}
-                skills={skills}
-                patient={item}
-                onSkillPress={skillIndex => {
-                  this.skillPress(index, skillIndex);
-                }}
-                showAll={index === currentIndex && showAll}
-                isSelected={item.LikeIndicator}
-                onLikePress={this.onIconPress}
-              />
-            );
-          }}
-        />
+        {openShift.length ? (
+          <FlatList
+            // numColumns={Platform.OS === "web" ? 2 : 1}
+            data={openShift}
+            extraData={this.state}
+            keyExtractor={item =>
+              item.SchedID.toString() + Math.random().toString()
+            }
+            renderItem={({ item, index }) => {
+              let skills =
+                item.SkillsRequired && item.SkillsRequired.split(",");
+              return (
+                <PatientsCompo
+                  key={index}
+                  skills={skills}
+                  patient={item}
+                  onSkillPress={skillIndex => {
+                    this.skillPress(index, skillIndex);
+                  }}
+                  showAll={index === currentIndex && showAll}
+                  isSelected={item.LikeIndicator}
+                  onLikePress={this.onIconPress}
+                  loading={loading}
+                  scheduleId={scheduleId}
+                />
+              );
+            }}
+          />
+        ) : (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text
+              style={{ ...Constants.Fonts.Medium, fontSize: moderateScale(20) }}
+            >
+              No Shift Found
+            </Text>
+          </View>
+        )}
       </View>
     );
   }

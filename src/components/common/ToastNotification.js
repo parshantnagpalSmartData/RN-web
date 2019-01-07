@@ -204,8 +204,6 @@ const Styles = StyleSheet.create({
     justifyContent: "flex-start"
   },
   image: {
-    height: moderateScale(30),
-    width: moderateScale(30),
     ...Platform.select({
       web: {
         height: moderateScale(20),
