@@ -130,7 +130,6 @@ class ToastNotification extends Component {
               height: 0,
               position: "relative",
               left: 0,
-              top: 0,
               right: 0,
               justifyContent: "center",
               backgroundColor: Constants.Colors.Transparent,
@@ -138,12 +137,16 @@ class ToastNotification extends Component {
               zIndex: 999,
               ...Platform.select({
                 android: {
-                  height: 200,
-                  opacity: 1
+                  position: "absolute",
+                  height: moderateScale(200),
+                  opacity: 1,
+                  bottom: moderateScale(10)
                 },
                 web: {
-                  position: "absolute"
-                }
+                  position: "absolute",
+                  top: 0
+                },
+                ios: { top: 0 }
               })
             }
           ]}
@@ -175,9 +178,8 @@ const Styles = StyleSheet.create({
       ios: {
         bottom: moderateScale(50)
       },
-      android: { bottom: moderateScale(50) }
+      android: { bottom: moderateScale(10) }
     })
-    // flex: 1
   },
   notificationView: {
     flexDirection: "row",

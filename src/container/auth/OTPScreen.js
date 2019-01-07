@@ -62,16 +62,7 @@ class OTPScreen extends Component {
         ) : null}
         <KeyboardAwareScrollView
           scrollEnabled={false}
-          style={
-            {
-              // height:
-              //   Platform.OS === "web"
-              //     ? Constants.BaseStyle.DEVICE_HEIGHT
-              //     : Platform.OS === "ios"
-              //     ? Constants.BaseStyle.DEVICE_HEIGHT * 0.1
-              //     : Constants.BaseStyle.DEVICE_HEIGHT
-            }
-          }
+          keyboardShouldPersistTaps={"always"}
         >
           <View
             style={{
