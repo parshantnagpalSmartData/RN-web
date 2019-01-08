@@ -170,7 +170,14 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.White,
     fontSize: moderateScale(16),
     textAlign: "center",
-    textAlignVertical: "center"
+    textAlignVertical: "center",
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(20),
+        ...Constants.Fonts.Regular,
+      }
+    })
+
   },
   subHeaderText: {
     ...Constants.Fonts.SemiBold,

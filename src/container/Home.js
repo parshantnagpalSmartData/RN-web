@@ -132,7 +132,7 @@ class Home extends Component {
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             <Text
-              style={{ ...Constants.Fonts.Medium, fontSize: moderateScale(20) }}
+              style={Styles.noScheduleFoundText}
             >
               No Schedule Found
             </Text>
@@ -246,7 +246,8 @@ const Styles = StyleSheet.create({
     paddingBottom: moderateScale(5),
     ...Platform.select({
       web: {
-        fontSize: moderateScale(13)
+        fontSize: moderateScale(13),
+        paddingBottom: moderateScale(0),
       }
     })
   },
@@ -260,7 +261,16 @@ const Styles = StyleSheet.create({
   },
   paddingTop: {
     paddingTop: moderateScale(35)
-  }
+  },
+  noScheduleFoundText : { 
+    ...Constants.Fonts.Medium,
+     fontSize: moderateScale(20),
+     ...Platform.select({
+      web: {
+        fontSize: moderateScale(15)
+      }
+    })
+     }
 });
 const mapStateToProps = state => ({
   user: state.user,

@@ -1,3 +1,9 @@
+/**
+ * Name: Parshant Nagpal
+ * Description : Contains sideMenu 
+ * Date: 8 January 2019
+ */
+
 import React from "react";
 import {
   View,
@@ -41,7 +47,7 @@ class SideMenu extends React.Component {
   setScrenStack(screen, visible) {
     if (screen === "Logout" && Platform.OS !== "web") {
       Dialog(Constants.AppConstants.Alert.Logout, [
-        { text: "Cancel", onPress: () => {} },
+        { text: "Cancel", onPress: () => { } },
         { text: "Ok", onPress: () => this.props.appAction.logOut() }
       ]);
     } else if (screen === "Logout" && Platform.OS === "web") {
@@ -51,7 +57,7 @@ class SideMenu extends React.Component {
         buttons: [
           {
             label: "Cancel",
-            onClick: () => {}
+            onClick: () => { }
           },
           {
             label: "Ok",
@@ -94,7 +100,7 @@ class SideMenu extends React.Component {
           start={{ x: 1, y: 1 }}
           end={{ x: 0, y: 0 }}
           colors={Constants.Colors.SelectedMenu}
-          //  style={styles.gradientStyle}
+        //  style={styles.gradientStyle}
         >
           <TouchableOpacity
             style={styles.text}
@@ -150,64 +156,23 @@ class SideMenu extends React.Component {
         <SafeView />
         <View style={styles.container}>
           <View
-            style={{
-              borderBottomColor: Constants.Colors.White,
-              borderBottomWidth: 0.2,
-              margin: moderateScale(20),
-              paddingBottom: moderateScale(10),
-              ...Platform.select({
-                web: {
-                  justifyContent: "center",
-                  alignItems: "center"
-                }
-              })
-            }}
+            style={styles.containerUserProfile}
           >
             <View
-              style={{
-                height: moderateScale(80),
-                width: moderateScale(80),
-                backgroundColor: Constants.Colors.White,
-                borderRadius: moderateScale(100),
-                justifyContent: "center",
-                alignItems: "center"
-              }}
+              style={styles.subContainerUserProfile}
             >
               <Image
                 source={Constants.Images.UserAvatar}
-                style={{
-                  height: moderateScale(80),
-                  width: moderateScale(80)
-                }}
+                style={styles.avatarImage}
                 resizeMode={"cover"}
               />
             </View>
             <View style={{}}>
               <Text
-                style={{
-                  ...Constants.Fonts.Regular,
-                  fontSize: moderateScale(18),
-                  color: Constants.Colors.White,
-                  paddingVertical: moderateScale(3),
-                  ...Platform.select({
-                    web: {
-                      textAlign: "center"
-                    }
-                  })
-                }}
+                style={styles.firstName}
               >{`${FirstName} ${LastName}`}</Text>
               <Text
-                style={{
-                  ...Constants.Fonts.Regular,
-                  fontSize: moderateScale(14),
-                  color: Constants.Colors.White,
-                  paddingVertical: moderateScale(3),
-                  ...Platform.select({
-                    web: {
-                      textAlign: "center"
-                    }
-                  })
-                }}
+                style={styles.userName}
               >
                 {UserName}
               </Text>
@@ -239,7 +204,12 @@ const styles = StyleSheet.create({
   welcome: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(16),
-    color: Constants.Colors.White
+    color: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(13),
+      }
+    })
   },
   container: {
     flex: 1,
@@ -252,7 +222,71 @@ const styles = StyleSheet.create({
     marginVertical: moderateScale(11),
     marginHorizontal: moderateScale(20)
   },
-  marginTop: {}
+  marginTop: {},
+  userName: {
+    ...Constants.Fonts.Regular,
+    fontSize: moderateScale(14),
+    color: Constants.Colors.White,
+    paddingVertical: moderateScale(3),
+    ...Platform.select({
+      web: {
+        textAlign: "center",
+        fontSize: moderateScale(11)
+      }
+    })
+  },
+  firstName: {
+    ...Constants.Fonts.Regular,
+    fontSize: moderateScale(18),
+    color: Constants.Colors.White,
+    paddingVertical: moderateScale(3),
+    ...Platform.select({
+      web: {
+        textAlign: "center",
+        fontSize: moderateScale(13),
+      }
+    })
+  },
+  avatarImage: {
+    height: moderateScale(80),
+    width: moderateScale(80),
+    ...Platform.select({
+      web: {
+        height: moderateScale(56),
+        width: moderateScale(56),
+      }
+    })
+  },
+  subContainerUserProfile: {
+    height: moderateScale(82),
+    width: moderateScale(82),
+    backgroundColor: Constants.Colors.White,
+    borderRadius: moderateScale(100),
+    justifyContent: "center",
+    alignItems: "center",
+    ...Platform.select({
+      web: {
+        height: moderateScale(57),
+        width: moderateScale(57),
+      }
+    })
+
+  },
+  containerUserProfile: {
+    borderBottomColor: Constants.Colors.White,
+    borderBottomWidth: 0.2,
+    marginVertical: moderateScale(20),
+    // margin: moderateScale(20),
+    paddingLeft : moderateScale(20),
+    paddingBottom: moderateScale(10),
+    ...Platform.select({
+      web: {
+        justifyContent: "center",
+        alignItems: "center",
+        borderBottomWidth: 0,
+      }
+    })
+  }
 });
 const mapStateToProps = state => ({
   user: state.user,

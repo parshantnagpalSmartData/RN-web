@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     borderRadius: (Constants.BaseStyle.DEVICE_WIDTH / 200) * 25,
     ...Platform.select({
       web: {
-        height: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 12,
-        width: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 12
+        height: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 7,
+        width: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 7
       }
     })
   },
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     ...Platform.select({
       web: {
-        height: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 12
+        height: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 7,
+        marginBottom : (Constants.BaseStyle.DEVICE_WIDTH / 100) * 2,
       }
     })
   }

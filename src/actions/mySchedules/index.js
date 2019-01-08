@@ -12,8 +12,8 @@ export const fetchMySchedules = (prevDate, nextDate) => {
       getState().user.token
     )
       .then(res => {
+        dispatch(AppActions.stopLoader());
         if (res.status) {
-          dispatch(AppActions.stopLoader());
           dispatch({ type: Types.ADD_MYSCHEDULE, payload: res.result.data });
         } else {
           if (res.error === "Token expired") {
@@ -23,8 +23,10 @@ export const fetchMySchedules = (prevDate, nextDate) => {
                 res.error
               )
             );
-            dispatch({ type: Types.RESET_USER });
-            dispatch(AppActions.goAuth());
+            setTimeout(()=>{
+              dispatch({ type: Types.RESET_USER });
+              dispatch(AppActions.goAuth());
+            },500);
           } else {
             dispatch(
               AppActions.showToast(
@@ -50,11 +52,10 @@ export const fetchPatientDetails = (patient_id, patientInfo) => {
     dispatch(AppActions.startLoader());
     RestClient.getCall(`patients/${patient_id}`, getState().user.token)
       .then(res => {
+        dispatch(AppActions.stopLoader());
         if (res.status) {
-          dispatch(AppActions.stopLoader());
           patientInfo(res.result.patientDetail);
         } else {
-          dispatch(AppActions.stopLoader());
           if (res.error === "Token expired") {
             dispatch(
               AppActions.showToast(
@@ -63,8 +64,10 @@ export const fetchPatientDetails = (patient_id, patientInfo) => {
               )
             );
             patientInfo(res.error);
+            setTimeout(()=>{
             dispatch({ type: Types.RESET_USER });
             dispatch(AppActions.goAuth());
+          },500);
           } else {
             dispatch(
               AppActions.showToast(
