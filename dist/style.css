@@ -1,4 +1,4 @@
-
+body{font-family: 'Montserrat', sans-serif; font-size:14px;}
 .ReactTable .-pagination .-btn {
     height: 71px;
 }
@@ -7,3 +7,5 @@
 
 .leftContainer{flex:0 0 25%; max-width: 25%;}
 .rightContentContainer{flex:0 0 75%; max-width: 75%;}
+
+

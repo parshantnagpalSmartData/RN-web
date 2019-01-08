@@ -1,4 +1,0 @@
-diff a/src/actions/mySchedules/index.js b/src/actions/mySchedules/index.js	(rejected hunks)
-@@ -29 +29 @@ export const fetchMySchedules = (prevDate, nextDate) => {
--            },500)
-+            },500);

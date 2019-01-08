@@ -147,7 +147,9 @@ const Styles = StyleSheet.create({
     paddingHorizontal: moderateScale(20),
     paddingVertical: moderateScale(15),
     flexDirection: "row",
-    backgroundColor: Constants.Colors.transparent
+    backgroundColor: Constants.Colors.transparent,
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   iconBtn: {
     height: moderateScale(40),
@@ -163,7 +165,7 @@ const Styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: moderateScale(40),
-    width: Constants.BaseStyle.DEVICE_WIDTH - moderateScale(110)
+    width: Constants.BaseStyle.DEVICE_WIDTH * 0.8
   },
   headerText: {
     ...Constants.Fonts.SemiBold,

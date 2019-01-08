@@ -3,10 +3,11 @@ import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 import Constants from "../../constants";
 
-export const fetchMySchedules = (prevDate, nextDate) => {
+export const fetchMySchedules = (prevDate, nextDate, refresh = false) => {
   return (dispatch, getState) => {
-    dispatch(AppActions.startLoader());
-    // dispatch({ type: Types.LOGIN_REQUEST });
+    refresh
+      ? dispatch(AppActions.startRefreshLoader())
+      : dispatch(AppActions.startLoader());
     RestClient.getCall(
       "nurses/schedules?startDate=" + prevDate + "&endDate=" + nextDate,
       getState().user.token
@@ -14,6 +15,9 @@ export const fetchMySchedules = (prevDate, nextDate) => {
       .then(res => {
         dispatch(AppActions.stopLoader());
         if (res.status) {
+          refresh
+            ? dispatch(AppActions.stopRefreshLoader())
+            : dispatch(AppActions.stopLoader());
           dispatch({ type: Types.ADD_MYSCHEDULE, payload: res.result.data });
         } else {
           if (res.error === "Token expired") {
@@ -35,13 +39,13 @@ export const fetchMySchedules = (prevDate, nextDate) => {
               )
             );
           }
-          dispatch(AppActions.stopLoader());
-          // dispatch({ type: Types.LOGIN_FAIL });
+          refresh
+            ? dispatch(AppActions.stopRefreshLoader())
+            : dispatch(AppActions.stopLoader());
         }
       })
       .catch(e => {
         dispatch(AppActions.stopLoader());
-        // dispatch({ type: Types.LOGIN_FAIL });
         console.warn("error", e); // eslint-disable-line
       });
   };

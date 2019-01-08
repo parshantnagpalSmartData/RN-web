@@ -61,8 +61,14 @@ class OTPScreen extends Component {
           <Header hideDrawer onBackPress={this.onBackPress} />
         ) : null}
         <KeyboardAwareScrollView
-          scrollEnabled={false}
-          keyboardShouldPersistTaps={"always"}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps={"handled"}
+          contentContainerStyle={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: Constants.BaseStyle.DEVICE_HEIGHT * 0.83
+          }}
         >
           <View
             style={{
@@ -71,7 +77,8 @@ class OTPScreen extends Component {
                   ? Constants.BaseStyle.DEVICE_HEIGHT
                   : Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
               justifyContent:
-                Platform.OS === "android" ? "flex-start" : "space-between",
+                // Platform.OS === "android" ? "flex-start" :
+                "space-between",
               alignItems: "center"
             }}
           >
@@ -103,7 +110,7 @@ class OTPScreen extends Component {
                 numberOfInputs={4}
                 keyboardType={"numeric"}
                 inputContainerStyles={Styles.inputContainerStyles}
-                underlineColorAndroid={Constants.Colors.Gray}
+                underlineColorAndroid={Constants.Colors.Transparent}
                 inputTextErrorColor={Constants.Colors.Primary}
                 focusedBorderColor={Constants.Colors.Gray}
                 inputStyles={{ color: Constants.Colors.Primary }}
@@ -146,7 +153,10 @@ const Styles = StyleSheet.create({
   resendOTP: {
     // justifyContent: "flex-end",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
+    ...Platform.select({
+      android: { top: moderateScale(20) }
+    })
   },
 
   inputContainerStyles: {
@@ -157,7 +167,8 @@ const Styles = StyleSheet.create({
       web: {
         backgroundColor: Constants.Colors.Gray,
         borderColor: Constants.Colors.Primary
-      }
+      },
+      android: { bottom: moderateScale(50) }
     })
   },
   buttonStyle: { flex: 1 },

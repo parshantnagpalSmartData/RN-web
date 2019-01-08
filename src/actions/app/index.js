@@ -106,6 +106,17 @@ export const stopLoader = () => {
   };
 };
 
+export const startRefreshLoader = () => {
+  return dispatch => {
+    dispatch({ type: Types.START_REFRESH_LOADER });
+  };
+};
+export const stopRefreshLoader = () => {
+  return dispatch => {
+    dispatch({ type: Types.STOP_REFRESH_LOADER });
+  };
+};
+
 export const showToast = (type, message) => {
   return dispatch => {
     dispatch({

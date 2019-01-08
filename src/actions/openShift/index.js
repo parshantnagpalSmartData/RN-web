@@ -3,19 +3,25 @@ import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 import Constants from "../../constants";
 
-export const fetchOpenShift = (startDate, enddate, loader = true) => {
+export const fetchOpenShift = (startDate, enddate, refresh = false) => {
   return (dispatch, getState) => {
-    loader && dispatch(AppActions.startLoader());
+    refresh
+      ? dispatch(AppActions.startRefreshLoader())
+      : dispatch(AppActions.startLoader());
     RestClient.getCall(
       `nurses/openshifts?startDate=${startDate}&enddate=${enddate}`,
       getState().user.token
     )
       .then(res => {
         if (res.status) {
-          loader && dispatch(AppActions.stopLoader());
+          refresh
+            ? dispatch(AppActions.stopRefreshLoader())
+            : dispatch(AppActions.stopLoader());
           dispatch({ type: Types.OPEN_SHIFTS, payload: res.result.data });
         } else {
-          loader && dispatch(AppActions.stopLoader());
+          refresh
+            ? dispatch(AppActions.stopRefreshLoader())
+            : dispatch(AppActions.stopLoader());
           if (res.error === "Token expired") {
             dispatch(
               AppActions.showToast(
