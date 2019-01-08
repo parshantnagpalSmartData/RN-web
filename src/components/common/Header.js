@@ -174,10 +174,9 @@ const Styles = StyleSheet.create({
     ...Platform.select({
       web: {
         fontSize: moderateScale(20),
-        ...Constants.Fonts.Regular,
+        ...Constants.Fonts.Regular
       }
     })
-
   },
   subHeaderText: {
     ...Constants.Fonts.SemiBold,

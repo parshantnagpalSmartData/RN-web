@@ -81,7 +81,7 @@ const Styles = StyleSheet.create({
     ...Platform.select({
       web: {
         height: moderateScale(15),
-        width:  moderateScale(8),
+        width: moderateScale(8)
       }
     })
   },
@@ -102,7 +102,7 @@ const Styles = StyleSheet.create({
         ...Constants.Fonts.Regular,
         color: Constants.Colors.Black,
         fontSize: moderateScale(16),
-        marginHorizontal: moderateScale(25),
+        marginHorizontal: moderateScale(25)
       }
     })
   }

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         height: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 7,
-        marginBottom : (Constants.BaseStyle.DEVICE_WIDTH / 100) * 2,
+        marginBottom: (Constants.BaseStyle.DEVICE_WIDTH / 100) * 2
       }
     })
   }

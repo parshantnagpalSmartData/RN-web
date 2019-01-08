@@ -4,7 +4,7 @@ import React from "react";
 import ReactTable from "react-table";
 import { StyleSheet } from "react-native";
 import moment from "moment";
- import Constants from "../../constants";
+import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 // import 'react-table/react-table.css'
 
@@ -20,14 +20,14 @@ let spanHeaderStyle = {
     borderWidth: 0,
     // fontWeight: "bold",
     fontSize: moderateScale(11),
-    ...Constants.Fonts.Medium,
+    ...Constants.Fonts.Medium
   },
   cellStyle = {
     style: {
       textAlign: "center",
       color: "#848484",
       fontSize: moderateScale(11),
-    ...Constants.Fonts.Regular,
+      ...Constants.Fonts.Regular
     }
   },
   scheduleColor = { color: "green" },

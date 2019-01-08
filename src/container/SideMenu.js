@@ -1,6 +1,6 @@
 /**
  * Name: Parshant Nagpal
- * Description : Contains sideMenu 
+ * Description : Contains sideMenu
  * Date: 8 January 2019
  */
 
@@ -47,7 +47,7 @@ class SideMenu extends React.Component {
   setScrenStack(screen, visible) {
     if (screen === "Logout" && Platform.OS !== "web") {
       Dialog(Constants.AppConstants.Alert.Logout, [
-        { text: "Cancel", onPress: () => { } },
+        { text: "Cancel", onPress: () => {} },
         { text: "Ok", onPress: () => this.props.appAction.logOut() }
       ]);
     } else if (screen === "Logout" && Platform.OS === "web") {
@@ -57,7 +57,7 @@ class SideMenu extends React.Component {
         buttons: [
           {
             label: "Cancel",
-            onClick: () => { }
+            onClick: () => {}
           },
           {
             label: "Ok",
@@ -100,7 +100,7 @@ class SideMenu extends React.Component {
           start={{ x: 1, y: 1 }}
           end={{ x: 0, y: 0 }}
           colors={Constants.Colors.SelectedMenu}
-        //  style={styles.gradientStyle}
+          //  style={styles.gradientStyle}
         >
           <TouchableOpacity
             style={styles.text}
@@ -155,12 +155,8 @@ class SideMenu extends React.Component {
       >
         <SafeView />
         <View style={styles.container}>
-          <View
-            style={styles.containerUserProfile}
-          >
-            <View
-              style={styles.subContainerUserProfile}
-            >
+          <View style={styles.containerUserProfile}>
+            <View style={styles.subContainerUserProfile}>
               <Image
                 source={Constants.Images.UserAvatar}
                 style={styles.avatarImage}
@@ -168,14 +164,8 @@ class SideMenu extends React.Component {
               />
             </View>
             <View style={{}}>
-              <Text
-                style={styles.firstName}
-              >{`${FirstName} ${LastName}`}</Text>
-              <Text
-                style={styles.userName}
-              >
-                {UserName}
-              </Text>
+              <Text style={styles.firstName}>{`${FirstName} ${LastName}`}</Text>
+              <Text style={styles.userName}>{UserName}</Text>
             </View>
           </View>
           <FlatList
@@ -207,7 +197,7 @@ const styles = StyleSheet.create({
     color: Constants.Colors.White,
     ...Platform.select({
       web: {
-        fontSize: moderateScale(13),
+        fontSize: moderateScale(13)
       }
     })
   },
@@ -243,7 +233,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         textAlign: "center",
-        fontSize: moderateScale(13),
+        fontSize: moderateScale(13)
       }
     })
   },
@@ -253,7 +243,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         height: moderateScale(56),
-        width: moderateScale(56),
+        width: moderateScale(56)
       }
     })
   },
@@ -267,23 +257,22 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         height: moderateScale(57),
-        width: moderateScale(57),
+        width: moderateScale(57)
       }
     })
-
   },
   containerUserProfile: {
     borderBottomColor: Constants.Colors.White,
     borderBottomWidth: 0.2,
     marginVertical: moderateScale(20),
     // margin: moderateScale(20),
-    paddingLeft : moderateScale(20),
+    paddingLeft: moderateScale(20),
     paddingBottom: moderateScale(10),
     ...Platform.select({
       web: {
         justifyContent: "center",
         alignItems: "center",
-        borderBottomWidth: 0,
+        borderBottomWidth: 0
       }
     })
   }

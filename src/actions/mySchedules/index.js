@@ -23,10 +23,10 @@ export const fetchMySchedules = (prevDate, nextDate) => {
                 res.error
               )
             );
-            setTimeout(()=>{
+            setTimeout(() => {
               dispatch({ type: Types.RESET_USER });
               dispatch(AppActions.goAuth());
-            },500);
+            }, 500);
           } else {
             dispatch(
               AppActions.showToast(
@@ -64,10 +64,10 @@ export const fetchPatientDetails = (patient_id, patientInfo) => {
               )
             );
             patientInfo(res.error);
-            setTimeout(()=>{
-            dispatch({ type: Types.RESET_USER });
-            dispatch(AppActions.goAuth());
-          },500);
+            setTimeout(() => {
+              dispatch({ type: Types.RESET_USER });
+              dispatch(AppActions.goAuth());
+            }, 500);
           } else {
             dispatch(
               AppActions.showToast(
