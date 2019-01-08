@@ -37,9 +37,13 @@ class Home extends Component {
     this.openTelephone = this.openTelephone.bind(this);
   }
   componentDidMount() {
-    let { prevDate, nextDate } = this.state;
-    this.props.appAction.fetchMySchedules(prevDate, nextDate);
+    this.fetchMySchedules();
   }
+
+  fetchMySchedules = (refresh = false) => {
+    let { prevDate, nextDate } = this.state;
+    this.props.appAction.fetchMySchedules(prevDate, nextDate, refresh);
+  };
 
   onDrawerPress = () => {
     this.props.appAction.mergeOptions(this.props.componentId, true);
@@ -73,7 +77,7 @@ class Home extends Component {
         nextDate
       },
       () => {
-        this.props.appAction.fetchMySchedules(prevDate, nextDate);
+        this.fetchMySchedules();
       }
     );
   };
@@ -108,7 +112,7 @@ class Home extends Component {
 
   render() {
     let { isVisible, nextDate, prevDate, patient } = this.state,
-      { mySchedules } = this.props,
+      { mySchedules, app } = this.props,
       { Close, UserImage } = Constants.Images;
 
     return (
@@ -126,6 +130,8 @@ class Home extends Component {
             patitents={mySchedules}
             renderItem={this.renderPatients}
             onPatientPress={this.fetchPatientDetails}
+            loader={app.refreshLoader}
+            onRefresh={() => this.fetchMySchedules(true)}
           />
         ) : (
           <View

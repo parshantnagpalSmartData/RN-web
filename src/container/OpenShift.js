@@ -51,9 +51,9 @@ class OpenShift extends Component {
     }
   };
 
-  getLikeUpdate = loader => {
+  getLikeUpdate = (refresh = false) => {
     let { prevDate, nextDate } = this.state;
-    this.props.appAction.fetchOpenShift(prevDate, nextDate, loader);
+    this.props.appAction.fetchOpenShift(prevDate, nextDate, refresh);
     this.setState({ loading: false, scheduleId: null });
   };
 
@@ -65,7 +65,7 @@ class OpenShift extends Component {
       },
       () => {
         this.props.appAction.openshiftsLike(scheduleId, () => {
-          this.getLikeUpdate(false);
+          this.getLikeUpdate(true);
         });
       }
     );
@@ -83,16 +83,30 @@ class OpenShift extends Component {
     );
   };
 
+  renderItem = ({ item, index }) => {
+    let { showAll, currentIndex, loading, scheduleId } = this.state;
+    let skills = item.SkillsRequired && item.SkillsRequired.split(",");
+    return (
+      <PatientsCompo
+        key={index}
+        skills={skills}
+        patient={item}
+        onSkillPress={skillIndex => {
+          this.skillPress(index, skillIndex);
+        }}
+        showAll={index === currentIndex && showAll}
+        isSelected={item.LikeIndicator}
+        onLikePress={this.onIconPress}
+        loading={loading}
+        scheduleId={scheduleId}
+      />
+    );
+  };
+
   render() {
-    let { openShift } = this.props.schedule;
-    let {
-      showAll,
-      currentIndex,
-      prevDate,
-      nextDate,
-      loading,
-      scheduleId
-    } = this.state;
+    let { app, schedule } = this.props;
+    let { openShift } = schedule;
+    let { prevDate, nextDate } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Open Shift"} onDrawerPress={this.onDrawerPress} />
@@ -103,34 +117,16 @@ class OpenShift extends Component {
             this.onDateChange(prevDate, nextDate)
           }
         />
-        {/* <UnderDevelopment /> */}
         {openShift.length ? (
           <FlatList
-            // numColumns={Platform.OS === "web" ? 2 : 1}
             data={openShift}
             extraData={this.state}
             keyExtractor={item =>
               item.SchedID.toString() + Math.random().toString()
             }
-            renderItem={({ item, index }) => {
-              let skills =
-                item.SkillsRequired && item.SkillsRequired.split(",");
-              return (
-                <PatientsCompo
-                  key={index}
-                  skills={skills}
-                  patient={item}
-                  onSkillPress={skillIndex => {
-                    this.skillPress(index, skillIndex);
-                  }}
-                  showAll={index === currentIndex && showAll}
-                  isSelected={item.LikeIndicator}
-                  onLikePress={this.onIconPress}
-                  loading={loading}
-                  scheduleId={scheduleId}
-                />
-              );
-            }}
+            refreshing={app.refreshLoader}
+            onRefresh={() => this.getLikeUpdate(true)}
+            renderItem={this.renderItem}
           />
         ) : (
           <View
@@ -154,7 +150,8 @@ const Styles = StyleSheet.create({
   }
 });
 const mapStateToProps = state => ({
-  schedule: state.schedule
+  schedule: state.schedule,
+  app: state.app
 });
 const mapDispatchToProps = dispatch => ({
   appAction: bindActionCreators(appAction, dispatch)

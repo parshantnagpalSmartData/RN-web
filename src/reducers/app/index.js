@@ -6,6 +6,7 @@ const initialState = Immutable({
   componentId: "",
   screen: "Home",
   loading: false,
+  refreshLoader: false,
   notification: {
     isVisible: false
   }
@@ -22,6 +23,16 @@ export default function app(state = initialState, action = {}) {
       return {
         ...state,
         loading: false
+      };
+    case Types.START_REFRESH_LOADER:
+      return {
+        ...state,
+        refreshLoader: true
+      };
+    case Types.STOP_REFRESH_LOADER:
+      return {
+        ...state,
+        refreshLoader: false
       };
     case Types.ROOT_CHANGED:
       return {

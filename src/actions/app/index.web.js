@@ -48,21 +48,3 @@ export const setScrenStack = (componentId = null, screen, visible) => {
     history.push(`/${screen}`);
   };
 };
-
-export const showToast = (type, message) => {
-  return dispatch => {
-    dispatch({
-      type: Types.SHOW_TOAST,
-      payload: { type, message, isVisible: true }
-    });
-  };
-};
-
-export const hideToast = () => {
-  return dispatch => {
-    dispatch({
-      type: Types.HIDE_TOAST,
-      payload: { isVisible: false }
-    });
-  };
-};
