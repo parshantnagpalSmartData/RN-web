@@ -117,7 +117,7 @@ class Home extends Component {
 
     return (
       <View style={Styles.containner}>
-        <Header title={"MY SCHEDULE"} onDrawerPress={this.onDrawerPress} />
+        <Header title={"My Schedule"} onDrawerPress={this.onDrawerPress} />
         <Filter
           prevDate={new Date(prevDate)}
           nextDate={new Date(nextDate)}
@@ -258,7 +258,9 @@ const Styles = StyleSheet.create({
   },
   commonFontColor: {
     color: Constants.Colors.Primary,
-    ...Constants.Fonts.Regular
+    ...Constants.Fonts.Regular,
+    textAlign: "center",
+    textAlignVertical: "center"
   },
   commonFontColorBold: {
     color: Constants.Colors.Primary,

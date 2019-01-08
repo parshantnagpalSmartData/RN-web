@@ -20,6 +20,8 @@ class OpenShift extends Component {
       showAll: false,
       currentIndex: null,
       loading: false,
+      // prevDate: "04/24/2018",
+      // nextDate: "05/01/2018"
       prevDate: moment().format("MM/DD/YYYY"),
       nextDate: moment()
         .add(7, "d")
@@ -45,7 +47,7 @@ class OpenShift extends Component {
       this.setState({ currentIndex: index, showAll: true });
       return;
     }
-    if (showAll && skillIndex === skills.length) {
+    if (showAll && skillIndex === skills.length + 1) {
       this.setState({ currentIndex: null, showAll: false });
       return;
     }
