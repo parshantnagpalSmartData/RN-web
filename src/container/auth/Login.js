@@ -85,8 +85,8 @@ class Login extends Component {
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props; // eslint-disable-line OTPScreen
-    // appAction.pushTParticulatScreen(componentId, "ForgotPassword");
-    appAction.pushTParticulatScreen(componentId, "OTPScreen");
+    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
+    // appAction.pushTParticulatScreen(componentId, "OTPScreen");
   };
 
   render() {
@@ -97,7 +97,8 @@ class Login extends Component {
         <LogoText text={"ACT Home Health Services"} />
         {/* </View> */}
         <KeyboardAwareScrollView
-          scrollEnabled={true}
+          keyboardShouldPersistTaps={"always"}
+          scrollEnabled={false}
           contentContainerStyle={{
             alignItems: "center",
             flex: 1

@@ -61,7 +61,8 @@ class ForgotPassword extends Component {
       <View style={Styles.containner}>
         <Header title={title} hideDrawer onBackPress={this.onBackPress} />
         <KeyboardAwareScrollView
-          scrollEnabled={true}
+          keyboardShouldPersistTaps={"always"}
+          scrollEnabled={false}
           contentContainerStyle={{
             alignItems: "center"
           }}

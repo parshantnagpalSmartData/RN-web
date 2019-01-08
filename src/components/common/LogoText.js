@@ -41,10 +41,8 @@ const LogoText = props => {
       />
       <View
         style={{
-          //flex: 0.5,
           justifyContent: "center",
           alignItems: "center"
-          //top: moderateScale(20),
         }}
       >
         {heading ? (

@@ -75,7 +75,7 @@ const Filter = ({ prevDate, nextDate, onDateChange }) => {
 };
 
 const Styles = StyleSheet.create({
-  imageNextPrevious: { 
+  imageNextPrevious: {
     height: moderateScale(20),
     width: moderateScale(20),
     ...Platform.select({
@@ -84,7 +84,7 @@ const Styles = StyleSheet.create({
         width: 20
       }
     })
-   },
+  },
   mainView: {
     marginVertical: moderateScale(20),
     flexDirection: "row",
