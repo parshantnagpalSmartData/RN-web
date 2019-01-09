@@ -5,7 +5,6 @@ Description: contains the myschedule page
 Date : 13 december 2018
 */
 
-
 import React, { Component } from "react";
 import {
   View,
@@ -94,7 +93,7 @@ class Home extends Component {
    * Method to open the telephone number
    */
   openTelephone() {
-    openLinkingURL("tel", "+919041908802");
+    openLinkingURL("tel", "+919041908803");
   }
   /*
    * Method to open the telephone number
