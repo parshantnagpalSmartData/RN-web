@@ -1,8 +1,8 @@
 /*
- * file :profileView.js
- * @ description : profile name with profile pic
- * @ date : 7 March 2018
- * @author : Abhishek
+ * file :index.js
+ * @ description : Contains model for app
+ * @ date : 9 Jan 2019
+ * @author : Parshant Nagpal
  */
 
 import React from "react";

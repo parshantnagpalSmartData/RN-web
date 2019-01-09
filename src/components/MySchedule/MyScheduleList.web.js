@@ -1,8 +1,13 @@
-/* eslint-disable  */
+/**
+ * Name :Parshant Nagpal
+ * Description: Contains  MySchedule  component for web
+ * Date : 3 Jan 2019
+ * File: MyScheduleList.web.js
+ */
+/* eslint-disable*/
 
 import React from "react";
 import ReactTable from "react-table";
-import { StyleSheet } from "react-native";
 import moment from "moment";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
@@ -44,7 +49,7 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
         columns={[
           {
             // Header: "Date",
-            Header: props => <span style={spanHeaderStyle}>Date</span>,
+            Header: () => <span style={spanHeaderStyle}>Date</span>,
             accessor: "SchedDate",
             headerStyle: headerStyle,
             getProps: () => cellStyle,
@@ -56,21 +61,21 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
           },
           {
             // Header: "Name",
-            Header: props => <span style={spanHeaderStyle}>Name</span>,
+            Header: () => <span style={spanHeaderStyle}>Name</span>,
             accessor: "Pat_LName",
             headerStyle: headerStyle,
             getProps: () => cellStyle
           },
           {
             // Header: "Time",
-            Header: props => <span style={spanHeaderStyle}>Time</span>,
+            Header: () => <span style={spanHeaderStyle}>Time</span>,
             accessor: "StartTime",
             headerStyle: headerStyle,
             getProps: () => cellStyle
           },
           {
             // Header: "Status",
-            Header: props => <span style={spanHeaderStyle}>Status</span>,
+            Header: () => <span style={spanHeaderStyle}>Status</span>,
             accessor: "StatusName",
             headerStyle: headerStyle,
             getProps: () => cellStyle,

@@ -2,7 +2,7 @@
  * @file: RestClient.js
  * @description: Rest Client
  * @date: 14.12.2017
- * @author: Gurtej Singh
+ * @author: Parshant Nagpal
  * */
 /* eslint-disable */
 

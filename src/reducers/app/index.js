@@ -1,3 +1,10 @@
+/*
+ * @file: index.js
+ * @description: contains all user releated reducers
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
+ * */
+
 import * as Types from "../../actionTypes";
 import Immutable from "seamless-immutable";
 

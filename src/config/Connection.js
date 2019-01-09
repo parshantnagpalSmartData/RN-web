@@ -1,4 +1,3 @@
-"use strict";
 /*
  * @file: Connection.js
  * @description: Connection file for the application
@@ -6,6 +5,7 @@
  * @author: Suraj Sanwal
  * */
 /* eslint-disable */
+"use strict";
 const localhost = {
   smartdata: "172.24.4.48:3010"
 };

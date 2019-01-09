@@ -1,3 +1,10 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: conatins all OpenShift related actions for app 
+Date : 9 January 2019
+*/
+
 import RestClient from "../../helpers/RestClient";
 import * as Types from "../../actionTypes";
 import * as AppActions from "../app";

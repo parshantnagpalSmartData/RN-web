@@ -1,3 +1,10 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: Contains the OpenShift component
+Date : 13 december 2018
+*/
+
 import React, { Component } from "React";
 import { View, StyleSheet, FlatList, Text } from "react-native";
 import { connect } from "react-redux";
@@ -20,6 +27,8 @@ class OpenShift extends Component {
       showAll: false,
       currentIndex: null,
       loading: false,
+      // prevDate: "04/24/2018",
+      // nextDate: "05/01/2018"
       prevDate: moment().format("MM/DD/YYYY"),
       nextDate: moment()
         .add(7, "d")
@@ -45,7 +54,7 @@ class OpenShift extends Component {
       this.setState({ currentIndex: index, showAll: true });
       return;
     }
-    if (showAll && skillIndex === skills.length) {
+    if (showAll && skillIndex === skills.length + 1) {
       this.setState({ currentIndex: null, showAll: false });
       return;
     }

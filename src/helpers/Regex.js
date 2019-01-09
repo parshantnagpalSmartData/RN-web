@@ -2,7 +2,7 @@
  * @file: Regex.js
  * @description: Regex used for validation in application.
  * @date: 14.12.2017
- * @author: Ankush Rishi
+ * @author: Parshant Nagpal
  * */
 /* eslint-disable */
 "use strict";

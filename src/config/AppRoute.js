@@ -1,8 +1,8 @@
 /*
  * @file: AppRoute.js
- * @description: Defined all routers
- * @date: 19 April 2018
- * @author: Monika Rani
+ * @description: Defined a component of routes
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
  */
 
 /************ React Pages according to layouts  *****************/

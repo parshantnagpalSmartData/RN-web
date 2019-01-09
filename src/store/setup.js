@@ -1,6 +1,6 @@
 /**
  * Name :Parshant Nagpal
- * Description: Contains all redux store configuration
+ * Description: Contains all redux store configuration of app
  * date: 7 Seopt 2018
  */
 import { applyMiddleware, createStore, combineReducers, compose } from "redux";

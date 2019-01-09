@@ -1,3 +1,10 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: Contains the Printable forms component
+Date : 13 december 2018
+*/
+
 import React, { Component } from "React";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";

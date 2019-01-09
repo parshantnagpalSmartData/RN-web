@@ -1,7 +1,8 @@
 /*
  * @file: BaseStyle.js
  * @description: Base Style for the application
-
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
  * */
 
 "use-strict";

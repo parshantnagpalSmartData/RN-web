@@ -1,6 +1,6 @@
 /**
-Author: Gurtej Singh
-Date 28th march 2018
+Author: Parshant Nagpal
+Date  9 Jan 2019
 purpose :safe view for the iPhoneX
  */
 

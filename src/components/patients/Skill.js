@@ -30,10 +30,18 @@ export default Skill;
 
 const Styles = StyleSheet.create({
   container: {
-    padding: moderateScale(10),
+    padding: moderateScale(5),
     ...Platform.select({
-      ios: { alignItems: "center", justifyContent: "center" },
-      android: { alignItems: "center", justifyContent: "center" }
+      ios: {
+        // flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+      },
+      android: {
+        // flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+      }
     })
   },
   gradientStyle: {

@@ -1,8 +1,8 @@
 /*
 AuthorName : Suraj Sanwal
 FileName: reducer.js
-Description: Contains the reducer regarding the user
-Date : 11 Sept 2018  
+Description: Contains the reducer regarding the schedule
+Date : 9 Jan 2019 
 */
 
 import * as Types from "../../actionTypes";

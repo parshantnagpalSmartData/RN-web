@@ -1,7 +1,7 @@
 /*
  * @file: registerevets.js
  * @description: this file will be used to regiseter all events required in the app
- * @author:Gurtej Singh
+ * @author: Parshant Nagpal
  * */
 /* eslint-disable */
 import { NetInfo } from "react-native";

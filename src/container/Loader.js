@@ -1,3 +1,10 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: contains the Loader component
+Date : 13 december 2018
+*/
+
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 

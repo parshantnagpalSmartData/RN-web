@@ -1,6 +1,8 @@
 /*
  * @file: i18n.js
  * @description: App i18n Localization
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
  * */
 import AppConstants from "./AppConstants";
 ("use strict");

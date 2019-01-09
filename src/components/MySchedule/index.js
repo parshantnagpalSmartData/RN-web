@@ -20,6 +20,7 @@ const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
 const MySchedule = ({ item, index, onPatientPress }) => {
   return (
     <TouchableOpacity
+      key={index}
       style={Styles.containner}
       onPress={() => onPatientPress(item)}
     >

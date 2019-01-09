@@ -1,3 +1,10 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: Conatins all auth related actions for app 
+Date : 9 January 2019
+*/
+
 import { Platform } from "react-native";
 
 import RestClient from "../../helpers/RestClient";

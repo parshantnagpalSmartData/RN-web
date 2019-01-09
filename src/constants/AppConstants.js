@@ -1,3 +1,10 @@
+/*
+ * @file: Connection.js
+ * @description: contains all constants
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
+ * */
+
 let AppConstants = {
   AppName: "ACT Nurses Portal",
   Notificaitons: {

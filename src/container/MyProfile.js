@@ -1,3 +1,10 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: Contains the My Profile component
+Date : 13 december 2018
+*/
+
 import React, { Component } from "React";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
@@ -30,8 +37,6 @@ class MyProfile extends Component {
         <Header title={"My Profile"} onDrawerPress={this.onDrawerPress} />
         <UnderDevelopment />
         <AuthButton
-          buttonStyle={Styles.authButton}
-
           buttonName={"Reset Password"}
           gradientColors={Constants.Colors.ButtonGradients}
           onPress={this.resetPassword}
@@ -45,12 +50,6 @@ class MyProfile extends Component {
 const Styles = StyleSheet.create({
   containner: {
     flex: 1
-  },
-  authButton : {
-    height : moderateScale(70),
-    width : moderateScale(350),
-    alignItems : "center",
-    backgroundColor :"red"
   }
 });
 const mapStateToProps = state => ({

@@ -1,3 +1,10 @@
+/*
+FileName: index.js
+Author :Parshant Nagpal
+Description: Contains 404 page of the app 
+Date : 13 december 2018
+*/
+
 import React, { Component } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import Constants from "../../constants";

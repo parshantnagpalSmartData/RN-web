@@ -40,9 +40,17 @@ const PatientsCompo = props => {
       </View>
       <FlatList
         contentContainerStyle={{
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center"
+          // width: Constants.BaseStyle.DEVICE_WIDTH
         }}
+        style={
+          {
+            // backgroundColor: "red"
+          }
+        }
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         data={skills}
         keyExtractor={item => item.toString() + Math.random().toString()}
         key={`${
@@ -91,7 +99,7 @@ export default PatientsCompo;
 const Styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    padding: moderateScale(10),
+    paddingHorizontal: moderateScale(10),
     borderBottomColor: Constants.Colors.placehoder,
     borderBottomWidth: 0.4,
     ...Platform.select({

@@ -1,7 +1,7 @@
 /*
  * @file: PushNotification.js
  * @description: Initiliazing push notification , Redirection on push notifications
- * @author: Ankush Rishi
+ * @author: Parshant Nagpal
  * */
 /* eslint-disable */
 "use strict";

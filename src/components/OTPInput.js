@@ -1,3 +1,10 @@
+/*
+ * @file: otpInput.js
+ * @description: Contains all Otp input component
+ * @date: 9 January 2019
+ * @author:Parshant Nagpal
+ */
+
 import React, { Component } from "react";
 import { TextInput, View, StyleSheet } from "react-native";
 import Constants from "../constants";

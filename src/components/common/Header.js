@@ -109,27 +109,23 @@ const Header = props => {
               </Text>
             ) : null}
           </View>
-          {rightIcon ? (
-            <TouchableOpacity
-              style={Styles.iconBtn}
-              onPress={() => onRightPress()}
-            >
-              <Image
-                source={rightIcon}
-                resizeMode={"contain"}
-                style={Styles.icon}
-              />
-            </TouchableOpacity>
-          ) : rightText ? (
-            <TouchableOpacity
-              style={Styles.iconBtn}
-              onPress={() => onRightPress()}
-            >
-              <Text style={Styles.skip}>{rightText}</Text>
-            </TouchableOpacity>
-          ) : rightComponent ? (
-            <View style={Styles.iconBtn}>{rightComponent}</View>
-          ) : null}
+          <View style={Styles.iconBtn}>
+            {rightIcon ? (
+              <TouchableOpacity onPress={() => onRightPress()}>
+                <Image
+                  source={rightIcon}
+                  resizeMode={"contain"}
+                  style={Styles.icon}
+                />
+              </TouchableOpacity>
+            ) : rightText ? (
+              <TouchableOpacity onPress={() => onRightPress()}>
+                <Text style={Styles.skip}>{rightText}</Text>
+              </TouchableOpacity>
+            ) : rightComponent ? (
+              <View>{rightComponent}</View>
+            ) : null}
+          </View>
         </View>
       </View>
     </LinearGradient>
@@ -165,7 +161,7 @@ const Styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: moderateScale(40),
-    width: Constants.BaseStyle.DEVICE_WIDTH * 0.8
+    width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
   },
   headerText: {
     ...Constants.Fonts.SemiBold,

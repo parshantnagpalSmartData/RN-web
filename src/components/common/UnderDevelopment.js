@@ -1,3 +1,10 @@
+/**
+ * Name :Suraj Sanwal
+ * File Name : ToastNotification.js
+ * Description : Contains the under Development component
+ * Date : 25 Sept 2018
+ */
+
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Constants from "../../constants";

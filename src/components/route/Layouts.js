@@ -1,8 +1,8 @@
 /*
  * @file: Layouts.js
  * @description: Defined all Layouts for application
- * @date: 19 April 2018
- * @author: Monika Rani
+ * @date: 9 January 2019
+ * @author:Parshant Nagpal
  */
 
 import React from "react";

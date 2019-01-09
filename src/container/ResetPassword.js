@@ -1,7 +1,7 @@
 /*
 Name : Suraj Sanwal 
 File Name : login.js
-Description : Contains login screen.
+Description : Contains reset Password component
 Date : 11 Dec 2018
 */
 

@@ -111,13 +111,13 @@ const Styles = StyleSheet.create({
 });
 
 Filter.propTypes = {
+  nextDate: PropTypes.date,
   prevDate: PropTypes.date,
-  onDateChange: PropTypes.func,
-  nextDate: PropTypes.date
+  onDateChange: PropTypes.func
 };
 Filter.defaultProps = {
   prevDate: null,
-  onDateChange: null,
-  nextDate: null
+  nextDate: null,
+  onDateChange: null
 };
 export default Filter;

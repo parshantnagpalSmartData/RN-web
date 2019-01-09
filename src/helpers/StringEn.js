@@ -1,3 +1,10 @@
+/*
+ * @file: RestClient.js
+ * @description: Contains all Strings
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
+ * */
+
 String.prototype.capitalizeFirstLetter = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };

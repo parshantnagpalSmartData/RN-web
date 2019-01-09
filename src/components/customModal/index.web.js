@@ -1,8 +1,8 @@
-/*
- * file :profileView.js
- * @ description : profile name with profile pic
- * @ date : 7 March 2018
- * @author : Abhishek
+/**
+ * Name :Suraj Sanwal
+ * File Name : ToastNotification.js
+ * Description : Contains the toast Notificaitons of the Web
+ * Date : 25 Sept 2018
  */
 
 import React from "react";

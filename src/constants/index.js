@@ -1,3 +1,10 @@
+/*
+ * @file: Images.js
+ * @description: Contains all constants
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
+ * */
+
 "use-strict";
 import Colors from "./Colors";
 import BaseStyle from "./BaseStyle";

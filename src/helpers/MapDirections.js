@@ -2,7 +2,7 @@
  * @file: MapDirections.js
  * @description: Fetch direactions between two locations.
  * @date: 04.Jan.2018
- * @author: Manish Budhraja
+ * @author: Parshant Nagpal
  * */
 /* eslint-disable */
 "use strict";

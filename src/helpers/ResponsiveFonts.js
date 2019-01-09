@@ -1,8 +1,13 @@
+/*
+ * @file: Responsive Fonts.js
+ * @description: contains all moderate scale calculation
+ * @author: Parshant Nagpal
+ * */
 "use strict";
 
 import { Dimensions, Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
-console.log("height & width ===>os", height, width, Platform.OS);
+// console.log("height & width ===>os", height, width, Platform.OS);
 
 //Guideline sizes are based on standard ~5" screen mobile device
 const guidelineBaseWidth = 350;

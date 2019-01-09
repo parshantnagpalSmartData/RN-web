@@ -1,7 +1,8 @@
 /*
  * @file: Images.js
  * @description: Images constants file for the application
-
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
  * */
 
 "use strict";

@@ -1,3 +1,10 @@
+/*
+ * @file: Connection.js
+ * @description: contains all routes for app
+ * @date: 9 Jan 2019
+ * @author: Parshant Nagpal
+ * */
+
 import React from "react";
 import { Navigation } from "react-native-navigation";
 import { View } from "react-native";
