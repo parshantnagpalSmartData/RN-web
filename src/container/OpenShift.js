@@ -13,7 +13,6 @@ import moment from "moment";
 
 import * as appAction from "../actions";
 import Header from "../components/common/Header";
-// import UnderDevelopment from "../components/common/UnderDevelopment";
 import PatientsCompo from "../components/patients/PatientsCompo";
 import Filter from "../components/MySchedule/Filter";
 import { moderateScale } from "../helpers/ResponsiveFonts";
@@ -27,6 +26,7 @@ class OpenShift extends Component {
       showAll: false,
       currentIndex: null,
       loading: false,
+      page: 1,
       // prevDate: "04/24/2018",
       // nextDate: "05/01/2018"
       prevDate: moment().format("MM/DD/YYYY"),
@@ -61,8 +61,8 @@ class OpenShift extends Component {
   };
 
   getLikeUpdate = (refresh = false) => {
-    let { prevDate, nextDate } = this.state;
-    this.props.appAction.fetchOpenShift(prevDate, nextDate, refresh);
+    let { prevDate, nextDate, page } = this.state;
+    this.props.appAction.fetchOpenShift(page, prevDate, nextDate, refresh);
     this.setState({ loading: false, scheduleId: null });
   };
 
@@ -92,6 +92,16 @@ class OpenShift extends Component {
     );
   };
 
+  onCurrentPageEndReach = () => {
+    let {
+      schedule: { openShiftMeta }
+    } = this.props;
+    let { page } = this.state;
+    if (page < openShiftMeta.totalPages) {
+      this.setState({ page: page++ }, () => this.getLikeUpdate());
+    }
+  };
+
   renderItem = ({ item, index }) => {
     let { showAll, currentIndex, loading, scheduleId } = this.state;
     let skills = item.SkillsRequired && item.SkillsRequired.split(",");
@@ -113,8 +123,10 @@ class OpenShift extends Component {
   };
 
   render() {
-    let { app, schedule } = this.props;
-    let { openShift } = schedule;
+    let {
+      app,
+      schedule: { openShift }
+    } = this.props;
     let { prevDate, nextDate } = this.state;
     return (
       <View style={Styles.containner}>
@@ -136,6 +148,8 @@ class OpenShift extends Component {
             refreshing={app.refreshLoader}
             onRefresh={() => this.getLikeUpdate(true)}
             renderItem={this.renderItem}
+            onEndReached={this.onCurrentPageEndReach}
+            onEndReachedThreshold={0}
           />
         ) : (
           <View

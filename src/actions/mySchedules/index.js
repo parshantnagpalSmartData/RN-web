@@ -10,13 +10,19 @@ import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 import Constants from "../../constants";
 
-export const fetchMySchedules = (prevDate, nextDate, refresh = false) => {
+export const fetchMySchedules = (
+  page = 1,
+  prevDate,
+  nextDate,
+  refresh = false,
+  limit = Constants.AppConstants.limit
+) => {
   return (dispatch, getState) => {
     refresh
       ? dispatch(AppActions.startRefreshLoader())
       : dispatch(AppActions.startLoader());
     RestClient.getCall(
-      "nurses/schedules?startDate=" + prevDate + "&endDate=" + nextDate,
+      `nurses/schedules?startDate=${prevDate}&endDate=${nextDate}&page=${page}&limit=${limit}`,
       getState().user.token
     )
       .then(res => {
@@ -25,7 +31,7 @@ export const fetchMySchedules = (prevDate, nextDate, refresh = false) => {
           refresh
             ? dispatch(AppActions.stopRefreshLoader())
             : dispatch(AppActions.stopLoader());
-          dispatch({ type: Types.ADD_MYSCHEDULE, payload: res.result.data });
+          dispatch({ type: Types.ADD_MYSCHEDULE, payload: res.result });
         } else {
           if (res.error === "Token expired") {
             dispatch(

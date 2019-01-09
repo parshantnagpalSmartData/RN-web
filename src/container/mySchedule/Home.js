@@ -33,6 +33,7 @@ class Home extends Component {
     super(props);
     this.state = {
       patient: {},
+      page: 1,
       isVisible: false,
       prevDate: moment().format("MM/DD/YYYY"),
       nextDate: moment()
@@ -46,11 +47,6 @@ class Home extends Component {
   componentDidMount() {
     this.fetchMySchedules();
   }
-
-  fetchMySchedules = (refresh = false) => {
-    let { prevDate, nextDate } = this.state;
-    this.props.appAction.fetchMySchedules(prevDate, nextDate, refresh);
-  };
 
   onDrawerPress = () => {
     this.props.appAction.mergeOptions(this.props.componentId, true);
@@ -117,6 +113,19 @@ class Home extends Component {
     googleMapNavigate(source, destination);
   }
 
+  fetchMySchedules = (refresh = false) => {
+    let { prevDate, nextDate, page } = this.state;
+    this.props.appAction.fetchMySchedules(page, prevDate, nextDate, refresh);
+  };
+
+  onCurrentPageEndReach = () => {
+    let { myScheduleMeta } = this.props;
+    let { page } = this.state;
+    if (page < myScheduleMeta.totalPages) {
+      this.setState({ page: page++ }, () => this.fetchMySchedules());
+    }
+  };
+
   render() {
     let { isVisible, nextDate, prevDate, patient } = this.state,
       { mySchedules, app } = this.props,
@@ -139,6 +148,7 @@ class Home extends Component {
             onPatientPress={this.fetchPatientDetails}
             loader={app.refreshLoader}
             onRefresh={() => this.fetchMySchedules(true)}
+            onEndReached={this.onCurrentPageEndReach}
           />
         ) : (
           <View
@@ -201,6 +211,21 @@ class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user,
+  app: state.app,
+  mySchedules: state.schedule.mySchedules,
+  myScheduleMeta: state.schedule.myScheduleMeta
+});
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
 
 const Styles = StyleSheet.create({
   containner: {
@@ -283,16 +308,3 @@ const Styles = StyleSheet.create({
     })
   }
 });
-const mapStateToProps = state => ({
-  user: state.user,
-  app: state.app,
-  mySchedules: state.schedule.mySchedules
-});
-const mapDispatchToProps = dispatch => ({
-  appAction: bindActionCreators(appAction, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
