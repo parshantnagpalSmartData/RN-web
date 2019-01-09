@@ -51,7 +51,7 @@ const Styles = StyleSheet.create({
       Platform.OS === "web"
         ? Constants.BaseStyle.DEVICE_WIDTH - moderateScale(400)
         : Constants.BaseStyle.DEVICE_WIDTH,
-    padding: moderateScale(10),
+    padding: moderateScale(5),
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap"
@@ -61,7 +61,7 @@ const Styles = StyleSheet.create({
       Platform.OS === "web"
         ? Constants.BaseStyle.DEVICE_WIDTH * 0.1
         : Constants.BaseStyle.DEVICE_WIDTH / 3.2,
-    paddingVertical: moderateScale(10),
+    paddingVertical: moderateScale(5),
     alignItems: "center",
     justifyContent: Platform.OS === "web" ? "flex-start" : "center"
   },
@@ -74,6 +74,6 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(12),
     color: Constants.Colors.Secondary,
-    paddingVertical: moderateScale(10)
+    paddingVertical: moderateScale(5)
   }
 });
