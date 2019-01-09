@@ -11,7 +11,7 @@ import Immutable from "seamless-immutable";
 const initialState = Immutable({
   root: "login", // 'login' / 'after-login'
   componentId: "",
-  screen: "Home",
+  screen: "MySchedule",
   loading: false,
   refreshLoader: false,
   notification: {

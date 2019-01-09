@@ -28,7 +28,7 @@ class SideMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: "Home"
+      screen: "MySchedule"
     };
     this.hideSideMenu = this.hideSideMenu.bind(this);
     this.setScrenStack = this.setScrenStack.bind(this);
@@ -126,7 +126,7 @@ class SideMenu extends React.Component {
     let { user } = this.props;
     let { FirstName, LastName, UserName } = user;
     let menuOptions = [
-      { key: "Home", value: "My Schedule", onPress: this.onMenuPress },
+      { key: "MySchedule", value: "My Schedule", onPress: this.onMenuPress },
       { key: "OpenShift", value: "Open Shift", onPress: this.onMenuPress },
       {
         key: "PotientialCases",

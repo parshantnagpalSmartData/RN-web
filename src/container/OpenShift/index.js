@@ -11,13 +11,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 
-import * as appAction from "../actions";
-import Header from "../components/common/Header";
+import * as appAction from "../../actions";
+import Header from "../../components/common/Header";
 // import UnderDevelopment from "../components/common/UnderDevelopment";
-import PatientsCompo from "../components/patients/PatientsCompo";
-import Filter from "../components/MySchedule/Filter";
-import { moderateScale } from "../helpers/ResponsiveFonts";
-import Constants from "../constants";
+import PatientsCompo from "../../components/patients/PatientsCompo";
+import Filter from "../../components/mySchedule/Filter";
+import { moderateScale } from "../../helpers/ResponsiveFonts";
+import Constants from "../../constants";
 
 class OpenShift extends Component {
   constructor(props) {
