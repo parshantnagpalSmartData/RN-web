@@ -9,7 +9,7 @@ import { Navigation } from "react-native-navigation";
 import { goHome, goToAuth } from "../../config/navigation";
 import * as Types from "../../actionTypes";
 
-export const pushTParticulatScreen = (componentId, screenName) => {
+export const pushToParticularScreen = (componentId, screenName) => {
   return dispatch => {
     dispatch({ type: Types.SET_COMPONENT, payload: componentId });
     Navigation.push(componentId, {

@@ -8,7 +8,7 @@ Date : 13 december 2018
 import history from "../../helpers/history";
 import * as Types from "../../actionTypes";
 // eslint-disable-next-line
-export const pushTParticulatScreen = (componentId = null, screen) => {
+export const pushToParticularScreen = (componentId = null, screen) => {
   return () => {
     history.push(`/${screen}`);
   };

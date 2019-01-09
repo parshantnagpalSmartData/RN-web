@@ -21,15 +21,15 @@ export const signIn = (postData, componentId) => {
         if (res.status) {
           dispatch(AppActions.stopLoader());
           // dispatch({ type: Types.LOGIN_SUCESS });
-          dispatch({ type: Types.LOGIN });
           dispatch({ type: Types.SAVE_USER, payload: res.result });
-          dispatch(AppActions.pushTParticulatScreen(componentId, "OTPScreen"));
-          dispatch(
-            AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Success,
-              res.message
-            )
-          );
+          dispatch(AppActions.pushToParticularScreen(componentId, "OTPScreen"));
+          dispatch({ type: Types.LOGIN });
+          // dispatch(
+          //   AppActions.showToast(
+          //     Constants.AppConstants.Notificaitons.Success,
+          //     res.message
+          //   )
+          // );
         } else {
           dispatch(AppActions.stopLoader());
           // dispatch({ type: Types.LOGIN_FAIL });
@@ -104,7 +104,7 @@ export const verifyOTP = postData => {
         if (Platform.OS !== "web") {
           dispatch(AppActions.goToHome());
         } else {
-          dispatch(AppActions.pushTParticulatScreen(null, "MySchedule"));
+          dispatch(AppActions.pushToParticularScreen(null, "MySchedule"));
         }
       } else {
         dispatch(

@@ -13,7 +13,6 @@ import { Route, Redirect } from "react-router-dom";
 const AppRoute = ({
   component: Component,
   layout: Layout,
-  //  requireAuth: requireAuth,
   isLogin: isLogin,
   ...rest
 }) => {
@@ -21,7 +20,6 @@ const AppRoute = ({
     <Route
       {...rest}
       render={props => {
-        // requireAuth();
         if (
           isLogin &&
           (props.location.pathname === "/" ||
