@@ -28,7 +28,7 @@ import ToastNotification from "../components/common/ToastNotification";
 const store = setup();
 /* eslint-disable */
 /**
- * HOC for wrapping toast and loader 
+ * HOC for wrapping toast and loader
  */
 
 const WrapScreen = ReduxScreen => props => (
