@@ -5,6 +5,7 @@ Description: contains the myschedule page
 Date : 13 december 2018
 */
 
+
 import React, { Component } from "react";
 import {
   View,
