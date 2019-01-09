@@ -104,7 +104,7 @@ export const verifyOTP = postData => {
         if (Platform.OS !== "web") {
           dispatch(AppActions.goToHome());
         } else {
-          dispatch(AppActions.pushTParticulatScreen(null, "Home"));
+          dispatch(AppActions.pushTParticulatScreen(null, "MySchedule"));
         }
       } else {
         dispatch(

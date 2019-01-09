@@ -43,7 +43,7 @@ export default function setup() {
     // console.log("newstore", store.getState().user.isLoggedIn,history);
     // console.log("historyyyy",history)
     // if (store.getState().user.isLoggedIn &&  history.location.pathname == '/') {
-    //     store.dispatch(AppAction.pushTParticulatScreen("/Home"));
+    //     store.dispatch(AppAction.pushTParticulatScreen("/MySchedule"));
     // } else if (!store.getState().user.isLoggedIn && (history.location.pathname !== '/' &&  history.location.pathname !== 'ForgotPassword')) {
     //     store.dispatch(AppAction.pushTParticulatScreen("/"));
     // }

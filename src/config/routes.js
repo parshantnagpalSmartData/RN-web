@@ -13,13 +13,12 @@ import setup from "../store/setup";
 
 import SignIn from "../container/auth/Login";
 import ForgotPassword from "../container/auth/ForgotPassword";
-import Loader from "../container/Loader";
 import Loading from "../components/common/Loader";
-import Home from "../container/mySchedule/Home";
+import MySchedule from "../container/mySchedule";
 import OpenShift from "../container/OpenShift";
-import PotientialCases from "../container/PotientialCases";
+import PotientialCases from "../container/PotentialCases";
 import PrintableForms from "../container/PrintableForms";
-import MyProfile from "../container/MyProfile";
+import MyProfile from "../container/myProfile/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/auth/OTPScreen";
@@ -28,7 +27,11 @@ import ToastNotification from "../components/common/ToastNotification";
 
 const store = setup();
 /* eslint-disable */
-const LoadReducxSceen = ReduxScreen => props => (
+/**
+ * HOC for wrapping toast and loader
+ */
+
+const WrapScreen = ReduxScreen => props => (
   <Provider store={store}>
     <View style={{ flex: 1 }}>
       <ReduxScreen {...props} />
@@ -41,54 +44,51 @@ const LoadReducxSceen = ReduxScreen => props => (
 /* eslint-enable */
 
 export const registerScreens = () => {
-  // Loader Stack
-  Navigation.registerComponentWithRedux(
-    "Loader",
-    () => Loader,
-    Provider,
-    store
-  );
   // Auth stack
   Navigation.registerComponent(
     "SignIn",
-    () => LoadReducxSceen(SignIn),
+    () => WrapScreen(SignIn),
     () => SignIn
   );
   Navigation.registerComponent(
     "ForgotPassword",
-    () => LoadReducxSceen(ForgotPassword),
+    () => WrapScreen(ForgotPassword),
     () => ForgotPassword
   );
   // Dashboard Stack
-  Navigation.registerComponent("Home", () => LoadReducxSceen(Home), () => Home);
+  Navigation.registerComponent(
+    "MySchedule",
+    () => WrapScreen(MySchedule),
+    () => MySchedule
+  );
   Navigation.registerComponent(
     "MessageCenter",
-    () => LoadReducxSceen(MessageCenter),
+    () => WrapScreen(MessageCenter),
     () => MessageCenter
   );
   Navigation.registerComponent(
     "MyProfile",
-    () => LoadReducxSceen(MyProfile),
+    () => WrapScreen(MyProfile),
     () => MyProfile
   );
   Navigation.registerComponent(
     "OpenShift",
-    () => LoadReducxSceen(OpenShift),
+    () => WrapScreen(OpenShift),
     () => OpenShift
   );
   Navigation.registerComponent(
     "PotientialCases",
-    () => LoadReducxSceen(PotientialCases),
+    () => WrapScreen(PotientialCases),
     () => PotientialCases
   );
   Navigation.registerComponent(
     "PrintableForms",
-    () => LoadReducxSceen(PrintableForms),
+    () => WrapScreen(PrintableForms),
     () => PrintableForms
   );
   Navigation.registerComponent(
     "ResetPassword",
-    () => LoadReducxSceen(ResetPassword),
+    () => WrapScreen(ResetPassword),
     () => ResetPassword
   );
 
@@ -100,7 +100,7 @@ export const registerScreens = () => {
   );
   Navigation.registerComponent(
     "OTPScreen",
-    () => LoadReducxSceen(OTPScreen),
+    () => WrapScreen(OTPScreen),
     () => OTPScreen
   );
 };

@@ -16,11 +16,11 @@ import { frontLayout, dashboardLayout } from "../components/route/Layouts";
 import SignIn from "../container/auth/Login";
 import ForgotPassword from "../container/auth/ForgotPassword";
 import NotFound from "../container/errors/NotFound";
-import Home from "../container/mySchedule/Home";
+import MySchedule from "../container/mySchedule";
 import OpenShift from "../container/OpenShift";
-import PotientialCases from "../container/PotientialCases";
+import PotientialCases from "../container/PotentialCases";
 import PrintableForms from "../container/PrintableForms";
-import MyProfile from "../container/MyProfile";
+import MyProfile from "../container/myProfile/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/auth/OTPScreen";
@@ -37,7 +37,7 @@ import OTPScreen from "../container/auth/OTPScreen";
 // 	// 	// 	state.user.isLoggedIn &&
 // 	// 	// 	(history.location.pathname === '/' || history.location.pathname === '/admin')
 // 	// 	// ) {
-// 	// 	// 	// history.push('/Home');
+// 	// 	// 	// history.push('/MySchedule');
 // 	// 	// }
 //   // };
 
@@ -75,8 +75,8 @@ class Routes extends Component {
           />
           <AppRoute
             exact
-            path="/Home"
-            component={Home}
+            path="/MySchedule"
+            component={MySchedule}
             //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}

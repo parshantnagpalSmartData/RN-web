@@ -12,12 +12,12 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as appAction from "../actions";
-import FormTextInput from "../components/common/FormTextInput";
-import Header from "../components/common/Header";
-import { moderateScale } from "../helpers/ResponsiveFonts";
-import AuthButton from "../components/common/AuthButton";
-import Constants from "../constants";
+import * as appAction from "../../actions";
+import FormTextInput from "../../components/common/FormTextInput";
+import Header from "../../components/common/Header";
+import { moderateScale } from "../../helpers/ResponsiveFonts";
+import AuthButton from "../../components/common/AuthButton";
+import Constants from "../../constants";
 
 class ResetPssword extends Component {
   constructor(props) {

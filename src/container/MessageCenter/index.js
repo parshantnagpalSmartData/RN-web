@@ -10,10 +10,9 @@ import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 
 import { bindActionCreators } from "redux";
-import * as appAction from "../actions";
-import Header from "../components/common/Header";
-import UnderDevelopment from "../components/common/UnderDevelopment";
-// import ToastNotification from "../components/common/ToastNotification";
+import * as appAction from "../../actions";
+import Header from "../../components/common/Header";
+import UnderDevelopment from "../../components/common/UnderDevelopment";
 class MessageCenter extends Component {
   constructor(props) {
     super(props);
@@ -33,13 +32,6 @@ class MessageCenter extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Message Center"} onDrawerPress={this.onDrawerPress} />
-        {/* <TouchableOpacity onPress={this.displayToast}>
-          <Text>Toastr display Info Toast</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.displayErrorToast}>
-          <Text>Toastr display Error Toast</Text>
-        </TouchableOpacity> */}
         <UnderDevelopment />
       </View>
     );
