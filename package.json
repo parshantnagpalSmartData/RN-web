@@ -41,7 +41,7 @@
     "reset-cache": "watchman watch-del-all && react-native start --reset-cache",
     "android-bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "android-install": "adb install /android/app/build/outputs/apk/release/app-release.apk",
-    "android-unintsall": "adb uninstall com.actnursesportal"
+    "android-uninstall": "adb uninstall com.actnursesportal"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",

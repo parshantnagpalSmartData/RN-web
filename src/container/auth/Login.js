@@ -13,9 +13,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-// import FloatingInput from "../../components/common/FloatingInput";
 import FormTextInput from "../../components/common/FormTextInput";
-// import Header from "../../components/common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
@@ -84,7 +82,7 @@ class Login extends Component {
   });
 
   onForgotPassword = () => {
-    let { appAction, componentId } = this.props; // eslint-disable-line OTPScreen
+    let { appAction, componentId } = this.props;
     appAction.pushTParticulatScreen(componentId, "ForgotPassword");
     // appAction.pushTParticulatScreen(componentId, "OTPScreen");
   };
@@ -92,121 +90,122 @@ class Login extends Component {
   render() {
     let { deviceWidth } = this.state;
     return (
-      <View style={Styles.containner}>
-        {/* <View style={{ flex: 0.5, justifyContent: "center" }}> */}
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={Styles.containner}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+      >
         <LogoText text={"ACT Home Health Services"} />
-        {/* </View> */}
-        <KeyboardAwareScrollView
-          keyboardShouldPersistTaps={"always"}
-          scrollEnabled={false}
-          contentContainerStyle={{
-            alignItems: "center",
-            flex: 1
-          }}
-        >
-          <View
-            style={{
+
+        <View
+          style={[
+            Styles.formView,
+            {
               ...Platform.select({
                 web: {
-                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
-                  justifyContent: "space-evenly",
                   width: deviceWidth > 600 ? deviceWidth / 2 : deviceWidth
-                },
-                ios: {
-                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
-                  justifyContent: "space-evenly",
-                  width: Constants.BaseStyle.DEVICE_WIDTH
-                },
-                android: {
-                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
-                  width: Constants.BaseStyle.DEVICE_WIDTH,
-                  justifyContent: "space-evenly"
                 }
-              }),
-              overflow: "hidden"
-            }}
-          >
-            <View className="djshfjdsjk" style={Styles.FloatingInputContainer}>
-              <FormTextInput
-                image={Constants.Images.Email}
-                placeHolderText={"Username"}
-                onChangeText={email => {
-                  this.setState({ email });
-                }}
-                value={this.state.email}
-                keyboardType={"email-address"}
-                returnKeyType={"next"}
-                autoCapitalize={"none"}
-                ref={ref => (this.email = ref)}
-                onSubmitEditing={() => {
-                  this.focusNext("password");
-                }}
-              />
-              <FormTextInput
-                image={Constants.Images.Password}
-                placeHolderText={"Password"}
-                onChangeText={password => {
-                  this.setState({ password });
-                }}
-                value={this.state.password}
-                returnKey="done"
-                onSubmitEditing={() => {
-                  this.submitLogin();
-                }}
-                autoCapitalize={"none"}
-                secureText
-                ref={ref => (this.password = ref)}
-              />
-            </View>
-
-            <View
-              style={{
-                flex: 0.25,
-                justifyContent: "center",
-                alignItems: "center"
+              })
+            }
+          ]}
+        >
+          <View className="djshfjdsjk" style={Styles.FloatingInputContainer}>
+            <FormTextInput
+              image={Constants.Images.Email}
+              placeHolderText={"Username"}
+              onChangeText={email => {
+                this.setState({ email });
               }}
-            >
-              <AuthButton
-                buttonName={"Log In"}
-                gradientColors={Constants.Colors.ButtonGradients}
-                textStyle={{ color: "#fff" }}
-                onPress={this.submitLogin}
-              />
-            </View>
-            <View
-              style={{
-                justifyContent: "flex-start",
-                alignItems: "center",
-                flex: 0.25
+              value={this.state.email}
+              keyboardType={"email-address"}
+              returnKeyType={"next"}
+              autoCapitalize={"none"}
+              ref={ref => (this.email = ref)}
+              onSubmitEditing={() => {
+                this.focusNext("password");
               }}
-            >
-              <Text
-                style={{
-                  ...Constants.Fonts.Regular,
-                  fontSize: moderateScale(16),
-                  color: Constants.Colors.Secondary
-                }}
-                onPress={this.onForgotPassword}
-              >
-                Forgot Password?
-              </Text>
-            </View>
+            />
+            <FormTextInput
+              image={Constants.Images.Password}
+              placeHolderText={"Password"}
+              onChangeText={password => {
+                this.setState({ password });
+              }}
+              value={this.state.password}
+              returnKey="done"
+              onSubmitEditing={() => {
+                this.submitLogin();
+              }}
+              autoCapitalize={"none"}
+              secureText
+              ref={ref => (this.password = ref)}
+            />
           </View>
-        </KeyboardAwareScrollView>
-      </View>
+
+          <View style={Styles.AuthButton}>
+            <AuthButton
+              buttonName={"Log In"}
+              gradientColors={Constants.Colors.ButtonGradients}
+              textStyle={{ color: "#fff" }}
+              onPress={this.submitLogin}
+            />
+          </View>
+          <View style={Styles.forgotView}>
+            <Text style={Styles.forgotText} onPress={this.onForgotPassword}>
+              Forgot Password?
+            </Text>
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1,
-    justifyContent: "center"
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.9
+  },
+  formView: {
+    ...Platform.select({
+      web: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
+        justifyContent: "space-evenly"
+      },
+      ios: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
+        justifyContent: "space-evenly",
+        width: Constants.BaseStyle.DEVICE_WIDTH
+      },
+      android: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
+        width: Constants.BaseStyle.DEVICE_WIDTH,
+        justifyContent: "space-evenly"
+      }
+    }),
+    overflow: "hidden"
   },
   FloatingInputContainer: {
     flex: 0.5,
     paddingHorizontal: moderateScale(25),
     justifyContent: "center"
+  },
+  AuthButton: {
+    flex: 0.25,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  forgotView: {
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flex: 0.25
+  },
+  forgotText: {
+    ...Constants.Fonts.Regular,
+    fontSize: moderateScale(16),
+    color: Constants.Colors.Secondary
   },
   gradientStyle: { borderRadius: 0 }
 });

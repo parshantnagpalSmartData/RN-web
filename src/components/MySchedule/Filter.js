@@ -86,10 +86,12 @@ const Styles = StyleSheet.create({
     })
   },
   mainView: {
-    marginVertical: moderateScale(20),
+    paddingVertical: moderateScale(20),
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    borderBottomWidth: 0.4,
+    borderBottomColor: Constants.Colors.Gray
   },
   commonFontColor: {
     color: Constants.Colors.Primary,
