@@ -126,6 +126,10 @@ class Home extends Component {
     }
   };
 
+  onRefresh = () => {
+    this.setState({ page: 1 }, () => this.fetchMySchedules(true));
+  };
+
   render() {
     let { isVisible, nextDate, prevDate, patient } = this.state,
       { mySchedules, app } = this.props,
@@ -147,7 +151,7 @@ class Home extends Component {
             renderItem={this.renderPatients}
             onPatientPress={this.fetchPatientDetails}
             loader={app.refreshLoader}
-            onRefresh={() => this.fetchMySchedules(true)}
+            onRefresh={this.onRefresh}
             onEndReached={this.onCurrentPageEndReach}
           />
         ) : (

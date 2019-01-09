@@ -9,10 +9,10 @@ import * as Types from "../../actionTypes";
 const initialState = {
   mySchedules: [],
   openShift: [],
-  potantialCases: [],
+  potientialCases: [],
   myScheduleMeta: {},
   openShiftMeta: {},
-  potantialCasesMeta: {}
+  potientialCasesMeta: {}
 };
 const Schedule = (state = initialState, action) => {
   switch (action.type) {
@@ -27,6 +27,12 @@ const Schedule = (state = initialState, action) => {
         ...state,
         mySchedules: action.payload.data,
         myScheduleMeta: action.payload.pagingMetadata
+      };
+    case Types.POTIENTIAL_CASES:
+      return {
+        ...state,
+        potientialCases: action.payload.data,
+        potientialCasesMeta: action.payload.pagingMetadata
       };
     default:
       return state;
