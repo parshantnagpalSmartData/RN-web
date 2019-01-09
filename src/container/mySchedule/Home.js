@@ -17,17 +17,17 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import * as appAction from "../actions";
-import Constants from "../constants";
-import { moderateScale } from "../helpers/ResponsiveFonts";
-import Header from "../components/common/Header";
-import MySchedule from "../components/MySchedule";
-import Avtar from "../components/common/Avatar";
-import CustomModal from "../components/customModal";
-import Filter from "../components/MySchedule/Filter";
-import MyScheduleList from "../components/MySchedule/MyScheduleList";
-import { googleMapNavigate } from "../helpers/MapDirections";
-import { openLinkingURL } from "../helpers/Linking";
+import * as appAction from "../../actions";
+import Constants from "../../constants";
+import { moderateScale } from "../../helpers/ResponsiveFonts";
+import Header from "../../components/common/Header";
+import MySchedule from "../../components/MySchedule";
+import Avtar from "../../components/common/Avatar";
+import CustomModal from "../../components/customModal";
+import Filter from "../../components/MySchedule/Filter";
+import MyScheduleList from "../../components/MySchedule/MyScheduleList";
+import { googleMapNavigate } from "../../helpers/MapDirections";
+import { openLinkingURL } from "../../helpers/Linking";
 class Home extends Component {
   constructor(props) {
     super(props);

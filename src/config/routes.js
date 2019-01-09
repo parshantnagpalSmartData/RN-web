@@ -15,7 +15,7 @@ import SignIn from "../container/auth/Login";
 import ForgotPassword from "../container/auth/ForgotPassword";
 import Loader from "../container/Loader";
 import Loading from "../components/common/Loader";
-import Home from "../container/Home";
+import Home from "../container/mySchedule/Home";
 import OpenShift from "../container/OpenShift";
 import PotientialCases from "../container/PotientialCases";
 import PrintableForms from "../container/PrintableForms";
