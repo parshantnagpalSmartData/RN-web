@@ -42,7 +42,7 @@ class Home extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openEmail = this.openEmail.bind(this);
     this.openTelephone = this.openTelephone.bind(this);
-  }
+  } 
   componentDidMount() {
     this.fetchMySchedules();
   }
