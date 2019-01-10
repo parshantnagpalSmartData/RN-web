@@ -1,7 +1,13 @@
 import React from "react";
 import { FlatList, Platform } from "react-native";
 
-const MyScheduleList = ({ patitents, renderItem, loader, onRefresh }) => {
+const MyScheduleList = ({
+  patitents,
+  renderItem,
+  loader,
+  onRefresh,
+  onEndReached
+}) => {
   return (
     <FlatList
       data={patitents}
@@ -11,8 +17,8 @@ const MyScheduleList = ({ patitents, renderItem, loader, onRefresh }) => {
       showsVerticalScrollIndicator={false}
       onRefresh={onRefresh}
       refreshing={loader}
-      // onEndReached={onEndReached}
-      // onEndReachedThreshold={0}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0}
       style={{
         ...Platform.select({
           web: {

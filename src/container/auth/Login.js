@@ -53,7 +53,6 @@ class Login extends Component {
   }
 
   submitLogin = _.debounce(() => {
-    // console.log(this.props);
     let { componentId, appAction } = this.props;
     let { email, password } = this.state;
     if (_.isEmpty(email.trim())) {
@@ -83,8 +82,7 @@ class Login extends Component {
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props;
-    appAction.pushTParticulatScreen(componentId, "ForgotPassword");
-    // appAction.pushTParticulatScreen(componentId, "OTPScreen");
+    appAction.pushToParticularScreen(componentId, "ForgotPassword");
   };
 
   render() {

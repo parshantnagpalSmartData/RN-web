@@ -18,6 +18,7 @@ export const frontLayout = props => {
 /*************** Dashboard Layout ***************/
 
 export const dashboardLayout = props => {
+  let isToggleOpen = false;
   let { isLogin } = props.children.props;
   return (
     <View style={{ flex: 1 }}>
@@ -29,17 +30,30 @@ export const dashboardLayout = props => {
             justifyContent: "space-between"
           }}
         >
-          <View style={{ flex: 0.2 }}>
+          <div id="leftMenuBar" className="leftContainer">
             <SideMenu />
-          </View>
-          <View
-            style={{
-              flex: 0.8,
-              justifyContent: "center"
-            }}
-          >
+          </div>
+          <div className="rightContentContainer">
+            <a
+              href="javascript:void(0)"
+              className="menuToggle"
+              onClick={() => {
+                var element = document.getElementById("leftMenuBar");
+                if (isToggleOpen) {
+                  isToggleOpen = false;
+                  element.classList.remove("toggleMenu");
+                } else {
+                  isToggleOpen = true;
+                  element.classList.add("toggleMenu");
+                }
+              }}
+            >
+              <span />
+              <span />
+              <span />
+            </a>
             {props.children}
-          </View>
+          </div>
         </View>
       ) : null}
     </View>

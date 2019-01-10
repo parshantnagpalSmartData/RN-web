@@ -28,7 +28,7 @@ class MyProfile extends Component {
 
   resetPassword = () => {
     let { appAction, componentId } = this.props;
-    appAction.pushTParticulatScreen(componentId, "ResetPassword");
+    appAction.pushToParticularScreen(componentId, "ResetPassword");
   };
 
   render() {
