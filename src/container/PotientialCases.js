@@ -33,7 +33,6 @@ class PotientialCases extends Component {
 
   fetchPotientialCases = (refreshLoader = false) => {
     this.props.appAction.fetchPotientialCases(this.state.page, refreshLoader);
-    this.setState({ loading: false, CaseID: null });
   };
 
   onDrawerPress = () => {
@@ -47,9 +46,9 @@ class PotientialCases extends Component {
         CaseID
       },
       () => {
-        this.props.appAction.potientialCasesLike(CaseID, () => {
-          this.fetchPotientialCases(true);
-        });
+        this.props.appAction.potientialCasesLike(CaseID, () =>
+          this.setState({ loading: false, CaseID: null })
+        );
       }
     );
   };
@@ -96,7 +95,7 @@ class PotientialCases extends Component {
     } = this.props;
     let { page } = this.state;
     if (page < potientialCasesMeta.totalPages) {
-      this.setState({ page: page++ }, () => this.fetchPotientialCases(true));
+      this.setState({ page: page + 1 }, () => this.fetchPotientialCases(true));
     }
   };
 
@@ -110,7 +109,24 @@ class PotientialCases extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Potiential Cases"} onDrawerPress={this.onDrawerPress} />
-        {potientialCases && potientialCases.length ? (
+        {!app.loading && !app.refreshLoader && !potientialCases.length ? (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text
+              style={{
+                ...Constants.Fonts.Medium,
+                fontSize: moderateScale(20)
+              }}
+            >
+              Potential Cases Not Found
+            </Text>
+          </View>
+        ) : (
           <FlatList
             // numColumns={Platform.OS === "web" ? 2 : 1}
             data={potientialCases}
@@ -126,23 +142,6 @@ class PotientialCases extends Component {
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
           />
-        ) : (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Text
-              style={{
-                ...Constants.Fonts.Medium,
-                fontSize: moderateScale(20)
-              }}
-            >
-              No Shift Found
-            </Text>
-          </View>
         )}
       </View>
     );
