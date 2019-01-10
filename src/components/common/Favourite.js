@@ -19,9 +19,9 @@ const Favourite = props => {
   return (
     <TouchableOpacity
       style={Styles.buttonStyle}
-      onPress={() => onLikePress(patient.SchedID)}
+      onPress={() => onLikePress(patient.SchedID || patient.CaseID)}
     >
-      {loading && patient.SchedID === scheduleId ? (
+      {loading && (patient.SchedID || patient.CaseID) === scheduleId ? (
         <ActivityIndicator />
       ) : isSelected ? (
         <Image

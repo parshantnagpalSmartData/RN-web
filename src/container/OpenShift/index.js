@@ -13,11 +13,12 @@ import moment from "moment";
 
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
-// import UnderDevelopment from "../components/common/UnderDevelopment";
-import PatientsCompo from "../../components/patients/PatientsCompo";
-import Filter from "../../components/mySchedule/Filter";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
+import Shifts from "../../components/shift/Shifts";
+import Filter from "../../components/MySchedule/Filter";
+
+
 
 class OpenShift extends Component {
   constructor(props) {
@@ -27,8 +28,7 @@ class OpenShift extends Component {
       showAll: false,
       currentIndex: null,
       loading: false,
-      // prevDate: "04/24/2018",
-      // nextDate: "05/01/2018"
+      page: 1,
       prevDate: moment().format("MM/DD/YYYY"),
       nextDate: moment()
         .add(7, "d")
@@ -61,8 +61,8 @@ class OpenShift extends Component {
   };
 
   getLikeUpdate = (refresh = false) => {
-    let { prevDate, nextDate } = this.state;
-    this.props.appAction.fetchOpenShift(prevDate, nextDate, refresh);
+    let { prevDate, nextDate, page } = this.state;
+    this.props.appAction.fetchOpenShift(page, prevDate, nextDate, refresh);
     this.setState({ loading: false, scheduleId: null });
   };
 
@@ -92,11 +92,25 @@ class OpenShift extends Component {
     );
   };
 
+  onCurrentPageEndReach = () => {
+    let {
+      schedule: { openShiftMeta }
+    } = this.props;
+    let { page } = this.state;
+    if (page < openShiftMeta.totalPages) {
+      this.setState({ page: page++ }, () => this.getLikeUpdate(true));
+    }
+  };
+
+  onRefresh = () => {
+    this.setState({ page: 1 }, () => this.getLikeUpdate(true));
+  };
+
   renderItem = ({ item, index }) => {
     let { showAll, currentIndex, loading, scheduleId } = this.state;
     let skills = item.SkillsRequired && item.SkillsRequired.split(",");
     return (
-      <PatientsCompo
+      <Shifts
         key={index}
         skills={skills}
         patient={item}
@@ -126,23 +140,36 @@ class OpenShift extends Component {
             this.onDateChange(prevDate, nextDate)
           }
         />
-        {openShift.length ? (
+
+        {openShift && openShift.length ? (
           <FlatList
+            // numColumns={Platform.OS === "web" ? 2 : 1}
             data={openShift}
             extraData={this.state}
             keyExtractor={item =>
               item.SchedID.toString() + Math.random().toString()
             }
             refreshing={app.refreshLoader}
-            onRefresh={() => this.getLikeUpdate(true)}
+            onRefresh={this.onRefresh}
             renderItem={this.renderItem}
+            onEndReached={this.onCurrentPageEndReach}
+            onEndReachedThreshold={0}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           />
         ) : (
           <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
           >
             <Text
-              style={{ ...Constants.Fonts.Medium, fontSize: moderateScale(20) }}
+              style={{
+                ...Constants.Fonts.Medium,
+                fontSize: moderateScale(20)
+              }}
             >
               No Shift Found
             </Text>

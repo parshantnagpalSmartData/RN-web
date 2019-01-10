@@ -42,3 +42,4 @@ export const HIDE_TOAST = "HIDE_TOAST";
 
 export const OPEN_SHIFTS = "OPEN_SHIFTS";
 export const ADD_MYSCHEDULE = "ADD_MYSCHEDULE";
+export const POTIENTIAL_CASES = "POTIENTIAL_CASES";

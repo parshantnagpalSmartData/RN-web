@@ -34,21 +34,23 @@ export const dashboardLayout = props => {
             <SideMenu />
           </div>
           <div className="rightContentContainer">
-            <a href="javascript:void(0)" className="menuToggle" onClick = {
-            () => {
-              var element = document.getElementById("leftMenuBar");
-                if(isToggleOpen){
+            <a
+              href="javascript:void(0)"
+              className="menuToggle"
+              onClick={() => {
+                var element = document.getElementById("leftMenuBar");
+                if (isToggleOpen) {
                   isToggleOpen = false;
                   element.classList.remove("toggleMenu");
-                }else{
+                } else {
                   isToggleOpen = true;
                   element.classList.add("toggleMenu");
                 }
-            }
-        }>
-               <span></span>
-               <span></span>
-               <span></span>
+              }}
+            >
+              <span />
+              <span />
+              <span />
             </a>
             {props.children}
           </div>

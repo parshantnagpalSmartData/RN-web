@@ -8,11 +8,11 @@ import React from "react";
 import { View, StyleSheet, Text, FlatList, Platform } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import Skill from "./Skill";
-import Favourite from "./Favourite";
-import PatientsDetails from "./PatientsDetails";
+import Skill from "../common/Skill";
+import Favourite from "../common/Favourite";
+import PatientsDetails from "../common/PatientsDetails";
 
-const PatientsCompo = props => {
+const Shifts = props => {
   let {
     skills,
     patient,
@@ -53,6 +53,7 @@ const PatientsCompo = props => {
         showsVerticalScrollIndicator={false}
         data={skills}
         keyExtractor={item => item.toString() + Math.random().toString()}
+        listKey={(item, index) => "D" + index.toString()}
         key={`${
           showAll
             ? item => item.toString()
@@ -89,12 +90,21 @@ const PatientsCompo = props => {
           }
         }}
       />
-      <PatientsDetails patient={patient} />
+      <PatientsDetails
+        // patient={patient}
+        date={patient.SchedDate}
+        StartTime={patient.StartTime}
+        EndTime={patient.EndTime}
+        age={patient.Patient_Age}
+        gender={patient.Patient_Gender || patient.Sex}
+        zip={patient.Patient_Zip || patient.Zip}
+        birthday={patient.Bday}
+      />
     </View>
   );
 };
 
-export default PatientsCompo;
+export default Shifts;
 
 const Styles = StyleSheet.create({
   container: {
@@ -104,7 +114,10 @@ const Styles = StyleSheet.create({
     borderBottomWidth: 0.4,
     ...Platform.select({
       ios: { flex: 1 },
-      android: { flex: 1 }
+      android: { flex: 1 },
+      web: {
+        //width: Constants.BaseStyle.DEVICE_WIDTH / 2.5
+      }
     })
   },
   heading: {

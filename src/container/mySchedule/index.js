@@ -21,11 +21,11 @@ import * as appAction from "../../actions";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Header from "../../components/common/Header";
-import MySchedule from "../../components/mySchedule";
+import MySchedule from "../../components/MySchedule";
 import Avtar from "../../components/common/Avatar";
 import CustomModal from "../../components/customModal";
-import Filter from "../../components/mySchedule/Filter";
-import MyScheduleList from "../../components/mySchedule/MyScheduleList";
+import Filter from "../../components/MySchedule/Filter";
+import MyScheduleList from "../../components/MySchedule/MyScheduleList";
 import { googleMapNavigate } from "../../helpers/MapDirections";
 import { openLinkingURL } from "../../helpers/Linking";
 class Home extends Component {
@@ -33,6 +33,7 @@ class Home extends Component {
     super(props);
     this.state = {
       patient: {},
+      page: 1,
       isVisible: false,
       prevDate: moment().format("MM/DD/YYYY"),
       nextDate: moment()
@@ -46,11 +47,6 @@ class Home extends Component {
   componentDidMount() {
     this.fetchMySchedules();
   }
-
-  fetchMySchedules = (refresh = false) => {
-    let { prevDate, nextDate } = this.state;
-    this.props.appAction.fetchMySchedules(prevDate, nextDate, refresh);
-  };
 
   onDrawerPress = () => {
     this.props.appAction.mergeOptions(this.props.componentId, true);
@@ -117,6 +113,23 @@ class Home extends Component {
     googleMapNavigate(source, destination);
   }
 
+  fetchMySchedules = (refresh = false) => {
+    let { prevDate, nextDate, page } = this.state;
+    this.props.appAction.fetchMySchedules(page, prevDate, nextDate, refresh);
+  };
+
+  onCurrentPageEndReach = () => {
+    let { myScheduleMeta } = this.props;
+    let { page } = this.state;
+    if (page < myScheduleMeta.totalPages) {
+      this.setState({ page: page++ }, () => this.fetchMySchedules());
+    }
+  };
+
+  onRefresh = () => {
+    this.setState({ page: 1 }, () => this.fetchMySchedules(true));
+  };
+
   render() {
     let { isVisible, nextDate, prevDate, patient } = this.state,
       { mySchedules, app } = this.props,
@@ -138,7 +151,8 @@ class Home extends Component {
             renderItem={this.renderPatients}
             onPatientPress={this.fetchPatientDetails}
             loader={app.refreshLoader}
-            onRefresh={() => this.fetchMySchedules(true)}
+            onRefresh={this.onRefresh}
+            onEndReached={this.onCurrentPageEndReach}
           />
         ) : (
           <View
@@ -201,6 +215,21 @@ class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user,
+  app: state.app,
+  mySchedules: state.schedule.mySchedules,
+  myScheduleMeta: state.schedule.myScheduleMeta
+});
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
 
 const Styles = StyleSheet.create({
   containner: {
@@ -283,16 +312,3 @@ const Styles = StyleSheet.create({
     })
   }
 });
-const mapStateToProps = state => ({
-  user: state.user,
-  app: state.app,
-  mySchedules: state.schedule.mySchedules
-});
-const mapDispatchToProps = dispatch => ({
-  appAction: bindActionCreators(appAction, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
