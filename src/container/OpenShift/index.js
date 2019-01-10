@@ -18,8 +18,6 @@ import Constants from "../../constants";
 import Shifts from "../../components/shift/Shifts";
 import Filter from "../../components/MySchedule/Filter";
 
-
-
 class OpenShift extends Component {
   constructor(props) {
     super(props);

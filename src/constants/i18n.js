@@ -36,6 +36,9 @@ let Strings = {
       "Gallery access permission is denied for " +
       AppConstants.AppName +
       ",Please enable it from the settings"
+  },
+  MySchedule: {
+    SchdeularName: "Schedular Name"
   }
 };
 

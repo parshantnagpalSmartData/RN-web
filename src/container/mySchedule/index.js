@@ -43,7 +43,7 @@ class Home extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openEmail = this.openEmail.bind(this);
     this.openTelephone = this.openTelephone.bind(this);
-  } 
+  }
   componentDidMount() {
     this.fetchMySchedules();
   }
@@ -186,11 +186,22 @@ class Home extends Component {
                 patient.Patient_State
               } ${patient.Patient_Zip}`}
             </Text>
+            <View style={Styles.centerLine}>
+            </View>
             <Text
               style={[
                 Styles.commonFontColor,
-                Styles.BoldText,
+                Styles.schedularName,
                 Styles.paddingTop
+              ]}
+            >
+              {Constants.Strings.MySchedule.SchdeularName}
+            </Text>
+            <Text
+              style={[
+                Styles.commonFontColor,
+                Styles.smallOne,
+                Styles.schedularFullName
               ]}
             >
               {`${patient.Scheduler_FirstName} ${patient.Scheduler_LastName}`}
@@ -251,6 +262,12 @@ const Styles = StyleSheet.create({
       }
     })
   },
+  centerLine: {
+    height:moderateScale(10),
+    width : moderateScale(250),
+    borderBottomColor : Constants.Colors.Gray,
+     borderBottomWidth : 1
+    },
   closeImage: {
     height: moderateScale(20),
     width: moderateScale(20)
@@ -266,6 +283,16 @@ const Styles = StyleSheet.create({
       }
     })
   },
+  schedularName: {
+    fontSize: moderateScale(20),
+    color: Constants.Colors.Black,
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(16)
+      }
+    })
+  },
+
   BoldText: {
     fontSize: moderateScale(20),
     paddingBottom: moderateScale(5),
@@ -278,6 +305,10 @@ const Styles = StyleSheet.create({
         paddingTop: moderateScale(0)
       }
     })
+  },
+  schedularFullName: {
+  
+    color: Constants.Colors.Black,
   },
   smallOne: {
     fontSize: moderateScale(15),
@@ -300,7 +331,13 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Bold
   },
   paddingTop: {
-    paddingTop: moderateScale(35)
+    paddingTop: moderateScale(20),
+    ...Platform.select({
+      web: {
+  
+        paddingTop: moderateScale(10)
+      }
+    })
   },
   noScheduleFoundText: {
     ...Constants.Fonts.Medium,
