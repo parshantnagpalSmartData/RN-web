@@ -101,14 +101,14 @@ class Home extends Component {
    * Method to open the google maps
    *
    */
-  openMaps() {
+  openMaps(latitude, longitude) {
     let source = {
       latitude: 30.7046,
       longitude: 76.7179
     };
     let destination = {
-      latitude: 30.7063633,
-      longitude: 76.7047791
+      latitude,
+      longitude
     };
     googleMapNavigate(source, destination);
   }
@@ -122,7 +122,7 @@ class Home extends Component {
     let { myScheduleMeta } = this.props;
     let { page } = this.state;
     if (page < myScheduleMeta.totalPages) {
-      this.setState({ page: page++ }, () => this.fetchMySchedules());
+      this.setState({ page: page + 1 }, () => this.fetchMySchedules());
     }
   };
 
@@ -145,7 +145,13 @@ class Home extends Component {
             this.onDateChange(prevDate, nextDate)
           }
         />
-        {mySchedules.length ? (
+        {!app.loading && !mySchedules.length ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text style={Styles.noScheduleFoundText}>No Schedule Found</Text>
+          </View>
+        ) : (
           <MyScheduleList
             patitents={mySchedules}
             renderItem={this.renderPatients}
@@ -154,12 +160,6 @@ class Home extends Component {
             onRefresh={this.onRefresh}
             onEndReached={this.onCurrentPageEndReach}
           />
-        ) : (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text style={Styles.noScheduleFoundText}>No Schedule Found</Text>
-          </View>
         )}
         <CustomModal
           isVisible={isVisible}
@@ -180,7 +180,12 @@ class Home extends Component {
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}
-              onPress={() => this.openMaps()}
+              onPress={() =>
+                this.openMaps(
+                  patient.Patient_Latitude,
+                  patient.Patient_Longitude
+                )
+              }
             >
               {`${patient.Patient_Address}, ${patient.Patient_City} ${
                 patient.Patient_State

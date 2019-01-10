@@ -61,7 +61,6 @@ class OpenShift extends Component {
   getLikeUpdate = (refresh = false) => {
     let { prevDate, nextDate, page } = this.state;
     this.props.appAction.fetchOpenShift(page, prevDate, nextDate, refresh);
-    this.setState({ loading: false, scheduleId: null });
   };
 
   onIconPress = scheduleId => {
@@ -71,9 +70,9 @@ class OpenShift extends Component {
         scheduleId
       },
       () => {
-        this.props.appAction.openshiftsLike(scheduleId, () => {
-          this.getLikeUpdate(true);
-        });
+        this.props.appAction.openshiftsLike(scheduleId, () =>
+          this.setState({ loading: false, scheduleId: null })
+        );
       }
     );
   };
@@ -96,7 +95,7 @@ class OpenShift extends Component {
     } = this.props;
     let { page } = this.state;
     if (page < openShiftMeta.totalPages) {
-      this.setState({ page: page++ }, () => this.getLikeUpdate(true));
+      this.setState({ page: page + 1 }, () => this.getLikeUpdate(true));
     }
   };
 
@@ -139,23 +138,7 @@ class OpenShift extends Component {
           }
         />
 
-        {openShift && openShift.length ? (
-          <FlatList
-            // numColumns={Platform.OS === "web" ? 2 : 1}
-            data={openShift}
-            extraData={this.state}
-            keyExtractor={item =>
-              item.SchedID.toString() + Math.random().toString()
-            }
-            refreshing={app.refreshLoader}
-            onRefresh={this.onRefresh}
-            renderItem={this.renderItem}
-            onEndReached={this.onCurrentPageEndReach}
-            onEndReachedThreshold={0}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-          />
-        ) : (
+        {!app.loading && !openShift.length ? (
           <View
             style={{
               flex: 1,
@@ -172,6 +155,22 @@ class OpenShift extends Component {
               No Shift Found
             </Text>
           </View>
+        ) : (
+          <FlatList
+            // numColumns={Platform.OS === "web" ? 2 : 1}
+            data={openShift}
+            extraData={this.state}
+            keyExtractor={item =>
+              item.SchedID.toString() + Math.random().toString()
+            }
+            refreshing={app.refreshLoader}
+            onRefresh={this.onRefresh}
+            renderItem={this.renderItem}
+            onEndReached={this.onCurrentPageEndReach}
+            onEndReachedThreshold={0}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          />
         )}
       </View>
     );

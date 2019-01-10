@@ -40,7 +40,11 @@ class MyProfile extends Component {
           buttonName={"Reset Password"}
           gradientColors={Constants.Colors.ButtonGradients}
           onPress={this.resetPassword}
-          gradientStyle={{ borderRadius: moderateScale(10) }}
+          gradientStyle={{ borderRadius: moderateScale(70) }}
+          buttonStyle={{
+            marginHorizontal: moderateScale(30),
+            bottom: moderateScale(50)
+          }}
         />
       </View>
     );

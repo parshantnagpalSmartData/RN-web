@@ -21,6 +21,9 @@ export const fetchOpenShift = (
     refresh
       ? dispatch(AppActions.startRefreshLoader())
       : dispatch(AppActions.startLoader());
+    if (page === 1) {
+      dispatch({ type: Types.CLEAR_OPEN_SHIFT });
+    }
     RestClient.getCall(
       `nurses/openshifts?startDate=${startDate}&enddate=${enddate}&page=${page}&limit=${limit}`,
       getState().user.token
@@ -70,6 +73,10 @@ export const openshiftsLike = (shiftId, sucess) => {
     )
       .then(res => {
         if (res.status) {
+          dispatch({
+            type: Types.UPDATE_OPENSHIFT_LIKE_INDICATOR,
+            payload: shiftId
+          });
           sucess();
         } else {
           if (res.error === "Token expired") {

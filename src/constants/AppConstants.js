@@ -19,7 +19,7 @@ let AppConstants = {
   Alert: {
     Logout: "Are you sure want to logout?"
   },
-  limit: 20
+  limit: 15
 };
 
 module.exports = AppConstants;
