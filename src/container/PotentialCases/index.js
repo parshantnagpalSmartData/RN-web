@@ -109,7 +109,9 @@ class PotientialCases extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Potiential Cases"} onDrawerPress={this.onDrawerPress} />
-        {!app.loading && !app.refreshLoader && !potientialCases.length ? (
+        {!app.loading &&
+        !app.refreshLoader &&
+        !(potientialCases && potientialCases.length) ? (
           <View
             style={{
               flex: 1,

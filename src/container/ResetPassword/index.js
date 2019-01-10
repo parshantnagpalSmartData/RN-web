@@ -172,7 +172,12 @@ class ResetPssword extends Component {
               gradientStyle={{ borderRadius: moderateScale(70) }}
               buttonStyle={{
                 marginHorizontal: moderateScale(30),
-                bottom: moderateScale(50)
+                bottom: moderateScale(50),
+                ...Platform.select({
+                  web: {
+                    bottom: moderateScale(0)
+                  }
+                })
               }}
             />
           </View>

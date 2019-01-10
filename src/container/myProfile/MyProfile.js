@@ -6,7 +6,7 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "React";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -43,7 +43,10 @@ class MyProfile extends Component {
           gradientStyle={{ borderRadius: moderateScale(70) }}
           buttonStyle={{
             marginHorizontal: moderateScale(30),
-            bottom: moderateScale(50)
+            bottom: moderateScale(50),
+            ...Platform.select({
+              web: { marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2 }
+            })
           }}
         />
       </View>
