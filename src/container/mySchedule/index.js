@@ -191,8 +191,7 @@ class Home extends Component {
                 patient.Patient_State
               } ${patient.Patient_Zip}`}
             </Text>
-            <View style={Styles.centerLine}>
-            </View>
+            <View style={Styles.centerLine} />
             <Text
               style={[
                 Styles.commonFontColor,
@@ -268,11 +267,11 @@ const Styles = StyleSheet.create({
     })
   },
   centerLine: {
-    height:moderateScale(10),
-    width : moderateScale(250),
-    borderBottomColor : Constants.Colors.Gray,
-     borderBottomWidth : 1
-    },
+    height: moderateScale(10),
+    width: moderateScale(250),
+    borderBottomColor: Constants.Colors.Gray,
+    borderBottomWidth: 1
+  },
   closeImage: {
     height: moderateScale(20),
     width: moderateScale(20)
@@ -312,8 +311,7 @@ const Styles = StyleSheet.create({
     })
   },
   schedularFullName: {
-  
-    color: Constants.Colors.Black,
+    color: Constants.Colors.Black
   },
   smallOne: {
     fontSize: moderateScale(15),
@@ -339,7 +337,6 @@ const Styles = StyleSheet.create({
     paddingTop: moderateScale(20),
     ...Platform.select({
       web: {
-  
         paddingTop: moderateScale(10)
       }
     })
