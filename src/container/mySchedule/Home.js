@@ -101,14 +101,14 @@ class Home extends Component {
    * Method to open the google maps
    *
    */
-  openMaps() {
+  openMaps(latitude, longitude) {
     let source = {
       latitude: 30.7046,
       longitude: 76.7179
     };
     let destination = {
-      latitude: 30.7063633,
-      longitude: 76.7047791
+      latitude,
+      longitude
     };
     googleMapNavigate(source, destination);
   }
@@ -180,7 +180,12 @@ class Home extends Component {
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}
-              onPress={() => this.openMaps()}
+              onPress={() =>
+                this.openMaps(
+                  patient.Patient_Latitude,
+                  patient.Patient_Longitude
+                )
+              }
             >
               {`${patient.Patient_Address}, ${patient.Patient_City} ${
                 patient.Patient_State
