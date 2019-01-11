@@ -35,8 +35,8 @@ let spanHeaderStyle = {
       ...Constants.Fonts.Regular
     }
   },
-  scheduleColor = { color: "green" },
-  nonScheduleColor = { color: "red" };
+  scheduleColor = { color: "rgba(54, 156, 18, 0.7)" },
+  nonScheduleColor = { color: "rgba(228, 67, 46, 0.7)" };
 const MyScheduleList = ({ patitents, onPatientPress }) => {
   return (
     <div className={"contentScroll"}>
@@ -54,7 +54,7 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             headerStyle: headerStyle,
             getProps: () => cellStyle,
             Cell: props => (
-              <span className="number">
+              <span className="cusor-point">
                 {moment(props.value).format("DD MMM YYYY")}
               </span>
             )
@@ -64,14 +64,24 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             Header: () => <span style={spanHeaderStyle}>Name</span>,
             accessor: "Pat_LName",
             headerStyle: headerStyle,
-            getProps: () => cellStyle
+            getProps: () => cellStyle,
+            Cell: props => (
+              <span className="cusor-point">
+                {props.value}
+              </span>
+            )
           },
           {
             // Header: "Time",
             Header: () => <span style={spanHeaderStyle}>Time</span>,
             accessor: "StartTime",
             headerStyle: headerStyle,
-            getProps: () => cellStyle
+            getProps: () => cellStyle,
+            Cell: props => (
+              <span className="cusor-point">
+                {props.value}
+              </span>
+            )
           },
           {
             // Header: "Status",
@@ -81,6 +91,7 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             getProps: () => cellStyle,
             Cell: props => (
               <span
+              className="cusor-point"
                 style={
                   props.value == "Scheduled" ? scheduleColor : nonScheduleColor
                 }

@@ -39,7 +39,7 @@ const Shifts = props => {
           scheduleId={scheduleId}
         />
       </View>
-      <FlatList
+      {skills &&<FlatList
         contentContainerStyle={{
           justifyContent: "space-between",
           alignItems: "center"
@@ -48,7 +48,9 @@ const Shifts = props => {
         style={{
           ...Platform.select({
             web: {
-              backgroundColor: Constants.Colors.LighBlueWhite
+              backgroundColor: Constants.Colors.LighBlueWhite,
+              height:moderateScale(40) ,
+             justifyContent :"center"
             }
           })
         }}
@@ -92,7 +94,7 @@ const Shifts = props => {
             );
           }
         }}
-      />
+      />}
       <PatientsDetails
         // patient={patient}
         date={patient.SchedDate}
@@ -120,14 +122,14 @@ const Styles = StyleSheet.create({
       ios: { flex: 1 },
       android: { flex: 1 },
       web: {
-        width: Constants.BaseStyle.DEVICE_WIDTH / 2.5,
+        width: Constants.BaseStyle.DEVICE_WIDTH / 2.7,
         marginVertical: moderateScale(10),
         margin: moderateScale(10),
         backgroundColor: Constants.Colors.White,
         paddingHorizontal: moderateScale(0),
         borderBottomWidth: 0,
         shadowColor: "#000000",
-        shadowOffset: { width: 0, height: 1 },
+   
         shadowOpacity: 0.1,
         shadowRadius: 2
       }

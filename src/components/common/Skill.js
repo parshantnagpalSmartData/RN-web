@@ -54,6 +54,11 @@ const Styles = StyleSheet.create({
   skill: {
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(11),
-    color: Constants.Colors.White
+    color: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(10),
+      }
+    })
   }
 });

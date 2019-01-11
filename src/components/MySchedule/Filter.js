@@ -91,7 +91,12 @@ const Styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderBottomWidth: 0.4,
-    borderBottomColor: Constants.Colors.Gray
+    borderBottomColor: Constants.Colors.Gray,
+    ...Platform.select({
+      web: {
+        borderBottomWidth: 0
+      }
+    })
   },
   commonFontColor: {
     color: Constants.Colors.Primary,

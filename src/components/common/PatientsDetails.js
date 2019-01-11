@@ -26,10 +26,10 @@ const PatientsDetails = props => {
       {birthday ? (
         <View style={[Styles.boxStyle, Styles.ageStyle]}>
           {Platform.OS == "web" ? (
-            <View style={{ paddingBottom: moderateScale(5) }}>
+            <View style={Styles.imageBottomPadding}>
               <Image
                 source={Constants.Images.Age}
-                style={{ height: moderateScale(16), width: moderateScale(16) }}
+                style={Styles.imageIconWeb}
               />
             </View>
           ) : null}
@@ -42,10 +42,10 @@ const PatientsDetails = props => {
       {date ? (
         <View style={Styles.boxStyle}>
           {Platform.OS == "web" ? (
-            <View style={{ paddingBottom: moderateScale(5) }}>
+            <View style={Styles.imageBottomPadding}>
               <Image
                 source={Constants.Images.Calander}
-                style={{ height: moderateScale(16), width: moderateScale(16) }}
+                style={Styles.imageIconWeb}
               />
             </View>
           ) : null}
@@ -58,10 +58,10 @@ const PatientsDetails = props => {
       {StartTime && EndTime ? (
         <View style={Styles.boxStyle}>
           {Platform.OS == "web" ? (
-            <View style={{ paddingBottom: moderateScale(5) }}>
+            <View style={Styles.imageBottomPadding}>
               <Image
                 source={Constants.Images.Date}
-                style={{ height: moderateScale(16), width: moderateScale(16) }}
+                style={Styles.imageIconWeb}
               />
             </View>
           ) : null}
@@ -74,10 +74,10 @@ const PatientsDetails = props => {
       {age ? (
         <View style={Styles.boxStyle}>
           {Platform.OS == "web" ? (
-            <View style={{ paddingBottom: moderateScale(5) }}>
+            <View style={Styles.imageBottomPadding}>
               <Image
                 source={Constants.Images.Age}
-                style={{ height: moderateScale(16), width: moderateScale(16) }}
+                style={Styles.imageIconWeb}
               />
             </View>
           ) : null}
@@ -88,10 +88,10 @@ const PatientsDetails = props => {
       {gender ? (
         <View style={Styles.boxStyle}>
           {Platform.OS == "web" ? (
-            <View style={{ paddingBottom: moderateScale(5) }}>
+            <View style={Styles.imageBottomPadding}>
               <Image
                 source={Constants.Images.Gender}
-                style={{ height: moderateScale(22), width: moderateScale(18) }}
+                style={Styles.imageIconWeblargeGender}
               />
             </View>
           ) : null}
@@ -102,10 +102,10 @@ const PatientsDetails = props => {
       {zip ? (
         <View style={Styles.boxStyle}>
           {Platform.OS == "web" ? (
-            <View style={{ paddingBottom: moderateScale(5) }}>
+            <View style={Styles.imageBottomPadding}>
               <Image
                 source={Constants.Images.ZipCode}
-                style={{ height: moderateScale(22), width: moderateScale(16) }}
+                style={Styles.imageIconWeblargeHeightIcons}
               />
             </View>
           ) : null}
@@ -179,5 +179,10 @@ const Styles = StyleSheet.create({
         fontSize: moderateScale(11)
       }
     })
-  }
+  },
+  imageIconWeb : { height: moderateScale(17), width: moderateScale(17) },
+  imageBottomPadding :{ paddingBottom: moderateScale(5) },
+  imageIconWeblargeHeightIcons :{ height: moderateScale(20), width: moderateScale(14) },
+  imageIconWeblargeGender :{ height: moderateScale(21), width: moderateScale(17) }
+
 });
