@@ -21,7 +21,8 @@ const Shifts = props => {
     isSelected,
     onLikePress,
     loading,
-    scheduleId
+    scheduleId,
+    blankView
   } = props;
   if (showAll) {
     skills[skills.length + 1] = "Hide less";
@@ -44,11 +45,13 @@ const Shifts = props => {
           alignItems: "center"
           // width: Constants.BaseStyle.DEVICE_WIDTH
         }}
-        style={
-          {
-            // backgroundColor: "red"
-          }
-        }
+        style={{
+          ...Platform.select({
+            web: {
+              backgroundColor: Constants.Colors.LighBlueWhite
+            }
+          })
+        }}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         data={skills}
@@ -59,7 +62,7 @@ const Shifts = props => {
             ? item => item.toString()
             : item => item + Math.random().toString()
         }`}
-        numColumns={showAll ? (Platform.OS === "web" ? 8 : 3) : 4}
+        numColumns={showAll ? (Platform.OS === "web" ? 6 : 3) : 4}
         renderItem={({ item, index }) => {
           if (!showAll) {
             if (index < 3) {
@@ -99,6 +102,7 @@ const Shifts = props => {
         gender={patient.Patient_Gender || patient.Sex}
         zip={patient.Patient_Zip || patient.Zip}
         birthday={patient.Bday}
+        blankView={blankView}
       />
     </View>
   );
@@ -116,7 +120,16 @@ const Styles = StyleSheet.create({
       ios: { flex: 1 },
       android: { flex: 1 },
       web: {
-        //width: Constants.BaseStyle.DEVICE_WIDTH / 2.5
+        width: Constants.BaseStyle.DEVICE_WIDTH / 2.5,
+        marginVertical: moderateScale(10),
+        margin: moderateScale(10),
+        backgroundColor: Constants.Colors.White,
+        paddingHorizontal: moderateScale(0),
+        borderBottomWidth: 0,
+        shadowColor: "#000000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2
       }
     })
   },
@@ -128,6 +141,12 @@ const Styles = StyleSheet.create({
   skill: {
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(17),
-    color: Constants.Colors.Secondary
+    color: Constants.Colors.Secondary,
+    paddingLeft: moderateScale(10),
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(13)
+      }
+    })
   }
 });

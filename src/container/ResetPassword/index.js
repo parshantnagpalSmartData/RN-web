@@ -156,7 +156,7 @@ class ResetPssword extends Component {
                   this.setState({ reNewPass });
                 }}
                 value={this.state.reNewPass}
-                returnKeyType={"return"}
+                returnKeyType={"done"}
                 autoCapitalize={"none"}
                 secureText
                 ref={ref => (this.reNewPass = ref)}
@@ -169,7 +169,16 @@ class ResetPssword extends Component {
               buttonName={"Reset Password"}
               gradientColors={Constants.Colors.ButtonGradients}
               onPress={this.resetPssword}
-              gradientStyle={Styles.gradientStyle}
+              gradientStyle={{ borderRadius: moderateScale(70) }}
+              buttonStyle={{
+                marginHorizontal: moderateScale(30),
+                bottom: moderateScale(50),
+                ...Platform.select({
+                  web: {
+                    bottom: moderateScale(0)
+                  }
+                })
+              }}
             />
           </View>
         </KeyboardAwareScrollView>

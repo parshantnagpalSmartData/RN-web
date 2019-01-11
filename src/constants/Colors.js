@@ -28,7 +28,9 @@ let colors = {
   FadeBorder: "#e0e0e0",
   FilterBackground: "#EAEAEA",
   ButtonGradients: ["#3098CF", "#2D3E9D"],
-  SelectedMenu: ["#2D3F9E", "#3097CE"]
+  SelectedMenu: ["#2D3F9E", "#3097CE"],
+  BlueWhite: "#F1F5FA",
+  LighBlueWhite: "#d1e8f5"
 };
 
 module.exports = colors;

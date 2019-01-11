@@ -5,7 +5,7 @@ Description: Contains the Potential cases component
 Date : 13 december 2018
 */
 import React, { Component } from "React";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList, Text, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -33,7 +33,6 @@ class PotientialCases extends Component {
 
   fetchPotientialCases = (refreshLoader = false) => {
     this.props.appAction.fetchPotientialCases(this.state.page, refreshLoader);
-    this.setState({ loading: false, CaseID: null });
   };
 
   onDrawerPress = () => {
@@ -47,9 +46,9 @@ class PotientialCases extends Component {
         CaseID
       },
       () => {
-        this.props.appAction.potientialCasesLike(CaseID, () => {
-          this.fetchPotientialCases(true);
-        });
+        this.props.appAction.potientialCasesLike(CaseID, () =>
+          this.setState({ loading: false, CaseID: null })
+        );
       }
     );
   };
@@ -70,6 +69,7 @@ class PotientialCases extends Component {
         onLikePress={this.onIconPress}
         loading={loading}
         scheduleId={CaseID}
+        blankView={false}
       />
     );
   };
@@ -96,7 +96,7 @@ class PotientialCases extends Component {
     } = this.props;
     let { page } = this.state;
     if (page < potientialCasesMeta.totalPages) {
-      this.setState({ page: page++ }, () => this.fetchPotientialCases(true));
+      this.setState({ page: page + 1 }, () => this.fetchPotientialCases(true));
     }
   };
 
@@ -110,7 +110,26 @@ class PotientialCases extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Potiential Cases"} onDrawerPress={this.onDrawerPress} />
-        {potientialCases && potientialCases.length ? (
+        {!app.loading &&
+        !app.refreshLoader &&
+        !(potientialCases && potientialCases.length) ? (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text
+              style={{
+                ...Constants.Fonts.Medium,
+                fontSize: moderateScale(20)
+              }}
+            >
+              Potential Cases Not Found
+            </Text>
+          </View>
+        ) : (
           <FlatList
             // numColumns={Platform.OS === "web" ? 2 : 1}
             data={potientialCases}
@@ -125,24 +144,8 @@ class PotientialCases extends Component {
             onEndReachedThreshold={0}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
+            numColumns={Platform.OS == "web" ? 2 : 1}
           />
-        ) : (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Text
-              style={{
-                ...Constants.Fonts.Medium,
-                fontSize: moderateScale(20)
-              }}
-            >
-              No Shift Found
-            </Text>
-          </View>
         )}
       </View>
     );
@@ -151,7 +154,13 @@ class PotientialCases extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        backgroundColor: Constants.Colors.BlueWhite
+      }
+    })
   }
 });
 const mapStateToProps = state => ({

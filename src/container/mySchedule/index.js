@@ -43,7 +43,7 @@ class Home extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openEmail = this.openEmail.bind(this);
     this.openTelephone = this.openTelephone.bind(this);
-  } 
+  }
   componentDidMount() {
     this.fetchMySchedules();
   }
@@ -101,14 +101,14 @@ class Home extends Component {
    * Method to open the google maps
    *
    */
-  openMaps() {
+  openMaps(latitude, longitude) {
     let source = {
       latitude: 30.7046,
       longitude: 76.7179
     };
     let destination = {
-      latitude: 30.7063633,
-      longitude: 76.7047791
+      latitude,
+      longitude
     };
     googleMapNavigate(source, destination);
   }
@@ -122,7 +122,7 @@ class Home extends Component {
     let { myScheduleMeta } = this.props;
     let { page } = this.state;
     if (page < myScheduleMeta.totalPages) {
-      this.setState({ page: page++ }, () => this.fetchMySchedules());
+      this.setState({ page: page + 1 }, () => this.fetchMySchedules());
     }
   };
 
@@ -145,7 +145,13 @@ class Home extends Component {
             this.onDateChange(prevDate, nextDate)
           }
         />
-        {mySchedules.length ? (
+        {!app.loading && !mySchedules.length ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text style={Styles.noScheduleFoundText}>No Schedule Found</Text>
+          </View>
+        ) : (
           <MyScheduleList
             patitents={mySchedules}
             renderItem={this.renderPatients}
@@ -154,12 +160,6 @@ class Home extends Component {
             onRefresh={this.onRefresh}
             onEndReached={this.onCurrentPageEndReach}
           />
-        ) : (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text style={Styles.noScheduleFoundText}>No Schedule Found</Text>
-          </View>
         )}
         <CustomModal
           isVisible={isVisible}
@@ -180,17 +180,32 @@ class Home extends Component {
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}
-              onPress={() => this.openMaps()}
+              onPress={() =>
+                this.openMaps(
+                  patient.Patient_Latitude,
+                  patient.Patient_Longitude
+                )
+              }
             >
               {`${patient.Patient_Address}, ${patient.Patient_City} ${
                 patient.Patient_State
               } ${patient.Patient_Zip}`}
             </Text>
+            <View style={Styles.centerLine} />
             <Text
               style={[
                 Styles.commonFontColor,
-                Styles.BoldText,
+                Styles.schedularName,
                 Styles.paddingTop
+              ]}
+            >
+              {Constants.Strings.MySchedule.SchdeularName}
+            </Text>
+            <Text
+              style={[
+                Styles.commonFontColor,
+                Styles.smallOne,
+                Styles.schedularFullName
               ]}
             >
               {`${patient.Scheduler_FirstName} ${patient.Scheduler_LastName}`}
@@ -251,6 +266,12 @@ const Styles = StyleSheet.create({
       }
     })
   },
+  centerLine: {
+    height: moderateScale(10),
+    width: moderateScale(250),
+    borderBottomColor: Constants.Colors.Gray,
+    borderBottomWidth: 1
+  },
   closeImage: {
     height: moderateScale(20),
     width: moderateScale(20)
@@ -266,6 +287,16 @@ const Styles = StyleSheet.create({
       }
     })
   },
+  schedularName: {
+    fontSize: moderateScale(20),
+    color: Constants.Colors.Black,
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(16)
+      }
+    })
+  },
+
   BoldText: {
     fontSize: moderateScale(20),
     paddingBottom: moderateScale(5),
@@ -278,6 +309,9 @@ const Styles = StyleSheet.create({
         paddingTop: moderateScale(0)
       }
     })
+  },
+  schedularFullName: {
+    color: Constants.Colors.Black
   },
   smallOne: {
     fontSize: moderateScale(15),
@@ -300,7 +334,12 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Bold
   },
   paddingTop: {
-    paddingTop: moderateScale(35)
+    paddingTop: moderateScale(20),
+    ...Platform.select({
+      web: {
+        paddingTop: moderateScale(10)
+      }
+    })
   },
   noScheduleFoundText: {
     ...Constants.Fonts.Medium,

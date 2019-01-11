@@ -6,7 +6,7 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "React";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList, Text, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -17,8 +17,6 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
 import Shifts from "../../components/shift/Shifts";
 import Filter from "../../components/MySchedule/Filter";
-
-
 
 class OpenShift extends Component {
   constructor(props) {
@@ -63,7 +61,6 @@ class OpenShift extends Component {
   getLikeUpdate = (refresh = false) => {
     let { prevDate, nextDate, page } = this.state;
     this.props.appAction.fetchOpenShift(page, prevDate, nextDate, refresh);
-    this.setState({ loading: false, scheduleId: null });
   };
 
   onIconPress = scheduleId => {
@@ -73,9 +70,9 @@ class OpenShift extends Component {
         scheduleId
       },
       () => {
-        this.props.appAction.openshiftsLike(scheduleId, () => {
-          this.getLikeUpdate(true);
-        });
+        this.props.appAction.openshiftsLike(scheduleId, () =>
+          this.setState({ loading: false, scheduleId: null })
+        );
       }
     );
   };
@@ -98,7 +95,7 @@ class OpenShift extends Component {
     } = this.props;
     let { page } = this.state;
     if (page < openShiftMeta.totalPages) {
-      this.setState({ page: page++ }, () => this.getLikeUpdate(true));
+      this.setState({ page: page + 1 }, () => this.getLikeUpdate(true));
     }
   };
 
@@ -122,6 +119,7 @@ class OpenShift extends Component {
         onLikePress={this.onIconPress}
         loading={loading}
         scheduleId={scheduleId}
+        blankView={true}
       />
     );
   };
@@ -141,23 +139,7 @@ class OpenShift extends Component {
           }
         />
 
-        {openShift && openShift.length ? (
-          <FlatList
-            // numColumns={Platform.OS === "web" ? 2 : 1}
-            data={openShift}
-            extraData={this.state}
-            keyExtractor={item =>
-              item.SchedID.toString() + Math.random().toString()
-            }
-            refreshing={app.refreshLoader}
-            onRefresh={this.onRefresh}
-            renderItem={this.renderItem}
-            onEndReached={this.onCurrentPageEndReach}
-            onEndReachedThreshold={0}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-          />
-        ) : (
+        {!app.loading && !openShift.length ? (
           <View
             style={{
               flex: 1,
@@ -174,6 +156,23 @@ class OpenShift extends Component {
               No Shift Found
             </Text>
           </View>
+        ) : (
+          <FlatList
+            // numColumns={Platform.OS === "web" ? 2 : 1}
+            data={openShift}
+            extraData={this.state}
+            keyExtractor={item =>
+              item.SchedID.toString() + Math.random().toString()
+            }
+            refreshing={app.refreshLoader}
+            onRefresh={this.onRefresh}
+            renderItem={this.renderItem}
+            onEndReached={this.onCurrentPageEndReach}
+            onEndReachedThreshold={0}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            numColumns={Platform.OS == "web" ? 2 : 1}
+          />
         )}
       </View>
     );
@@ -182,7 +181,13 @@ class OpenShift extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        backgroundColor: Constants.Colors.BlueWhite
+      }
+    })
   }
 });
 const mapStateToProps = state => ({

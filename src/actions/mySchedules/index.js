@@ -21,6 +21,9 @@ export const fetchMySchedules = (
     refresh
       ? dispatch(AppActions.startRefreshLoader())
       : dispatch(AppActions.startLoader());
+    if (page === 1) {
+      dispatch({ type: Types.CLEAR_MY_SCHEDULE });
+    }
     RestClient.getCall(
       `nurses/schedules?startDate=${prevDate}&endDate=${nextDate}&page=${page}&limit=${limit}`,
       getState().user.token

@@ -25,7 +25,9 @@ export const fetchPotientialCases = (
         ? dispatch(AppActions.stopRefreshLoader())
         : dispatch(AppActions.stopLoader());
     startLoader();
-
+    if (page === 1) {
+      dispatch({ type: Types.CLEAR_POTIENTIAL_DATA });
+    }
     RestClient.getCall(
       `nurses/potentialcases?page=${page}&limit=${limit}`,
       getState().user.token
@@ -70,6 +72,10 @@ export const potientialCasesLike = (caseId, sucess) => {
     )
       .then(res => {
         if (res.status) {
+          dispatch({
+            type: Types.UPDATE_POTIENTIAL_LIKE_INDICATOR,
+            payload: caseId
+          });
           sucess();
         } else {
           if (res.error === "Token expired") {

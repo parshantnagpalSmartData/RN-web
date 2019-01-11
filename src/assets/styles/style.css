@@ -5,9 +5,9 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
 
 .contentScroll{height: calc(100vh - 115px); overflow: auto;}
 
-.leftContainer{width:260px;}
+.leftContainer, .leftContainer > div{width:260px;}
 .leftContainer > div, .rightContentContainer > div{height: 100%;}
-.rightContentContainer{flex:1; width: 100%; position: relative;}
+.rightContentContainer{flex:1; /*width: 100%;*/ position: relative;}
 .menuToggle{position: absolute; left:15px; top:20px; z-index: 9; display: none;}
 .menuToggle span{width: 25px; height: 2px; background-color: #fff; margin: 6px 0; transition: 0.4s; display: block;}
 

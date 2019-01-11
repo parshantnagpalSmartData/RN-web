@@ -5,17 +5,34 @@
  */
 
 import React from "react";
-import { View, StyleSheet, Text, Platform } from "react-native";
+import { View, StyleSheet, Text, Platform, Image } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import moment from "moment";
 
 const PatientsDetails = props => {
-  let { date, StartTime, EndTime, age, gender, zip, birthday } = props;
+  let {
+    date,
+    StartTime,
+    EndTime,
+    age,
+    gender,
+    zip,
+    birthday,
+    blankView
+  } = props;
   return (
     <View style={Styles.container}>
       {birthday ? (
-        <View style={Styles.boxStyle}>
+        <View style={[Styles.boxStyle, Styles.ageStyle]}>
+          {Platform.OS == "web" ? (
+            <View style={{ paddingBottom: moderateScale(5) }}>
+              <Image
+                source={Constants.Images.Age}
+                style={{ height: moderateScale(16), width: moderateScale(16) }}
+              />
+            </View>
+          ) : null}
           <Text style={Styles.heading}>Age</Text>
           <Text style={Styles.value}>
             {moment().diff(birthday, "years")} yrs
@@ -24,6 +41,14 @@ const PatientsDetails = props => {
       ) : null}
       {date ? (
         <View style={Styles.boxStyle}>
+          {Platform.OS == "web" ? (
+            <View style={{ paddingBottom: moderateScale(5) }}>
+              <Image
+                source={Constants.Images.Calander}
+                style={{ height: moderateScale(16), width: moderateScale(16) }}
+              />
+            </View>
+          ) : null}
           <Text style={Styles.heading}>Date</Text>
           <Text style={Styles.value}>
             {moment(date).format("MM-DD-YYYY ddd")}
@@ -32,6 +57,14 @@ const PatientsDetails = props => {
       ) : null}
       {StartTime && EndTime ? (
         <View style={Styles.boxStyle}>
+          {Platform.OS == "web" ? (
+            <View style={{ paddingBottom: moderateScale(5) }}>
+              <Image
+                source={Constants.Images.Date}
+                style={{ height: moderateScale(16), width: moderateScale(16) }}
+              />
+            </View>
+          ) : null}
           <Text style={Styles.heading}>Time</Text>
           <Text style={Styles.value}>
             {StartTime} -{EndTime}
@@ -40,20 +73,50 @@ const PatientsDetails = props => {
       ) : null}
       {age ? (
         <View style={Styles.boxStyle}>
+          {Platform.OS == "web" ? (
+            <View style={{ paddingBottom: moderateScale(5) }}>
+              <Image
+                source={Constants.Images.Age}
+                style={{ height: moderateScale(16), width: moderateScale(16) }}
+              />
+            </View>
+          ) : null}
           <Text style={Styles.heading}>Age</Text>
           <Text style={Styles.value}>{age} yrs</Text>
         </View>
       ) : null}
       {gender ? (
         <View style={Styles.boxStyle}>
+          {Platform.OS == "web" ? (
+            <View style={{ paddingBottom: moderateScale(5) }}>
+              <Image
+                source={Constants.Images.Gender}
+                style={{ height: moderateScale(22), width: moderateScale(18) }}
+              />
+            </View>
+          ) : null}
           <Text style={Styles.heading}>Patient Gender</Text>
           <Text style={Styles.value}>{gender}</Text>
         </View>
       ) : null}
       {zip ? (
         <View style={Styles.boxStyle}>
+          {Platform.OS == "web" ? (
+            <View style={{ paddingBottom: moderateScale(5) }}>
+              <Image
+                source={Constants.Images.ZipCode}
+                style={{ height: moderateScale(22), width: moderateScale(16) }}
+              />
+            </View>
+          ) : null}
           <Text style={Styles.heading}>Zipcode</Text>
           <Text style={Styles.value}>{zip}</Text>
+        </View>
+      ) : null}
+      {blankView ? (
+        <View style={Styles.boxStyle}>
+          <Text style={Styles.heading} />
+          <Text style={Styles.value} />
         </View>
       ) : null}
     </View>
@@ -67,12 +130,24 @@ const Styles = StyleSheet.create({
     flexDirection: "row",
     width:
       Platform.OS === "web"
-        ? Constants.BaseStyle.DEVICE_WIDTH - moderateScale(400)
+        ? Constants.BaseStyle.DEVICE_WIDTH * 0.38
         : Constants.BaseStyle.DEVICE_WIDTH,
     padding: moderateScale(5),
     alignItems: "center",
     justifyContent: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    ...Platform.select({
+      web: {
+        justifyContent: "space-between"
+      }
+    })
+  },
+  ageStyle: {
+    ...Platform.select({
+      web: {
+        width: Constants.BaseStyle.DEVICE_WIDTH * 0.04
+      }
+    })
   },
   boxStyle: {
     width:
@@ -86,12 +161,23 @@ const Styles = StyleSheet.create({
   heading: {
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(14),
-    color: Constants.Colors.Black
+    color: Constants.Colors.Black,
+    ...Platform.select({
+      web: {
+        textAlign: "center",
+        fontSize: moderateScale(13)
+      }
+    })
   },
   value: {
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(12),
     color: Constants.Colors.Secondary,
-    paddingVertical: moderateScale(5)
+    paddingVertical: moderateScale(5),
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(11)
+      }
+    })
   }
 });
