@@ -6,7 +6,7 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "React";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList, Text, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -119,6 +119,7 @@ class OpenShift extends Component {
         onLikePress={this.onIconPress}
         loading={loading}
         scheduleId={scheduleId}
+        blankView={true}
       />
     );
   };
@@ -170,6 +171,7 @@ class OpenShift extends Component {
             onEndReachedThreshold={0}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
+            numColumns={Platform.OS == "web" ? 2 : 1}
           />
         )}
       </View>
@@ -179,7 +181,13 @@ class OpenShift extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        backgroundColor: Constants.Colors.BlueWhite
+      }
+    })
   }
 });
 const mapStateToProps = state => ({
