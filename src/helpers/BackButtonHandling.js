@@ -14,7 +14,7 @@ import { Dialog } from "./common";
  */
 export function handleBackPress() {
   Dialog(
-    "Are You Sure You Want To Exit",
+    "Are you sure you want to exit",
     [
       {
         text: "Cancel",

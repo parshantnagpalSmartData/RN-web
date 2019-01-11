@@ -132,9 +132,9 @@ const Styles = StyleSheet.create({
       Platform.OS === "web"
         ? Constants.BaseStyle.DEVICE_WIDTH * 0.38
         : Constants.BaseStyle.DEVICE_WIDTH,
-    padding: moderateScale(5),
+    paddingVertical: moderateScale(5),
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     flexWrap: "wrap",
     ...Platform.select({
       web: {
@@ -153,10 +153,12 @@ const Styles = StyleSheet.create({
     width:
       Platform.OS === "web"
         ? Constants.BaseStyle.DEVICE_WIDTH * 0.1
-        : Constants.BaseStyle.DEVICE_WIDTH / 3.2,
+        : Constants.BaseStyle.DEVICE_WIDTH / 3,
     paddingVertical: moderateScale(5),
-    alignItems: "center",
-    justifyContent: Platform.OS === "web" ? "flex-start" : "center"
+    paddingHorizontal:
+      Platform.OS === "web" ? moderateScale(5) : moderateScale(10),
+    alignItems: Platform.OS === "web" ? "center" : "flex-start",
+    justifyContent: Platform.OS === "web" ? "flex-start" : "flex-start"
   },
   heading: {
     ...Constants.Fonts.Medium,

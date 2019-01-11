@@ -77,6 +77,12 @@ export const openshiftsLike = (shiftId, sucess) => {
             type: Types.UPDATE_OPENSHIFT_LIKE_INDICATOR,
             payload: shiftId
           });
+          // dispatch(
+          //   AppActions.showToast(
+          //     Constants.Strings.Sucess.likeIndicator,
+          //     res.message
+          //   )
+          // );
           sucess();
         } else {
           if (res.error === "Token expired") {

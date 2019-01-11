@@ -94,7 +94,6 @@ const Shifts = props => {
         }}
       />
       <PatientsDetails
-        // patient={patient}
         date={patient.SchedDate}
         StartTime={patient.StartTime}
         EndTime={patient.EndTime}

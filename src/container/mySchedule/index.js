@@ -329,7 +329,8 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.Primary,
     ...Constants.Fonts.Regular,
     textAlign: "center",
-    textAlignVertical: "center"
+    textAlignVertical: "center",
+    paddingHorizontal: moderateScale(5)
   },
   commonFontColorBold: {
     color: Constants.Colors.Primary,

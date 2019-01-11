@@ -20,7 +20,9 @@ let Strings = {
     OTPDigit: "OTP must be 4 digit."
   },
   Error: {},
-  sucess: {},
+  Sucess: {
+    likeIndicator: "Case added to favourites."
+  },
   Permissions: {
     Locations:
       "Location access permission is denied for " +
