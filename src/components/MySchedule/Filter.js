@@ -45,9 +45,9 @@ const Filter = ({ prevDate, nextDate, onDateChange }) => {
         />
       </TouchableOpacity>
       <Text style={[Styles.commonFontColor]}>
-        {moment(prevDate).format("ddd DD MMM") +
-          " - " +
-          moment(nextDate).format("DD MMM YYYY")}
+        {`${moment(prevDate).format("ddd DD, MMM")}
+           -  
+          ${moment(nextDate).format("DD MMMM YYYY")}`}
       </Text>
       <TouchableOpacity
         onPress={() => {

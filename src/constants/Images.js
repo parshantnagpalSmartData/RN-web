@@ -23,5 +23,10 @@ module.exports = {
   Next: require("../assets/images/Next/next.png"),
   Previous: require("../assets/images/Previous/previous.png"),
   BlackPrevious: require("../assets/images/BlackPrevious/previous.png"),
-  BlackNext: require("../assets/images/BlackNext/next.png")
+  BlackNext: require("../assets/images/BlackNext/next.png"),
+  ZipCode: require("../assets/images/ZipCode/ZipCode.png"),
+  Gender: require("../assets/images/Gender/Gender.png"),
+  Calander: require("../assets/images/Calander/Calander.png"),
+  Date: require("../assets/images/Date/Date.png"),
+  Age: require("../assets/images/Age/Age.png")
 };

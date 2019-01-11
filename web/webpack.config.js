@@ -67,6 +67,12 @@ const cssLoaderConfiguration = {
   ]
 };
 
+const imageLoader = {
+  test: /\.(png|jpe?g|gif)$/,
+  loader:
+    "react-native-web-image-loader?name=[name].[ext]&scalings[@2x]=2&scalings[-3x]=3"
+};
+
 module.exports = {
   entry: [
     // load any web API polyfills
@@ -90,6 +96,7 @@ module.exports = {
       babelLoaderConfiguration,
       imageLoaderConfiguration,
       cssLoaderConfiguration
+      // imageLoader
     ]
   },
 

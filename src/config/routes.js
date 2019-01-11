@@ -24,6 +24,7 @@ import OTPScreen from "../container/auth/OTPScreen";
 import SideMenu from "../container/SideMenu";
 import ToastNotification from "../components/common/ToastNotification";
 
+// const store = setup();
 /* eslint-disable */
 /**
  * HOC for wrapping toast and loader

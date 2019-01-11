@@ -6,7 +6,7 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "React";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -16,6 +16,7 @@ import Header from "../../components/common/Header";
 import Shifts from "../../components/shift/Shifts";
 import Filter from "../../components/MySchedule/Filter";
 import ListEmptyComponent from "../../components/common/ListEmptyComponent";
+import Constants from "../../constants";
 
 class OpenShift extends Component {
   constructor(props) {
@@ -118,6 +119,7 @@ class OpenShift extends Component {
         onLikePress={this.onIconPress}
         loading={loading}
         scheduleId={scheduleId}
+        blankView={true}
       />
     );
   };
@@ -164,7 +166,13 @@ class OpenShift extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        backgroundColor: Constants.Colors.BlueWhite
+      }
+    })
   }
 });
 const mapStateToProps = state => ({
