@@ -57,7 +57,7 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.White,
     ...Platform.select({
       web: {
-        fontSize: moderateScale(10),
+        fontSize: moderateScale(10)
       }
     })
   }

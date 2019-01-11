@@ -180,9 +180,14 @@ const Styles = StyleSheet.create({
       }
     })
   },
-  imageIconWeb : { height: moderateScale(17), width: moderateScale(17) },
-  imageBottomPadding :{ paddingBottom: moderateScale(5) },
-  imageIconWeblargeHeightIcons :{ height: moderateScale(20), width: moderateScale(14) },
-  imageIconWeblargeGender :{ height: moderateScale(21), width: moderateScale(17) }
-
+  imageIconWeb: { height: moderateScale(17), width: moderateScale(17) },
+  imageBottomPadding: { paddingBottom: moderateScale(5) },
+  imageIconWeblargeHeightIcons: {
+    height: moderateScale(20),
+    width: moderateScale(14)
+  },
+  imageIconWeblargeGender: {
+    height: moderateScale(21),
+    width: moderateScale(17)
+  }
 });

@@ -65,11 +65,7 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             accessor: "Pat_LName",
             headerStyle: headerStyle,
             getProps: () => cellStyle,
-            Cell: props => (
-              <span className="cusor-point">
-                {props.value}
-              </span>
-            )
+            Cell: props => <span className="cusor-point">{props.value}</span>
           },
           {
             // Header: "Time",
@@ -77,11 +73,7 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             accessor: "StartTime",
             headerStyle: headerStyle,
             getProps: () => cellStyle,
-            Cell: props => (
-              <span className="cusor-point">
-                {props.value}
-              </span>
-            )
+            Cell: props => <span className="cusor-point">{props.value}</span>
           },
           {
             // Header: "Status",
@@ -91,7 +83,7 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             getProps: () => cellStyle,
             Cell: props => (
               <span
-              className="cusor-point"
+                className="cusor-point"
                 style={
                   props.value == "Scheduled" ? scheduleColor : nonScheduleColor
                 }
