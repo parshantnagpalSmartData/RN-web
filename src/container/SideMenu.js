@@ -10,9 +10,9 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
   Image,
-  Platform
+  Platform,
+  ScrollView
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { connect } from "react-redux";
@@ -33,13 +33,7 @@ class SideMenu extends React.Component {
     this.hideSideMenu = this.hideSideMenu.bind(this);
     this.setScrenStack = this.setScrenStack.bind(this);
   }
-  // static getDerivedStateFromProps(props, state) {
-  //   if (props.app && props.app.screen !== state.screen) {
-  //     return { screen: props.app.screen };
-  //   } else {
-  //     return null;
-  //   }
-  // }
+
   hideSideMenu() {
     this.props.appAction.mergeOptions(this.props.componentId, false);
   }
@@ -100,7 +94,6 @@ class SideMenu extends React.Component {
           start={{ x: 1, y: 1 }}
           end={{ x: 0, y: 0 }}
           colors={Constants.Colors.SelectedMenu}
-          //  style={styles.gradientStyle}
         >
           <TouchableOpacity
             style={styles.text}
@@ -154,7 +147,11 @@ class SideMenu extends React.Component {
         style={styles.gradientStyle}
       >
         <SafeView />
-        <View style={styles.container}>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.container}
+        >
           <View style={styles.containerUserProfile}>
             <View style={styles.subContainerUserProfile}>
               <Image
@@ -168,19 +165,10 @@ class SideMenu extends React.Component {
               <Text style={styles.userName}>{UserName}</Text>
             </View>
           </View>
-          <FlatList
-            data={menuOptions}
-            renderItem={this.renderMenu}
-            scrollEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            extraData={this.state.screen}
-            style={{
-              overscrollBehaviorY: "auto",
-              touchAction: "auto"
-            }}
-          />
-        </View>
+          <View style={{ flex: 1 }}>
+            {menuOptions.map((item, index) => this.renderMenu({ item, index }))}
+          </View>
+        </ScrollView>
       </LinearGradient>
     );
   }
@@ -202,7 +190,7 @@ const styles = StyleSheet.create({
     })
   },
   container: {
-    flex: 1,
+    minHeight: moderateScale(450),
     justifyContent: "space-between",
     overflow: "hidden"
   },
@@ -272,7 +260,8 @@ const styles = StyleSheet.create({
       web: {
         justifyContent: "center",
         alignItems: "center",
-        borderBottomWidth: 0
+        borderBottomWidth: 0,
+        paddingLeft: moderateScale(0)
       }
     })
   }

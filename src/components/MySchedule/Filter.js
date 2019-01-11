@@ -18,6 +18,7 @@ import PropTypes from "prop-types";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import moment from "moment";
+
 const Filter = ({ prevDate, nextDate, onDateChange }) => {
   return (
     <View style={Styles.mainView}>
@@ -111,8 +112,8 @@ const Styles = StyleSheet.create({
 });
 
 Filter.propTypes = {
-  nextDate: PropTypes.date,
-  prevDate: PropTypes.date,
+  nextDate: PropTypes.object,
+  prevDate: PropTypes.object,
   onDateChange: PropTypes.func
 };
 Filter.defaultProps = {

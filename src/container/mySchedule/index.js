@@ -26,8 +26,9 @@ import Avtar from "../../components/common/Avatar";
 import CustomModal from "../../components/customModal";
 import Filter from "../../components/MySchedule/Filter";
 import MyScheduleList from "../../components/MySchedule/MyScheduleList";
-import { googleMapNavigate } from "../../helpers/MapDirections";
+import MapApi from "../../helpers/MapApi";
 import { openLinkingURL } from "../../helpers/Linking";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -66,6 +67,7 @@ class Home extends Component {
         item={item}
         index={index}
         onPatientPress={this.fetchPatientDetails}
+        key={index}
       />
     );
   };
@@ -94,23 +96,28 @@ class Home extends Component {
   /*
    * Method to open the telephone number
    */
-  openEmail() {
-    openLinkingURL("email", "nagpal.parshant8@gmail.com");
+  openEmail(email) {
+    openLinkingURL("email", email);
   }
   /**
    * Method to open the google maps
    *
    */
-  openMaps(latitude, longitude) {
-    let source = {
-      latitude: 30.7046,
-      longitude: 76.7179
-    };
-    let destination = {
-      latitude,
-      longitude
-    };
-    googleMapNavigate(source, destination);
+  openMaps(dest) {
+    MapApi.getCurrentPosition()
+      .then(pos => {
+        let { latitude, longitude } = pos;
+        let source = {
+          latitude,
+          longitude
+        };
+        let destination = {
+          latitude: dest.latitude,
+          longitude: dest.longitude
+        };
+        MapApi.googleMapNavigate(source, destination);
+      })
+      .catch(e => console.warn(e)); //eslint-disable-line
   }
 
   fetchMySchedules = (refresh = false) => {
@@ -145,22 +152,17 @@ class Home extends Component {
             this.onDateChange(prevDate, nextDate)
           }
         />
-        {!app.loading && !mySchedules.length ? (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text style={Styles.noScheduleFoundText}>No Schedule Found</Text>
-          </View>
-        ) : (
-          <MyScheduleList
-            patitents={mySchedules}
-            renderItem={this.renderPatients}
-            onPatientPress={this.fetchPatientDetails}
-            loader={app.refreshLoader}
-            onRefresh={this.onRefresh}
-            onEndReached={this.onCurrentPageEndReach}
-          />
-        )}
+
+        <MyScheduleList
+          patitents={mySchedules}
+          renderItem={this.renderPatients}
+          onPatientPress={this.fetchPatientDetails}
+          loader={app.refreshLoader}
+          appLoader={app.loading}
+          onRefresh={this.onRefresh}
+          onEndReached={this.onCurrentPageEndReach}
+        />
+
         <CustomModal
           isVisible={isVisible}
           onBackdropPress={() => this.closeModal()}
@@ -181,10 +183,10 @@ class Home extends Component {
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}
               onPress={() =>
-                this.openMaps(
-                  patient.Patient_Latitude,
-                  patient.Patient_Longitude
-                )
+                this.openMaps({
+                  latitude: patient.Patient_Latitude,
+                  longitude: patient.Patient_Longitude
+                })
               }
             >
               {`${patient.Patient_Address}, ${patient.Patient_City} ${
@@ -220,7 +222,7 @@ class Home extends Component {
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}
-              onPress={() => this.openEmail()}
+              onPress={() => this.openEmail(patient.Scheduler_Email)}
             >
               {patient.Scheduler_Email}
             </Text>

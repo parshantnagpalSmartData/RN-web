@@ -9,20 +9,18 @@ import AppConstants from "./AppConstants";
 
 let Strings = {
   Common: {
-    EmptyEmailMsg: "Please enter an email address.",
-    ValidEmailAddress: "Please enter a valid email address.",
-    EnterPassword: "Please enter a password.",
-    EnterOTP: "Please enter OTP.",
-    MinPersonRide: "Please enter number of persons to continue ride.",
-    MaxPersonRide: "Minimum 1 and maximum 20 person can travelle in a ride",
-    VaildDigit: "No of persons must be between 1-20",
-    OldPassword: "Please enter old password.",
-    NewPassword: "Please enter new password.",
-    confirmPassword: "Please confirm new password.",
-    PasswordNotMatched: "Your new Password Not Matched.",
+    EmptyEmailMsg: "Enter your email address.",
+    ValidEmailAddress: "Enter valid email address.",
+    EnterPassword: "Enter your password.",
+    EnterOTP: "Enter OTP.",
+    OldPassword: "Enter your old password.",
+    NewPassword: "Enter your new password.",
+    confirmPassword: "Confirm your new password.",
+    PasswordNotMatched: "Your Password Not Matched.",
     OTPDigit: "OTP must be 4 digit."
   },
   Error: {},
+  sucess: {},
   Permissions: {
     Locations:
       "Location access permission is denied for " +

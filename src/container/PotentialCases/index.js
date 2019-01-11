@@ -5,15 +5,14 @@ Description: Contains the Potential cases component
 Date : 13 december 2018
 */
 import React, { Component } from "React";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
 import Shifts from "../../components/shift/Shifts";
-import Constants from "../../constants";
-import { moderateScale } from "../../helpers/ResponsiveFonts";
+import ListEmptyComponent from "../../components/common/ListEmptyComponent";
 
 class PotientialCases extends Component {
   constructor(props) {
@@ -109,42 +108,26 @@ class PotientialCases extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Potiential Cases"} onDrawerPress={this.onDrawerPress} />
-        {!app.loading &&
-        !app.refreshLoader &&
-        !(potientialCases && potientialCases.length) ? (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Text
-              style={{
-                ...Constants.Fonts.Medium,
-                fontSize: moderateScale(20)
-              }}
-            >
-              Potential Cases Not Found
-            </Text>
-          </View>
-        ) : (
-          <FlatList
-            // numColumns={Platform.OS === "web" ? 2 : 1}
-            data={potientialCases}
-            extraData={this.state}
-            keyExtractor={item =>
-              item.CaseID.toString() + Math.random().toString()
-            }
-            refreshing={app.refreshLoader}
-            onRefresh={this.onRefresh}
-            renderItem={this.renderItem}
-            onEndReached={this.onCurrentPageEndReach}
-            onEndReachedThreshold={0}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-          />
-        )}
+        <FlatList
+          data={potientialCases}
+          extraData={this.state}
+          keyExtractor={item =>
+            item.CaseID.toString() + Math.random().toString()
+          }
+          refreshing={app.refreshLoader}
+          onRefresh={this.onRefresh}
+          renderItem={this.renderItem}
+          onEndReached={this.onCurrentPageEndReach}
+          onEndReachedThreshold={0}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <ListEmptyComponent
+              message={" Potential Cases Not Found"}
+              loader={app.refreshLoader || app.loading}
+            />
+          }
+        />
       </View>
     );
   }

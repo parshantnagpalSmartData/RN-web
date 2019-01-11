@@ -1,17 +1,21 @@
 import React from "react";
-import { FlatList, Platform } from "react-native";
+import { FlatList } from "react-native";
+
+import ListEmptyComponent from "../common/ListEmptyComponent";
 
 const MyScheduleList = ({
   patitents,
   renderItem,
   loader,
   onRefresh,
-  onEndReached
+  onEndReached,
+  appLoader
 }) => {
   return (
     <FlatList
       data={patitents}
-      keyExtractor={item => item._id}
+      keyExtractor={item => item.SchedID.toString()}
+      key={item => item.SchedID.toString()}
       renderItem={renderItem}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
@@ -19,22 +23,12 @@ const MyScheduleList = ({
       refreshing={loader}
       onEndReached={onEndReached}
       onEndReachedThreshold={0}
-      style={{
-        ...Platform.select({
-          web: {
-            overflow: "hidden"
-            //width: Constants.BaseStyle.DEVICE_WIDTH
-          }
-        })
-      }}
-      contentContainerStyle={{
-        ...Platform.select({
-          web: {
-            // backgroundColor : 'red'
-            //   justifyContent: "center",
-          }
-        })
-      }}
+      ListEmptyComponent={
+        <ListEmptyComponent
+          message={"Schedule Not Found"}
+          loader={loader || appLoader}
+        />
+      }
     />
   );
 };

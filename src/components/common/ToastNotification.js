@@ -110,7 +110,7 @@ class ToastNotification extends Component {
         easing: Easing.linear
       }).start();
       this.hideToast();
-    }, 3000);
+    }, 5000);
   }
 
   hideToast = () => {
