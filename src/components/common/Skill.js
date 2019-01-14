@@ -39,6 +39,10 @@ const Styles = StyleSheet.create({
       android: {
         alignItems: "center",
         justifyContent: "center"
+      },
+      web: {
+        alignItems: "center",
+        justifyContent: "center"
       }
     })
   },

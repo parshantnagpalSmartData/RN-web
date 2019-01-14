@@ -55,18 +55,11 @@ const Shifts = props => {
             flexDirection: "row",
             justifyContent: "flex-start"
           }}
-          // listKey={(item, index) => "D" + index.toString()}
-          // key={`${
-          //   showAll
-          //     ? item => item.toString()
-          //     : item => item + Math.random().toString()
-          // }`}
-          //numColumns={showAll && Platform.OS === "web" ? 6 : 3}
+          listKey={(item, index) => "D" + index.toString()}
           style={{
             ...Platform.select({
               web: {
-                backgroundColor: Constants.Colors.LighBlueWhite,
-                height: moderateScale(40)
+                backgroundColor: Constants.Colors.LighBlueWhite
               }
             })
           }}
