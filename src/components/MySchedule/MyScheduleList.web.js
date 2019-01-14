@@ -42,8 +42,9 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
     <div className={"contentScroll"}>
       <ReactTable
         style={{
-          marginLeft: moderateScale(18),
-          marginRight: moderateScale(18)
+          // marginLeft: moderateScale(18),
+          // marginRight: moderateScale(18),
+          maxHeight: "400px"
         }}
         data={patitents}
         columns={[
