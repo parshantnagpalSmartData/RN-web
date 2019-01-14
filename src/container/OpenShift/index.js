@@ -14,7 +14,7 @@ import _ from "lodash";
 
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
-import Shifts from "../../components/shift/Shifts";
+import Shifts from "../../components/shift";
 import Filter from "../../components/MySchedule/Filter";
 import ListEmptyComponent from "../../components/common/ListEmptyComponent";
 import Constants from "../../constants";

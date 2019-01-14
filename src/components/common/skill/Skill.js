@@ -7,8 +7,8 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, Platform } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Constants from "../../constants";
-import { moderateScale } from "../../helpers/ResponsiveFonts";
+import Constants from "../../../constants";
+import { moderateScale } from "../../../helpers/ResponsiveFonts";
 
 const Skill = props => {
   let { gradientStyle, gradientColors, skill, onSkillPress } = props;

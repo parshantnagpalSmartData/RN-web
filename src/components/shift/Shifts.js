@@ -10,7 +10,7 @@ import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Skill from "../common/Skill";
 import Favourite from "../common/Favourite";
-import PatientsDetails from "../common/PatientsDetails";
+import PatientsDetails from "../common/patientsDetails";
 
 const Shifts = props => {
   let {
