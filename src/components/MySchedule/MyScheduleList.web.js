@@ -65,7 +65,11 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             accessor: "Pat_LName",
             headerStyle: headerStyle,
             getProps: () => cellStyle,
-            Cell: props => <span className="cusor-point">{props.value}</span>
+            Cell: props => (
+              <span className="cusor-point">
+                {props.value + " " + props.original.Pat_FName}
+              </span>
+            )
           },
           {
             // Header: "Time",

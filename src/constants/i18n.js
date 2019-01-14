@@ -38,7 +38,7 @@ let Strings = {
       ",Please enable it from the settings"
   },
   MySchedule: {
-    SchdeularName: "Schedular Name"
+    SchdeularName: "Scheduler Name"
   }
 };
 
