@@ -1,4 +1,0 @@
-diff a/src/components/shift/Shifts.js b/src/components/shift/Shifts.js	(rejected hunks)
-@@ -53 +53 @@ const Shifts = props => {
--             justifyContent :'center'
-+             justifyContent :"center"

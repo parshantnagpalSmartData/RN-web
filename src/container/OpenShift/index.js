@@ -10,6 +10,7 @@ import { View, StyleSheet, FlatList, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import _ from "lodash";
 
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
@@ -24,8 +25,7 @@ class OpenShift extends Component {
     super(props);
     this.state = {
       scheduleId: null,
-      showAll: false,
-      currentIndex: null,
+      currentIndex: [],
       loading: false,
       page: 1,
       prevDate: moment().format("MM/DD/YYYY"),
@@ -44,17 +44,23 @@ class OpenShift extends Component {
   };
 
   skillPress = (index, skillIndex) => {
-    let { showAll } = this.state;
+    let currentIndex = [...this.state.currentIndex];
     let { openShift } = this.props.schedule;
     let skills =
       openShift[index].SkillsRequired &&
       openShift[index].SkillsRequired.split(",");
     if (skillIndex === 3) {
-      this.setState({ currentIndex: index, showAll: true });
+      let myindex = _.findIndex(currentIndex, item => item === index);
+      if (myindex === -1) {
+        currentIndex.push(index);
+      }
+      this.setState({ currentIndex });
       return;
     }
-    if (showAll && skillIndex === skills.length + 1) {
-      this.setState({ currentIndex: null, showAll: false });
+
+    if (skillIndex >= skills.length) {
+      _.remove(currentIndex, item => item === index);
+      this.setState({ currentIndex });
       return;
     }
   };
@@ -82,7 +88,8 @@ class OpenShift extends Component {
     this.setState(
       {
         prevDate,
-        nextDate
+        nextDate,
+        currentIndex: []
       },
       () => {
         this.getLikeUpdate();
@@ -105,7 +112,7 @@ class OpenShift extends Component {
   };
 
   renderItem = ({ item, index }) => {
-    let { showAll, currentIndex, loading, scheduleId } = this.state;
+    let { currentIndex, loading, scheduleId } = this.state;
     let skills = item.SkillsRequired && item.SkillsRequired.split(",");
     return (
       <Shifts
@@ -115,7 +122,7 @@ class OpenShift extends Component {
         onSkillPress={skillIndex => {
           this.skillPress(index, skillIndex);
         }}
-        showAll={index === currentIndex && showAll}
+        showAll={_.findIndex(currentIndex, item => item === index) !== -1}
         isSelected={item.LikeIndicator}
         onLikePress={this.onIconPress}
         loading={loading}

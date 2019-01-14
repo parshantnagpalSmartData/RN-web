@@ -18,9 +18,15 @@ export const fetchMySchedules = (
   limit = Constants.AppConstants.limit
 ) => {
   return (dispatch, getState) => {
-    refresh
-      ? dispatch(AppActions.startRefreshLoader())
-      : dispatch(AppActions.startLoader());
+    let startLoader = () =>
+      refresh
+        ? dispatch(AppActions.startRefreshLoader())
+        : dispatch(AppActions.startLoader());
+    let stopLoader = () =>
+      refresh
+        ? dispatch(AppActions.stopRefreshLoader())
+        : dispatch(AppActions.stopLoader());
+    startLoader();
     if (page === 1) {
       dispatch({ type: Types.CLEAR_MY_SCHEDULE });
     }
@@ -31,76 +37,14 @@ export const fetchMySchedules = (
       .then(res => {
         dispatch(AppActions.stopLoader());
         if (res.status) {
-          refresh
-            ? dispatch(AppActions.stopRefreshLoader())
-            : dispatch(AppActions.stopLoader());
           dispatch({ type: Types.ADD_MYSCHEDULE, payload: res.result });
         } else {
-          if (res.error === "Token expired") {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.error
-              )
-            );
-            setTimeout(() => {
-              dispatch({ type: Types.RESET_USER });
-              dispatch(AppActions.goAuth());
-            }, 500);
-          } else {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.message
-              )
-            );
-          }
-          refresh
-            ? dispatch(AppActions.stopRefreshLoader())
-            : dispatch(AppActions.stopLoader());
+          dispatch(AppActions.checkLogin(res));
         }
+        stopLoader();
       })
       .catch(e => {
-        dispatch(AppActions.stopLoader());
-        console.warn("error", e); // eslint-disable-line
-      });
-  };
-};
-
-export const fetchPatientDetails = (patient_id, patientInfo) => {
-  return (dispatch, getState) => {
-    dispatch(AppActions.startLoader());
-    RestClient.getCall(`patients/${patient_id}`, getState().user.token)
-      .then(res => {
-        dispatch(AppActions.stopLoader());
-        if (res.status) {
-          patientInfo(res.result.patientDetail);
-        } else {
-          if (res.error === "Token expired") {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.error
-              )
-            );
-            patientInfo(res.error);
-            setTimeout(() => {
-              dispatch({ type: Types.RESET_USER });
-              dispatch(AppActions.goAuth());
-            }, 500);
-          } else {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.error
-              )
-            );
-            patientInfo(res.message);
-          }
-        }
-      })
-      .catch(e => {
-        dispatch(AppActions.stopLoader());
+        stopLoader();
         console.warn("error", e); // eslint-disable-line
       });
   };
