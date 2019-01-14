@@ -17,7 +17,7 @@ let AppConstants = {
       "The server is not reachable right now, sorry for inconvenience."
   },
   Alert: {
-    Logout: "Are you sure want to logout?"
+    Logout: "Are you sure you want to logout?"
   },
   limit: 15
 };

@@ -4,7 +4,10 @@
  * @author: Parshant Nagpal
  * */
 /* eslint-disable */
-import { NetInfo } from "react-native";
+import { NetInfo, BackHandler, Platform } from "react-native";
+import { handleBackPress } from "./BackButtonHandling";
+import { Navigation } from "react-native-navigation";
+import _ from "lodash";
 
 var Events = {
   RegisterNetEvents: () => {
@@ -19,6 +22,28 @@ var Events = {
       handleFirstConnectivityChange
     );
     NetInfo.isConnected.fetch().then(() => {});
+  },
+
+  RegisterComponentDidAppearListener: store => {
+    Platform.OS === "android" &&
+      Navigation.events().registerComponentDidAppearListener(
+        ({ componentId, componentName }) => {
+          let { backHandlingScreens } = store.getState().app;
+
+          var index = _.findIndex(
+            backHandlingScreens,
+            screen => screen === componentName
+          );
+          if (index !== -1) {
+            BackHandler.addEventListener("hardwareBackPress", handleBackPress);
+          } else {
+            BackHandler.removeEventListener(
+              "hardwareBackPress",
+              handleBackPress
+            );
+          }
+        }
+      );
   }
 };
 module.exports = Events;

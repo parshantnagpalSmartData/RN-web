@@ -18,6 +18,7 @@ import PropTypes from "prop-types";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import moment from "moment";
+
 const Filter = ({ prevDate, nextDate, onDateChange }) => {
   return (
     <View style={Styles.mainView}>
@@ -44,9 +45,9 @@ const Filter = ({ prevDate, nextDate, onDateChange }) => {
         />
       </TouchableOpacity>
       <Text style={[Styles.commonFontColor]}>
-        {moment(prevDate).format("ddd DD MMM") +
-          " - " +
-          moment(nextDate).format("DD MMM YYYY")}
+        {`${moment(prevDate).format("ddd DD, MMM ")} - ${moment(
+          nextDate
+        ).format("DD MMM YYYY")}`}
       </Text>
       <TouchableOpacity
         onPress={() => {
@@ -116,8 +117,8 @@ const Styles = StyleSheet.create({
 });
 
 Filter.propTypes = {
-  nextDate: PropTypes.date,
-  prevDate: PropTypes.date,
+  nextDate: PropTypes.object,
+  prevDate: PropTypes.object,
   onDateChange: PropTypes.func
 };
 Filter.defaultProps = {

@@ -9,7 +9,6 @@ import React from "react";
 import { Navigation } from "react-native-navigation";
 import { View } from "react-native";
 import { Provider } from "react-redux";
-// import setup from "../store/setup";
 
 import SignIn from "../container/auth/Login";
 import ForgotPassword from "../container/auth/ForgotPassword";

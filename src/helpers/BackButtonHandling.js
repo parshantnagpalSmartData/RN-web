@@ -7,14 +7,14 @@
 
 "use strict";
 
-import { Alert, BackHandler } from "react-native";
+import { BackHandler } from "react-native";
+import { Dialog } from "./common";
 /**
  * Function for handling back preess function
  */
 export function handleBackPress() {
-  Alert.alert(
-    "Are You Sure You Want To Exit The App",
-    "",
+  Dialog(
+    "Are you sure you want to exit",
     [
       {
         text: "Cancel",

@@ -10,6 +10,15 @@ import Immutable from "seamless-immutable";
 
 const initialState = Immutable({
   root: "login", // 'login' / 'after-login'
+  backHandlingScreens: [
+    "SignIn",
+    "MySchedule",
+    "OpenShift",
+    "PotientialCases",
+    "PrintableForms",
+    "MyProfile",
+    "MessageCenter"
+  ],
   componentId: "",
   screen: "MySchedule",
   loading: false,

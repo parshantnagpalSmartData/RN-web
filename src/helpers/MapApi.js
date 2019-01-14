@@ -11,7 +11,6 @@ import Geocoder from "react-native-geocoding";
 import Idx from "./Idx";
 import { Linking } from "react-native";
 import Constants from "../constants";
-import DriverSocket from "./socket/driver";
 import { Dimensions } from "react-native";
 import TimerMixin from "react-timer-mixin";
 import reactMixin from "react-mixin";
@@ -278,7 +277,6 @@ class MapApi {
             region => {
               region.angle = heading;
               console.log("watcher", region);
-              DriverSocket.updateTripLocation(region);
               resolve(region);
             }
           );
