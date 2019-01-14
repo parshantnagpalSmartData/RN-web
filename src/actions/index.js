@@ -9,3 +9,4 @@ export * from "./user";
 export * from "./mySchedules";
 export * from "./openShift";
 export * from "./potientialCases";
+export * from "./printableForms";

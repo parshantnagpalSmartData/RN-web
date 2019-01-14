@@ -6,6 +6,8 @@ Date : 09 Jan 2019
 */
 
 import * as Types from "../../actionTypes";
+import Constants from "../../constants";
+import * as AppActions from "../../actions";
 
 export const startLoader = () => {
   return dispatch => {
@@ -44,5 +46,21 @@ export const hideToast = () => {
       type: Types.HIDE_TOAST,
       payload: { isVisible: false }
     });
+  };
+};
+
+export const checkLogin = res => {
+  return dispatch => {
+    if (res.error === "Token expired") {
+      dispatch(
+        showToast(Constants.AppConstants.Notificaitons.Error, res.error)
+      );
+      dispatch({ type: Types.RESET_USER });
+      dispatch(AppActions.goAuth());
+    } else {
+      dispatch(
+        showToast(Constants.AppConstants.Notificaitons.Error, res.message)
+      );
+    }
   };
 };

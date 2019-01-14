@@ -25,7 +25,7 @@ const Shifts = props => {
     blankView
   } = props;
   if (showAll) {
-    skills[skills.length + 1] = "Hide less";
+    skills[skills.length] = "show less";
   }
   return (
     <View style={Styles.container}>
@@ -41,31 +41,35 @@ const Shifts = props => {
       </View>
       {skills && (
         <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          data={skills}
+          keyExtractor={item =>
+            (item && item.toString() + Math.random().toString()) ||
+            Math.random().toString()
+          }
           contentContainerStyle={{
-            justifyContent: "space-between",
-            alignItems: "center"
-            // width: Constants.BaseStyle.DEVICE_WIDTH
+            flex: 1,
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "flex-start"
           }}
+          // listKey={(item, index) => "D" + index.toString()}
+          // key={`${
+          //   showAll
+          //     ? item => item.toString()
+          //     : item => item + Math.random().toString()
+          // }`}
+          //numColumns={showAll && Platform.OS === "web" ? 6 : 3}
           style={{
             ...Platform.select({
               web: {
                 backgroundColor: Constants.Colors.LighBlueWhite,
-                height: moderateScale(40),
-                justifyContent: "center"
+                height: moderateScale(40)
               }
             })
           }}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={skills}
-          keyExtractor={item => item.toString() + Math.random().toString()}
-          listKey={(item, index) => "D" + index.toString()}
-          key={`${
-            showAll
-              ? item => item.toString()
-              : item => item + Math.random().toString()
-          }`}
-          numColumns={showAll ? (Platform.OS === "web" ? 6 : 3) : 4}
           renderItem={({ item, index }) => {
             if (!showAll) {
               if (index < 3) {
