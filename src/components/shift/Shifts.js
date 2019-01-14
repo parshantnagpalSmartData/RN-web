@@ -39,33 +39,53 @@ const Shifts = props => {
           scheduleId={scheduleId}
         />
       </View>
-      <FlatList
-        contentContainerStyle={{
-          justifyContent: "space-between",
-          alignItems: "center"
-          // width: Constants.BaseStyle.DEVICE_WIDTH
-        }}
-        style={{
-          ...Platform.select({
-            web: {
-              backgroundColor: Constants.Colors.LighBlueWhite
-            }
-          })
-        }}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        data={skills}
-        keyExtractor={item => item.toString() + Math.random().toString()}
-        listKey={(item, index) => "D" + index.toString()}
-        key={`${
-          showAll
-            ? item => item.toString()
-            : item => item + Math.random().toString()
-        }`}
-        numColumns={showAll ? (Platform.OS === "web" ? 6 : 3) : 4}
-        renderItem={({ item, index }) => {
-          if (!showAll) {
-            if (index < 3) {
+      {skills && (
+        <FlatList
+          contentContainerStyle={{
+            justifyContent: "space-between",
+            alignItems: "center"
+            // width: Constants.BaseStyle.DEVICE_WIDTH
+          }}
+          style={{
+            ...Platform.select({
+              web: {
+                backgroundColor: Constants.Colors.LighBlueWhite,
+                height: moderateScale(40),
+                justifyContent: "center"
+              }
+            })
+          }}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          data={skills}
+          keyExtractor={item => item.toString() + Math.random().toString()}
+          listKey={(item, index) => "D" + index.toString()}
+          key={`${
+            showAll
+              ? item => item.toString()
+              : item => item + Math.random().toString()
+          }`}
+          numColumns={showAll ? (Platform.OS === "web" ? 6 : 3) : 4}
+          renderItem={({ item, index }) => {
+            if (!showAll) {
+              if (index < 3) {
+                return (
+                  <Skill
+                    key={index}
+                    skill={item}
+                    onSkillPress={() => onSkillPress(index)}
+                  />
+                );
+              } else if (index === 3) {
+                return (
+                  <Skill
+                    key={index}
+                    skill={`+ ${skills && skills.length - index}`}
+                    onSkillPress={() => onSkillPress(index)}
+                  />
+                );
+              }
+            } else {
               return (
                 <Skill
                   key={index}
@@ -73,28 +93,11 @@ const Shifts = props => {
                   onSkillPress={() => onSkillPress(index)}
                 />
               );
-            } else if (index === 3) {
-              return (
-                <Skill
-                  key={index}
-                  skill={`+ ${skills && skills.length - index}`}
-                  onSkillPress={() => onSkillPress(index)}
-                />
-              );
             }
-          } else {
-            return (
-              <Skill
-                key={index}
-                skill={item}
-                onSkillPress={() => onSkillPress(index)}
-              />
-            );
-          }
-        }}
-      />
+          }}
+        />
+      )}
       <PatientsDetails
-        // patient={patient}
         date={patient.SchedDate}
         StartTime={patient.StartTime}
         EndTime={patient.EndTime}
@@ -120,14 +123,14 @@ const Styles = StyleSheet.create({
       ios: { flex: 1 },
       android: { flex: 1 },
       web: {
-        width: Constants.BaseStyle.DEVICE_WIDTH / 2.5,
+        width: Constants.BaseStyle.DEVICE_WIDTH / 2.7,
         marginVertical: moderateScale(10),
         margin: moderateScale(10),
         backgroundColor: Constants.Colors.White,
         paddingHorizontal: moderateScale(0),
         borderBottomWidth: 0,
         shadowColor: "#000000",
-        shadowOffset: { width: 0, height: 1 },
+
         shadowOpacity: 0.1,
         shadowRadius: 2
       }

@@ -17,3 +17,16 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
     .leftContainer.toggleMenu{margin-left: 0; width: 260px;}
 }
 
+
+.contentScroll .ReactTable .rt-thead .rt-th .rt-resizable-header-content span {
+    font-weight: 600!important;
+}
+.contentScroll .ReactTable .rt-tbody .rt-td{
+    padding:11px 5px;
+}
+.contentScroll .ReactTable .rt-tbody .rt-td span{
+    color:rgba(51, 51, 51, 0.7);
+}
+.contentScroll .ReactTable .rt-tbody .rt-td .cusor-point{
+    cursor: hand;
+}

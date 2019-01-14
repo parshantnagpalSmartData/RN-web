@@ -30,15 +30,13 @@ export default Skill;
 
 const Styles = StyleSheet.create({
   container: {
-    padding: moderateScale(5),
+    padding: moderateScale(10),
     ...Platform.select({
       ios: {
-        // flex: 1,
         alignItems: "center",
         justifyContent: "center"
       },
       android: {
-        // flex: 1,
         alignItems: "center",
         justifyContent: "center"
       }
@@ -54,6 +52,11 @@ const Styles = StyleSheet.create({
   skill: {
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(11),
-    color: Constants.Colors.White
+    color: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(10)
+      }
+    })
   }
 });

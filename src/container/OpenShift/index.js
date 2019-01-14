@@ -6,17 +6,18 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "React";
-import { View, StyleSheet, FlatList, Text, Platform } from "react-native";
+import { View, StyleSheet, FlatList, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
-import { moderateScale } from "../../helpers/ResponsiveFonts";
-import Constants from "../../constants";
 import Shifts from "../../components/shift/Shifts";
 import Filter from "../../components/MySchedule/Filter";
+import ListEmptyComponent from "../../components/common/ListEmptyComponent";
+import Constants from "../../constants";
+// import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 class OpenShift extends Component {
   constructor(props) {
@@ -139,41 +140,27 @@ class OpenShift extends Component {
           }
         />
 
-        {!app.loading && !openShift.length ? (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Text
-              style={{
-                ...Constants.Fonts.Medium,
-                fontSize: moderateScale(20)
-              }}
-            >
-              No Shift Found
-            </Text>
-          </View>
-        ) : (
-          <FlatList
-            // numColumns={Platform.OS === "web" ? 2 : 1}
-            data={openShift}
-            extraData={this.state}
-            keyExtractor={item =>
-              item.SchedID.toString() + Math.random().toString()
-            }
-            refreshing={app.refreshLoader}
-            onRefresh={this.onRefresh}
-            renderItem={this.renderItem}
-            onEndReached={this.onCurrentPageEndReach}
-            onEndReachedThreshold={0}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            numColumns={Platform.OS == "web" ? 2 : 1}
-          />
-        )}
+        <FlatList
+          data={openShift}
+          extraData={this.state}
+          keyExtractor={item =>
+            item.SchedID.toString() + Math.random().toString()
+          }
+          refreshing={app.refreshLoader}
+          onRefresh={this.onRefresh}
+          renderItem={this.renderItem}
+          onEndReached={this.onCurrentPageEndReach}
+          onEndReachedThreshold={0}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          numColumns={Platform.OS == "web" ? 2 : 1}
+          ListEmptyComponent={
+            <ListEmptyComponent
+              message={"Shift Not Found!"}
+              loader={app.refreshLoader || app.loading}
+            />
+          }
+        />
       </View>
     );
   }

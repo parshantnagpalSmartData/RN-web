@@ -90,7 +90,7 @@ class FormTextInput extends Component {
             <Image
               source={image}
               style={Styles.imageStyle}
-              resizeMode="contain"
+              resizeMode="center"
             />
           </View>
         )}
@@ -131,8 +131,8 @@ const Styles = StyleSheet.create({
     marginTop: moderateScale(15),
     marginBottom: moderateScale(15),
     marginHorizontal: moderateScale(25),
-    justifyContent: "center"
-    // alignItems: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   inputStyle: {
     flex: 1,
@@ -153,7 +153,8 @@ const Styles = StyleSheet.create({
     alignItems: "center"
   },
   imageStyle: {
-    height: moderateScale(25),
-    width: moderateScale(25)
+    ...Platform.select({
+      web: { height: moderateScale(25), width: moderateScale(25) }
+    })
   }
 });

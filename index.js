@@ -12,6 +12,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   registerScreens(store);
   addListeners();
   Events.RegisterNetEvents();
+  Events.RegisterComponentDidAppearListener(store);
   Navigation.setDefaultOptions({
     topBar: {
       visible: false,
