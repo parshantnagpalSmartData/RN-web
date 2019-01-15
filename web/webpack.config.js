@@ -85,10 +85,14 @@ module.exports = {
   // configures where the build ends up
   output: {
     filename: "bundle.web.js",
-    path: path.resolve(appDirectory, "dist")
+    path: path.resolve(appDirectory, "dist"),
+    globalObject: "this"
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*" // allow Access-Control-Allow-Origin enable for pdf to view
+    }
   },
   // ...the rest of your config
 

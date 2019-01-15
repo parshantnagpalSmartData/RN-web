@@ -7,7 +7,7 @@ Date : 14 Jan 2018
 
 import React from "react";
 import { Image, View, TextInput, StyleSheet } from "react-native";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
@@ -78,9 +78,9 @@ SearchBar.defaultProps = {
 };
 
 SearchBar.propTypes = {
-  style: propTypes.object,
-  inputStyle: propTypes.object,
-  value: propTypes.string,
-  onTextChange: propTypes.func,
-  onEndEditing: propTypes.func
+  style: PropTypes.object,
+  inputStyle: PropTypes.object,
+  value: PropTypes.string,
+  onTextChange: PropTypes.func,
+  onEndEditing: PropTypes.func
 };
