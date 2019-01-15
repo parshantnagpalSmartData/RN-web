@@ -141,7 +141,7 @@ class Home extends Component {
     let { isVisible, nextDate, prevDate, patient } = this.state,
       { mySchedules, app } = this.props,
       { Close, UserImage } = Constants.Images;
-  
+
     return (
       <View style={Styles.containner}>
         <Header title={"My Schedule"} onDrawerPress={this.onDrawerPress} />

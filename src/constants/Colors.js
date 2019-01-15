@@ -30,7 +30,8 @@ let colors = {
   ButtonGradients: ["#3098CF", "#2D3E9D"],
   SelectedMenu: ["#2D3F9E", "#3097CE"],
   BlueWhite: "#F1F5FA",
-  LighBlueWhite: "#d1e8f5"
+  LighBlueWhite: "#d1e8f5",
+  FormGredient: ["#d1e8f5", "#d1e8f5"]
 };
 
 module.exports = colors;
