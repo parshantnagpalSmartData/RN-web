@@ -7,8 +7,8 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, Platform } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Constants from "../../constants";
-import { moderateScale } from "../../helpers/ResponsiveFonts";
+import Constants from "../../../constants";
+import { moderateScale } from "../../../helpers/ResponsiveFonts";
 
 const Skill = props => {
   let { gradientStyle, gradientColors, skill, onSkillPress } = props;
@@ -30,13 +30,17 @@ export default Skill;
 
 const Styles = StyleSheet.create({
   container: {
-    padding: moderateScale(10),
+    padding: moderateScale(5),
     ...Platform.select({
       ios: {
         alignItems: "center",
         justifyContent: "center"
       },
       android: {
+        alignItems: "center",
+        justifyContent: "center"
+      },
+      web: {
         alignItems: "center",
         justifyContent: "center"
       }
@@ -53,6 +57,7 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Medium,
     fontSize: moderateScale(11),
     color: Constants.Colors.White,
+    padding: moderateScale(5),
     ...Platform.select({
       web: {
         fontSize: moderateScale(10)

@@ -5,4 +5,4 @@
  * @author: Parshant Nagpal
  * */
 
-export default ["user", "schedule"];
+export default ["user", "schedule", "forms"];

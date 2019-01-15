@@ -8,6 +8,7 @@ import React, { Component } from "React";
 import { View, StyleSheet, FlatList, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import _ from "lodash";
 
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
@@ -20,8 +21,7 @@ class PotientialCases extends Component {
     super(props);
     this.state = {
       CaseID: null,
-      showAll: false,
-      currentIndex: null,
+      currentIndex: [],
       loading: false,
       page: 1
     };
@@ -54,7 +54,7 @@ class PotientialCases extends Component {
   };
 
   renderItem = ({ item, index }) => {
-    let { showAll, currentIndex, loading, CaseID } = this.state;
+    let { currentIndex, loading, CaseID } = this.state;
     let skills = item.SkillsRequired && item.SkillsRequired.split(",");
     return (
       <Shifts
@@ -64,7 +64,7 @@ class PotientialCases extends Component {
         onSkillPress={skillIndex => {
           this.skillPress(index, skillIndex);
         }}
-        showAll={index === currentIndex && showAll}
+        showAll={_.findIndex(currentIndex, item => item === index) !== -1}
         isSelected={item.LikeIndicator}
         onLikePress={this.onIconPress}
         loading={loading}
@@ -75,17 +75,22 @@ class PotientialCases extends Component {
   };
 
   skillPress = (index, skillIndex) => {
-    let { showAll } = this.state;
-    let { openShift } = this.props.schedule;
+    let { potientialCases } = this.props.schedule;
+    let currentIndex = [...this.state.currentIndex];
     let skills =
-      openShift[index].SkillsRequired &&
-      openShift[index].SkillsRequired.split(",");
+      potientialCases[index].SkillsRequired &&
+      potientialCases[index].SkillsRequired.split(",");
     if (skillIndex === 3) {
-      this.setState({ currentIndex: index, showAll: true });
+      let myindex = _.findIndex(currentIndex, item => item === index);
+      if (myindex === -1) {
+        currentIndex.push(index);
+      }
+      this.setState({ currentIndex });
       return;
     }
-    if (showAll && skillIndex === skills.length + 1) {
-      this.setState({ currentIndex: null, showAll: false });
+    if (skillIndex >= skills.length) {
+      _.remove(currentIndex, item => item === index);
+      this.setState({ currentIndex });
       return;
     }
   };
