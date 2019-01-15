@@ -10,7 +10,7 @@ import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Skill from "../common/Skill";
 import Favourite from "../common/Favourite";
-import PatientsDetails from "../common/PatientsDetails";
+import PatientsDetails from "../common/patientsDetails";
 
 const Shifts = props => {
   let {
@@ -25,7 +25,7 @@ const Shifts = props => {
     blankView
   } = props;
   if (showAll) {
-    skills[skills.length + 1] = "Hide less";
+    skills[skills.length] = "show less";
   }
   return (
     <View style={Styles.container}>
@@ -41,31 +41,28 @@ const Shifts = props => {
       </View>
       {skills && (
         <FlatList
-          contentContainerStyle={{
-            justifyContent: "space-between",
-            alignItems: "center"
-            // width: Constants.BaseStyle.DEVICE_WIDTH
-          }}
-          style={{
-            ...Platform.select({
-              web: {
-                backgroundColor: Constants.Colors.LighBlueWhite,
-                height: moderateScale(40),
-                justifyContent: "center"
-              }
-            })
-          }}
+          horizontal
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           data={skills}
-          keyExtractor={item => item.toString() + Math.random().toString()}
+          keyExtractor={item =>
+            (item && item.toString() + Math.random().toString()) ||
+            Math.random().toString()
+          }
+          contentContainerStyle={{
+            flex: 1,
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "flex-start"
+          }}
           listKey={(item, index) => "D" + index.toString()}
-          key={`${
-            showAll
-              ? item => item.toString()
-              : item => item + Math.random().toString()
-          }`}
-          numColumns={showAll ? (Platform.OS === "web" ? 6 : 3) : 4}
+          style={{
+            ...Platform.select({
+              web: {
+                backgroundColor: Constants.Colors.LighBlueWhite
+              }
+            })
+          }}
           renderItem={({ item, index }) => {
             if (!showAll) {
               if (index < 3) {

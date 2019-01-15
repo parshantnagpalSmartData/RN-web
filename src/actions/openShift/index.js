@@ -18,9 +18,15 @@ export const fetchOpenShift = (
   limit = Constants.AppConstants.limit
 ) => {
   return (dispatch, getState) => {
-    refresh
-      ? dispatch(AppActions.startRefreshLoader())
-      : dispatch(AppActions.startLoader());
+    let startLoader = () =>
+      refresh
+        ? dispatch(AppActions.startRefreshLoader())
+        : dispatch(AppActions.startLoader());
+    let stopLoader = () =>
+      refresh
+        ? dispatch(AppActions.stopRefreshLoader())
+        : dispatch(AppActions.stopLoader());
+    startLoader();
     if (page === 1) {
       dispatch({ type: Types.CLEAR_OPEN_SHIFT });
     }
@@ -30,35 +36,14 @@ export const fetchOpenShift = (
     )
       .then(res => {
         if (res.status) {
-          refresh
-            ? dispatch(AppActions.stopRefreshLoader())
-            : dispatch(AppActions.stopLoader());
           dispatch({ type: Types.OPEN_SHIFTS, payload: res.result });
         } else {
-          refresh
-            ? dispatch(AppActions.stopRefreshLoader())
-            : dispatch(AppActions.stopLoader());
-          if (res.error === "Token expired") {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.error
-              )
-            );
-            dispatch({ type: Types.RESET_USER });
-            dispatch(AppActions.goAuth());
-          } else {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.message
-              )
-            );
-          }
+          dispatch(AppActions.checkLogin(res));
         }
+        stopLoader();
       })
       .catch(e => {
-        dispatch(AppActions.stopLoader());
+        stopLoader();
         console.warn("error", e); // eslint-disable-line
       });
   };
@@ -77,35 +62,12 @@ export const openshiftsLike = (shiftId, sucess) => {
             type: Types.UPDATE_OPENSHIFT_LIKE_INDICATOR,
             payload: shiftId
           });
-          // dispatch(
-          //   AppActions.showToast(
-          //     Constants.Strings.Sucess.likeIndicator,
-          //     res.message
-          //   )
-          // );
           sucess();
         } else {
-          if (res.error === "Token expired") {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.error
-              )
-            );
-            dispatch({ type: Types.RESET_USER });
-            dispatch(AppActions.goAuth());
-          } else {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.message
-              )
-            );
-          }
+          dispatch(AppActions.checkLogin(res));
         }
       })
       .catch(e => {
-        dispatch(AppActions.stopLoader());
         console.warn("error", e); // eslint-disable-line
       });
   };

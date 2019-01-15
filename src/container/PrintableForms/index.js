@@ -12,11 +12,18 @@ import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
-import UnderDevelopment from "../../components/common/UnderDevelopment";
+import SearchBar from "../../components/common/SearchBar";
 
 class PrintableForms extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      searchText: ""
+    };
+  }
+
+  componentDidMount() {
+    this.props.appAction.fetchPrintableForms();
   }
 
   onDrawerPress = () => {
@@ -24,10 +31,14 @@ class PrintableForms extends Component {
   };
 
   render() {
+    let { searchText } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Printable Forms"} onDrawerPress={this.onDrawerPress} />
-        <UnderDevelopment />
+        <SearchBar
+          value={searchText}
+          onTextChange={searchText => this.setState({ searchText })}
+        />
       </View>
     );
   }

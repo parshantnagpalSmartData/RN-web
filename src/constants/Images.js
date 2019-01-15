@@ -28,5 +28,7 @@ module.exports = {
   Gender: require("../assets/images/Gender/Gender.png"),
   Calander: require("../assets/images/Calander/Calander.png"),
   Date: require("../assets/images/Date/Date.png"),
-  Age: require("../assets/images/Age/Age.png")
+  Age: require("../assets/images/Age/Age.png"),
+  Search: require("../assets/images/Search/searchActive.png"),
+  SearchInactive: require("../assets/images/Search/searchInActive.png")
 };

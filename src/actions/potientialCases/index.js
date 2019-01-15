@@ -33,28 +33,12 @@ export const fetchPotientialCases = (
       getState().user.token
     )
       .then(res => {
-        stopLoader();
         if (res.status) {
           dispatch({ type: Types.POTIENTIAL_CASES, payload: res.result });
         } else {
-          if (res.error === "Token expired") {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.error
-              )
-            );
-            dispatch({ type: Types.RESET_USER });
-            dispatch(AppActions.goAuth());
-          } else {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.message
-              )
-            );
-          }
+          dispatch(AppActions.checkLogin(res));
         }
+        stopLoader();
       })
       .catch(e => {
         dispatch(AppActions.stopLoader());
@@ -78,23 +62,7 @@ export const potientialCasesLike = (caseId, sucess) => {
           });
           sucess();
         } else {
-          if (res.error === "Token expired") {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.error
-              )
-            );
-            dispatch({ type: Types.RESET_USER });
-            dispatch(AppActions.goAuth());
-          } else {
-            dispatch(
-              AppActions.showToast(
-                Constants.AppConstants.Notificaitons.Error,
-                res.message
-              )
-            );
-          }
+          dispatch(AppActions.checkLogin(res));
         }
       })
       .catch(e => {
