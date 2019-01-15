@@ -39,7 +39,7 @@ const babelLoaderConfiguration = {
   }
 };
 
-// This is needed for webpack to import static images in JavaScript files.
+// This is needed for webpack to import static images in JavaScript files. But takes only 1x dimensions
 const imageLoaderConfiguration = {
   test: /\.(gif|jpe?g|png|svg)$/,
   use: {
@@ -50,6 +50,7 @@ const imageLoaderConfiguration = {
   }
 };
 
+// For loading css in web as in normal react Project
 const cssLoaderConfiguration = {
   test: /\.css$/,
   use: [
@@ -66,7 +67,7 @@ const cssLoaderConfiguration = {
     }
   ]
 };
-
+// For loading 3x images(High resolution images ) in react native web
 const imageLoader = {
   test: /\.(png|jpe?g|gif)$/,
   loader:
@@ -94,9 +95,9 @@ module.exports = {
   module: {
     rules: [
       babelLoaderConfiguration,
-      imageLoaderConfiguration,
-      cssLoaderConfiguration
-      // imageLoader
+      // imageLoaderConfiguration,
+      cssLoaderConfiguration,
+      imageLoader
     ]
   },
 
@@ -105,8 +106,6 @@ module.exports = {
     alias: {
       "react-native$": "react-native-web",
       "react-native-linear-gradient": "react-native-web-linear-gradient"
-      // "react-native-redux-toast": "react-redux-toastr"
-      // "react-native-otp-inputs": "react-otp-input"
     },
     // If you're working on a multi-platform React Native app, web-specific
     // module implementations should be written in files using the extension
