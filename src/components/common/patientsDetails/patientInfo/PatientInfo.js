@@ -2,19 +2,22 @@ import React from "react";
 import { View, Image, Text, StyleSheet, Platform } from "react-native";
 import Constants from "../../../../constants";
 import { moderateScale } from "../../../../helpers/ResponsiveFonts";
+import DivContainer from "../../DivContainer";
 
 const PatientInfo = props => {
   let { image, heading, value } = props;
   return (
-    <View style={[Styles.boxStyle, Styles.ageStyle]}>
-      {Platform.OS == "web" ? (
-        <View style={Styles.imageBottomPadding}>
-          <Image source={image} style={Styles.imageIconWeb} />
-        </View>
-      ) : null}
-      <Text style={Styles.heading}>{heading}</Text>
-      <Text style={Styles.value}>{value}</Text>
-    </View>
+    <DivContainer className={"myclassdajksd"}>
+      <View style={[Styles.boxStyle, Styles.ageStyle]}>
+        {Platform.OS == "web" ? (
+          <View style={Styles.imageBottomPadding}>
+            <Image source={image} style={Styles.imageIconWeb} />
+          </View>
+        ) : null}
+        <Text style={Styles.heading}>{heading}</Text>
+        <Text style={Styles.value}>{value}</Text>
+      </View>
+    </DivContainer>
   );
 };
 

@@ -9,20 +9,23 @@ import { StyleSheet, Text, TouchableOpacity, Platform } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Constants from "../../../constants";
 import { moderateScale } from "../../../helpers/ResponsiveFonts";
+import DivContainer from "../DivContainer";
 
 const Skill = props => {
   let { gradientStyle, gradientColors, skill, onSkillPress } = props;
   return (
-    <TouchableOpacity style={Styles.container} onPress={onSkillPress}>
-      <LinearGradient
-        start={{ x: 1, y: 0 }}
-        end={{ x: 0, y: 0 }}
-        colors={gradientColors || Constants.Colors.ButtonGradients}
-        style={[Styles.gradientStyle, gradientStyle]}
-      >
-        <Text style={Styles.skill}>{skill}</Text>
-      </LinearGradient>
-    </TouchableOpacity>
+    <DivContainer>
+      <TouchableOpacity style={Styles.container} onPress={onSkillPress}>
+        <LinearGradient
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 0 }}
+          colors={gradientColors || Constants.Colors.ButtonGradients}
+          style={[Styles.gradientStyle, gradientStyle]}
+        >
+          <Text style={Styles.skill}>{skill}</Text>
+        </LinearGradient>
+      </TouchableOpacity>
+    </DivContainer>
   );
 };
 

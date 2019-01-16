@@ -8,9 +8,10 @@ import React from "react";
 import { View, StyleSheet, Text, FlatList, Platform } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import Skill from "../common/Skill";
+import Skill from "../common/skill";
 import Favourite from "../common/Favourite";
 import PatientsDetails from "../common/patientsDetails";
+import DivContainer from "../common/DivContainer";
 
 const Shifts = props => {
   let {
@@ -28,44 +29,62 @@ const Shifts = props => {
     skills[skills.length] = "show less";
   }
   return (
-    <View style={Styles.container}>
-      <View style={Styles.heading}>
-        <Text style={Styles.skill}>Skills</Text>
-        <Favourite
-          isSelected={isSelected}
-          onLikePress={onLikePress}
-          patient={patient}
-          loading={loading}
-          scheduleId={scheduleId}
-        />
-      </View>
-      {skills && (
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={skills}
-          keyExtractor={item =>
-            (item && item.toString() + Math.random().toString()) ||
-            Math.random().toString()
-          }
-          contentContainerStyle={{
-            flex: 1,
-            flexWrap: "wrap",
-            flexDirection: "row",
-            justifyContent: "flex-start"
-          }}
-          listKey={(item, index) => "D" + index.toString()}
-          style={{
-            ...Platform.select({
-              web: {
-                backgroundColor: Constants.Colors.LighBlueWhite
-              }
-            })
-          }}
-          renderItem={({ item, index }) => {
-            if (!showAll) {
-              if (index < 3) {
+    <DivContainer className={"myclsass"}>
+      <View style={Styles.container}>
+        <View style={Styles.heading}>
+          <Text style={Styles.skill}>Skills</Text>
+          <Favourite
+            isSelected={isSelected}
+            onLikePress={onLikePress}
+            patient={patient}
+            loading={loading}
+            scheduleId={scheduleId}
+          />
+        </View>
+        {skills && (
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            data={skills}
+            keyExtractor={item =>
+              (item && item.toString() + Math.random().toString()) ||
+              Math.random().toString()
+            }
+            contentContainerStyle={{
+              flex: 1,
+              flexWrap: "wrap",
+              flexDirection: "row",
+              justifyContent: "flex-start"
+            }}
+            listKey={(item, index) => "D" + index.toString()}
+            style={{
+              ...Platform.select({
+                web: {
+                  backgroundColor: Constants.Colors.LighBlueWhite
+                }
+              })
+            }}
+            renderItem={({ item, index }) => {
+              if (!showAll) {
+                if (index < 3) {
+                  return (
+                    <Skill
+                      key={index}
+                      skill={item}
+                      onSkillPress={() => onSkillPress(index)}
+                    />
+                  );
+                } else if (index === 3) {
+                  return (
+                    <Skill
+                      key={index}
+                      skill={`+ ${skills && skills.length - index}`}
+                      onSkillPress={() => onSkillPress(index)}
+                    />
+                  );
+                }
+              } else {
                 return (
                   <Skill
                     key={index}
@@ -73,38 +92,22 @@ const Shifts = props => {
                     onSkillPress={() => onSkillPress(index)}
                   />
                 );
-              } else if (index === 3) {
-                return (
-                  <Skill
-                    key={index}
-                    skill={`+ ${skills && skills.length - index}`}
-                    onSkillPress={() => onSkillPress(index)}
-                  />
-                );
               }
-            } else {
-              return (
-                <Skill
-                  key={index}
-                  skill={item}
-                  onSkillPress={() => onSkillPress(index)}
-                />
-              );
-            }
-          }}
+            }}
+          />
+        )}
+        <PatientsDetails
+          date={patient.SchedDate}
+          StartTime={patient.StartTime}
+          EndTime={patient.EndTime}
+          age={patient.Patient_Age}
+          gender={patient.Patient_Gender || patient.Sex}
+          zip={patient.Patient_Zip || patient.Zip}
+          birthday={patient.Bday}
+          blankView={blankView}
         />
-      )}
-      <PatientsDetails
-        date={patient.SchedDate}
-        StartTime={patient.StartTime}
-        EndTime={patient.EndTime}
-        age={patient.Patient_Age}
-        gender={patient.Patient_Gender || patient.Sex}
-        zip={patient.Patient_Zip || patient.Zip}
-        birthday={patient.Bday}
-        blankView={blankView}
-      />
-    </View>
+      </View>
+    </DivContainer>
   );
 };
 

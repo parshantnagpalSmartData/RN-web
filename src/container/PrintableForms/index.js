@@ -13,6 +13,8 @@ import { bindActionCreators } from "redux";
 import * as appAction from "../../actions";
 import Header from "../../components/common/Header";
 import SearchBar from "../../components/common/SearchBar";
+import RenderPrintableForms from "../../components/printableForms";
+import DivContainer from "../../components/common/DivContainer";
 
 class PrintableForms extends Component {
   constructor(props) {
@@ -32,13 +34,14 @@ class PrintableForms extends Component {
 
   render() {
     let { searchText } = this.state;
+    let { myForms } = this.props && this.props.forms;
     return (
       <View style={Styles.containner}>
         <Header title={"Printable Forms"} onDrawerPress={this.onDrawerPress} />
-        <SearchBar
-          value={searchText}
-          onTextChange={searchText => this.setState({ searchText })}
-        />
+        <DivContainer className={"Searchbar"}>
+          <SearchBar value={searchText} />
+        </DivContainer>
+        <RenderPrintableForms data={myForms} />
       </View>
     );
   }
@@ -51,7 +54,8 @@ const Styles = StyleSheet.create({
 });
 const mapStateToProps = state => ({
   user: state.user,
-  app: state.app
+  app: state.app,
+  forms: state.forms
 });
 const mapDispatchToProps = dispatch => ({
   appAction: bindActionCreators(appAction, dispatch)

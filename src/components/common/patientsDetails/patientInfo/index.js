@@ -1,1 +1,2 @@
-export * from "./PatientInfo";
+import PatientInfo from "./PatientInfo";
+export default PatientInfo;

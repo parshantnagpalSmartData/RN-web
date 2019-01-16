@@ -90,8 +90,8 @@ class Home extends Component {
   /*
    * Method to open the telephone number
    */
-  openTelephone() {
-    openLinkingURL("tel", "+919041908803");
+  openTelephone(phoneNumber) {
+    openLinkingURL("tel", phoneNumber);
   }
   /*
    * Method to open the telephone number
@@ -178,7 +178,7 @@ class Home extends Component {
             </TouchableOpacity>
             <Avtar source={UserImage} />
             <Text style={[Styles.commonFontColor, Styles.BoldText]}>
-              {`${patient.Pat_FName} ${patient.Pat_LName}`}
+              {`${patient.Pat_LName} ${patient.Pat_FName}`}
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}
@@ -210,15 +210,21 @@ class Home extends Component {
                 Styles.schedularFullName
               ]}
             >
-              {`${patient.Scheduler_FirstName} ${patient.Scheduler_LastName}`}
+              {`${patient.Scheduler_LastName} ${patient.Scheduler_FirstName}`}
             </Text>
             <Text
               style={[Styles.commonFontColorBold, Styles.smallOne]}
-              onPress={() => this.openTelephone()}
+              onPress={() => this.openTelephone(patient.Scheduler_Phone)}
             >
               P{" "}
-              <Text style={Styles.commonFontColor}>: +1(215) 389 -1800 /</Text>
-              Ext <Text style={Styles.commonFontColor}> : 411</Text>
+              <Text style={Styles.commonFontColor}>
+                : +{patient.Scheduler_Phone} /
+              </Text>
+              Ext{" "}
+              <Text style={Styles.commonFontColor}>
+                {" "}
+                : {patient.Scheduler_Extension}
+              </Text>
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}

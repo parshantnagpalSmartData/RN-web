@@ -19,11 +19,4 @@ Navigation.events().registerAppLaunchedListener(() => {
       drawBehind: true
     }
   });
-  // Navigation.setRoot({
-  //   root: {
-  //     component: {
-  //       name: "Loader"
-  //     }
-  //   }
-  // });
 });

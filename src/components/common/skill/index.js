@@ -1,1 +1,2 @@
-export * from "./Skill";
+import Skill from "./Skill";
+export default Skill;
