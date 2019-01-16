@@ -1,6 +1,6 @@
 /*
 FileName: index.js
-Author :Parshant Nagpal
+Author :Suraj Sanwal
 Description: Contains the Printable forms component
 Date : 13 december 2018
 */
@@ -39,7 +39,10 @@ class PrintableForms extends Component {
       <View style={Styles.containner}>
         <Header title={"Printable Forms"} onDrawerPress={this.onDrawerPress} />
         <DivContainer className={"Searchbar"}>
-          <SearchBar value={searchText} />
+          <SearchBar
+            value={searchText}
+            onChangeText={searchText => this.setState({ searchText })}
+          />
         </DivContainer>
         <RenderPrintableForms data={myForms} />
       </View>

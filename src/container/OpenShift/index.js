@@ -1,6 +1,6 @@
 /*
 FileName: index.js
-Author :Parshant Nagpal
+Author :Suraj Sanwal
 Description: Contains the OpenShift component
 Date : 13 december 2018
 */

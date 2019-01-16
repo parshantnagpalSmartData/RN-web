@@ -22,12 +22,6 @@ class MessageCenter extends Component {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
-  displayToast = () => {
-    this.props.appAction.showToast(2, "this is an sucess toast");
-  };
-  displayErrorToast = () => {
-    this.props.appAction.showToast(1, "This is an error toast");
-  };
   render() {
     return (
       <View style={Styles.containner}>

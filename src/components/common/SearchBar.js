@@ -6,14 +6,14 @@ Date : 14 Jan 2018
 */
 
 import React from "react";
-import { Image, View, TextInput, StyleSheet } from "react-native";
+import { Image, View, TextInput, StyleSheet, Platform } from "react-native";
 import PropTypes from "prop-types";
 
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
 
 const SearchBar = props => {
-  let { style, inputStyle, value, onTextChange, onEndEditing } = props;
+  let { style, inputStyle, value, onChangeText, onEndEditing } = props;
   return (
     <View style={[Styles.container, style]}>
       <View style={Styles.SearchIconView}>
@@ -25,7 +25,7 @@ const SearchBar = props => {
       </View>
       <View style={Styles.inputView}>
         <TextInput
-          onTextChange={onTextChange}
+          onChangeText={onChangeText}
           onEndEditing={onEndEditing}
           value={value}
           style={[Styles.inputStyle, inputStyle]}
@@ -47,7 +47,7 @@ const Styles = StyleSheet.create({
     margin: moderateScale(25),
     borderRadius: moderateScale(25),
     borderColor: Constants.Colors.placehoder,
-    borderWidth: 0.4,
+    borderWidth: Platform.OS == "web" ? 1 : 0.4,
     backgroundColor: Constants.Colors.White
   },
   SearchIconView: {
@@ -65,7 +65,12 @@ const Styles = StyleSheet.create({
   inputStyle: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(16),
-    color: Constants.Colors.Black
+    color: Constants.Colors.Black,
+    ...Platform.select({
+      web: {
+        outline: "none"
+      }
+    })
   }
 });
 
@@ -73,7 +78,7 @@ SearchBar.defaultProps = {
   style: null,
   inputStyle: null,
   value: "",
-  onTextChange: null,
+  onChangeText: null,
   onEndEditing: null
 };
 
@@ -81,6 +86,6 @@ SearchBar.propTypes = {
   style: PropTypes.object,
   inputStyle: PropTypes.object,
   value: PropTypes.string,
-  onTextChange: PropTypes.func,
+  onChangeText: PropTypes.func,
   onEndEditing: PropTypes.func
 };
