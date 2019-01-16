@@ -18,6 +18,7 @@ import Constants from "../../constants";
 import Header from "../../components/common/Header";
 import LogoText from "../../components/common/LogoText";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import DivContainer from "../../components/common/DivContainer";
 
 class OTPScreen extends Component {
   constructor(props) {
@@ -87,8 +88,10 @@ class OTPScreen extends Component {
               heading="Verification"
               message="We have sent OTP in your mobile number. Please enter below"
             />
-            {Platform.OS === "web" ? (
-              <View style={{}}>
+         
+              <DivContainer className={"otpinput"}>
+              {Platform.OS === "web" ? (  
+              // <View style={{}}>
                 <OtpInputs
                   handleChange={otp => {
                     this.setState({ otp });
@@ -101,7 +104,7 @@ class OTPScreen extends Component {
                   focusedBorderColor={Constants.Colors.Gray}
                   inputStyles={{ color: Constants.Colors.Primary }}
                 />
-              </View>
+              // </View>
             ) : (
               <OtpInputs
                 handleChange={otp => {
@@ -116,7 +119,8 @@ class OTPScreen extends Component {
                 inputStyles={{ color: Constants.Colors.Primary }}
               />
             )}
-            {/* <View style={{}}> */}
+              </DivContainer>
+     
             <AuthButton
               gradientColors={Constants.Colors.ButtonGradients}
               buttonName={"Verify"}
@@ -131,11 +135,10 @@ class OTPScreen extends Component {
                 this.verifyOTP();
               }}
             />
-            {/* </View> */}
-            <View style={Styles.resendOTP}>
+            <DivContainer style={Styles.resendOTP} className={"resendOTP"}>
               <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
               <Text style={Styles.resend}>{"Resend"}</Text>
-            </View>
+            </DivContainer>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -151,9 +154,8 @@ const Styles = StyleSheet.create({
   },
   logoStyle: {},
   resendOTP: {
-    // justifyContent: "flex-end",
+    flexDirection:"column",
     alignItems: "center",
-    flexDirection: "column",
     ...Platform.select({
       android: { top: moderateScale(20) }
     })
