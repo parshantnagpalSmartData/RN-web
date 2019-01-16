@@ -24,8 +24,7 @@ const PrintableForms = () => {
         // eslint-disable-line
         console.log(`current page: ${page}`); // eslint-disable-line
       }} // eslint-disable-next-line
-      onError={error => {
-      }}
+      onError={error => {}}
       style={Styles.pdf}
     />
   );
