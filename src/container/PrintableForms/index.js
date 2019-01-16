@@ -38,8 +38,8 @@ class PrintableForms extends Component {
 
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
-  };
-  loadError = errr => {  // eslint-disable-line
+  };// eslint-disable-next-line
+  loadError = errr => {
     //  console.log("error",errr)
   };
   downloadFile = () => {

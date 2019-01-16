@@ -16,14 +16,15 @@ const source = {
 const PrintableForms = () => {
   return (
     <Pdf
-      source={source}
-      onLoadComplete={(numberOfPages, filePath) => {  // eslint-disable-line
-        console.log(`number of pages: ${numberOfPages}`);// eslint-disable-line
-      }}
-      onPageChanged={(page, numberOfPages) => {// eslint-disable-line
-        console.log(`current page: ${page}`);// eslint-disable-line
-      }}
-      onError={error => {// eslint-disable-line
+      source={source} // eslint-disable-next-line
+      onLoadComplete={(numberOfPages, filePath) => {
+        console.log(`number of pages: ${numberOfPages}`); // eslint-disable-line
+      }} // eslint-disable-next-line
+      onPageChanged={(page, numberOfPages) => {
+        // eslint-disable-line
+        console.log(`current page: ${page}`); // eslint-disable-line
+      }} // eslint-disable-next-line
+      onError={error => {
         // console.log(error);// eslint-disable-line
       }}
       style={Styles.pdf}
