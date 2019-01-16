@@ -1,0 +1,7 @@
+diff a/src/components/common/DivContainer.js b/src/components/common/DivContainer.js	(rejected hunks)
+@@ -16 +16 @@ const DivContainer = props => {
+-    <View style={[style,{flex:1}]}>{props.children}</View></div>
++    <View style={[style,{flex:1}]}>{props.children}</View></div>;
+@@ -18 +18 @@ const DivContainer = props => {
+-    return <View style={[style,{flex:1}]}>{props.children}</View>
++    return <View style={[style,{flex:1}]}>{props.children}</View>;

@@ -1,0 +1,4 @@
+diff a/src/container/auth/OTPScreen.js b/src/container/auth/OTPScreen.js	(rejected hunks)
+@@ -157 +157 @@ const Styles = StyleSheet.create({
+-    flexDirection:'column',
++    flexDirection:"column",

@@ -88,10 +88,10 @@ class OTPScreen extends Component {
               heading="Verification"
               message="We have sent OTP in your mobile number. Please enter below"
             />
-         
-              <DivContainer className={"otpinput"}>
-              {Platform.OS === "web" ? (  
-              // <View style={{}}>
+
+            <DivContainer className={"otpinput"}>
+              {Platform.OS === "web" ? (
+                // <View style={{}}>
                 <OtpInputs
                   handleChange={otp => {
                     this.setState({ otp });
@@ -104,23 +104,23 @@ class OTPScreen extends Component {
                   focusedBorderColor={Constants.Colors.Gray}
                   inputStyles={{ color: Constants.Colors.Primary }}
                 />
-              // </View>
-            ) : (
-              <OtpInputs
-                handleChange={otp => {
-                  this.setState({ otp });
-                }}
-                numberOfInputs={4}
-                keyboardType={"numeric"}
-                inputContainerStyles={Styles.inputContainerStyles}
-                underlineColorAndroid={Constants.Colors.Transparent}
-                inputTextErrorColor={Constants.Colors.Primary}
-                focusedBorderColor={Constants.Colors.Gray}
-                inputStyles={{ color: Constants.Colors.Primary }}
-              />
-            )}
-              </DivContainer>
-     
+              ) : (
+                // </View>
+                <OtpInputs
+                  handleChange={otp => {
+                    this.setState({ otp });
+                  }}
+                  numberOfInputs={4}
+                  keyboardType={"numeric"}
+                  inputContainerStyles={Styles.inputContainerStyles}
+                  underlineColorAndroid={Constants.Colors.Transparent}
+                  inputTextErrorColor={Constants.Colors.Primary}
+                  focusedBorderColor={Constants.Colors.Gray}
+                  inputStyles={{ color: Constants.Colors.Primary }}
+                />
+              )}
+            </DivContainer>
+
             <AuthButton
               gradientColors={Constants.Colors.ButtonGradients}
               buttonName={"Verify"}
@@ -154,7 +154,7 @@ const Styles = StyleSheet.create({
   },
   logoStyle: {},
   resendOTP: {
-    flexDirection:"column",
+    flexDirection: "column",
     alignItems: "center",
     ...Platform.select({
       android: { top: moderateScale(20) }
