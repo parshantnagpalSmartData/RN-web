@@ -24,7 +24,7 @@ import MyProfile from "../container/myProfile/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/auth/OTPScreen";
-
+import PDFViewer from "../container/PrintableForms/PDFViewer";
 // const routes = ({store}) => {
 //   const state = store.getState();
 //   console.log('storestatestatestatestatestate',state)
@@ -93,6 +93,14 @@ class Routes extends Component {
             exact
             path="/PrintableForms"
             component={PrintableForms}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/PDFViewer"
+            component={PDFViewer}
             //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}

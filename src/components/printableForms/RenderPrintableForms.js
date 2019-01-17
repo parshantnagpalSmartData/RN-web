@@ -2,28 +2,27 @@ import React from "react";
 import { FlatList } from "react-native";
 import PropTypes from "prop-types";
 import RenderForms from "./RenderForms";
-import DivContainer from "../common/DivContainer";
 
 const RenderPrintableForms = props => {
-  let { data } = props;
+  let { data, onFormPress } = props;
   return (
-    <DivContainer className={"myClass"}>
-      <FlatList
-        data={data}
-        renderItem={({ item, index }) => (
-          <RenderForms form={item} key={index} />
-        )}
-      />
-    </DivContainer>
+    <FlatList
+      data={data}
+      renderItem={({ item, index }) => (
+        <RenderForms form={item} key={index} onFormPress={onFormPress} />
+      )}
+    />
   );
 };
 
 export default RenderPrintableForms;
 
 RenderPrintableForms.defaultProps = {
-  data: []
+  data: [],
+  onFormPress: null
 };
 
 RenderPrintableForms.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  onFormPress: PropTypes.func
 };

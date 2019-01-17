@@ -3,7 +3,7 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
     height: 71px;
 }
 
-.contentScroll{height: calc(100vh - 115px); overflow: auto;}
+.contentScroll{height: calc(100vh - 115px); padding: 0 15px; overflow: auto;}
 
 .leftContainer, .leftContainer > div{width:260px;}
 .leftContainer > div, .rightContentContainer > div{height: 100%;}
@@ -15,6 +15,7 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
     .menuToggle{display: block;}
     .leftContainer{margin-left: -260px; transition: 1s ease;}
     .leftContainer.toggleMenu{margin-left: 0; width: 260px;}
+    .rightContentContainer{width: 100%;}
 }
 
 
@@ -22,11 +23,11 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
     font-weight: 600!important;
 }
 .contentScroll .ReactTable .rt-tbody .rt-td{
-    padding:11px 5px;
+    padding:11px 5px; cursor: hand;
 }
 .contentScroll .ReactTable .rt-tbody .rt-td span{
     color:rgba(51, 51, 51, 0.7);
 }
-.contentScroll .ReactTable .rt-tbody .rt-td .cusor-point{
+/* .contentScroll .ReactTable .rt-tbody .rt-td .cusor-point{
     cursor: hand;
-}
+} */

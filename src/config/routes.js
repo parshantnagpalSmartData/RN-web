@@ -23,6 +23,7 @@ import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/auth/OTPScreen";
 import SideMenu from "../container/SideMenu";
 import ToastNotification from "../components/common/ToastNotification";
+import PDFViewer from "../container/PrintableForms/PDFViewer";
 
 // const store = setup();
 /* eslint-disable */
@@ -60,6 +61,7 @@ export const registerScreens = store => {
     () => WrapScreen(MySchedule, store),
     () => MySchedule
   );
+
   Navigation.registerComponent(
     "MessageCenter",
     () => WrapScreen(MessageCenter, store),
@@ -84,6 +86,11 @@ export const registerScreens = store => {
     "PrintableForms",
     () => WrapScreen(PrintableForms, store),
     () => PrintableForms
+  );
+  Navigation.registerComponent(
+    "PDFViewer",
+    () => WrapScreen(PDFViewer, store),
+    () => PDFViewer
   );
   Navigation.registerComponent(
     "ResetPassword",

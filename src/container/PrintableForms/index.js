@@ -15,6 +15,12 @@ import Header from "../../components/common/Header";
 import SearchBar from "../../components/common/SearchBar";
 import RenderPrintableForms from "../../components/printableForms";
 import DivContainer from "../../components/common/DivContainer";
+// import UnderDevelopment from "../../components/common/UnderDevelopment";
+
+// import Constants from "../../constants";
+// import Pdf from "../../components/PrintableForms";
+// import { Document, Page } from 'react-pdf/dist/entry.webpack';;
+// import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 class PrintableForms extends Component {
   constructor(props) {
@@ -32,6 +38,11 @@ class PrintableForms extends Component {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
+  onFormPress = () => {
+    let { appAction, componentId } = this.props;
+    appAction.pushToParticularScreen(componentId, "PDFViewer");
+  };
+
   render() {
     let { searchText } = this.state;
     let { myForms } = this.props && this.props.forms;
@@ -44,7 +55,7 @@ class PrintableForms extends Component {
             onChangeText={searchText => this.setState({ searchText })}
           />
         </DivContainer>
-        <RenderPrintableForms data={myForms} />
+        <RenderPrintableForms data={myForms} onFormPress={this.onFormPress} />
       </View>
     );
   }

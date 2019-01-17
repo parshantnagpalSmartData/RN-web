@@ -9,7 +9,7 @@ import LinearGradient from "react-native-linear-gradient";
 import DivContainer from "../../common/DivContainer";
 
 const RenderForms = props => {
-  let { form, key } = props;
+  let { form, key, onFormPress } = props;
   return (
     <DivContainer class={"formGredient"}>
       <LinearGradient
@@ -21,16 +21,19 @@ const RenderForms = props => {
         useAngle
         locations={[0.1]}
       >
-        <TouchableOpacity style={Styles.continer}>
+        <View style={Styles.continer}>
           <Text style={Styles.formName}>{form.FormName}</Text>
-          <View style={Styles.iconView}>
+          <TouchableOpacity
+            style={Styles.iconView}
+            onPress={() => onFormPress()}
+          >
             <Image
               source={Constants.Images.SearchInactive}
               resizeMode={"contain"}
               style={Styles.icon}
             />
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       </LinearGradient>
     </DivContainer>
   );
@@ -64,10 +67,12 @@ const Styles = StyleSheet.create({
 
 RenderForms.defaultProps = {
   form: {},
-  key: null
+  key: null,
+  onFormPress: null
 };
 
 RenderForms.propTypes = {
   form: PropTypes.object,
-  key: PropTypes.number
+  key: PropTypes.number,
+  onFormPress: PropTypes.func
 };
