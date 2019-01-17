@@ -57,18 +57,7 @@ class PDFViewer extends Component {
           hideDrawer
           onBackPress={this.onBackPress}
         />
-        <DivContainer
-          style={{
-            height: "80%",
-            width: "100%",
-            ...Platform.select({
-              web: {
-                alignItems: "center",
-                height: "100%"
-              }
-            })
-          }}
-        >
+        <DivContainer styleApp={Styles.pdfStyle} styleWeb={Styles.pdfStyle}>
           <PDF
             onDocumentLoadSuccess={this.onDocumentLoadSuccess}
             loadError={this.loadError}
@@ -84,6 +73,16 @@ class PDFViewer extends Component {
 const Styles = StyleSheet.create({
   containner: {
     flex: 1
+  },
+  pdfStyle: {
+    height: "80%",
+    width: "100%",
+    ...Platform.select({
+      web: {
+        alignItems: "center",
+        height: "100%"
+      }
+    })
   }
 });
 const mapStateToProps = state => ({

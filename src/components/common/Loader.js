@@ -21,12 +21,15 @@ import DivContainer from "../Common/DivContainer";
 class Loader extends Component {
   render() {
     let { loading } = this.props;
-    // let loading=true;
     if (!loading) {
       return null;
     }
     return (
-      <DivContainer style={Styles.mainContainer} className={"loader"}>
+      <DivContainer
+        styleApp={Styles.mainContainer}
+        styleWeb={Styles.mainContainer}
+        className={"loader"}
+      >
         <View style={Styles.innerView}>
           <ActivityIndicator size="large" color={Constants.Colors.Primary} />
         </View>
