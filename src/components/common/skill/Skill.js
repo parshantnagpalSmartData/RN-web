@@ -14,7 +14,7 @@ import DivContainer from "../DivContainer";
 const Skill = props => {
   let { gradientStyle, gradientColors, skill, onSkillPress } = props;
   return (
-    <DivContainer>
+    <DivContainer className={"skillView"}>
       <TouchableOpacity style={Styles.container} onPress={onSkillPress}>
         <LinearGradient
           start={{ x: 1, y: 0 }}
@@ -33,21 +33,9 @@ export default Skill;
 
 const Styles = StyleSheet.create({
   container: {
-    padding: moderateScale(5),
-    ...Platform.select({
-      ios: {
-        alignItems: "center",
-        justifyContent: "center"
-      },
-      android: {
-        alignItems: "center",
-        justifyContent: "center"
-      },
-      web: {
-        alignItems: "center",
-        justifyContent: "center"
-      }
-    })
+    alignItems: "center",
+    justifyContent: "center",
+    padding: moderateScale(5)
   },
   gradientStyle: {
     borderRadius: moderateScale(25),

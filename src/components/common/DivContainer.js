@@ -10,24 +10,28 @@ import { View, Platform } from "react-native";
 import PropTypes from "prop-types";
 
 const DivContainer = props => {
-  let { className, style } = props;
+  let { className, styleApp, hideFlex,styleWeb } = props;
   if (Platform.OS === "web") {
     return (
       <div className={className}>
-        <View style={[style]}>{props.children}</View>
+        <View style={[styleWeb, !hideFlex ? { flex: 1 } : null]}>
+          {props.children}
+        </View>
       </div>
     );
   } else {
-    return <View style={[style]}>{props.children}</View>;
+    return <View style={[styleApp]}>{props.children}</View>;
   }
 };
 
 export default DivContainer;
 
 DivContainer.defaultProps = {
-  className: null
+  className: null,
+  style: null
 };
 
 DivContainer.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  style: PropTypes.object
 };

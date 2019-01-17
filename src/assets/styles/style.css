@@ -1,3 +1,4 @@
+*, *:after, *:before{box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;}
 body{font-family: 'Montserrat', sans-serif; font-size:14px;}
 .ReactTable .-pagination .-btn {
     height: 71px;
@@ -31,3 +32,48 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
 /* .contentScroll .ReactTable .rt-tbody .rt-td .cusor-point{
     cursor: hand;
 } */
+
+/*----OTP Screen----*/
+.otpinput{height: 100px; margin: 0 auto 20px;}
+.otpinput > div > div > div{margin-top:0!important;}
+.verifyBTN > div > div{top:0 !important;}
+.loginTopText > div > div{ height: auto !important; padding-bottom:0 !important;}
+.loginTopText > div > div > div{margin-bottom: 10px;}
+.otpInputcontainer > div input{height: 100%; padding-top: 0 !important; color: #fff;}
+.flatListScroll {
+    height: calc(100vh - 90px); overflow: auto; width: calc(100vw - 260px);
+}
+
+/*-----*/
+.mainView{max-width: 50%; padding:0 15px 30px;}
+.mainView > div > div{width: 100% !important; margin:0!important;}
+.skillView > div {margin: 0!important; padding: 5px!important;}
+.skillView > div > div, .skillView > div > div > div{padding: 0!important;}
+
+.skillView > div > div > div:hover{background:rgb(45, 62, 157,1)!important;}
+
+.textPatientComp{margin-bottom: 5px; text-align: center;}
+.textPatientComp > div{font-size: 14px!important; }
+
+.MyPatientsDetailsWrapper > div,
+.PatientsDetails > div{width:100%!important;}
+.MyPatientsDetailsWrapper{width:33.33%;}
+.MyPatientsDetailsWrapper > div > div, 
+.Patienticon > div > div{width:auto!important; height:auto!important;}
+.Patienticon img{max-width:22px!important; height:auto!important;}
+.Patienticon > div{display: flex; align-items: center; justify-content: center; height: 50px!important;}
+.Patienticon, .Patienticon > div > div, .Patienticon img{position: relative!important;}
+
+@media screen and (max-width:992px){
+    .mainView{max-width: 100%;}
+    /* .MyPatientsDetailsWrapper{width:50%;} */
+    .patientDetailsWrapper > div > div{width:100%;}    
+}
+
+@media screen and (max-width:767px){    
+    .flatListScroll { width: 100vw;}
+}
+
+@media screen and (max-width:500px){
+    .MyPatientsDetailsWrapper{width:50%;}     
+}

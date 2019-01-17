@@ -7,7 +7,7 @@ Date : 12 Sept 2018
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
-import OtpInputs from "react-native-otp-inputs";
+import OtpInputs from "../../../modified_modules/react-native-otp-inputs";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import _ from "lodash";
 import { bindActionCreators } from "redux";
@@ -18,6 +18,7 @@ import Constants from "../../constants";
 import Header from "../../components/common/Header";
 import LogoText from "../../components/common/LogoText";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import DivContainer from "../../components/common/DivContainer";
 
 class OTPScreen extends Component {
   constructor(props) {
@@ -65,30 +66,36 @@ class OTPScreen extends Component {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps={"handled"}
           contentContainerStyle={{
-            justifyContent: "space-between",
+            // justifyContent: "space-between",
             alignItems: "center",
             height: Constants.BaseStyle.DEVICE_HEIGHT * 0.83
           }}
         >
           <View
             style={{
-              height:
-                Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT
-                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
-              justifyContent:
-                // Platform.OS === "android" ? "flex-start" :
-                "space-between",
-              alignItems: "center"
+              ...Platform.select({
+                ios: {
+                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                },
+                android: {
+                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }
+              })
             }}
           >
-            <LogoText
-              containerStyle={Styles.logoStyle}
-              heading="Verification"
-              message="We have sent OTP in your mobile number. Please enter below"
-            />
+            <DivContainer className={"loginTopText"}>
+              <LogoText
+                containerStyle={Styles.logoStyle}
+                heading="Verification"
+                message="We have sent OTP in your mobile number. Please enter below"
+              />
+            </DivContainer>
             {Platform.OS === "web" ? (
-              <View style={{}}>
+              <DivContainer className={"otpinput"}>
                 <OtpInputs
                   handleChange={otp => {
                     this.setState({ otp });
@@ -96,12 +103,12 @@ class OTPScreen extends Component {
                   numberOfInputs={4}
                   keyboardType={"numeric"}
                   inputContainerStyles={Styles.inputContainerStyles}
-                  underlineColorAndroid={Constants.Colors.Gray}
+                  underlineColorAndroid={Constants.Colors.Transparent}
                   inputTextErrorColor={Constants.Colors.Primary}
                   focusedBorderColor={Constants.Colors.Gray}
                   inputStyles={{ color: Constants.Colors.Primary }}
                 />
-              </View>
+              </DivContainer>
             ) : (
               <OtpInputs
                 handleChange={otp => {
@@ -116,26 +123,27 @@ class OTPScreen extends Component {
                 inputStyles={{ color: Constants.Colors.Primary }}
               />
             )}
-            {/* <View style={{}}> */}
-            <AuthButton
-              gradientColors={Constants.Colors.ButtonGradients}
-              buttonName={"Verify"}
-              buttonStyle={{
-                ...Platform.select({
-                  web: {
-                    top: moderateScale(15)
-                  }
-                })
-              }}
-              onPress={() => {
-                this.verifyOTP();
-              }}
-            />
-            {/* </View> */}
-            <View style={Styles.resendOTP}>
+            <DivContainer className={"verifyBTN"} styleApp={{ flex: 1 }}>
+              <AuthButton
+                gradientColors={Constants.Colors.ButtonGradients}
+                buttonName={"Verify"}
+                buttonStyle={{
+                  ...Platform.select({
+                    web: {
+                      top: moderateScale(15)
+                    }
+                  })
+                }}
+                onPress={() => {
+                  this.verifyOTP();
+                }}
+              />
+            </DivContainer>
+
+            <DivContainer style={Styles.resendOTP} className={"resendOTP"}>
               <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
               <Text style={Styles.resend}>{"Resend"}</Text>
-            </View>
+            </DivContainer>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -151,9 +159,8 @@ const Styles = StyleSheet.create({
   },
   logoStyle: {},
   resendOTP: {
-    // justifyContent: "flex-end",
-    alignItems: "center",
     flexDirection: "column",
+    alignItems: "center",
     ...Platform.select({
       android: { top: moderateScale(20) }
     })

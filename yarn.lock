@@ -1358,9 +1358,9 @@ babel-plugin-jest-hoist@^23.2.0:
   integrity sha1-5h+uBaHKiAGq3uV6bWa4zvr0QWc=
 
 babel-plugin-module-resolver@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.1.1.tgz#881cf67e3d4b8400d5eaaefc1be44d2dc1fe404f"
-  integrity sha512-1Q77Al4ydp6nYApJ7sQ2fmgz30WuQgJZegIYuyOdbdpxenB/bSezQ3hDPsumIXGlUS4vUIv+EwFjzzXZNWtARw==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.1.2.tgz#5d4bd3572eb1d1d4c7ca37bd53de8ec82d251dcb"
+  integrity sha512-OiDI8VKCp8zcjhbp/QwqZ5MliRTHp+Fv8tO2IJYiCl1B18/4t8ZCVhm90/8JDe+Zu4Th/DUxeLCHws8kbkVUZQ==
   dependencies:
     find-babel-config "^1.1.0"
     glob "^7.1.2"
@@ -2920,6 +2920,11 @@ crypto-js@^3.1.9-1:
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
   integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
 
+css-color-keywords@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/css-color-keywords/-/css-color-keywords-1.0.0.tgz#fea2616dc676b2962686b3af8dbdbe180b244e05"
+  integrity sha1-/qJhbcZ2spYmhrOvjb2+GAskTgU=
+
 css-in-js-utils@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/css-in-js-utils/-/css-in-js-utils-2.0.1.tgz#3b472b398787291b47cfe3e44fecfdd9e914ba99"
@@ -2968,10 +2973,38 @@ css-selector-tokenizer@^0.7.0:
     fastparse "^1.1.1"
     regexpu-core "^1.0.0"
 
+css-to-react-native-transform@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/css-to-react-native-transform/-/css-to-react-native-transform-1.8.0.tgz#e3e5811f42e6caa6ef60aace0b71dce583fb8c15"
+  integrity sha512-1EVcu6txVHDyQ8ZTkOOjB1xyKH1Kt/e+5mUmHO6CwLKd8hysYYy5cPesxpv10xIOjx2ewew8tCd4fO4ESUtgvg==
+  dependencies:
+    css "^2.2.4"
+    css-mediaquery "^0.1.2"
+    css-to-react-native "^2.2.2"
+
+css-to-react-native@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.2.2.tgz#c077d0f7bf3e6c915a539e7325821c9dd01f9965"
+  integrity sha512-w99Fzop1FO8XKm0VpbQp3y5mnTnaS+rtCvS+ylSEOK76YXO5zoHQx/QMB1N54Cp+Ya9jB9922EHrh14ld4xmmw==
+  dependencies:
+    css-color-keywords "^1.0.0"
+    fbjs "^0.8.5"
+    postcss-value-parser "^3.3.0"
+
 css-what@2.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.2.tgz#c0876d9d0480927d7d4920dcd72af3595649554d"
   integrity sha512-wan8dMWQ0GUeF7DGEPVjhHemVW/vy6xUYmFzRY8RYqgA0JtXC9rJmbScBjqSu6dg9q0lwPQy6ZAmJVr3PPTvqQ==
+
+css@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/css/-/css-2.2.4.tgz#c646755c73971f2bba6a601e2cf2fd71b1298929"
+  integrity sha512-oUnjmWpy0niI3x/mPL8dVEI1l7MnG3+HHyRPHf+YFSbK+svOhXpmSOcDURUh2aOCgl2grzrOPt1nHLuCVFULLw==
+  dependencies:
+    inherits "^2.0.3"
+    source-map "^0.6.1"
+    source-map-resolve "^0.5.2"
+    urix "^0.1.0"
 
 cssesc@^0.1.0:
   version "0.1.0"
@@ -3964,7 +3997,7 @@ fbjs-scripts@^0.8.1:
     semver "^5.1.0"
     through2 "^2.0.0"
 
-fbjs@^0.8.14, fbjs@^0.8.16, fbjs@^0.8.9:
+fbjs@^0.8.14, fbjs@^0.8.16, fbjs@^0.8.5, fbjs@^0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -7982,9 +8015,9 @@ react-native-modal@^7.0.2:
     react-native-animatable "^1.2.4"
 
 react-native-navigation@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.5.2.tgz#110fcdaee60e1c0ee9a6945e21ac1010895d9caa"
-  integrity sha512-BNrriVY/a71l8mqCvv5h6vRQg45+XnWAao66i0vTMvTD1SSpRIdS9HbmR5nZD3aPHdk1uUZixdk5G9XYVQ4fDQ==
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.7.0.tgz#56b279f6acd2b6cab4c8ff0aef49b26e9f75b6c5"
+  integrity sha512-HApoKZwikQN4SGXSNwaA/0dRrrYI8jY0nvBsfndbNbOQ3bT2kbK7PE/x9OHgDs8mP7d7CNZnLAWV22tJD7efRA==
   dependencies:
     hoist-non-react-statics "3.x.x"
     lodash "4.17.x"
@@ -7992,10 +8025,8 @@ react-native-navigation@^2.5.2:
     react-lifecycles-compat "2.0.0"
     tslib "1.9.3"
 
-react-native-otp-inputs@^1.0.0:
+"react-native-otp-inputs@file:./modified_modules/react-native-otp-inputs":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-otp-inputs/-/react-native-otp-inputs-1.0.0.tgz#76c09daadb1aab41fa90f945e2bcecf35b6a8fae"
-  integrity sha512-7heyQP9dSQ7+rbP9P6fNMcFuS38XZDroVoDkYc3v8febH/iF7k1jz1T+Uj5Ct1Gmqy+wTOnHsrFtqjxWoSvS/Q==
 
 react-native-pdf@^5.0.11:
   version "5.0.11"
@@ -8103,11 +8134,6 @@ react-native@0.55.4:
     xcode "^0.9.1"
     xmldoc "^0.4.0"
     yargs "^9.0.0"
-
-react-otp-input@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/react-otp-input/-/react-otp-input-0.2.2.tgz#c6be36cec6f3437e95084419641ab20a289666d0"
-  integrity sha512-N9/ztBH5KTJv2Wy+k4kFc2EvAwmGk2W53q7lTn6m7/Vcno0x9WXbUJMOO5TZ2nNCbyhjJFw3zA3Ol0C1xg4LRw==
 
 react-pdf@^4.0.2:
   version "4.0.2"
@@ -8967,7 +8993,7 @@ source-list-map@^2.0.0:
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
   integrity sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==
 
-source-map-resolve@^0.5.0:
+source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/source-map-resolve/-/source-map-resolve-0.5.2.tgz#72e2cc34095543e43b2c62b2c4c10d4a9054f259"
   integrity sha512-MjqsvNwyz1s0k81Goz/9vRBe9SZdB09Bdw+/zYyO+3CuPk6fouTaxscHkgtE8jKvf01kVfl8riHzERQ/kefaSA==

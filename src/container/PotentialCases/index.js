@@ -15,6 +15,7 @@ import Header from "../../components/common/Header";
 import Shifts from "../../components/shift";
 import ListEmptyComponent from "../../components/common/ListEmptyComponent";
 import Constants from "../../constants";
+import DivContainer from "../../components/common/DivContainer";
 
 class PotientialCases extends Component {
   constructor(props) {
@@ -115,27 +116,29 @@ class PotientialCases extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Potiential Cases"} onDrawerPress={this.onDrawerPress} />
-        <FlatList
-          data={potientialCases}
-          extraData={this.state}
-          keyExtractor={item =>
-            item.CaseID.toString() + Math.random().toString()
-          }
-          refreshing={app.refreshLoader}
-          onRefresh={this.onRefresh}
-          renderItem={this.renderItem}
-          onEndReached={this.onCurrentPageEndReach}
-          onEndReachedThreshold={0}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          numColumns={Platform.OS == "web" ? 2 : 1}
-          ListEmptyComponent={
-            <ListEmptyComponent
-              message={" Potential Cases Not Found"}
-              loader={app.refreshLoader || app.loading}
-            />
-          }
-        />
+        <DivContainer hideFlex className={"flatListScroll"}>
+          <FlatList
+            data={potientialCases}
+            extraData={this.state}
+            keyExtractor={item =>
+              item.CaseID.toString() + Math.random().toString()
+            }
+            refreshing={app.refreshLoader}
+            onRefresh={this.onRefresh}
+            renderItem={this.renderItem}
+            onEndReached={this.onCurrentPageEndReach}
+            onEndReachedThreshold={0}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            numColumns={Platform.OS == "web" ? 2 : 1}
+            ListEmptyComponent={
+              <ListEmptyComponent
+                message={" Potential Cases Not Found"}
+                loader={app.refreshLoader || app.loading}
+              />
+            }
+          />
+        </DivContainer>
       </View>
     );
   }

@@ -18,6 +18,7 @@ import Shifts from "../../components/shift";
 import Filter from "../../components/MySchedule/Filter";
 import ListEmptyComponent from "../../components/common/ListEmptyComponent";
 import Constants from "../../constants";
+import DivContainer from "../../components/common/DivContainer";
 // import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 class OpenShift extends Component {
@@ -115,20 +116,30 @@ class OpenShift extends Component {
     let { currentIndex, loading, scheduleId } = this.state;
     let skills = item.SkillsRequired && item.SkillsRequired.split(",");
     return (
-      <Shifts
-        key={index}
-        skills={skills}
-        patient={item}
-        onSkillPress={skillIndex => {
-          this.skillPress(index, skillIndex);
-        }}
-        showAll={_.findIndex(currentIndex, item => item === index) !== -1}
-        isSelected={item.LikeIndicator}
-        onLikePress={this.onIconPress}
-        loading={loading}
-        scheduleId={scheduleId}
-        blankView={true}
-      />
+      <DivContainer
+        className={"mainView"}
+        style={
+          {
+            // justifyContent:"center",
+            // alignItem:'center'
+          }
+        }
+      >
+        <Shifts
+          key={index}
+          skills={skills}
+          patient={item}
+          onSkillPress={skillIndex => {
+            this.skillPress(index, skillIndex);
+          }}
+          showAll={_.findIndex(currentIndex, item => item === index) !== -1}
+          isSelected={item.LikeIndicator}
+          onLikePress={this.onIconPress}
+          loading={loading}
+          scheduleId={scheduleId}
+          blankView={true}
+        />
+      </DivContainer>
     );
   };
 
@@ -146,28 +157,42 @@ class OpenShift extends Component {
             this.onDateChange(prevDate, nextDate)
           }
         />
-
-        <FlatList
-          data={openShift}
-          extraData={this.state}
-          keyExtractor={item =>
-            item.SchedID.toString() + Math.random().toString()
-          }
-          refreshing={app.refreshLoader}
-          onRefresh={this.onRefresh}
-          renderItem={this.renderItem}
-          onEndReached={this.onCurrentPageEndReach}
-          onEndReachedThreshold={0}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          numColumns={Platform.OS == "web" ? 2 : 1}
-          ListEmptyComponent={
-            <ListEmptyComponent
-              message={"Shift Not Found!"}
-              loader={app.refreshLoader || app.loading}
-            />
-          }
-        />
+        <DivContainer hideFlex className={"flatListScroll"}>
+          <FlatList
+            // horizontal
+            // contentContainerStyle={{
+            //   flex: 1,
+            //   flexWrap: "wrap",
+            //   flexDirection: "row",
+            //   justifyContent: "flex-start",
+            //   width:"100%"
+            // }}
+            data={openShift}
+            extraData={this.state}
+            keyExtractor={item =>
+              item.SchedID.toString() + Math.random().toString()
+            }
+            refreshing={app.refreshLoader}
+            onRefresh={this.onRefresh}
+            renderItem={this.renderItem}
+            onEndReached={this.onCurrentPageEndReach}
+            onEndReachedThreshold={0}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            numColumns={
+              Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH > 992
+                ? 2
+                : 1
+            }
+            ListEmptyComponent={
+              <ListEmptyComponent
+                message={"Shift Not Found!"}
+                loader={app.refreshLoader || app.loading}
+              />
+            }
+            // columnWrapperStyle={Styles.columnWrapperStyle}
+          />
+        </DivContainer>
       </View>
     );
   }
@@ -182,8 +207,12 @@ const Styles = StyleSheet.create({
         backgroundColor: Constants.Colors.BlueWhite
       }
     })
+  },
+  columnWrapperStyle: {
+    backgroundColor: "green"
   }
 });
+
 const mapStateToProps = state => ({
   schedule: state.schedule,
   app: state.app

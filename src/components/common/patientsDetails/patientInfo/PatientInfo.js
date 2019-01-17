@@ -7,15 +7,23 @@ import DivContainer from "../../DivContainer";
 const PatientInfo = props => {
   let { image, heading, value } = props;
   return (
-    <DivContainer className={"myclassdajksd"}>
+    <DivContainer className={"MyPatientsDetailsWrapper"}>
       <View style={[Styles.boxStyle, Styles.ageStyle]}>
         {Platform.OS == "web" ? (
-          <View style={Styles.imageBottomPadding}>
+          <DivContainer
+            style={Styles.imageBottomPadding}
+            className={"Patienticon"}
+          >
             <Image source={image} style={Styles.imageIconWeb} />
-          </View>
+          </DivContainer>
         ) : null}
-        <Text style={Styles.heading}>{heading}</Text>
-        <Text style={Styles.value}>{value}</Text>
+        <DivContainer className={"patientTitle"}>
+          <Text style={Styles.heading}>{heading}</Text>
+        </DivContainer>
+
+        <DivContainer className={"patientDate"}>
+          <Text style={Styles.value}>{value}</Text>
+        </DivContainer>
       </View>
     </DivContainer>
   );

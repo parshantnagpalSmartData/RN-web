@@ -36,7 +36,7 @@ class App extends Component {
       <Provider store={store}>
         <PersistGate loading={<Loader />} persistor={persistor}>
           <Routes />
-          <Loader />
+          {/* <Loader /> */}
           <ToastNotification />
         </PersistGate>
       </Provider>

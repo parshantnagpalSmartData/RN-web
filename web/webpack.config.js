@@ -18,10 +18,10 @@ const babelLoaderConfiguration = {
     path.resolve(appDirectory, "src"),
     path.resolve(appDirectory, "node_modules/react-native-uncompiled"),
     path.resolve(appDirectory, "node_modules/lodash"),
-    path.resolve(appDirectory, "node_modules/react-native-otp-inputs"),
+    path.resolve(appDirectory, "modified_modules/react-native-otp-inputs"),
     path.resolve(appDirectory, "node_modules/react-native-modal"),
     path.resolve(appDirectory, "node_modules/react-native-animatable"),
-    // path.resolve(appDirectory, "node_modules/react-confirm-alert"),
+    // path.resolve(appDirectory, "node_modules/css-to-react-native-transform"),
     path.resolve(
       appDirectory,
       "node_modules/react-native-keyboard-aware-scroll-view"

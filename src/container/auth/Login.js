@@ -19,6 +19,7 @@ import AuthButton from "../../components/common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
 import LogoText from "../../components/common/LogoText";
+import DivContainer from "../../components/common/DivContainer";
 
 class Login extends Component {
   constructor(props) {
@@ -82,7 +83,7 @@ class Login extends Component {
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props;
-    appAction.pushToParticularScreen(componentId, "ForgotPassword");
+    appAction.pushToParticularScreen(componentId, "OTPScreen");
   };
 
   render() {
@@ -94,8 +95,9 @@ class Login extends Component {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
-        <LogoText text={"ACT Home Health Services"} />
-
+        <DivContainer className={"loginTopText"}>
+          <LogoText text={"ACT Home Health Services"} />
+        </DivContainer>
         <View
           style={[
             Styles.formView,
@@ -162,15 +164,15 @@ class Login extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
     height: Constants.BaseStyle.DEVICE_HEIGHT * 0.9
   },
   formView: {
     ...Platform.select({
       web: {
-        height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
-        justifyContent: "space-evenly"
+        // height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
+        //justifyContent: "space-evenly"
       },
       ios: {
         height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
@@ -186,19 +188,45 @@ const Styles = StyleSheet.create({
     overflow: "hidden"
   },
   FloatingInputContainer: {
-    flex: 0.5,
+    //flex: 0.5,
     paddingHorizontal: moderateScale(25),
-    justifyContent: "center"
+    justifyContent: "center",
+    ...Platform.select({
+      ios: {
+        flex: 0.5
+      },
+      android: {
+        flex: 0.5
+      }
+    })
   },
   AuthButton: {
-    flex: 0.25,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    ...Platform.select({
+      ios: {
+        flex: 0.25
+      },
+      android: {
+        flex: 0.25
+      }
+    })
   },
   forgotView: {
     justifyContent: "flex-start",
     alignItems: "center",
-    flex: 0.25
+    ...Platform.select({
+      ios: {
+        flex: 0.25
+      },
+      android: {
+        flex: 0.25
+      },
+      web: {
+        marginTop: "10",
+        marginBottom: "20"
+      }
+    })
   },
   forgotText: {
     ...Constants.Fonts.Regular,
