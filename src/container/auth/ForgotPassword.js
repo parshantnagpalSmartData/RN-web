@@ -56,7 +56,7 @@ class ForgotPassword extends Component {
 
   render() {
     let { deviceWidth } = this.state;
-    let title = "ACT HOME HEALTH SERVICES";
+    let title = "Forgot Password?";
     return (
       <View style={Styles.containner}>
         <Header title={title} hideDrawer onBackPress={this.onBackPress} />

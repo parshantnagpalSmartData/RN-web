@@ -14,7 +14,7 @@ export default class OtpInput extends Component {
     }
     render() {
         const { clearTextOnFocus, containerStyles, error, focusedBorderColor, handleBackspace, inputStyles, keyboardType, selectTextOnFocus, textErrorColor, unFocusedBorderColor, updateText, value, } = this.props;
-        return (<DivContainer className={"otpInputcontainer"} style={[
+        return (<DivContainer className={"otpInputcontainer"} styleApp={[
             defaultStyles.otpContainer,
             containerStyles,
             { borderColor: this.state.isFocused ? focusedBorderColor : unFocusedBorderColor },

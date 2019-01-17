@@ -83,7 +83,7 @@ class Login extends Component {
 
   onForgotPassword = () => {
     let { appAction, componentId } = this.props;
-    appAction.pushToParticularScreen(componentId, "OTPScreen");
+    appAction.pushToParticularScreen(componentId, "ForgotPassword");
   };
 
   render() {
@@ -96,7 +96,10 @@ class Login extends Component {
         showsVerticalScrollIndicator={false}
       >
         <DivContainer className={"loginTopText"}>
-          <LogoText text={"ACT Home Health Services"} />
+          <LogoText
+            text={"ACT Home Health Services"}
+            containerStyle={{ marginTop: moderateScale(40) }}
+          />
         </DivContainer>
         <View
           style={[
