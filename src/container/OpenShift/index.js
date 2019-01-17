@@ -136,7 +136,6 @@ class OpenShift extends Component {
     let { app, schedule } = this.props;
     let { openShift } = schedule;
     let { prevDate, nextDate } = this.state;
-    
 
     return (
       <View style={Styles.containner}>
