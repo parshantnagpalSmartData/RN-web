@@ -10,11 +10,13 @@ import { View, Platform } from "react-native";
 import PropTypes from "prop-types";
 
 const DivContainer = props => {
-  let { className, style } = props;
+  let { className, style, hideFlex } = props;
   if (Platform.OS === "web") {
     return (
       <div className={className}>
-        <View style={[style, { flex: 1 }]}>{props.children}</View>
+        <View style={[style, !hideFlex ? { flex: 1 } : null]}>
+          {props.children}
+        </View>
       </div>
     );
   } else {

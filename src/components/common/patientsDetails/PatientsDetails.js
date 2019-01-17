@@ -25,7 +25,7 @@ const PatientsDetails = props => {
     blankView
   } = props;
   return (
-    <DivContainer>
+    <DivContainer className={"patientDetailsWrapper"}>
       <View style={Styles.container}>
         {birthday ? (
           <PatientInfo

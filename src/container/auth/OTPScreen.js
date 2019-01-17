@@ -7,7 +7,7 @@ Date : 12 Sept 2018
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
-import OtpInputs from "react-native-otp-inputs";
+import OtpInputs from "../../../modified_modules/react-native-otp-inputs";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import _ from "lodash";
 import { bindActionCreators } from "redux";
@@ -66,75 +66,65 @@ class OTPScreen extends Component {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps={"handled"}
           contentContainerStyle={{
-            justifyContent: "space-between",
+            // justifyContent: "space-between",
             alignItems: "center",
             height: Constants.BaseStyle.DEVICE_HEIGHT * 0.83
           }}
         >
           <View
             style={{
-              height:
-                Platform.OS === "web"
-                  ? Constants.BaseStyle.DEVICE_HEIGHT
-                  : Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
-              justifyContent:
-                // Platform.OS === "android" ? "flex-start" :
-                "space-between",
-              alignItems: "center"
+              ...Platform.select({
+                ios: {
+                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                },
+                android: {
+                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }
+              })
             }}
           >
-            <LogoText
-              containerStyle={Styles.logoStyle}
-              heading="Verification"
-              message="We have sent OTP in your mobile number. Please enter below"
-            />
-
+            <DivContainer className={"loginTopText"}>
+              <LogoText
+                containerStyle={Styles.logoStyle}
+                heading="Verification"
+                message="We have sent OTP in your mobile number. Please enter below"
+              />
+            </DivContainer>
             <DivContainer className={"otpinput"}>
-              {Platform.OS === "web" ? (
-                // <View style={{}}>
-                <OtpInputs
-                  handleChange={otp => {
-                    this.setState({ otp });
-                  }}
-                  numberOfInputs={4}
-                  keyboardType={"numeric"}
-                  inputContainerStyles={Styles.inputContainerStyles}
-                  underlineColorAndroid={Constants.Colors.Gray}
-                  inputTextErrorColor={Constants.Colors.Primary}
-                  focusedBorderColor={Constants.Colors.Gray}
-                  inputStyles={{ color: Constants.Colors.Primary }}
-                />
-              ) : (
-                // </View>
-                <OtpInputs
-                  handleChange={otp => {
-                    this.setState({ otp });
-                  }}
-                  numberOfInputs={4}
-                  keyboardType={"numeric"}
-                  inputContainerStyles={Styles.inputContainerStyles}
-                  underlineColorAndroid={Constants.Colors.Transparent}
-                  inputTextErrorColor={Constants.Colors.Primary}
-                  focusedBorderColor={Constants.Colors.Gray}
-                  inputStyles={{ color: Constants.Colors.Primary }}
-                />
-              )}
+              <OtpInputs
+                handleChange={otp => {
+                  this.setState({ otp });
+                }}
+                numberOfInputs={4}
+                keyboardType={"numeric"}
+                inputContainerStyles={Styles.inputContainerStyles}
+                underlineColorAndroid={Constants.Colors.Transparent}
+                inputTextErrorColor={Constants.Colors.Primary}
+                focusedBorderColor={Constants.Colors.Gray}
+                inputStyles={{ color: Constants.Colors.Primary }}
+              />
+            </DivContainer>
+            <DivContainer className={"verifyBTN"}>
+              <AuthButton
+                gradientColors={Constants.Colors.ButtonGradients}
+                buttonName={"Verify"}
+                buttonStyle={{
+                  ...Platform.select({
+                    web: {
+                      top: moderateScale(15)
+                    }
+                  })
+                }}
+                onPress={() => {
+                  this.verifyOTP();
+                }}
+              />
             </DivContainer>
 
-            <AuthButton
-              gradientColors={Constants.Colors.ButtonGradients}
-              buttonName={"Verify"}
-              buttonStyle={{
-                ...Platform.select({
-                  web: {
-                    top: moderateScale(15)
-                  }
-                })
-              }}
-              onPress={() => {
-                this.verifyOTP();
-              }}
-            />
             <DivContainer style={Styles.resendOTP} className={"resendOTP"}>
               <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
               <Text style={Styles.resend}>{"Resend"}</Text>

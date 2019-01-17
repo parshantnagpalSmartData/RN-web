@@ -11,7 +11,7 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Skill from "../common/skill";
 import Favourite from "../common/Favourite";
 import PatientsDetails from "../common/patientsDetails";
-import DivContainer from "../common/DivContainer";
+//import DivContainer from "../common/DivContainer";
 
 const Shifts = props => {
   let {
@@ -29,62 +29,44 @@ const Shifts = props => {
     skills[skills.length] = "show less";
   }
   return (
-    <DivContainer className={"myclsass"}>
-      <View style={Styles.container}>
-        <View style={Styles.heading}>
-          <Text style={Styles.skill}>Skills</Text>
-          <Favourite
-            isSelected={isSelected}
-            onLikePress={onLikePress}
-            patient={patient}
-            loading={loading}
-            scheduleId={scheduleId}
-          />
-        </View>
-        {skills && (
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            data={skills}
-            keyExtractor={item =>
-              (item && item.toString() + Math.random().toString()) ||
-              Math.random().toString()
-            }
-            contentContainerStyle={{
-              flex: 1,
-              flexWrap: "wrap",
-              flexDirection: "row",
-              justifyContent: "flex-start"
-            }}
-            listKey={(item, index) => "D" + index.toString()}
-            style={{
-              ...Platform.select({
-                web: {
-                  backgroundColor: Constants.Colors.LighBlueWhite
-                }
-              })
-            }}
-            renderItem={({ item, index }) => {
-              if (!showAll) {
-                if (index < 3) {
-                  return (
-                    <Skill
-                      key={index}
-                      skill={item}
-                      onSkillPress={() => onSkillPress(index)}
-                    />
-                  );
-                } else if (index === 3) {
-                  return (
-                    <Skill
-                      key={index}
-                      skill={`+ ${skills && skills.length - index}`}
-                      onSkillPress={() => onSkillPress(index)}
-                    />
-                  );
-                }
-              } else {
+    <View style={Styles.container}>
+      <View style={Styles.heading}>
+        <Text style={Styles.skill}>Skills</Text>
+        <Favourite
+          isSelected={isSelected}
+          onLikePress={onLikePress}
+          patient={patient}
+          loading={loading}
+          scheduleId={scheduleId}
+        />
+      </View>
+      {skills && (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          data={skills}
+          keyExtractor={item =>
+            (item && item.toString() + Math.random().toString()) ||
+            Math.random().toString()
+          }
+          contentContainerStyle={{
+            flex: 1,
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "flex-start"
+          }}
+          listKey={(item, index) => "D" + index.toString()}
+          style={{
+            ...Platform.select({
+              web: {
+                backgroundColor: Constants.Colors.LighBlueWhite
+              }
+            })
+          }}
+          renderItem={({ item, index }) => {
+            if (!showAll) {
+              if (index < 3) {
                 return (
                   <Skill
                     key={index}
@@ -92,22 +74,38 @@ const Shifts = props => {
                     onSkillPress={() => onSkillPress(index)}
                   />
                 );
+              } else if (index === 3) {
+                return (
+                  <Skill
+                    key={index}
+                    skill={`+ ${skills && skills.length - index}`}
+                    onSkillPress={() => onSkillPress(index)}
+                  />
+                );
               }
-            }}
-          />
-        )}
-        <PatientsDetails
-          date={patient.SchedDate}
-          StartTime={patient.StartTime}
-          EndTime={patient.EndTime}
-          age={patient.Patient_Age}
-          gender={patient.Patient_Gender || patient.Sex}
-          zip={patient.Patient_Zip || patient.Zip}
-          birthday={patient.Bday}
-          blankView={blankView}
+            } else {
+              return (
+                <Skill
+                  key={index}
+                  skill={item}
+                  onSkillPress={() => onSkillPress(index)}
+                />
+              );
+            }
+          }}
         />
-      </View>
-    </DivContainer>
+      )}
+      <PatientsDetails
+        date={patient.SchedDate}
+        StartTime={patient.StartTime}
+        EndTime={patient.EndTime}
+        age={patient.Patient_Age}
+        gender={patient.Patient_Gender || patient.Sex}
+        zip={patient.Patient_Zip || patient.Zip}
+        birthday={patient.Bday}
+        blankView={blankView}
+      />
+    </View>
   );
 };
 
@@ -123,7 +121,10 @@ const Styles = StyleSheet.create({
       ios: { flex: 1 },
       android: { flex: 1 },
       web: {
-        width: Constants.BaseStyle.DEVICE_WIDTH / 2.7,
+        width:
+          Constants.BaseStyle.DEVICE_WIDTH <= 992
+            ? Constants.BaseStyle.DEVICE_WIDTH - 100
+            : Constants.BaseStyle.DEVICE_WIDTH / 2.7,
         marginVertical: moderateScale(10),
         margin: moderateScale(10),
         backgroundColor: Constants.Colors.White,
