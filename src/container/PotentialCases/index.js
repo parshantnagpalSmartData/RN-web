@@ -58,20 +58,22 @@ class PotientialCases extends Component {
     let { currentIndex, loading, CaseID } = this.state;
     let skills = item.SkillsRequired && item.SkillsRequired.split(",");
     return (
-      <Shifts
-        key={index}
-        skills={skills}
-        patient={item}
-        onSkillPress={skillIndex => {
-          this.skillPress(index, skillIndex);
-        }}
-        showAll={_.findIndex(currentIndex, item => item === index) !== -1}
-        isSelected={item.LikeIndicator}
-        onLikePress={this.onIconPress}
-        loading={loading}
-        scheduleId={CaseID}
-        blankView={false}
-      />
+      <DivContainer className={"mainView"}>
+        <Shifts
+          key={index}
+          skills={skills}
+          patient={item}
+          onSkillPress={skillIndex => {
+            this.skillPress(index, skillIndex);
+          }}
+          showAll={_.findIndex(currentIndex, item => item === index) !== -1}
+          isSelected={item.LikeIndicator}
+          onLikePress={this.onIconPress}
+          loading={loading}
+          scheduleId={CaseID}
+          blankView={false}
+        />
+      </DivContainer>
     );
   };
 
@@ -130,7 +132,12 @@ class PotientialCases extends Component {
             onEndReachedThreshold={0}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            numColumns={Platform.OS == "web" ? 2 : 1}
+            //numColumns={Platform.OS == "web" ? 2 : 1}
+            numColumns={
+              Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH > 992
+                ? 2
+                : 1
+            }
             ListEmptyComponent={
               <ListEmptyComponent
                 message={" Potential Cases Not Found"}

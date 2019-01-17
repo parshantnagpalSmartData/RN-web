@@ -20,6 +20,7 @@ import Constants from "../../constants";
 import SafeView from "./SafeView";
 import FormTextInput from "./FormTextInput";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import DivContainer from "./DivContainer";
 
 const Header = props => {
   let {
@@ -50,84 +51,88 @@ const Header = props => {
       colors={gradientColors || Constants.Colors.ButtonGradients}
       style={[Styles.gradientStyle, gradientStyle]}
     >
-      <View style={{ backgroundColor: color || Constants.Colors.Transparent }}>
-        <SafeView />
+      <DivContainer className={"pageTitleText"}>
         <View
-          style={[
-            Styles.container,
-            {
-              backgroundColor: color,
-              paddingVertical: !searchBox ? moderateScale(15) : 0
-            }
-          ]}
+          style={{ backgroundColor: color || Constants.Colors.Transparent }}
         >
-          {!hideDrawer && Platform.OS !== "web" ? (
-            <TouchableOpacity style={Styles.iconBtn} onPress={onDrawerPress}>
-              <Image
-                source={Constants.Images.Drawer}
-                resizeMode={"contain"}
-                style={Styles.icon}
-              />
-            </TouchableOpacity>
-          ) : !hideBack && Platform.OS !== "web" ? (
-            <TouchableOpacity style={Styles.iconBtn} onPress={onBackPress}>
-              <Image
-                source={Constants.Images.Back}
-                resizeMode={"contain"}
-                style={Styles.icon}
-              />
-            </TouchableOpacity>
-          ) : (
-            <View style={Styles.iconBtn} />
-          )}
+          <SafeView />
           <View
             style={[
-              Styles.header,
+              Styles.container,
               {
-                justifyContent: searchBox ? "flex-start" : "center",
-                alignItems: searchBox ? "flex-start" : "center"
+                backgroundColor: color,
+                paddingVertical: !searchBox ? moderateScale(15) : 0
               }
             ]}
           >
-            {searchBox ? (
-              <FormTextInput
-                onChangeText={text => onChangeSearchText(text)}
-                value={searchText}
-                placeHolderText={searchPlaceHolder}
-                style={Styles.searchBox}
-                inputStyle={Styles.inputStyle}
-              />
-            ) : null}
-            {title ? (
-              <Text numberOfLines={2} style={[Styles.headerText, headerText]}>
-                {title}
-              </Text>
-            ) : null}
-            {subTitle ? (
-              <Text numberOfLines={1} style={Styles.subHeaderText}>
-                {subTitle}
-              </Text>
-            ) : null}
-          </View>
-          <View style={Styles.iconBtn}>
-            {rightIcon ? (
-              <TouchableOpacity onPress={() => onRightPress()}>
+            {Platform.OS !== "web" && !hideDrawer ? (
+              <TouchableOpacity style={Styles.iconBtn} onPress={onDrawerPress}>
                 <Image
-                  source={rightIcon}
+                  source={Constants.Images.Drawer}
                   resizeMode={"contain"}
                   style={Styles.icon}
                 />
               </TouchableOpacity>
-            ) : rightText ? (
-              <TouchableOpacity onPress={() => onRightPress()}>
-                <Text style={Styles.skip}>{rightText}</Text>
+            ) : Platform.OS !== "web" && !hideBack ? (
+              <TouchableOpacity style={Styles.iconBtn} onPress={onBackPress}>
+                <Image
+                  source={Constants.Images.Back}
+                  resizeMode={"contain"}
+                  style={Styles.icon}
+                />
               </TouchableOpacity>
-            ) : rightComponent ? (
-              <View>{rightComponent}</View>
-            ) : null}
+            ) : (
+              <View style={Styles.iconBtn} />
+            )}
+            <View
+              style={[
+                Styles.header,
+                {
+                  justifyContent: searchBox ? "flex-start" : "center",
+                  alignItems: searchBox ? "flex-start" : "center"
+                }
+              ]}
+            >
+              {searchBox ? (
+                <FormTextInput
+                  onChangeText={text => onChangeSearchText(text)}
+                  value={searchText}
+                  placeHolderText={searchPlaceHolder}
+                  style={Styles.searchBox}
+                  inputStyle={Styles.inputStyle}
+                />
+              ) : null}
+              {title ? (
+                <Text numberOfLines={2} style={[Styles.headerText, headerText]}>
+                  {title}
+                </Text>
+              ) : null}
+              {subTitle ? (
+                <Text numberOfLines={1} style={Styles.subHeaderText}>
+                  {subTitle}
+                </Text>
+              ) : null}
+            </View>
+            <View style={Styles.iconBtn}>
+              {rightIcon ? (
+                <TouchableOpacity onPress={() => onRightPress()}>
+                  <Image
+                    source={rightIcon}
+                    resizeMode={"contain"}
+                    style={Styles.icon}
+                  />
+                </TouchableOpacity>
+              ) : rightText ? (
+                <TouchableOpacity onPress={() => onRightPress()}>
+                  <Text style={Styles.skip}>{rightText}</Text>
+                </TouchableOpacity>
+              ) : rightComponent ? (
+                <View>{rightComponent}</View>
+              ) : null}
+            </View>
           </View>
         </View>
-      </View>
+      </DivContainer>
     </LinearGradient>
   );
 };
@@ -148,20 +153,45 @@ const Styles = StyleSheet.create({
     alignItems: "center"
   },
   iconBtn: {
-    height: moderateScale(40),
-    width: moderateScale(40),
-    justifyContent: "center",
-    alignItems: "center"
+    ...Platform.select({
+      ios: {
+        height: moderateScale(40),
+        width: moderateScale(40),
+        justifyContent: "center",
+        alignItems: "center"
+      },
+      android: {
+        height: moderateScale(40),
+        width: moderateScale(40),
+        justifyContent: "center",
+        alignItems: "center"
+      }
+    })
   },
   icon: {
-    height: moderateScale(20),
-    width: moderateScale(20)
+    ...Platform.select({
+      ios: {
+        height: moderateScale(20),
+        width: moderateScale(20)
+      },
+      android: {
+        height: moderateScale(20),
+        width: moderateScale(20)
+      }
+    })
   },
   header: {
     justifyContent: "center",
     alignItems: "center",
     height: moderateScale(40),
-    width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
+    ...Platform.select({
+      ios: {
+        width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
+      },
+      android: {
+        width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
+      }
+    })
   },
   headerText: {
     ...Constants.Fonts.SemiBold,
