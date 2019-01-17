@@ -21,17 +21,17 @@ const PatientsDetails = props => {
     age,
     gender,
     zip,
-    birthday,
+    agePatient,
     blankView
   } = props;
   return (
     <DivContainer className={"patientDetailsWrapper"}>
       <View style={Styles.container}>
-        {birthday ? (
+        {agePatient ? (
           <PatientInfo
             image={Constants.Images.Age}
             heading={"Age"}
-            value={`${moment().diff(birthday, "years")} yrs`}
+            value={agePatient}
           />
         ) : null}
         {date ? (
