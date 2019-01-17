@@ -94,22 +94,7 @@ class OTPScreen extends Component {
                 message="We have sent OTP in your mobile number. Please enter below"
               />
             </DivContainer>
-            {Platform.OS === "web" ? (
-              <DivContainer className={"otpinput"}>
-                <OtpInputs
-                  handleChange={otp => {
-                    this.setState({ otp });
-                  }}
-                  numberOfInputs={4}
-                  keyboardType={"numeric"}
-                  inputContainerStyles={Styles.inputContainerStyles}
-                  underlineColorAndroid={Constants.Colors.Transparent}
-                  inputTextErrorColor={Constants.Colors.Primary}
-                  focusedBorderColor={Constants.Colors.Gray}
-                  inputStyles={{ color: Constants.Colors.Primary }}
-                />
-              </DivContainer>
-            ) : (
+            <DivContainer className={"otpinput"}>
               <OtpInputs
                 handleChange={otp => {
                   this.setState({ otp });
@@ -122,7 +107,8 @@ class OTPScreen extends Component {
                 focusedBorderColor={Constants.Colors.Gray}
                 inputStyles={{ color: Constants.Colors.Primary }}
               />
-            )}
+            </DivContainer>
+
             <DivContainer className={"verifyBTN"} styleApp={{ flex: 1 }}>
               <AuthButton
                 gradientColors={Constants.Colors.ButtonGradients}
@@ -140,7 +126,11 @@ class OTPScreen extends Component {
               />
             </DivContainer>
 
-            <DivContainer style={Styles.resendOTP} className={"resendOTP"}>
+            <DivContainer
+              styleWeb={Styles.resendOTP}
+              styleApp={Styles.resendOTP}
+              className={"resendOTP"}
+            >
               <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
               <Text style={Styles.resend}>{"Resend"}</Text>
             </DivContainer>
