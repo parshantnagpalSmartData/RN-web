@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList } from "react-native";
 
-import ListEmptyComponent from "../common/ListEmptyComponent";
+import ListEmptyComponent from "../Common/ListEmptyComponent";
 
 const MyScheduleList = ({
   patitents,

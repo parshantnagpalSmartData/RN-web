@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, View } from 'react-native';
 import defaultStyles from './defaultStyles';
-import DivContainer from "../../../src/components/common/DivContainer";
+import DivContainer from "../../../src/components/Common/DivContainer";
 
 export default class OtpInput extends Component {
     constructor() {

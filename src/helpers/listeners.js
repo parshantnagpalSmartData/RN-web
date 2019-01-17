@@ -1,3 +1,10 @@
+/*
+Name : Parshant Nagpal  
+File Name : index.js
+Description : Contains all ios net event listeners
+Date : 16 Jan 2019
+*/
+
 import { AppState } from "react-native";
 
 const _handleAppStateChange = nextAppState => {

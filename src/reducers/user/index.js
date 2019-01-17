@@ -16,8 +16,8 @@ const user = (state = initialState, action) => {
       return { ...state, ...action.payload };
     case Types.LOGIN:
       return { ...state, isLoggedIn: true };
-    case Types.LOGOUT:
-      return { ...state, isLoggedIn: false };
+    // case Types.LOGOUT:
+    //   return { ...state, isLoggedIn: false };
     case Types.RESET_USER:
       return {
         ...initialState

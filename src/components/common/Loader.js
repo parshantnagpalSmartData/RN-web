@@ -16,7 +16,7 @@ import React, { Component } from "react";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import Constants from "../../constants";
 import { connect } from "react-redux";
-import DivContainer from "../common/DivContainer";
+import DivContainer from "../Common/DivContainer";
 
 class Loader extends Component {
   render() {

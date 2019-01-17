@@ -6,6 +6,7 @@
  * */
 
 import * as Types from "../../actionTypes";
+import Constants from "../../constants";
 import Immutable from "seamless-immutable";
 
 const initialState = Immutable({
@@ -23,6 +24,7 @@ const initialState = Immutable({
   screen: "MySchedule",
   loading: false,
   refreshLoader: false,
+  deviceWidthWeb: Constants.BaseStyle.DEVICE_WIDTH,
   notification: {
     isVisible: false
   }
@@ -74,6 +76,11 @@ export default function app(state = initialState, action = {}) {
       return {
         ...state,
         notification: action.payload
+      };
+    case Types.SET_WEB_WIDTH:
+      return {
+        ...state,
+        deviceWidthWeb: action.payload.value
       };
     case Types.RESET_USER:
       return {

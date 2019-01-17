@@ -16,6 +16,7 @@ import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 import com.BV.LinearGradient.LinearGradientPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;    
 
 
 public class MainApplication extends NavigationApplication {
@@ -42,7 +43,9 @@ public class MainApplication extends NavigationApplication {
                                 return Arrays.<ReactPackage>asList(
                             // eg. new VectorIconsPackage()
                                         new LinearGradientPackage(),
-                                        new SplashScreenReactPackage()
+                                        new SplashScreenReactPackage(),
+                                        new RNFetchBlobPackage(), 
+                                         new RCTPdfView()
                                 );
             }
 

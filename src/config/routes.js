@@ -10,22 +10,20 @@ import { Navigation } from "react-native-navigation";
 import { View } from "react-native";
 import { Provider } from "react-redux";
 
-import SignIn from "../container/auth/Login";
-import ForgotPassword from "../container/auth/ForgotPassword";
-import Loading from "../components/common/Loader";
-import MySchedule from "../container/mySchedule";
+import SignIn from "../container/Auth/Login";
+import ForgotPassword from "../container/Auth/ForgotPassword";
+import Loading from "../components/Common/Loader";
+import MySchedule from "../container/MySchedule";
 import OpenShift from "../container/OpenShift";
 import PotientialCases from "../container/PotentialCases";
 import PrintableForms from "../container/PrintableForms";
-import MyProfile from "../container/myProfile/MyProfile";
+import MyProfile from "../container/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
-import OTPScreen from "../container/auth/OTPScreen";
-import SideMenu from "../container/SideMenu";
-import ToastNotification from "../components/common/ToastNotification";
+import OTPScreen from "../container/Auth/OTPScreen";
+import SideMenu from "../components/SideMenu";
+import ToastNotification from "../components/Common/ToastNotification";
 import PDFViewer from "../container/PrintableForms/PDFViewer";
-
-// const store = setup();
 /* eslint-disable */
 /**
  * HOC for wrapping toast and loader

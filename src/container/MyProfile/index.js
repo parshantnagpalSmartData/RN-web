@@ -11,9 +11,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import UnderDevelopment from "../../components/common/UnderDevelopment";
-import AuthButton from "../../components/common/AuthButton";
+import Header from "../../components/Common/Header";
+import UnderDevelopment from "../../components/Common/UnderDevelopment";
+import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 

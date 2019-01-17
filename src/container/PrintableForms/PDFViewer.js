@@ -11,9 +11,9 @@ import { bindActionCreators } from "redux";
 
 import axios from "axios";
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import PDF from "../../components/printableForms/PDFViewer";
-import DivContainer from "../../components/common/DivContainer";
+import Header from "../../components/Common/Header";
+import PDF from "../../components/PrintableForms/PDFViewer";
+import DivContainer from "../../components/Common/DivContainer";
 
 class PDFViewer extends Component {
   constructor(props) {
@@ -57,15 +57,6 @@ class PDFViewer extends Component {
           hideDrawer
           onBackPress={this.onBackPress}
         />
-        {/* <TouchableOpacity>
-          <Text
-            onPress={() => {
-              this.downloadFile();
-            }}
-          >
-            download
-          </Text>
-        </TouchableOpacity> */}
         <DivContainer
           style={{
             height: "80%",

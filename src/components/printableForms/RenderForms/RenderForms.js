@@ -6,7 +6,7 @@ import { TouchableOpacity, Text, Image, StyleSheet } from "react-native";
 import Constants from "../../../constants";
 import { moderateScale } from "../../../helpers/ResponsiveFonts";
 import LinearGradient from "react-native-linear-gradient";
-import DivContainer from "../../common/DivContainer";
+import DivContainer from "../../Common/DivContainer";
 
 const RenderForms = props => {
   let { form, key, onFormPress } = props;

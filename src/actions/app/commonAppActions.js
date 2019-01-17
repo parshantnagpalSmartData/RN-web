@@ -14,6 +14,7 @@ export const startLoader = () => {
     dispatch({ type: Types.START_LOADER });
   };
 };
+
 export const stopLoader = () => {
   return dispatch => {
     dispatch({ type: Types.STOP_LOADER });
@@ -46,6 +47,17 @@ export const hideToast = () => {
       type: Types.HIDE_TOAST,
       payload: { isVisible: false }
     });
+  };
+};
+
+/**
+ * App Action For Setting the width of web
+ *
+ */
+
+export const setWebWidth = value => {
+  return dispatch => {
+    dispatch({ type: Types.SET_WEB_WIDTH, payload: { value } });
   };
 };
 

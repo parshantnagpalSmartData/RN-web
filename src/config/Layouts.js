@@ -7,8 +7,8 @@
 
 import React from "react";
 import { View } from "react-native";
-import SideMenu from "../../container/SideMenu";
-import Loader from "../common/Loader";
+import SideMenu from "../components/SideMenu";
+import Loader from "../components/Common/Loader";
 
 // import Footer from './Footer';
 /*************** Front Layout ***************/

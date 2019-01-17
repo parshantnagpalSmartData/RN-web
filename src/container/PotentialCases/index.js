@@ -11,11 +11,11 @@ import { bindActionCreators } from "redux";
 import _ from "lodash";
 
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import Shifts from "../../components/shift";
-import ListEmptyComponent from "../../components/common/ListEmptyComponent";
+import Header from "../../components/Common/Header";
+import Shifts from "../../components/Shift/Shifts";
+import ListEmptyComponent from "../../components/Common/ListEmptyComponent";
 import Constants from "../../constants";
-import DivContainer from "../../components/common/DivContainer";
+import DivContainer from "../../components/Common/DivContainer";
 
 class PotientialCases extends Component {
   constructor(props) {

@@ -7,7 +7,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import Pdf from "react-native-pdf";
 // import Constants from "../../../constants";
-import Loader from "../../common/Loader";
+import Loader from "../../Common/Loader";
 const source = {
   uri: "http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf",
   cache: true

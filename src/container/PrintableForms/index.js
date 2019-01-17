@@ -11,16 +11,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import SearchBar from "../../components/common/SearchBar";
-import RenderPrintableForms from "../../components/printableForms";
-import DivContainer from "../../components/common/DivContainer";
-// import UnderDevelopment from "../../components/common/UnderDevelopment";
-
-// import Constants from "../../constants";
-// import Pdf from "../../components/PrintableForms";
-// import { Document, Page } from 'react-pdf/dist/entry.webpack';;
-// import 'react-pdf/dist/Page/AnnotationLayer.css';
+import Header from "../../components/Common/Header";
+import SearchBar from "../../components/Common/SearchBar";
+import RenderPrintableForms from "../../components/PrintableForms";
+import DivContainer from "../../components/Common/DivContainer";
 
 class PrintableForms extends Component {
   constructor(props) {

@@ -13,12 +13,12 @@ import _ from "lodash";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import AuthButton from "../../components/common/AuthButton";
+import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
-import Header from "../../components/common/Header";
-import LogoText from "../../components/common/LogoText";
+import Header from "../../components/Common/Header";
+import LogoText from "../../components/Common/LogoText";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import DivContainer from "../../components/common/DivContainer";
+import DivContainer from "../../components/Common/DivContainer";
 
 class OTPScreen extends Component {
   constructor(props) {
