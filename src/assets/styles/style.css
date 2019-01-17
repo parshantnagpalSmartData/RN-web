@@ -45,10 +45,14 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
 }
 
 /*-----*/
-.mainView{max-width: 50%; padding:0 15px 30px;}
+.mainView{width: 50%; padding:15px;}
+
+.skillList > div > div{padding:7px 15px;}
 .mainView > div > div{width: 100% !important; margin:0!important;}
 .skillView > div {margin: 0!important; padding: 5px!important;}
-.skillView > div > div, .skillView > div > div > div{padding: 0!important;}
+.skillView > div > div,
+.skillView > div > div > div > div{padding: 0!important; font-size:12px!important;}
+.skillView > div > div > div{min-width: 56px; padding:8px 10px!important; }
 
 .skillView > div > div > div:hover{background:rgb(45, 62, 157,1)!important;}
 
@@ -57,17 +61,18 @@ body{font-family: 'Montserrat', sans-serif; font-size:14px;}
 
 .MyPatientsDetailsWrapper > div,
 .PatientsDetails > div{width:100%!important;}
-.MyPatientsDetailsWrapper{width:33.33%;}
+.MyPatientsDetailsWrapper{width:33.33%; text-align: center;}
 .MyPatientsDetailsWrapper > div > div, 
 .Patienticon > div > div{width:auto!important; height:auto!important;}
 .Patienticon img{max-width:22px!important; height:auto!important;}
 .Patienticon > div{display: flex; align-items: center; justify-content: center; height: 50px!important;}
 .Patienticon, .Patienticon > div > div, .Patienticon img{position: relative!important;}
+.patientDetailsWrapper > div > div{width:100%!important;} 
+
+.loader{position: absolute; display: flex; width: 100%; height: 100%; top: 0;}
 
 @media screen and (max-width:992px){
-    .mainView{max-width: 100%;}
-    /* .MyPatientsDetailsWrapper{width:50%;} */
-    .patientDetailsWrapper > div > div{width:100%;}    
+    .mainView{width: 100%;}
 }
 
 @media screen and (max-width:767px){    

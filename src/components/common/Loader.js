@@ -21,6 +21,7 @@ import DivContainer from "../common/DivContainer";
 class Loader extends Component {
   render() {
     let { loading } = this.props;
+    // let loading=true;
     if (!loading) {
       return null;
     }

@@ -11,6 +11,7 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Skill from "../common/skill";
 import Favourite from "../common/Favourite";
 import PatientsDetails from "../common/patientsDetails";
+import DivContainer from "../common/DivContainer";
 //import DivContainer from "../common/DivContainer";
 
 const Shifts = props => {
@@ -41,32 +42,50 @@ const Shifts = props => {
         />
       </View>
       {skills && (
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={skills}
-          keyExtractor={item =>
-            (item && item.toString() + Math.random().toString()) ||
-            Math.random().toString()
-          }
-          contentContainerStyle={{
-            flex: 1,
-            flexWrap: "wrap",
-            flexDirection: "row",
-            justifyContent: "flex-start"
-          }}
-          listKey={(item, index) => "D" + index.toString()}
-          style={{
-            ...Platform.select({
-              web: {
-                backgroundColor: Constants.Colors.LighBlueWhite
-              }
-            })
-          }}
-          renderItem={({ item, index }) => {
-            if (!showAll) {
-              if (index < 3) {
+        <DivContainer className={"skillList"}>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            data={skills}
+            keyExtractor={item =>
+              (item && item.toString() + Math.random().toString()) ||
+              Math.random().toString()
+            }
+            contentContainerStyle={{
+              flex: 1,
+              flexWrap: "wrap",
+              flexDirection: "row",
+              justifyContent: "flex-start"
+            }}
+            listKey={(item, index) => "D" + index.toString()}
+            style={{
+              ...Platform.select({
+                web: {
+                  backgroundColor: Constants.Colors.LighBlueWhite
+                }
+              })
+            }}
+            renderItem={({ item, index }) => {
+              if (!showAll) {
+                if (index < 3) {
+                  return (
+                    <Skill
+                      key={index}
+                      skill={item}
+                      onSkillPress={() => onSkillPress(index)}
+                    />
+                  );
+                } else if (index === 3) {
+                  return (
+                    <Skill
+                      key={index}
+                      skill={`+ ${skills && skills.length - index}`}
+                      onSkillPress={() => onSkillPress(index)}
+                    />
+                  );
+                }
+              } else {
                 return (
                   <Skill
                     key={index}
@@ -74,26 +93,10 @@ const Shifts = props => {
                     onSkillPress={() => onSkillPress(index)}
                   />
                 );
-              } else if (index === 3) {
-                return (
-                  <Skill
-                    key={index}
-                    skill={`+ ${skills && skills.length - index}`}
-                    onSkillPress={() => onSkillPress(index)}
-                  />
-                );
               }
-            } else {
-              return (
-                <Skill
-                  key={index}
-                  skill={item}
-                  onSkillPress={() => onSkillPress(index)}
-                />
-              );
-            }
-          }}
-        />
+            }}
+          />
+        </DivContainer>
       )}
       <PatientsDetails
         date={patient.SchedDate}
