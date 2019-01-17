@@ -69,6 +69,7 @@
 		ACD2852EB180408F92665389 /* Montserrat-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7AD7D39681548C4B33E0D5B /* Montserrat-Italic.otf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B423D15121C0EE240070C0D6 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B423D12921C0EE0C0070C0D6 /* libBVLinearGradient.a */; };
+		B47DBD2E21F0C1CE00FB4563 /* libfishhook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6841FA4F8DC00B85C8A /* libfishhook.a */; };
 		B4DF971121C8D374006FF5AC /* Montserrat-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4DF96ED21C8D374006FF5AC /* Montserrat-MediumItalic.otf */; };
 		B4DF971221C8D374006FF5AC /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4DF96EE21C8D374006FF5AC /* Montserrat-Bold.otf */; };
 		B4DF971321C8D374006FF5AC /* Montserrat-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4DF96EF21C8D374006FF5AC /* Montserrat-BlackItalic.otf */; };
@@ -579,6 +580,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47DBD2E21F0C1CE00FB4563 /* libfishhook.a in Frameworks */,
 				B423D15121C0EE240070C0D6 /* libBVLinearGradient.a in Frameworks */,
 				669B0D6421C0E1F100067085 /* libReactNativeNavigation.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
