@@ -11,9 +11,9 @@ import { bindActionCreators } from "redux";
 import _ from "lodash";
 
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import Shifts from "../../components/shift/Shifts";
-import ListEmptyComponent from "../../components/common/ListEmptyComponent";
+import Header from "../../components/Common/Header";
+import Shifts from "../../components/Shift/Shifts";
+import ListEmptyComponent from "../../components/Common/ListEmptyComponent";
 import Constants from "../../constants";
 
 class PotientialCases extends Component {

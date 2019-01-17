@@ -8,9 +8,9 @@ import React from "react";
 import { View, StyleSheet, Text, FlatList, Platform } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import Skill from "../common/Skill";
-import Favourite from "../common/Favourite";
-import PatientsDetails from "../common/PatientsDetails";
+import Skill from "../Common/Skill";
+import Favourite from "../Common/Favourite";
+import PatientsDetails from "../Common/PatientsDetails";
 
 const Shifts = props => {
   let {
@@ -25,7 +25,7 @@ const Shifts = props => {
     blankView
   } = props;
   if (showAll) {
-    skills[skills.length] = "show less";
+    skills[skills.length] = "Show less";
   }
   return (
     <View style={Styles.container}>
@@ -101,7 +101,7 @@ const Shifts = props => {
         age={patient.Patient_Age}
         gender={patient.Patient_Gender || patient.Sex}
         zip={patient.Patient_Zip || patient.Zip}
-        birthday={patient.Bday}
+        agePatient={patient.Age}
         blankView={blankView}
       />
     </View>

@@ -17,7 +17,7 @@ const PrintableForms = ({
     <div>
       <Document
         // file="https://cors-anywhere.herokuapp.com/https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf"
-        file="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"
+        file="http://www.africau.edu/images/default/sample.pdf"
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={loadError}
       >

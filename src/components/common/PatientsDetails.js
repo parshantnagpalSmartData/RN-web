@@ -18,12 +18,12 @@ const PatientsDetails = props => {
     age,
     gender,
     zip,
-    birthday,
+    agePatient,
     blankView
   } = props;
   return (
     <View style={Styles.container}>
-      {birthday ? (
+      {agePatient ? (
         <View style={[Styles.boxStyle, Styles.ageStyle]}>
           {Platform.OS == "web" ? (
             <View style={Styles.imageBottomPadding}>
@@ -34,9 +34,7 @@ const PatientsDetails = props => {
             </View>
           ) : null}
           <Text style={Styles.heading}>Age</Text>
-          <Text style={Styles.value}>
-            {moment().diff(birthday, "years")} yrs
-          </Text>
+          <Text style={Styles.value}>{agePatient}</Text>
         </View>
       ) : null}
       {date ? (

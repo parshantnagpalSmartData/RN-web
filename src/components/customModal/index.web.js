@@ -1,13 +1,13 @@
 /**
- * Name :Suraj Sanwal
- * File Name : ToastNotification.js
- * Description : Contains the toast Notificaitons of the Web
- * Date : 25 Sept 2018
+ * Name : Parshant Nagpal
+ * File Name : index.web.js
+ * Description : Contains the custom Modal for Web
+ * Date : 17 Jan 2019
  */
 
 import React from "react";
 import Modal from "react-modal";
-// import PropTypes from "prop-types"; // ES6
+import PropTypes from "prop-types";
 
 const customStyles = {
   content: {
@@ -36,7 +36,13 @@ const CustomModal = props => {
 /**
  * declare prop's specific JS type.
  * */
-CustomModal.propTypes = {};
-CustomModal.defaultProps = {};
+CustomModal.propTypes = {
+  isOpen: PropTypes.bool,
+  onRequestClose: PropTypes.func
+};
+CustomModal.defaultProps = {
+  isOpen: false,
+  onRequestClose: null
+};
 
 export default CustomModal;

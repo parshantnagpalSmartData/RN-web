@@ -11,35 +11,19 @@ import { connect } from "react-redux";
 import history from "../helpers/history";
 
 import AppRoute from "./AppRoute";
-import { frontLayout, dashboardLayout } from "../components/route/Layouts";
+import { frontLayout, dashboardLayout } from "./Layouts";
 
-import SignIn from "../container/auth/Login";
-import ForgotPassword from "../container/auth/ForgotPassword";
-import NotFound from "../container/errors/NotFound";
-import MySchedule from "../container/mySchedule";
+import SignIn from "../container/Auth/Login";
+import ForgotPassword from "../container/Auth/ForgotPassword";
+import NotFound from "../container/Errors/NotFound";
+import MySchedule from "../container/MySchedule";
 import OpenShift from "../container/OpenShift";
 import PotientialCases from "../container/PotentialCases";
 import PrintableForms from "../container/PrintableForms";
-import MyProfile from "../container/myProfile/MyProfile";
+import MyProfile from "../container/MyProfile/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
-import OTPScreen from "../container/auth/OTPScreen";
-
-// const routes = ({store}) => {
-//   const state = store.getState();
-//   console.log('storestatestatestatestatestate',state)
-//   // const requireAuth = () => {
-//   //    console.log('statestatestatestate',state)
-// 	// 	// if (!state.user.isLoggedIn && history.location.pathname !== '/') {
-//   //   //   console.log('workinggggggggg')
-//   //   //   // history.push('/');
-//   //   // }else if (
-// 	// 	// 	state.user.isLoggedIn &&
-// 	// 	// 	(history.location.pathname === '/' || history.location.pathname === '/admin')
-// 	// 	// ) {
-// 	// 	// 	// history.push('/MySchedule');
-// 	// 	// }
-//   // };
+import OTPScreen from "../container/Auth/OTPScreen";
 
 class Routes extends Component {
   render() {

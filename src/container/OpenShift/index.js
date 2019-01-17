@@ -13,10 +13,10 @@ import moment from "moment";
 import _ from "lodash";
 
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import Shifts from "../../components/shift/Shifts";
-import Filter from "../../components/MySchedule/Filter";
-import ListEmptyComponent from "../../components/common/ListEmptyComponent";
+import Header from "../../components/Common/Header";
+import Shifts from "../../components/Shift/Shifts";
+import Filter from "../../components/Common/Filter";
+import ListEmptyComponent from "../../components/Common/ListEmptyComponent";
 import Constants from "../../constants";
 // import { moderateScale } from "../../helpers/ResponsiveFonts";
 
@@ -136,6 +136,8 @@ class OpenShift extends Component {
     let { app, schedule } = this.props;
     let { openShift } = schedule;
     let { prevDate, nextDate } = this.state;
+    
+
     return (
       <View style={Styles.containner}>
         <Header title={"Open Shift"} onDrawerPress={this.onDrawerPress} />

@@ -15,13 +15,6 @@ const apiServer = "api.acthomehealthservices.us";
 const live = "176.126.246.61";
 const apiPath = "api";
 
-//uncomment these four line for use localhost
-
-// const running_url = localhost,
-//   frontEndUrl = `http://${frontEndLocal}`,
-//   http_url = `http://${running_url}`,
-//   apiBase_url = `http://${running_url}/${apiPath}/`;
-
 //uncomment these four line for use staging
 
 const running_url = apiServer,

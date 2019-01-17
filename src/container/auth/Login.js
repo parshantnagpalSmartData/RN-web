@@ -13,12 +13,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import FormTextInput from "../../components/common/FormTextInput";
+import FormTextInput from "../../components/Common/FormTextInput";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import AuthButton from "../../components/common/AuthButton";
+import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
-import LogoText from "../../components/common/LogoText";
+import LogoText from "../../components/Common/LogoText";
 
 class Login extends Component {
   constructor(props) {

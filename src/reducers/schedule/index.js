@@ -80,6 +80,10 @@ const Schedule = (state = initialState, action) => {
         potientialCases: [...potientialCases]
       };
     }
+    case Types.RESET_USER:
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

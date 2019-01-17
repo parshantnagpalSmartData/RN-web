@@ -12,8 +12,8 @@ import { bindActionCreators } from "redux";
 import axios from "axios";
 
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import SearchBar from "../../components/common/SearchBar";
+import Header from "../../components/Common/Header";
+import SearchBar from "../../components/Common/SearchBar";
 // import Constants from "../../constants";
 import Pdf from "../../components/PrintableForms";
 // import { Document, Page } from 'react-pdf/dist/entry.webpack';;

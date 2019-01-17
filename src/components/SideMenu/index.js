@@ -17,11 +17,11 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as AppAction from "../actions";
-import Constants from "../constants";
-import { moderateScale } from "../helpers/ResponsiveFonts";
-import SafeView from "../components/common/SafeView";
-import { Dialog } from "../helpers/common";
+import * as AppAction from "../../actions";
+import Constants from "../../constants";
+import { moderateScale } from "../../helpers/ResponsiveFonts";
+import SafeView from "./../Common/SafeView";
+import { Dialog } from "../../helpers/common";
 import { confirmAlert } from "react-confirm-alert";
 
 class SideMenu extends React.Component {
