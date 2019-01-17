@@ -10,7 +10,7 @@ import { View, Platform } from "react-native";
 import PropTypes from "prop-types";
 
 const DivContainer = props => {
-  let { className, styleApp, hideFlex,styleWeb } = props;
+  let { className, styleApp, hideFlex, styleWeb } = props;
   if (Platform.OS === "web") {
     return (
       <div className={className}>
