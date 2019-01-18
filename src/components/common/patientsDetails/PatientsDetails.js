@@ -10,7 +10,7 @@ import moment from "moment";
 
 import Constants from "../../../constants";
 import { moderateScale } from "../../../helpers/ResponsiveFonts";
-import PatientInfo from "./patientInfo";
+import PatientInfo from "./PatientInfo";
 import DivContainer from "../DivContainer";
 
 const PatientsDetails = props => {
