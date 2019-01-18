@@ -19,12 +19,6 @@ const LogoText = props => {
             web: {
               height: moderateScale(150),
               justifyContent: "space-between"
-            },
-            ios: {
-              // flex: 1
-            },
-            android: {
-              // flex: 1
             }
           })
         },
@@ -42,11 +36,13 @@ const LogoText = props => {
       <View
         style={{
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
+          width: Constants.BaseStyle.DEVICE_WIDTH * 0.75
         }}
       >
         {heading ? (
           <Text
+            numberOfLines={2}
             style={{
               ...Constants.Fonts.Regular,
               fontSize: moderateScale(22),
