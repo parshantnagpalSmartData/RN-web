@@ -2,7 +2,13 @@ import React from "React";
 import { View } from "react-native";
 import PropTypes from "prop-types";
 
-import { TouchableOpacity, Text, Image, StyleSheet ,Platform} from "react-native";
+import {
+  TouchableOpacity,
+  Text,
+  Image,
+  StyleSheet,
+  Platform
+} from "react-native";
 import Constants from "../../../constants";
 import { moderateScale } from "../../../helpers/ResponsiveFonts";
 import LinearGradient from "react-native-linear-gradient";
@@ -19,8 +25,7 @@ const RenderForms = props => {
         colors={Constants.Colors.FormGredient}
         angle={280}
         useAngle
-        locations={Platform.OS!==
-          "android"?[0.1]:null}
+        locations={Platform.OS !== "android" ? [0.1] : null}
       >
         <View style={Styles.continer}>
           <Text style={Styles.formName}>{form.FormName}</Text>
