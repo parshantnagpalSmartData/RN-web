@@ -68,8 +68,16 @@ class OTPScreen extends Component {
           contentContainerStyle={{
             justifyContent: "space-around",
             alignItems: "center",
-            flex: 1,
-            flexDirection: "column"
+            flexDirection: "column",
+            ...Platform.select({
+              android: {
+                height: Constants.BaseStyle.DEVICE_HEIGHT * 0.82
+              },
+              web: {
+                flex: 1
+              },
+              ios: { flex: 1 }
+            })
           }}
         >
           <DivContainer className={"loginTopText"}>
@@ -169,7 +177,6 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.Gray,
     textAlign: "right",
     textAlignVertical: "center",
-    // paddingTop: moderateScale(60),
     ...Platform.select({
       web: {
         paddingTop: moderateScale(20)

@@ -82,6 +82,7 @@ body {
 .otpinput {
   height: 100px;
   margin: 0 auto 20px;
+  margin-top: 40px
 }
 .otpinput > div > div > div {
   margin-top: 0 !important;
@@ -101,7 +102,7 @@ body {
   height: 100%;
   padding-top: 0 !important;
   color: #000;
-  border-color: black;
+  border-color: #707070;
   border-width: 1px;
   height: 50px;
   margin: 0 10px;

@@ -25,6 +25,7 @@ const SearchBar = props => {
       </View>
       <View style={Styles.inputView}>
         <TextInput
+          underlineColorAndroid={"#fff"}
           onChangeText={onChangeText}
           onEndEditing={onEndEditing}
           value={value}
@@ -59,6 +60,7 @@ const Styles = StyleSheet.create({
   },
   searchIcon: { height: moderateScale(40), width: moderateScale(40) },
   inputView: {
+    flex: 1,
     justifyContent: "space-between",
     marginLeft: moderateScale(8)
   },

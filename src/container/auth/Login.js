@@ -168,8 +168,8 @@ class Login extends Component {
 const Styles = StyleSheet.create({
   containner: {
     // justifyContent: "space-between",
-    alignItems: "center",
-    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.9
+    alignItems: "center"
+    // height: Constants.BaseStyle.DEVICE_HEIGHT * 0.9
   },
   formView: {
     ...Platform.select({
