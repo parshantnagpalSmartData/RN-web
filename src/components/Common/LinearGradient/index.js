@@ -1,6 +1,6 @@
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
-import Constants from "../../constants";
+import Constants from "../../../constants";
 
 const LinearGradientApp = props => {
   return (
