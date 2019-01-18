@@ -79,39 +79,15 @@ body {
 } */
 
 /*----OTP Screen----*/
-.otpinput {
-  height: 100px;
-  margin: 0 auto 20px;
-}
-.otpinput > div > div > div {
-  margin-top: 0 !important;
-}
-.verifyBTN > div > div {
-  top: 0 !important;
-}
-.loginTopText > div > div {
-  height: auto !important;
-  padding-bottom: 0 !important;
-}
-.loginTopText > div > div > div {
-  margin-bottom: 10px;
-}
-
-.otpInputcontainer > div input {
-  height: 100%;
-  padding-top: 0 !important;
-  color: #000;
-  border-color: black;
-  border-width: 1px;
-  height: 50px;
-  margin: 0 10px;
-  border-radius: 10px;
-}
-.flatListScroll {
-  height: calc(100vh - 90px);
-  overflow: auto;
-  width: calc(100vw - 260px);
-}
+.otpinput {display: inline-table; margin: 0 auto 20px;}
+.otpinput > div > div > div {margin-top: 0 !important;}
+.verifyBTN > div > div { top: 0 !important;}
+.loginTopText > div > div { height: auto !important;  padding-bottom: 0 !important;}
+.loginTopText > div > div > div { margin-bottom: 10px;}
+.otpInputcontainer > div input {height: 100%; padding-top: 0 !important; color: #000;  border-color: black;
+  border-width: 1px;  height: 50px;  margin: 0 10px;  border-radius: 10px;}
+  .otpInputcontainer > div input:focus{outline: none;}
+.flatListScroll {  height: calc(100vh - 90px);  overflow: auto;  width: calc(100vw - 260px);}
 
 /*-----*/
 .mainView{width: 50%; padding:15px;}
@@ -146,7 +122,14 @@ body {
 .patientDetailsWrapper > div > div{width:100%!important;} 
 
 .loader{position: absolute; display: flex; width: 100%; height: 100%; top: 0;}
-
+.LinearGaredientSideMenu{background: #2d5aad; /* Old browsers */
+  background: -moz-linear-gradient(top, #2d5aad 0%, #2f7bbf 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #2d5aad 0%,#2f7bbf 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #2d5aad 0%,#2f7bbf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d5aad', endColorstr='#2f7bbf',GradientType=0 ); /* IE6-9 */}
+.ProfileDetailSideMenu{padding: 0 15px; word-break: break-all; line-height: 1.5;}
+.ProfileDetailSideMenu > div > div{margin:0 auto 10px;}
+#leftMenuBar > div > div > div > div{margin-bottom:0 !important;}
 @media screen and (max-width:992px){
     .mainView{width: 100%;}
 }
