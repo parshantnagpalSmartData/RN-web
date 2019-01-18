@@ -62,22 +62,18 @@ class OTPScreen extends Component {
           <Header hideDrawer onBackPress={this.onBackPress} />
         ) : null}
         <KeyboardAwareScrollView
+          scrollEnabled={false}
+          enableOnAndroid
+          extraScrollHeight={50}
+          enableAutomaticScroll={true}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps={"handled"}
           contentContainerStyle={{
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             alignItems: "center",
             flexDirection: "column",
-            ...Platform.select({
-              android: {
-                height: Constants.BaseStyle.DEVICE_HEIGHT * 0.82
-              },
-              web: {
-                flex: 1
-              },
-              ios: { flex: 1 }
-            })
+            flex: 1
           }}
         >
           <DivContainer className={"loginTopText"}>
@@ -89,10 +85,11 @@ class OTPScreen extends Component {
           </DivContainer>
           <DivContainer
             className={"otpinput"}
-            styleApp={{
-              height: moderateScale(80),
-              alignItems: "center"
-            }}
+            styleApp={
+              {
+                // alignItems: "center"
+              }
+            }
           >
             <OtpInputs
               handleChange={otp => {
@@ -100,9 +97,6 @@ class OTPScreen extends Component {
               }}
               numberOfInputs={4}
               keyboardType={"numeric"}
-              containerStyles={{
-                justifyContent: "center"
-              }}
               inputContainerStyles={Styles.inputContainerStyles}
               underlineColorAndroid={Constants.Colors.Transparent}
               inputTextErrorColor={Constants.Colors.Primary}
@@ -110,7 +104,7 @@ class OTPScreen extends Component {
               inputStyles={{ color: Constants.Colors.Primary }}
             />
           </DivContainer>
-          <DivContainer className={"verifyBTN"} styleApp={{}}>
+          <DivContainer className={"verifyBTN"}>
             <AuthButton
               gradientColors={Constants.Colors.ButtonGradients}
               buttonName={"Verify"}
@@ -152,10 +146,7 @@ const Styles = StyleSheet.create({
   },
   resendOTP: {
     flexDirection: "column",
-    alignItems: "center",
-    ...Platform.select({
-      android: { top: moderateScale(20) }
-    })
+    alignItems: "center"
   },
 
   inputContainerStyles: {
@@ -166,8 +157,7 @@ const Styles = StyleSheet.create({
       web: {
         backgroundColor: Constants.Colors.Gray,
         borderColor: Constants.Colors.Primary
-      },
-      android: { bottom: moderateScale(50) }
+      }
     })
   },
   buttonStyle: { flex: 1 },
@@ -189,7 +179,7 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.Primary,
     textAlign: "right",
     textAlignVertical: "center",
-    paddingVertical: moderateScale(10)
+    paddingVertical: moderateScale(15)
   }
 });
 function mapStateToProps(state) {

@@ -90,6 +90,10 @@ class Login extends Component {
     let { deviceWidth } = this.state;
     return (
       <KeyboardAwareScrollView
+        enableAutomaticScroll={true}
+        scrollEnabled={false}
+        extraHeight={80}
+        enableOnAndroid
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={Styles.containner}
         showsHorizontalScrollIndicator={false}
@@ -97,7 +101,7 @@ class Login extends Component {
       >
         <DivContainer className={"loginTopText"}>
           <LogoText
-            text={"ACT Home Health Services"}
+            text={"ACT Home Health Services, Inc"}
             containerStyle={{ marginTop: moderateScale(40) }}
           />
         </DivContainer>

@@ -31,7 +31,7 @@ const Shifts = props => {
   return (
     <View style={Styles.container}>
       <View style={Styles.heading}>
-        <Text style={Styles.skill}>Skills</Text>
+        <Text style={Styles.skill}>Skills Required</Text>
         <Favourite
           isSelected={isSelected}
           onLikePress={onLikePress}
@@ -117,6 +117,7 @@ const Styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     paddingHorizontal: moderateScale(10),
+    paddingVertical: moderateScale(5),
     borderBottomColor: Constants.Colors.placehoder,
     borderBottomWidth: 0.4,
     ...Platform.select({

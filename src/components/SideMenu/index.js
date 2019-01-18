@@ -261,8 +261,10 @@ const styles = StyleSheet.create({
   userName: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(14),
-    color: Constants.Colors.White,
+    //color: Constants.Colors.White,
     paddingVertical: moderateScale(3),
+    //opacity:53,
+    color: "rgba(255,255,255,0.53)",
     ...Platform.select({
       web: {
         textAlign: "center",

@@ -60,7 +60,7 @@ class FormTextInput extends Component {
     let {
       placeHolderText,
       placeHolderColor,
-      keyboard,
+      keyboardType,
       secureText,
       returnKeyType,
       onSubmitEditing,
@@ -103,8 +103,8 @@ class FormTextInput extends Component {
           autoCapitalize={"none"}
           value={value}
           placeholder={placeHolderText}
-          placeholderTextColor={placeHolderColor || Constants.Colors.Primary}
-          keyboardType={keyboard}
+          placeholderTextColor={placeHolderColor || Constants.Colors.placehoder}
+          keyboardType={keyboardType}
           secureTextEntry={secureText || isPassword}
           editable={editable}
           onChangeText={onChangeText}
@@ -136,10 +136,9 @@ const Styles = StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
-    color: Constants.Colors.Black,
+    color: Constants.Colors.Primary,
     ...Constants.Fonts.Light,
     fontSize: moderateScale(16),
-    margin: moderateScale(10),
     ...Platform.select({
       web: {
         outline: "none"

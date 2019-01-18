@@ -52,7 +52,7 @@ const Styles = StyleSheet.create({
   },
   heading: {
     ...Constants.Fonts.Medium,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(12),
     color: Constants.Colors.Black,
     ...Platform.select({
       web: {
@@ -63,7 +63,7 @@ const Styles = StyleSheet.create({
   },
   value: {
     ...Constants.Fonts.Medium,
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(14),
     color: Constants.Colors.Secondary,
     paddingVertical: moderateScale(5),
     ...Platform.select({

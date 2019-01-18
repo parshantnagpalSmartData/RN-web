@@ -25,10 +25,32 @@ const MySchedule = ({ item, index, onPatientPress }) => {
       onPress={() => onPatientPress(item)}
     >
       <View style={Styles.leftDateContainer}>
-        <Text style={[Styles.commonFontColor, Styles.dateText]}>
+        <Text
+          style={[
+            Styles.commonFontColor,
+            Styles.dateText,
+            moment(item.SchedDate).format("DD/MM/YY") ===
+            moment().format("DD/MM/YY")
+              ? {
+                  color: "#22B3FF"
+                }
+              : null
+          ]}
+        >
           {moment(item.SchedDate).format("DD")}
         </Text>
-        <Text style={[Styles.commonFontColor, Styles.dayText]}>
+        <Text
+          style={[
+            Styles.commonFontColor,
+            Styles.dayText,
+            moment(item.SchedDate).format("DD/MM/YY") ===
+            moment().format("DD/MM/YY")
+              ? {
+                  color: "#22B3FF"
+                }
+              : null
+          ]}
+        >
           {daysOfWeek[moment(item.SchedDate).day()]}
         </Text>
       </View>
