@@ -172,8 +172,14 @@ const Styles = StyleSheet.create({
     zIndex: 99,
     ...Platform.select({
       web: {
-        top: moderateScale(50),
-        right: moderateScale(0)
+        top:
+          Constants.BaseStyle.DEVICE_WIDTH <= 767
+            ? Constants.BaseStyle.DEVICE_HEIGHT * 0.8
+            : moderateScale(50),
+        right:
+          Constants.BaseStyle.DEVICE_WIDTH <= 767
+            ? Constants.BaseStyle.DEVICE_WIDTH * 0.05
+            : moderateScale(0)
       },
       ios: {
         bottom: moderateScale(50)
@@ -191,7 +197,10 @@ const Styles = StyleSheet.create({
       },
       android: { width: Constants.BaseStyle.DEVICE_WIDTH * 0.8 },
       web: {
-        width: Constants.BaseStyle.DEVICE_WIDTH / 4
+        width:
+          Constants.BaseStyle.DEVICE_WIDTH <= 767
+            ? Constants.BaseStyle.DEVICE_WIDTH / 1.5
+            : Constants.BaseStyle.DEVICE_WIDTH / 4
       }
     }),
 
