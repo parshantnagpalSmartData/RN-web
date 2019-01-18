@@ -85,6 +85,12 @@ class SideMenu extends React.Component {
       this.setScrenStack(menu, true);
     }
   };
+  closeToggle = () => {
+    if (Platform.OS === "web" && Constants.BaseStyle.DEVICE_WIDTH < 768) {
+      var element = document.getElementById("leftMenuBar");
+      element.classList.remove("toggleMenu");
+    }
+  };
 
   renderMenu = ({ item, index }) => {
     let { screen } = this.state;
@@ -106,7 +112,10 @@ class SideMenu extends React.Component {
         <CustomLinearGradient index={index}>
           <TouchableOpacity
             style={styles.text}
-            onPress={() => item.onPress(item.key)}
+            onPress={() => {
+              item.onPress(item.key);
+              this.closeToggle();
+            }}
           >
             <Text style={[styles.welcome, styles.textSelected]}>
               {item.value}
@@ -118,7 +127,10 @@ class SideMenu extends React.Component {
       return (
         <TouchableOpacity
           style={styles.text}
-          onPress={() => item.onPress(item.key)}
+          onPress={() => {
+            item.onPress(item.key);
+            this.closeToggle();
+          }}
         >
           <Text style={[styles.welcome, styles.textUnSelected]}>
             {item.value}
