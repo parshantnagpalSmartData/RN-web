@@ -28,10 +28,14 @@ let colors = {
   FadeBorder: "#e0e0e0",
   FilterBackground: "#EAEAEA",
   ButtonGradients: ["#3098CF", "#2D3E9D"],
+  ButtonGradientsWeb: ["#3098cf", "#3098CF"],
+  SideMenuGradientWeb: ["#2d4aa4", "#308dc9"],
   SelectedMenu: ["#2D3F9E", "#3097CE"],
   BlueWhite: "#F1F5FA",
   LighBlueWhite: "#d1e8f5",
-  FormGredient: ["#d1e8f5", "#d1e8f5"]
+  FormGredient: ["#d1e8f5", "#d1e8f5"],
+  LightWhite: "rgba(255,255,255,0.8)",
+  boderSideMenuRGB: "rgba(255,255,255,0.3)"
 };
 
 module.exports = colors;

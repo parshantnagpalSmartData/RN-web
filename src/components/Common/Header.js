@@ -48,7 +48,11 @@ const Header = props => {
     <LinearGradient
       start={{ x: 1, y: 0 }}
       end={{ x: 0, y: 0 }}
-      colors={gradientColors || Constants.Colors.ButtonGradients}
+      colors={
+        gradientColors || Platform.OS === "web"
+          ? Constants.Colors.ButtonGradientsWeb
+          : Constants.Colors.ButtonGradients
+      }
       style={[Styles.gradientStyle, gradientStyle]}
     >
       <DivContainer className={"pageTitleText"}>
