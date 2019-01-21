@@ -78,16 +78,39 @@ body {
     cursor: hand;
 } */
 
+/*-----Login----------*/
+.formWidget{padding:0 15px; min-width: 450px;}
+.formWidget > div > div{width:auto !important;}
+.loginFormFrame > div > div{padding:0 !important;}
+.loginFormFrame > div > div > div,
+.formInput  > div > div, .formInput  > div > div input{margin-left:0 !important; margin-right:0 !important;}
+.formInput  > div > div > div > div > div{background-size: 18px 18px!important;}
+.webButtonFrame > div > div > div{padding:0 15px !important; line-height: 60px; width:320px; margin:10px auto;}
+.webButtonFrame div{font-size: 18px!important; font-weight: 400 !important;}
+
+.forgotPass{font-size: 16px;}
+
+@media screen and (max-width:480px){
+  .formWidget{width: 100%; min-width: inherit;}
+  .webButtonFrame > div > div > div{width: 270px;}
+}
+
 /*----OTP Screen----*/
+.otpMainScreen{display: flex; height: 100%; width: 100%;}
+.otpMainScreen > div > div > div{justify-content: center !important;}
 .otpinput {display: inline-table; margin: 0 auto 20px;}
-.otpinput > div > div > div {margin-top: 0 !important;}
-.verifyBTN > div > div { top: 0 !important;}
+.otpinput > div > div > div {margin-top: 0 !important; margin-bottom: 0 !important;}
+.webButtonFrame > div > div { top: 0 !important;}
 .loginTopText > div > div { height: auto !important;  padding-bottom: 0 !important;}
 .loginTopText > div > div > div { margin-bottom: 10px;}
 .otpInputcontainer > div input {height: 100%; padding-top: 0 !important; color: #000;  border-color: black;
   border-width: 1px;  height: 50px;  margin: 0 10px;  border-radius: 10px;}
   .otpInputcontainer > div input:focus{outline: none;}
 .flatListScroll {  height: calc(100vh - 90px);  overflow: auto;  width: calc(100vw - 260px);}
+
+@media screen and (max-height:500px){
+  .otpMainScreen > div > div > div{justify-content: initial !important;}
+}
 
 /*-----*/
 .mainView{width: 50%; padding:15px;}
