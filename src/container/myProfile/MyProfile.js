@@ -5,7 +5,7 @@ Description: Contains the My Profile component
 Date : 13 december 2018
 */
 
-import React, { Component } from "React";
+import React, { Component } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
