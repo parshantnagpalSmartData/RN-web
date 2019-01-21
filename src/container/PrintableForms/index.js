@@ -9,6 +9,7 @@ import React, { Component } from "React";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import _ from "lodash";
 
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
@@ -32,10 +33,10 @@ class PrintableForms extends Component {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
-  onFormPress = () => {
+  onFormPress = _.debounce(() => {
     let { appAction, componentId } = this.props;
     appAction.pushToParticularScreen(componentId, "PDFViewer");
-  };
+  }, 1000);
 
   render() {
     let { searchText } = this.state;

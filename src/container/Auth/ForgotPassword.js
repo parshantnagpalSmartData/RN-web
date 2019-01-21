@@ -61,6 +61,10 @@ class ForgotPassword extends Component {
       <View style={Styles.containner}>
         <Header title={title} hideDrawer onBackPress={this.onBackPress} />
         <KeyboardAwareScrollView
+          enableAutomaticScroll={true}
+          scrollEnabled={false}
+          extraHeight={80}
+          enableOnAndroid
           keyboardShouldPersistTaps="handled"
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}

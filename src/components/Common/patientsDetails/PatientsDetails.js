@@ -58,8 +58,12 @@ const PatientsDetails = props => {
         {gender ? (
           <PatientInfo
             image={Constants.Images.Gender}
-            heading={"Patient Gender"}
-            value={gender}
+            heading={"Gender"}
+            value={
+              gender === "M" || gender === "Male" || gender === "male"
+                ? "Male"
+                : "Female"
+            }
           />
         ) : null}
         {zip ? (
