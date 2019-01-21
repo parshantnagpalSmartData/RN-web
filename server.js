@@ -5,7 +5,7 @@ const fs = require("fs");
 var cors = require("cors");
 // Serve only the static files form the dist directory
 app.use(cors({ credentials: true, origin: true }));
-app.use(express.static(__dirname + "/ActNursesportal/dist"));
+app.use(express.static(__dirname + "/dist"));
 app.use(function(req, res, next) {
   res.setHeader(
     "Access-Control-Allow-Headers",
