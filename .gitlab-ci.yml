@@ -1,0 +1,28 @@
+image: 'node:latest'
+cache:
+  paths:
+    - node_modules/
+stages:
+  - build
+  - deploy
+build-dev:
+  stage: build
+  tags:
+    - staging
+  script:
+    - npm install
+  only:
+    - staging
+deploy-dev:
+  tags:
+    - staging
+  only:
+    - staging
+  stage: deploy
+  script:
+    - npm install
+    - ls
+    - npm run web-build-prod
+    - cd ..
+    - pm2 restart server.js --env= production   --name "ActNursesPortalServer"
+    - pm2 logs
