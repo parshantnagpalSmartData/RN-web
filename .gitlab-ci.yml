@@ -24,4 +24,4 @@ deploy-dev:
   script:
     - ls
     - pm2 restart server.js --env=production   --name "ActNursesPortalServer"
-    - pm2 logs
+  
