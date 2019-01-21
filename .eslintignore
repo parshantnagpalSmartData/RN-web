@@ -1,0 +1,8 @@
+//ignoring the folder
+
+/dist/**
+
+/web/**
+
+/modified_modules/**
+

@@ -1,0 +1,32 @@
+body{font-family: 'Montserrat', sans-serif; font-size:14px;}
+.ReactTable .-pagination .-btn {
+    height: 71px;
+}
+
+.contentScroll{height: calc(100vh - 115px); overflow: auto;}
+
+.leftContainer, .leftContainer > div{width:260px;}
+.leftContainer > div, .rightContentContainer > div{height: 100%;}
+.rightContentContainer{flex:1; /*width: 100%;*/ position: relative;}
+.menuToggle{position: absolute; left:15px; top:20px; z-index: 9; display: none;}
+.menuToggle span{width: 25px; height: 2px; background-color: #fff; margin: 6px 0; transition: 0.4s; display: block;}
+
+@media screen and (max-width:767px){
+    .menuToggle{display: block;}
+    .leftContainer{margin-left: -260px; transition: 1s ease;}
+    .leftContainer.toggleMenu{margin-left: 0; width: 260px;}
+}
+
+
+.contentScroll .ReactTable .rt-thead .rt-th .rt-resizable-header-content span {
+    font-weight: 600!important;
+}
+.contentScroll .ReactTable .rt-tbody .rt-td{
+    padding:11px 5px;
+}
+.contentScroll .ReactTable .rt-tbody .rt-td span{
+    color:rgba(51, 51, 51, 0.7);
+}
+.contentScroll .ReactTable .rt-tbody .rt-td .cusor-point{
+    cursor: hand;
+}
