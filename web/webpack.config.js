@@ -67,7 +67,7 @@ const cssLoaderConfiguration = {
     }
   ]
 };
-// For loading 3x images(High resolution images ) in react native web 
+// For loading 3x images(High resolution images ) in react native web
 const imageLoader = {
   test: /\.(png|jpe?g|gif)$/,
   loader:

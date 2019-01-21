@@ -38,7 +38,7 @@ let spanHeaderStyle = {
   scheduleColor = { color: "rgba(54, 156, 18, 0.7)" },
   nonScheduleColor = { color: "rgba(228, 67, 46, 0.7)" };
 const MyScheduleList = ({ patitents, onPatientPress }) => {
-  console.log("patitents",patitents)
+  console.log("patitents", patitents);
   return (
     <div className={"contentScroll"}>
       <ReactTable

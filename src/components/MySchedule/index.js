@@ -18,7 +18,7 @@ import Constants from "../../constants";
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
 
 const MySchedule = ({ item, index, onPatientPress }) => {
-  console.log("mySchedule",item)
+  console.log("mySchedule", item);
   return (
     <TouchableOpacity
       key={index}
@@ -31,7 +31,7 @@ const MySchedule = ({ item, index, onPatientPress }) => {
         </Text>
         <Text style={[Styles.commonFontColor, Styles.dayText]}>
           {daysOfWeek[moment(item.SchedDate).day()]}
-        </Text>   
+        </Text>
       </View>
       <View style={Styles.rightContainer}>
         <View
@@ -41,7 +41,7 @@ const MySchedule = ({ item, index, onPatientPress }) => {
           <View>
             <View>
               <Text style={[Styles.commonFontColor, Styles.itemName]}>
-                {item.Pat_LName+ " " + item.Pat_FName} 
+                {item.Pat_LName + " " + item.Pat_FName}
               </Text>
             </View>
             <View>
