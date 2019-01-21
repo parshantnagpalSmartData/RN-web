@@ -23,6 +23,6 @@ deploy-dev:
     - npm install
     - ls
     - npm run web-build-prod
-    - cd ..
+   
     - pm2 restart server/server.js --env= production   --name "ActNursesPortalServer"
     - pm2 logs
