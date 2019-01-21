@@ -145,3 +145,9 @@ body {
     width: 50%;
   }
 }
+
+
+
+.formNameAlignLeft {
+  text-align: right;
+}

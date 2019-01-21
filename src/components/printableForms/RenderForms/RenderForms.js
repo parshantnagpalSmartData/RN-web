@@ -12,12 +12,10 @@ import {
 import Constants from "../../../constants";
 import { moderateScale } from "../../../helpers/ResponsiveFonts";
 import LinearGradient from "react-native-linear-gradient";
-import DivContainer from "../../Common/DivContainer";
 
 const RenderForms = props => {
   let { form, key, onFormPress } = props;
   return (
-    <DivContainer class={"formGredient"}>
       <LinearGradient
         key={key}
         start={{ x: 1, y: 0 }}
@@ -40,9 +38,7 @@ const RenderForms = props => {
             />
           </TouchableOpacity>
         </View>
-      </LinearGradient>
-    </DivContainer>
-  );
+      </LinearGradient>  );
 };
 
 export default RenderForms;
