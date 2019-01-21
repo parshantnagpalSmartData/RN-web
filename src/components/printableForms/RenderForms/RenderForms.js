@@ -16,29 +16,27 @@ import LinearGradient from "react-native-linear-gradient";
 const RenderForms = props => {
   let { form, key, onFormPress } = props;
   return (
-      <LinearGradient
-        key={key}
-        start={{ x: 1, y: 0 }}
-        end={{ x: 0, y: 0 }}
-        colors={Constants.Colors.FormGredient}
-        angle={280}
-        useAngle
-        locations={Platform.OS !== "android" ? [0.1] : null}
-      >
-        <View style={Styles.continer}>
-          <Text style={Styles.formName}>{form.FormName}</Text>
-          <TouchableOpacity
-            style={Styles.iconView}
-            onPress={() => onFormPress()}
-          >
-            <Image
-              source={Constants.Images.SearchInactive}
-              resizeMode={"contain"}
-              style={Styles.icon}
-            />
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>  );
+    <LinearGradient
+      key={key}
+      start={{ x: 1, y: 0 }}
+      end={{ x: 0, y: 0 }}
+      colors={Constants.Colors.FormGredient}
+      angle={280}
+      useAngle
+      locations={Platform.OS !== "android" ? [0.1] : null}
+    >
+      <View style={Styles.continer}>
+        <Text style={Styles.formName}>{form.FormName}</Text>
+        <TouchableOpacity style={Styles.iconView} onPress={() => onFormPress()}>
+          <Image
+            source={Constants.Images.SearchInactive}
+            resizeMode={"contain"}
+            style={Styles.icon}
+          />
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
+  );
 };
 
 export default RenderForms;
