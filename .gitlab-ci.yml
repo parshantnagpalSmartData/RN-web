@@ -12,7 +12,7 @@ build-dev:
   script:
     - npm install
     - npm run web-build-prod
-  only:
+    only:
     - staging
 deploy-dev:
   tags:
