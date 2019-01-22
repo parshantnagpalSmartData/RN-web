@@ -22,4 +22,5 @@ deploy-dev:
   stage: deploy
   script:
     - ls
+    - pwd
     - pm2 restart server.js --env=production   --name "ActNursesPortalServer"
