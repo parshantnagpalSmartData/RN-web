@@ -15,24 +15,26 @@ import Constants from "../../constants";
 const SearchBar = props => {
   let { style, inputStyle, value, onChangeText, onEndEditing } = props;
   return (
-    <View style={[Styles.container, style]}>
-      <View style={Styles.SearchIconView}>
-        <Image
-          source={Constants.Images.Search}
-          resizeMode={"contain"}
-          style={Styles.searchIcon}
-        />
-      </View>
-      <View style={Styles.inputView}>
-        <TextInput
-          underlineColorAndroid={"#fff"}
-          onChangeText={onChangeText}
-          onEndEditing={onEndEditing}
-          value={value}
-          style={[Styles.inputStyle, inputStyle]}
-          placeholder={"Search"}
-          placeholderTextColor={Constants.Colors.placehoder}
-        />
+    <View style={Styles.mainContainer}>
+      <View style={[Styles.container, style]}>
+        <View style={Styles.SearchIconView}>
+          <Image
+            source={Constants.Images.Search}
+            resizeMode={"contain"}
+            style={Styles.searchIcon}
+          />
+        </View>
+        <View style={Styles.inputView}>
+          <TextInput
+            underlineColorAndroid={"#fff"}
+            onChangeText={onChangeText}
+            onEndEditing={onEndEditing}
+            value={value}
+            style={[Styles.inputStyle, inputStyle]}
+            placeholder={"Search"}
+            placeholderTextColor={Constants.Colors.placehoder}
+          />
+        </View>
       </View>
     </View>
   );
@@ -41,6 +43,9 @@ const SearchBar = props => {
 export default SearchBar;
 
 const Styles = StyleSheet.create({
+  mainContainer: {
+    alignItems: "center"
+  },
   container: {
     height: moderateScale(50),
     flexDirection: "row",
@@ -49,16 +54,41 @@ const Styles = StyleSheet.create({
     borderRadius: moderateScale(25),
     borderColor: Constants.Colors.placehoder,
     borderWidth: Platform.OS == "web" ? 1 : 0.4,
-    backgroundColor: Constants.Colors.White
+    backgroundColor: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        // marginHorizontal: moderateScale(100)
+        width: moderateScale(330),
+        height: moderateScale(42)
+      }
+    })
   },
   SearchIconView: {
     height: moderateScale(40),
     width: moderateScale(40),
     justifyContent: "center",
     alignItems: "center",
-    margin: moderateScale(5)
+    margin: moderateScale(5),
+    ...Platform.select({
+      web: {
+        // marginHorizontal: moderateScale(100)
+        margin: moderateScale(0),
+        height: moderateScale(42),
+        width: moderateScale(42)
+      }
+    })
   },
-  searchIcon: { height: moderateScale(40), width: moderateScale(40) },
+  searchIcon: {
+    height: moderateScale(40),
+    width: moderateScale(40),
+    ...Platform.select({
+      web: {
+        // marginHorizontal: moderateScale(100)
+        height: moderateScale(42),
+        width: moderateScale(42)
+      }
+    })
+  },
   inputView: {
     flex: 1,
     justifyContent: "space-between",
