@@ -105,65 +105,78 @@ class Login extends Component {
             containerStyle={{ marginTop: moderateScale(40) }}
           />
         </DivContainer>
-        <View
-          style={[
-            Styles.formView,
-            {
-              ...Platform.select({
-                web: {
-                  width: deviceWidth > 600 ? deviceWidth / 2 : deviceWidth
-                }
-              })
-            }
-          ]}
-        >
-          <View className="djshfjdsjk" style={Styles.FloatingInputContainer}>
-            <FormTextInput
-              image={Constants.Images.Email}
-              placeHolderText={"Username"}
-              onChangeText={email => {
-                this.setState({ email });
-              }}
-              value={this.state.email}
-              keyboardType={"email-address"}
-              returnKeyType={"next"}
-              autoCapitalize={"none"}
-              ref={ref => (this.email = ref)}
-              onSubmitEditing={() => {
-                this.focusNext("password");
-              }}
-            />
-            <FormTextInput
-              image={Constants.Images.Password}
-              placeHolderText={"Password"}
-              onChangeText={password => {
-                this.setState({ password });
-              }}
-              value={this.state.password}
-              returnKey="done"
-              onSubmitEditing={() => {
-                this.submitLogin();
-              }}
-              autoCapitalize={"none"}
-              secureText
-              ref={ref => (this.password = ref)}
-            />
-          </View>
+        <DivContainer className={"formWidget"}>
+          <View
+            style={[
+              Styles.formView,
+              {
+                ...Platform.select({
+                  web: {
+                    width: deviceWidth > 600 ? deviceWidth / 2 : deviceWidth
+                  }
+                })
+              }
+            ]}
+          >
+            <DivContainer className={"loginFormFrame"}>
+              <View style={Styles.FloatingInputContainer}>
+                <DivContainer className={"formInput"}>
+                  <FormTextInput
+                    image={Constants.Images.Email}
+                    placeHolderText={"Username"}
+                    onChangeText={email => {
+                      this.setState({ email });
+                    }}
+                    value={this.state.email}
+                    keyboardType={"email-address"}
+                    returnKeyType={"next"}
+                    autoCapitalize={"none"}
+                    ref={ref => (this.email = ref)}
+                    onSubmitEditing={() => {
+                      this.focusNext("password");
+                    }}
+                  />
+                  <FormTextInput
+                    image={Constants.Images.Password}
+                    placeHolderText={"Password"}
+                    onChangeText={password => {
+                      this.setState({ password });
+                    }}
+                    value={this.state.password}
+                    returnKey="done"
+                    onSubmitEditing={() => {
+                      this.submitLogin();
+                    }}
+                    autoCapitalize={"none"}
+                    secureText
+                    ref={ref => (this.password = ref)}
+                  />
+                </DivContainer>
+              </View>
+            </DivContainer>
 
-          <View style={Styles.AuthButton}>
-            <AuthButton
-              buttonName={"Log In"}
-              gradientColors={Constants.Colors.ButtonGradients}
-              textStyle={{ color: "#fff" }}
-              onPress={this.submitLogin}
-            />
+            <View style={Styles.AuthButton}>
+              <DivContainer className={"webButtonFrame"}>
+                <AuthButton
+                  buttonName={"Log In"}
+                  gradientColors={Constants.Colors.ButtonGradients}
+                  textStyle={{ color: "#fff" }}
+                  onPress={this.submitLogin}
+                />
+              </DivContainer>
+            </View>
+
+            <View style={Styles.forgotView}>
+              <Text
+                className="forgotPass"
+                style={Styles.forgotText}
+                onPress={this.onForgotPassword}
+              >
+                Forgot Password?
+              </Text>
+            </View>
           </View>
-          <View style={Styles.forgotView}>
-            <Text style={Styles.forgotText} onPress={this.onForgotPassword}>
-              Forgot Password?
-            </Text>
-          </View>
-        </View>
+        </DivContainer>
       </KeyboardAwareScrollView>
     );
   }
