@@ -6,8 +6,8 @@ import { Provider } from "react-redux";
 import setup from "./src/store/setup";
 
 import Routes from "./src/config/routes";
-import Loader from "./src/components/common/Loader";
-import ToastNotification from "./src/components/common/ToastNotification";
+import Loader from "./src/components/Common/Loader";
+import ToastNotification from "./src/components/Common/ToastNotification";
 
 const { persistor, store } = setup();
 // import "./src/container/html/style.css";
