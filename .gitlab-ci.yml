@@ -7,11 +7,12 @@ stages:
   - deploy
 build-dev:
   stage: build
-tags:
+  tags:
     - staging
-script:
+  script:
     - npm install
-   only:
+    - npm run web-build-prod
+  only:
     - staging
 deploy-dev:
   tags:
