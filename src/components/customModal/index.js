@@ -7,6 +7,7 @@
 
 import React from "react";
 import Modal from "react-native-modal";
+import PropTypes from "prop-types";
 
 const CustomModal = props => {
   const { isVisible, onBackdropPress } = props;
@@ -20,7 +21,13 @@ const CustomModal = props => {
 /**
  * declare prop's specific JS type.
  * */
-CustomModal.propTypes = {};
-CustomModal.defaultProps = {};
+CustomModal.propTypes = {
+  isVisible: PropTypes.bool,
+  onBackdropPress: PropTypes.func
+};
+CustomModal.defaultProps = {
+  isVisible: false,
+  onBackdropPress: null
+};
 
 export default CustomModal;

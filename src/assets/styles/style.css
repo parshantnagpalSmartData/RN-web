@@ -1,32 +1,176 @@
-body{font-family: 'Montserrat', sans-serif; font-size:14px;}
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
 .ReactTable .-pagination .-btn {
-    height: 71px;
+  height: 71px;
 }
 
-.contentScroll{height: calc(100vh - 115px); overflow: auto;}
-
-.leftContainer, .leftContainer > div{width:260px;}
-.leftContainer > div, .rightContentContainer > div{height: 100%;}
-.rightContentContainer{flex:1; /*width: 100%;*/ position: relative;}
-.menuToggle{position: absolute; left:15px; top:20px; z-index: 9; display: none;}
-.menuToggle span{width: 25px; height: 2px; background-color: #fff; margin: 6px 0; transition: 0.4s; display: block;}
-
-@media screen and (max-width:767px){
-    .menuToggle{display: block;}
-    .leftContainer{margin-left: -260px; transition: 1s ease;}
-    .leftContainer.toggleMenu{margin-left: 0; width: 260px;}
+.contentScroll {
+  height: calc(100vh - 115px);
+  padding: 0 15px;
+  overflow: auto;
 }
 
+.leftContainer,
+.leftContainer > div {
+  width: 260px;
+}
+.leftContainer > div,
+.rightContentContainer > div {
+  height: 100%;
+}
+.rightContentContainer {
+  flex: 1; /*width: 100%;*/
+  position: relative;
+}
+.menuToggle {
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  z-index: 9;
+  display: none;
+}
+.menuToggle span {
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.4s;
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .menuToggle {
+    display: block;
+  }
+  .leftContainer {
+    margin-left: -260px;
+    transition: 1s ease;
+  }
+  .leftContainer.toggleMenu {
+    margin-left: 0;
+    width: 260px;
+  }
+  .rightContentContainer {
+    width: 100%;
+  }
+}
 
 .contentScroll .ReactTable .rt-thead .rt-th .rt-resizable-header-content span {
-    font-weight: 600!important;
+  font-weight: 600 !important;
 }
-.contentScroll .ReactTable .rt-tbody .rt-td{
-    padding:11px 5px;
+.contentScroll .ReactTable .rt-tbody .rt-td {
+  padding: 11px 5px;
+  cursor: hand;
 }
-.contentScroll .ReactTable .rt-tbody .rt-td span{
-    color:rgba(51, 51, 51, 0.7);
+.contentScroll .ReactTable .rt-tbody .rt-td span {
+  color: rgba(51, 51, 51, 0.7);
 }
-.contentScroll .ReactTable .rt-tbody .rt-td .cusor-point{
+/* .contentScroll .ReactTable .rt-tbody .rt-td .cusor-point{
     cursor: hand;
+} */
+
+/*-----Login----------*/
+.formWidget{padding:0 15px; min-width: 450px;}
+.formWidget > div > div{width:auto !important;}
+.loginFormFrame > div > div{padding:0 !important;}
+.loginFormFrame > div > div > div,
+.formInput  > div > div, .formInput  > div > div input{margin-left:0 !important; margin-right:0 !important;}
+.formInput  > div > div > div > div > div{background-size: 18px 18px!important;}
+.webButtonFrame > div > div > div{padding:0 15px !important; line-height: 60px; width:320px; margin:10px auto;}
+.webButtonFrame div{font-size: 18px!important; font-weight: 400 !important;}
+
+.forgotPass{font-size: 16px;}
+
+@media screen and (max-width:480px){
+  .formWidget{width: 100%; min-width: inherit;}
+  .webButtonFrame > div > div > div{width: 270px;}
+}
+
+/*----OTP Screen----*/
+.otpMainScreen{display: flex; height: 100%; width: 100%;}
+.otpMainScreen > div > div > div{justify-content: center !important;}
+.otpinput {display: inline-table; margin: 0 auto 20px;}
+.otpinput > div > div > div {margin-top: 0 !important; margin-bottom: 0 !important;}
+.webButtonFrame > div > div { top: 0 !important;}
+.loginTopText > div > div { height: auto !important;  padding-bottom: 0 !important;}
+.loginTopText > div > div > div { margin-bottom: 10px;}
+.otpInputcontainer > div input {height: 100%; padding-top: 0 !important; color: #000;  border-color: black;
+  border-width: 1px;  height: 50px;  margin: 0 10px;  border-radius: 10px;}
+  .otpInputcontainer > div input:focus{outline: none;}
+.flatListScroll {  height: calc(100vh - 90px);  overflow: auto;  width: calc(100vw - 260px);}
+
+@media screen and (max-height:500px){
+  .otpMainScreen > div > div > div{justify-content: initial !important;}
+}
+
+/*-----*/
+.mainView{width: 50%; padding:15px;}
+
+.skillList > div > div{padding:7px 15px;}
+.mainView > div > div{width: 100% !important; margin:0!important;}
+.skillView > div {margin: 0!important; padding: 5px!important;}
+.skillView > div > div,
+.skillView > div > div > div > div{padding: 0!important; font-size:12px!important;}
+.skillView > div > div > div{min-width: 56px; padding:8px 10px!important; }
+
+.skillView > div > div > div:hover {
+  background: rgb(45, 62, 157, 1) !important;
+}
+
+.textPatientComp {
+  margin-bottom: 5px;
+  text-align: center;
+}
+.textPatientComp > div {
+  font-size: 14px !important;
+}
+
+.MyPatientsDetailsWrapper > div,
+.PatientsDetails > div{width:100%!important;}
+.MyPatientsDetailsWrapper{width:33.33%; text-align: center;}
+.MyPatientsDetailsWrapper > div > div, 
+.Patienticon > div > div{width:auto!important; height:auto!important;}
+.Patienticon img{max-width:22px!important; height:auto!important;}
+.Patienticon > div{display: flex; align-items: center; justify-content: center; height: 50px!important;}
+.Patienticon, .Patienticon > div > div, .Patienticon img{position: relative!important;}
+.patientDetailsWrapper > div > div{width:100%!important;} 
+
+.loader{position: absolute; display: flex; width: 100%; height: 100%; top: 0;}
+.LinearGaredientSideMenu{background: #2d5aad; /* Old browsers */
+  background: -moz-linear-gradient(top, #2d5aad 0%, #2f7bbf 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #2d5aad 0%,#2f7bbf 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #2d5aad 0%,#2f7bbf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d5aad', endColorstr='#2f7bbf',GradientType=0 ); /* IE6-9 */}
+.ProfileDetailSideMenu{padding: 0 15px; word-break: break-all; line-height: 1.5;}
+.ProfileDetailSideMenu > div > div{margin:0 auto 10px;}
+#leftMenuBar > div > div > div > div{margin-bottom:0 !important;}
+@media screen and (max-width:992px){
+    .mainView{width: 100%;}
+}
+
+@media screen and (max-width: 767px) {
+  .flatListScroll {
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .MyPatientsDetailsWrapper {
+    width: 50%;
+  }
+}
+
+
+
+.formNameAlignLeft {
+  text-align: right;
 }

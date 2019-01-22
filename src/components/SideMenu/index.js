@@ -17,13 +17,14 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as AppAction from "../actions";
-import Constants from "../constants";
-import { moderateScale } from "../helpers/ResponsiveFonts";
-import SafeView from "../components/common/SafeView";
-import { Dialog } from "../helpers/common";
+import * as AppAction from "../../actions";
+import Constants from "../../constants";
+import { moderateScale } from "../../helpers/ResponsiveFonts";
+import SafeView from "./../Common/SafeView";
+import { Dialog } from "../../helpers/common";
 import { confirmAlert } from "react-confirm-alert";
-
+import DivContainer from "../../components/Common/DivContainer";
+import CustomLinearGradient from "../../components/Common/LinearGradient";
 class SideMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -84,32 +85,56 @@ class SideMenu extends React.Component {
       this.setScrenStack(menu, true);
     }
   };
+  closeToggle = () => {
+    if (Platform.OS === "web" && Constants.BaseStyle.DEVICE_WIDTH < 768) {
+      var element = document.getElementById("leftMenuBar");
+      element.classList.remove("toggleMenu");
+    }
+  };
 
   renderMenu = ({ item, index }) => {
     let { screen } = this.state;
     if (item.key === screen) {
       return (
-        <LinearGradient
-          key={index}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          colors={Constants.Colors.SelectedMenu}
-        >
+        // <LinearGradient
+        //   key={index}
+        //   start={{ x: 1, y: 1 }}
+        //   end={{ x: 0, y: 0 }}
+        //   colors={Constants.Colors.SelectedMenu}
+        // >
+        //   <TouchableOpacity
+        //     style={styles.text}
+        //     onPress={() => item.onPress(item.key)}
+        //   >
+        //     <Text style={styles.welcome}>{item.value}</Text>
+        //   </TouchableOpacity>
+        // </LinearGradient>
+        <CustomLinearGradient index={index}>
           <TouchableOpacity
             style={styles.text}
-            onPress={() => item.onPress(item.key)}
+            onPress={() => {
+              item.onPress(item.key);
+              this.closeToggle();
+            }}
           >
-            <Text style={styles.welcome}>{item.value}</Text>
+            <Text style={[styles.welcome, styles.textSelected]}>
+              {item.value}
+            </Text>
           </TouchableOpacity>
-        </LinearGradient>
+        </CustomLinearGradient>
       );
     } else {
       return (
         <TouchableOpacity
           style={styles.text}
-          onPress={() => item.onPress(item.key)}
+          onPress={() => {
+            item.onPress(item.key);
+            this.closeToggle();
+          }}
         >
-          <Text style={styles.welcome}>{item.value}</Text>
+          <Text style={[styles.welcome, styles.textUnSelected]}>
+            {item.value}
+          </Text>
         </TouchableOpacity>
       );
     }
@@ -131,6 +156,11 @@ class SideMenu extends React.Component {
         value: "Printable Forms",
         onPress: this.onMenuPress
       },
+      {
+        key: "Resources",
+        value: "Resources",
+        onPress: this.onMenuPress
+      },
       { key: "MyProfile", value: "My Profile", onPress: this.onMenuPress },
       {
         key: "MessageCenter",
@@ -142,8 +172,12 @@ class SideMenu extends React.Component {
     return (
       <LinearGradient
         start={{ x: 1, y: 1 }}
-        end={{ x: 0, y: 0 }}
-        colors={Constants.Colors.ButtonGradients}
+        end={Platform.OS == "web" ? { x: 1, y: 1 } : { x: 0, y: 0 }}
+        colors={
+          Platform.OS == "web"
+            ? Constants.Colors.SideMenuGradientWeb
+            : Constants.Colors.ButtonGradients
+        }
         style={styles.gradientStyle}
       >
         <SafeView />
@@ -153,17 +187,21 @@ class SideMenu extends React.Component {
           contentContainerStyle={styles.container}
         >
           <View style={styles.containerUserProfile}>
-            <View style={styles.subContainerUserProfile}>
-              <Image
-                source={Constants.Images.UserAvatar}
-                style={styles.avatarImage}
-                resizeMode={"cover"}
-              />
-            </View>
-            <View style={{}}>
-              <Text style={styles.firstName}>{`${FirstName} ${LastName}`}</Text>
-              <Text style={styles.userName}>{UserName}</Text>
-            </View>
+            <DivContainer className={"ProfileDetailSideMenu"}>
+              <View style={styles.subContainerUserProfile}>
+                <Image
+                  source={Constants.Images.UserAvatar}
+                  style={styles.avatarImage}
+                  resizeMode={"cover"}
+                />
+              </View>
+              <View style={{}}>
+                <Text
+                  style={styles.firstName}
+                >{`${FirstName} ${LastName}`}</Text>
+                <Text style={styles.userName}>{UserName}</Text>
+              </View>
+            </DivContainer>
           </View>
           <View style={{ flex: 1 }}>
             {menuOptions.map((item, index) => this.renderMenu({ item, index }))}
@@ -198,14 +236,40 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     marginVertical: moderateScale(11),
-    marginHorizontal: moderateScale(20)
+    marginHorizontal: moderateScale(20),
+    ...Platform.select({
+      web: {
+        borderBottomColor: Constants.Colors.boderSideMenuRGB,
+        borderBottomWidth: 0.6,
+        marginHorizontal: 0,
+        marginVertical: 0,
+        paddingHorizontal: moderateScale(20),
+        paddingVertical: moderateScale(11)
+      }
+    })
+  },
+  textSelected: {
+    ...Platform.select({
+      web: {
+        color: Constants.Colors.White
+      }
+    })
+  },
+  textUnSelected: {
+    ...Platform.select({
+      web: {
+        color: Constants.Colors.LightWhite
+      }
+    })
   },
   marginTop: {},
   userName: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(14),
-    color: Constants.Colors.White,
+    //color: Constants.Colors.White,
     paddingVertical: moderateScale(3),
+    //opacity:53,
+    color: "rgba(255,255,255,0.53)",
     ...Platform.select({
       web: {
         textAlign: "center",

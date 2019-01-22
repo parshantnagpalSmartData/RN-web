@@ -82,9 +82,8 @@ export const logOut = () => {
   return dispatch => {
     dispatch(AppActions.startLoader());
     setTimeout(() => {
-      dispatch({ type: Types.LOGOUT });
+      // dispatch({ type: Types.LOGOUT });
       dispatch({ type: Types.RESET_USER });
-      dispatch({ type: Types.RESET_APP });
       dispatch(AppActions.goAuth());
       dispatch(AppActions.stopLoader());
     }, 1000);

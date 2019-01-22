@@ -2,6 +2,8 @@ import React, { ReactElement, Component } from 'react'
 import { TextInput, View } from 'react-native'
 
 import defaultStyles from './defaultStyles'
+import DivContainer from "../../../src/components/common/DivContainer";
+
 interface Props {
   autoCapitalize: 'none' | 'sentences' | 'words' | 'characters'
   clearTextOnFocus: boolean
@@ -48,7 +50,7 @@ export default class OtpInput extends Component<Props, State> {
     } = this.props
 
     return (
-      <View
+      <DivContainer className={"otpInputContainer"}
         style={[
           defaultStyles.otpContainer,
           containerStyles,
@@ -69,7 +71,7 @@ export default class OtpInput extends Component<Props, State> {
           underlineColorAndroid="transparent"
           value={value}
         />
-      </View>
+      </DivContainer>
     )
   }
 }

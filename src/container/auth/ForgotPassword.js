@@ -13,10 +13,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import FormTextInput from "../../components/common/FormTextInput";
-import Header from "../../components/common/Header";
+import FormTextInput from "../../components/Common/FormTextInput";
+import Header from "../../components/Common/Header";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import AuthButton from "../../components/common/AuthButton";
+import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
 
@@ -56,11 +56,15 @@ class ForgotPassword extends Component {
 
   render() {
     let { deviceWidth } = this.state;
-    let title = "ACT HOME HEALTH SERVICES";
+    let title = "Forgot Password?";
     return (
       <View style={Styles.containner}>
         <Header title={title} hideDrawer onBackPress={this.onBackPress} />
         <KeyboardAwareScrollView
+          enableAutomaticScroll={true}
+          scrollEnabled={false}
+          extraHeight={80}
+          enableOnAndroid
           keyboardShouldPersistTaps="handled"
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}

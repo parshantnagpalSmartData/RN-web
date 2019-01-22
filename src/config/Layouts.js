@@ -7,12 +7,19 @@
 
 import React from "react";
 import { View } from "react-native";
-import SideMenu from "../../container/SideMenu";
+import SideMenu from "../components/SideMenu";
+import Loader from "../components/Common/Loader";
+
 // import Footer from './Footer';
 /*************** Front Layout ***************/
 
 export const frontLayout = props => {
-  return <View style={{ flex: 1 }}>{props.children}</View>;
+  return (
+    <View style={{ flex: 1 }}>
+      {props.children}
+      <Loader />
+    </View>
+  );
 };
 
 /*************** Dashboard Layout ***************/
@@ -53,6 +60,7 @@ export const dashboardLayout = props => {
               <span />
             </a>
             {props.children}
+            <Loader />
           </div>
         </View>
       ) : null}

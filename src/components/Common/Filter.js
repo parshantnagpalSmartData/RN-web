@@ -7,7 +7,6 @@
 
 import React from "react";
 import {
-  View,
   TouchableOpacity,
   Text,
   Image,
@@ -18,10 +17,15 @@ import PropTypes from "prop-types";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import moment from "moment";
+import DivContainer from "../Common/DivContainer";
 
 const Filter = ({ prevDate, nextDate, onDateChange }) => {
   return (
-    <View style={Styles.mainView}>
+    <DivContainer
+      className={"dateFilter"}
+      styleApp={Styles.mainView}
+      styleWeb={Styles.mainView}
+    >
       <TouchableOpacity
         onPress={() => {
           onDateChange(
@@ -71,7 +75,7 @@ const Filter = ({ prevDate, nextDate, onDateChange }) => {
           resizeMode={"contain"}
         />
       </TouchableOpacity>
-    </View>
+    </DivContainer>
   );
 };
 

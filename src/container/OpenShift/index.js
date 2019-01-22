@@ -1,22 +1,24 @@
 /*
 FileName: index.js
-Author :Parshant Nagpal
+Author :Suraj Sanwal
 Description: Contains the OpenShift component
 Date : 13 december 2018
 */
 
-import React, { Component } from "react";
+import React, { Component } from "React";
 import { View, StyleSheet, FlatList, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import _ from "lodash";
 
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import Shifts from "../../components/shift/Shifts";
-import Filter from "../../components/MySchedule/Filter";
-import ListEmptyComponent from "../../components/common/ListEmptyComponent";
+import Header from "../../components/Common/Header";
+import Shifts from "../../components/Shift/Shifts";
+import Filter from "../../components/Common/Filter";
+import ListEmptyComponent from "../../components/Common/ListEmptyComponent";
 import Constants from "../../constants";
+import DivContainer from "../../components/Common/DivContainer";
 // import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 class OpenShift extends Component {
@@ -24,8 +26,7 @@ class OpenShift extends Component {
     super(props);
     this.state = {
       scheduleId: null,
-      showAll: false,
-      currentIndex: null,
+      currentIndex: [],
       loading: false,
       page: 1,
       prevDate: moment().format("MM/DD/YYYY"),
@@ -44,17 +45,23 @@ class OpenShift extends Component {
   };
 
   skillPress = (index, skillIndex) => {
-    let { showAll } = this.state;
+    let currentIndex = [...this.state.currentIndex];
     let { openShift } = this.props.schedule;
     let skills =
       openShift[index].SkillsRequired &&
       openShift[index].SkillsRequired.split(",");
     if (skillIndex === 3) {
-      this.setState({ currentIndex: index, showAll: true });
+      let myindex = _.findIndex(currentIndex, item => item === index);
+      if (myindex === -1) {
+        currentIndex.push(index);
+      }
+      this.setState({ currentIndex });
       return;
     }
-    if (showAll && skillIndex === skills.length + 1) {
-      this.setState({ currentIndex: null, showAll: false });
+
+    if (skillIndex >= skills.length) {
+      _.remove(currentIndex, item => item === index);
+      this.setState({ currentIndex });
       return;
     }
   };
@@ -82,7 +89,8 @@ class OpenShift extends Component {
     this.setState(
       {
         prevDate,
-        nextDate
+        nextDate,
+        currentIndex: []
       },
       () => {
         this.getLikeUpdate();
@@ -105,23 +113,33 @@ class OpenShift extends Component {
   };
 
   renderItem = ({ item, index }) => {
-    let { showAll, currentIndex, loading, scheduleId } = this.state;
+    let { currentIndex, loading, scheduleId } = this.state;
     let skills = item.SkillsRequired && item.SkillsRequired.split(",");
     return (
-      <Shifts
-        key={index}
-        skills={skills}
-        patient={item}
-        onSkillPress={skillIndex => {
-          this.skillPress(index, skillIndex);
-        }}
-        showAll={index === currentIndex && showAll}
-        isSelected={item.LikeIndicator}
-        onLikePress={this.onIconPress}
-        loading={loading}
-        scheduleId={scheduleId}
-        blankView={true}
-      />
+      <DivContainer
+        className={"mainView"}
+        style={
+          {
+            // justifyContent:"center",
+            // alignItem:'center'
+          }
+        }
+      >
+        <Shifts
+          key={index}
+          skills={skills}
+          patient={item}
+          onSkillPress={skillIndex => {
+            this.skillPress(index, skillIndex);
+          }}
+          showAll={_.findIndex(currentIndex, item => item === index) !== -1}
+          isSelected={item.LikeIndicator}
+          onLikePress={this.onIconPress}
+          loading={loading}
+          scheduleId={scheduleId}
+          blankView={true}
+        />
+      </DivContainer>
     );
   };
 
@@ -129,6 +147,7 @@ class OpenShift extends Component {
     let { app, schedule } = this.props;
     let { openShift } = schedule;
     let { prevDate, nextDate } = this.state;
+
     return (
       <View style={Styles.containner}>
         <Header title={"Open Shift"} onDrawerPress={this.onDrawerPress} />
@@ -139,28 +158,42 @@ class OpenShift extends Component {
             this.onDateChange(prevDate, nextDate)
           }
         />
-
-        <FlatList
-          data={openShift}
-          extraData={this.state}
-          keyExtractor={item =>
-            item.SchedID.toString() + Math.random().toString()
-          }
-          refreshing={app.refreshLoader}
-          onRefresh={this.onRefresh}
-          renderItem={this.renderItem}
-          onEndReached={this.onCurrentPageEndReach}
-          onEndReachedThreshold={0}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          numColumns={Platform.OS == "web" ? 2 : 1}
-          ListEmptyComponent={
-            <ListEmptyComponent
-              message={"Shift Not Found!"}
-              loader={app.refreshLoader || app.loading}
-            />
-          }
-        />
+        <DivContainer hideFlex className={"flatListScroll"}>
+          <FlatList
+            // horizontal
+            // contentContainerStyle={{
+            //   flex: 1,
+            //   flexWrap: "wrap",
+            //   flexDirection: "row",
+            //   justifyContent: "flex-start",
+            //   width:"100%"
+            // }}
+            data={openShift}
+            extraData={this.state}
+            keyExtractor={item =>
+              item.SchedID.toString() + Math.random().toString()
+            }
+            refreshing={app.refreshLoader}
+            onRefresh={this.onRefresh}
+            renderItem={this.renderItem}
+            onEndReached={this.onCurrentPageEndReach}
+            onEndReachedThreshold={0}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            numColumns={
+              Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH > 992
+                ? 2
+                : 1
+            }
+            ListEmptyComponent={
+              <ListEmptyComponent
+                message={"Shift Not Found!"}
+                loader={app.refreshLoader || app.loading}
+              />
+            }
+            // columnWrapperStyle={Styles.columnWrapperStyle}
+          />
+        </DivContainer>
       </View>
     );
   }
@@ -175,8 +208,12 @@ const Styles = StyleSheet.create({
         backgroundColor: Constants.Colors.BlueWhite
       }
     })
+  },
+  columnWrapperStyle: {
+    backgroundColor: "green"
   }
 });
+
 const mapStateToProps = state => ({
   schedule: state.schedule,
   app: state.app

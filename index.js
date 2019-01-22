@@ -1,3 +1,10 @@
+/*
+Name : Parshant Nagpal  
+File Name : index.js
+Description : Contains the Root component for App
+Date : 16 Jan 2019
+*/
+
 import { Navigation } from "react-native-navigation";
 import { registerScreens } from "./src/config/routes";
 import { addListeners } from "./src/helpers/listeners";
@@ -19,11 +26,4 @@ Navigation.events().registerAppLaunchedListener(() => {
       drawBehind: true
     }
   });
-  // Navigation.setRoot({
-  //   root: {
-  //     component: {
-  //       name: "Loader"
-  //     }
-  //   }
-  // });
 });

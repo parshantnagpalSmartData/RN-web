@@ -5,14 +5,14 @@ Description: Contains the message center component
 Date : 13 december 2018
 */
 
-import React, { Component } from "react";
+import React, { Component } from "React";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 
 import { bindActionCreators } from "redux";
 import * as appAction from "../../actions";
-import Header from "../../components/common/Header";
-import UnderDevelopment from "../../components/common/UnderDevelopment";
+import Header from "../../components/Common/Header";
+import UnderDevelopment from "../../components/Common/UnderDevelopment";
 class MessageCenter extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +22,6 @@ class MessageCenter extends Component {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
-  displayToast = () => {
-    this.props.appAction.showToast(2, "this is an sucess toast");
-  };
-  displayErrorToast = () => {
-    this.props.appAction.showToast(1, "This is an error toast");
-  };
   render() {
     return (
       <View style={Styles.containner}>

@@ -20,11 +20,11 @@ import moment from "moment";
 import * as appAction from "../../actions";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import Header from "../../components/common/Header";
+import Header from "../../components/Common/Header";
 import MySchedule from "../../components/MySchedule";
-import Avtar from "../../components/common/Avatar";
-import CustomModal from "../../components/customModal";
-import Filter from "../../components/MySchedule/Filter";
+import Avtar from "../../components/Common/Avatar";
+import CustomModal from "../../components/CustomModal";
+import Filter from "../../components/Common/Filter";
 import MyScheduleList from "../../components/MySchedule/MyScheduleList";
 import MapApi from "../../helpers/MapApi";
 import { openLinkingURL } from "../../helpers/Linking";
@@ -90,8 +90,8 @@ class Home extends Component {
   /*
    * Method to open the telephone number
    */
-  openTelephone() {
-    openLinkingURL("tel", "+919041908803");
+  openTelephone(phoneNumber) {
+    openLinkingURL("tel", phoneNumber);
   }
   /*
    * Method to open the telephone number
@@ -210,15 +210,21 @@ class Home extends Component {
                 Styles.schedularFullName
               ]}
             >
-              {`${patient.Scheduler_FirstName} ${patient.Scheduler_LastName}`}
+              {`${patient.Scheduler_LastName} ${patient.Scheduler_FirstName}`}
             </Text>
             <Text
               style={[Styles.commonFontColorBold, Styles.smallOne]}
-              onPress={() => this.openTelephone()}
+              onPress={() => this.openTelephone(patient.Scheduler_Phone)}
             >
               P{" "}
-              <Text style={Styles.commonFontColor}>: +1(215) 389 -1800 /</Text>
-              Ext <Text style={Styles.commonFontColor}> : 411</Text>
+              <Text style={Styles.commonFontColor}>
+                : +{patient.Scheduler_Phone} /
+              </Text>
+              Ext{" "}
+              <Text style={Styles.commonFontColor}>
+                {" "}
+                : {patient.Scheduler_Extension}
+              </Text>
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}

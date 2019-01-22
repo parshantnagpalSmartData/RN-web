@@ -38,13 +38,13 @@ let spanHeaderStyle = {
   scheduleColor = { color: "rgba(54, 156, 18, 0.7)" },
   nonScheduleColor = { color: "rgba(228, 67, 46, 0.7)" };
 const MyScheduleList = ({ patitents, onPatientPress }) => {
-  console.log("patitents", patitents);
   return (
     <div className={"contentScroll"}>
       <ReactTable
         style={{
-          marginLeft: moderateScale(18),
-          marginRight: moderateScale(18)
+          // marginLeft: moderateScale(18),
+          // marginRight: moderateScale(18),
+          maxHeight: "400px"
         }}
         data={patitents}
         columns={[
@@ -66,7 +66,11 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
             accessor: "Pat_LName",
             headerStyle: headerStyle,
             getProps: () => cellStyle,
-            Cell: props => <span className="cusor-point">{props.value}</span>
+            Cell: props => (
+              <span className="cusor-point">
+                {props.value + " " + props.original.Pat_FName}
+              </span>
+            )
           },
           {
             // Header: "Time",

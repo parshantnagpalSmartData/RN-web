@@ -8,9 +8,10 @@ import React from "react";
 import { View, StyleSheet, Text, FlatList, Platform } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import Skill from "../common/Skill";
-import Favourite from "../common/Favourite";
-import PatientsDetails from "../common/PatientsDetails";
+import Skill from "../Common/Skill";
+import Favourite from "../Common/Favourite";
+import PatientsDetails from "../Common/PatientsDetails";
+import DivContainer from "../Common/DivContainer";
 
 const Shifts = props => {
   let {
@@ -25,12 +26,12 @@ const Shifts = props => {
     blankView
   } = props;
   if (showAll) {
-    skills[skills.length + 1] = "Hide less";
+    skills[skills.length] = "Show less";
   }
   return (
     <View style={Styles.container}>
       <View style={Styles.heading}>
-        <Text style={Styles.skill}>Skills</Text>
+        <Text style={Styles.skill}>Skills Required</Text>
         <Favourite
           isSelected={isSelected}
           onLikePress={onLikePress}
@@ -40,35 +41,50 @@ const Shifts = props => {
         />
       </View>
       {skills && (
-        <FlatList
-          contentContainerStyle={{
-            justifyContent: "space-between",
-            alignItems: "center"
-            // width: Constants.BaseStyle.DEVICE_WIDTH
-          }}
-          style={{
-            ...Platform.select({
-              web: {
-                backgroundColor: Constants.Colors.LighBlueWhite,
-                height: moderateScale(40),
-                justifyContent: "center"
-              }
-            })
-          }}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={skills}
-          keyExtractor={item => item.toString() + Math.random().toString()}
-          listKey={(item, index) => "D" + index.toString()}
-          key={`${
-            showAll
-              ? item => item.toString()
-              : item => item + Math.random().toString()
-          }`}
-          numColumns={showAll ? (Platform.OS === "web" ? 6 : 3) : 4}
-          renderItem={({ item, index }) => {
-            if (!showAll) {
-              if (index < 3) {
+        <DivContainer className={"skillList"}>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            data={skills}
+            keyExtractor={item =>
+              (item && item.toString() + Math.random().toString()) ||
+              Math.random().toString()
+            }
+            contentContainerStyle={{
+              flex: 1,
+              flexWrap: "wrap",
+              flexDirection: "row",
+              justifyContent: "flex-start"
+            }}
+            listKey={(item, index) => "D" + index.toString()}
+            style={{
+              ...Platform.select({
+                web: {
+                  backgroundColor: Constants.Colors.LighBlueWhite
+                }
+              })
+            }}
+            renderItem={({ item, index }) => {
+              if (!showAll) {
+                if (index < 3) {
+                  return (
+                    <Skill
+                      key={index}
+                      skill={item}
+                      onSkillPress={() => onSkillPress(index)}
+                    />
+                  );
+                } else if (index === 3) {
+                  return (
+                    <Skill
+                      key={index}
+                      skill={`+ ${skills && skills.length - index}`}
+                      onSkillPress={() => onSkillPress(index)}
+                    />
+                  );
+                }
+              } else {
                 return (
                   <Skill
                     key={index}
@@ -76,26 +92,10 @@ const Shifts = props => {
                     onSkillPress={() => onSkillPress(index)}
                   />
                 );
-              } else if (index === 3) {
-                return (
-                  <Skill
-                    key={index}
-                    skill={`+ ${skills && skills.length - index}`}
-                    onSkillPress={() => onSkillPress(index)}
-                  />
-                );
               }
-            } else {
-              return (
-                <Skill
-                  key={index}
-                  skill={item}
-                  onSkillPress={() => onSkillPress(index)}
-                />
-              );
-            }
-          }}
-        />
+            }}
+          />
+        </DivContainer>
       )}
       <PatientsDetails
         date={patient.SchedDate}
@@ -104,7 +104,7 @@ const Shifts = props => {
         age={patient.Patient_Age}
         gender={patient.Patient_Gender || patient.Sex}
         zip={patient.Patient_Zip || patient.Zip}
-        birthday={patient.Bday}
+        agePatient={patient.Age}
         blankView={blankView}
       />
     </View>
@@ -117,13 +117,17 @@ const Styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     paddingHorizontal: moderateScale(10),
+    paddingVertical: moderateScale(5),
     borderBottomColor: Constants.Colors.placehoder,
     borderBottomWidth: 0.4,
     ...Platform.select({
       ios: { flex: 1 },
       android: { flex: 1 },
       web: {
-        width: Constants.BaseStyle.DEVICE_WIDTH / 2.7,
+        width:
+          Constants.BaseStyle.DEVICE_WIDTH <= 992
+            ? Constants.BaseStyle.DEVICE_WIDTH - 100
+            : Constants.BaseStyle.DEVICE_WIDTH / 2.7,
         marginVertical: moderateScale(10),
         margin: moderateScale(10),
         backgroundColor: Constants.Colors.White,

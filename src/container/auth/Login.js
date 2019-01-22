@@ -13,12 +13,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
-import FormTextInput from "../../components/common/FormTextInput";
+import FormTextInput from "../../components/Common/FormTextInput";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import AuthButton from "../../components/common/AuthButton";
+import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import Regex from "../../helpers/Regex";
-import LogoText from "../../components/common/LogoText";
+import LogoText from "../../components/Common/LogoText";
+import DivContainer from "../../components/Common/DivContainer";
 
 class Login extends Component {
   constructor(props) {
@@ -89,88 +90,113 @@ class Login extends Component {
     let { deviceWidth } = this.state;
     return (
       <KeyboardAwareScrollView
+        enableAutomaticScroll={true}
+        scrollEnabled={false}
+        extraHeight={80}
+        enableOnAndroid
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={Styles.containner}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
-        <LogoText text={"ACT Home Health Services"} />
+        <DivContainer className={"loginTopText"}>
+          <LogoText
+            text={"ACT Home Health Services, Inc"}
+            containerStyle={{ marginTop: moderateScale(40) }}
+          />
+        </DivContainer>
+        <DivContainer className={"formWidget"}>
+          <View
+            style={[
+              Styles.formView,
+              {
+                ...Platform.select({
+                  web: {
+                    width: deviceWidth > 600 ? deviceWidth / 2 : deviceWidth
+                  }
+                })
+              }
+            ]}
+          >
+            <DivContainer
+              className={"loginFormFrame"}
+              styleApp={Styles.styleAppContainer}
+            >
+              <View style={Styles.FloatingInputContainer}>
+                <DivContainer className={"formInput"}>
+                  <FormTextInput
+                    image={Constants.Images.Email}
+                    placeHolderText={"Username"}
+                    onChangeText={email => {
+                      this.setState({ email });
+                    }}
+                    value={this.state.email}
+                    keyboardType={"email-address"}
+                    returnKeyType={"next"}
+                    autoCapitalize={"none"}
+                    ref={ref => (this.email = ref)}
+                    onSubmitEditing={() => {
+                      this.focusNext("password");
+                    }}
+                  />
+                  <FormTextInput
+                    image={Constants.Images.Password}
+                    placeHolderText={"Password"}
+                    onChangeText={password => {
+                      this.setState({ password });
+                    }}
+                    value={this.state.password}
+                    returnKey="done"
+                    onSubmitEditing={() => {
+                      this.submitLogin();
+                    }}
+                    autoCapitalize={"none"}
+                    secureText
+                    ref={ref => (this.password = ref)}
+                  />
+                </DivContainer>
+              </View>
+            </DivContainer>
 
-        <View
-          style={[
-            Styles.formView,
-            {
-              ...Platform.select({
-                web: {
-                  width: deviceWidth > 600 ? deviceWidth / 2 : deviceWidth
-                }
-              })
-            }
-          ]}
-        >
-          <View className="djshfjdsjk" style={Styles.FloatingInputContainer}>
-            <FormTextInput
-              image={Constants.Images.Email}
-              placeHolderText={"Username"}
-              onChangeText={email => {
-                this.setState({ email });
-              }}
-              value={this.state.email}
-              keyboardType={"email-address"}
-              returnKeyType={"next"}
-              autoCapitalize={"none"}
-              ref={ref => (this.email = ref)}
-              onSubmitEditing={() => {
-                this.focusNext("password");
-              }}
-            />
-            <FormTextInput
-              image={Constants.Images.Password}
-              placeHolderText={"Password"}
-              onChangeText={password => {
-                this.setState({ password });
-              }}
-              value={this.state.password}
-              returnKey="done"
-              onSubmitEditing={() => {
-                this.submitLogin();
-              }}
-              autoCapitalize={"none"}
-              secureText
-              ref={ref => (this.password = ref)}
-            />
-          </View>
+            <View style={Styles.AuthButton}>
+              <DivContainer className={"webButtonFrame"}>
+                <AuthButton
+                  buttonName={"Log In"}
+                  gradientColors={Constants.Colors.ButtonGradients}
+                  textStyle={{ color: "#fff" }}
+                  onPress={this.submitLogin}
+                />
+              </DivContainer>
+            </View>
 
-          <View style={Styles.AuthButton}>
-            <AuthButton
-              buttonName={"Log In"}
-              gradientColors={Constants.Colors.ButtonGradients}
-              textStyle={{ color: "#fff" }}
-              onPress={this.submitLogin}
-            />
+            <View style={Styles.forgotView}>
+              <Text
+                className="forgotPass"
+                style={Styles.forgotText}
+                onPress={this.onForgotPassword}
+              >
+                Forgot Password?
+              </Text>
+            </View>
           </View>
-          <View style={Styles.forgotView}>
-            <Text style={Styles.forgotText} onPress={this.onForgotPassword}>
-              Forgot Password?
-            </Text>
-          </View>
-        </View>
+        </DivContainer>
       </KeyboardAwareScrollView>
     );
   }
 }
 
 const Styles = StyleSheet.create({
+  styleAppContainer: { flex: 1 },
   containner: {
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.9
+    // justifyContent: "space-between",
+    alignItems: "center"
+    // height: Constants.BaseStyle.DEVICE_HEIGHT * 0.9
   },
   formView: {
     ...Platform.select({
       web: {
-        height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
-        justifyContent: "space-evenly"
+        // height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
+        //justifyContent: "space-evenly"
       },
       ios: {
         height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
@@ -186,19 +212,45 @@ const Styles = StyleSheet.create({
     overflow: "hidden"
   },
   FloatingInputContainer: {
-    flex: 0.5,
+    //flex: 0.5,
     paddingHorizontal: moderateScale(25),
-    justifyContent: "center"
+    justifyContent: "center",
+    ...Platform.select({
+      ios: {
+        flex: 0.5
+      },
+      android: {
+        flex: 0.5
+      }
+    })
   },
   AuthButton: {
-    flex: 0.25,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    ...Platform.select({
+      ios: {
+        flex: 0.25
+      },
+      android: {
+        flex: 0.25
+      }
+    })
   },
   forgotView: {
     justifyContent: "flex-start",
     alignItems: "center",
-    flex: 0.25
+    ...Platform.select({
+      ios: {
+        flex: 0.25
+      },
+      android: {
+        flex: 0.25
+      },
+      web: {
+        marginTop: "10",
+        marginBottom: "20"
+      }
+    })
   },
   forgotText: {
     ...Constants.Fonts.Regular,
