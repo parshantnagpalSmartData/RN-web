@@ -33,7 +33,7 @@
     "web-build-prod": "NODE_ENV=production && npm run cleanWeb && ./node_modules/.bin/webpack -p --config ./web/webpack.config.js",
     "watchman-clear": "watchman watch-del-all",
     "preinstall": "node preinstall.js",
-    "cleanWeb": "rm -rf ./dist/bundle.web.js",
+    "cleanWeb": "rm -rf ./dist/bundle.web.js && rm -rf ./dist/style.css && cp src/assets/styles/style.css dist/style.css",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "rp": "./node_modules/.bin/prettier --write \"**/*.json\" \"**/*.js\" \"!dist/**/*.js\"",
     "precommit": "npm run rp && lint-staged",
