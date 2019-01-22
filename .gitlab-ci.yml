@@ -7,10 +7,9 @@ stages:
   - deploy
 build-dev:
   stage: build
-  
-  tags:
+tags:
     - staging
-  script:
+script:
     - npm install
    only:
     - staging
