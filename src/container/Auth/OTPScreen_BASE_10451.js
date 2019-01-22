@@ -61,83 +61,81 @@ class OTPScreen extends Component {
         {Platform.OS !== "web" ? (
           <Header hideDrawer onBackPress={this.onBackPress} />
         ) : null}
-        <DivContainer className={"otpMainScreen"}>
-          <KeyboardAwareScrollView
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps={"handled"}
-            contentContainerStyle={{
-              justifyContent: "space-around",
-              alignItems: "center",
-              flexDirection: "column",
-              ...Platform.select({
-                android: {
-                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.82
-                },
-                web: {
-                  flex: 1
-                },
-                ios: { flex: 1 }
-              })
+        <KeyboardAwareScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps={"handled"}
+          contentContainerStyle={{
+            justifyContent: "space-around",
+            alignItems: "center",
+            flexDirection: "column",
+            ...Platform.select({
+              android: {
+                height: Constants.BaseStyle.DEVICE_HEIGHT * 0.82
+              },
+              web: {
+                flex: 1
+              },
+              ios: { flex: 1 }
+            })
+          }}
+        >
+          <DivContainer className={"loginTopText"}>
+            <LogoText
+              containerStyle={Styles.logoStyle}
+              heading="Verification"
+              message="We have sent OTP in your mobile number. Please enter below"
+            />
+          </DivContainer>
+          <DivContainer
+            className={"otpinput"}
+            styleApp={{
+              height: moderateScale(80),
+              alignItems: "center"
             }}
           >
-            <DivContainer className={"loginTopText"}>
-              <LogoText
-                containerStyle={Styles.logoStyle}
-                heading="Verification"
-                message="We have sent OTP in your mobile number. Please enter below"
-              />
-            </DivContainer>
-            <DivContainer
-              className={"otpinput"}
-              styleApp={{
-                height: moderateScale(80),
-                alignItems: "center"
+            <OtpInputs
+              handleChange={otp => {
+                this.setState({ otp });
               }}
-            >
-              <OtpInputs
-                handleChange={otp => {
-                  this.setState({ otp });
-                }}
-                numberOfInputs={4}
-                keyboardType={"numeric"}
-                containerStyles={{
-                  justifyContent: "center"
-                }}
-                inputContainerStyles={Styles.inputContainerStyles}
-                underlineColorAndroid={Constants.Colors.Transparent}
-                inputTextErrorColor={Constants.Colors.Primary}
-                focusedBorderColor={Constants.Colors.Gray}
-                inputStyles={{ color: Constants.Colors.Primary }}
-              />
-            </DivContainer>
-            <DivContainer className={"webButtonFrame"} styleApp={{}}>
-              <AuthButton
-                gradientColors={Constants.Colors.ButtonGradients}
-                buttonName={"Verify"}
-                buttonStyle={{
-                  ...Platform.select({
-                    web: {
-                      top: moderateScale(15)
-                    }
-                  })
-                }}
-                onPress={() => {
-                  this.verifyOTP();
-                }}
-              />
-            </DivContainer>
+              numberOfInputs={4}
+              keyboardType={"numeric"}
+              containerStyles={{
+                justifyContent: "center"
+              }}
+              inputContainerStyles={Styles.inputContainerStyles}
+              underlineColorAndroid={Constants.Colors.Transparent}
+              inputTextErrorColor={Constants.Colors.Primary}
+              focusedBorderColor={Constants.Colors.Gray}
+              inputStyles={{ color: Constants.Colors.Primary }}
+            />
+          </DivContainer>
+          <DivContainer className={"verifyBTN"} styleApp={{}}>
+            <AuthButton
+              gradientColors={Constants.Colors.ButtonGradients}
+              buttonName={"Verify"}
+              buttonStyle={{
+                ...Platform.select({
+                  web: {
+                    top: moderateScale(15)
+                  }
+                })
+              }}
+              onPress={() => {
+                this.verifyOTP();
+              }}
+            />
+          </DivContainer>
 
-            <DivContainer
-              styleWeb={Styles.resendOTP}
-              styleApp={Styles.resendOTP}
-              className={"resendOTP"}
-            >
-              <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
-              <Text style={Styles.resend}>{"Resend"}</Text>
-            </DivContainer>
-          </KeyboardAwareScrollView>
-        </DivContainer>
+          <DivContainer
+            styleWeb={Styles.resendOTP}
+            styleApp={Styles.resendOTP}
+            className={"resendOTP"}
+          >
+            <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
+            <Text style={Styles.resend}>{"Resend"}</Text>
+          </DivContainer>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
@@ -154,7 +152,10 @@ const Styles = StyleSheet.create({
   },
   resendOTP: {
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    ...Platform.select({
+      android: { top: moderateScale(20) }
+    })
   },
 
   inputContainerStyles: {
@@ -165,7 +166,8 @@ const Styles = StyleSheet.create({
       web: {
         backgroundColor: Constants.Colors.Gray,
         borderColor: Constants.Colors.Primary
-      }
+      },
+      android: { bottom: moderateScale(50) }
     })
   },
   buttonStyle: { flex: 1 },
@@ -187,7 +189,7 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.Primary,
     textAlign: "right",
     textAlignVertical: "center",
-    paddingVertical: moderateScale(15)
+    paddingVertical: moderateScale(10)
   }
 });
 function mapStateToProps(state) {

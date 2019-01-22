@@ -61,83 +61,75 @@ class OTPScreen extends Component {
         {Platform.OS !== "web" ? (
           <Header hideDrawer onBackPress={this.onBackPress} />
         ) : null}
-        <DivContainer className={"otpMainScreen"}>
-          <KeyboardAwareScrollView
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps={"handled"}
-            contentContainerStyle={{
-              justifyContent: "space-around",
-              alignItems: "center",
-              flexDirection: "column",
-              ...Platform.select({
-                android: {
-                  height: Constants.BaseStyle.DEVICE_HEIGHT * 0.82
-                },
-                web: {
-                  flex: 1
-                },
-                ios: { flex: 1 }
-              })
-            }}
+        <KeyboardAwareScrollView
+          scrollEnabled={false}
+          enableOnAndroid
+          extraScrollHeight={50}
+          enableAutomaticScroll={true}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps={"handled"}
+          contentContainerStyle={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "column",
+            flex: 1
+          }}
+        >
+          <DivContainer className={"loginTopText"}>
+            <LogoText
+              containerStyle={Styles.logoStyle}
+              heading="Verification"
+              message="We have sent OTP in your mobile number. Please enter below"
+            />
+          </DivContainer>
+          <DivContainer
+            className={"otpinput"}
+            styleApp={
+              {
+                // alignItems: "center"
+              }
+            }
           >
-            <DivContainer className={"loginTopText"}>
-              <LogoText
-                containerStyle={Styles.logoStyle}
-                heading="Verification"
-                message="We have sent OTP in your mobile number. Please enter below"
-              />
-            </DivContainer>
-            <DivContainer
-              className={"otpinput"}
-              styleApp={{
-                height: moderateScale(80),
-                alignItems: "center"
+            <OtpInputs
+              handleChange={otp => {
+                this.setState({ otp });
               }}
-            >
-              <OtpInputs
-                handleChange={otp => {
-                  this.setState({ otp });
-                }}
-                numberOfInputs={4}
-                keyboardType={"numeric"}
-                containerStyles={{
-                  justifyContent: "center"
-                }}
-                inputContainerStyles={Styles.inputContainerStyles}
-                underlineColorAndroid={Constants.Colors.Transparent}
-                inputTextErrorColor={Constants.Colors.Primary}
-                focusedBorderColor={Constants.Colors.Gray}
-                inputStyles={{ color: Constants.Colors.Primary }}
-              />
-            </DivContainer>
-            <DivContainer className={"webButtonFrame"} styleApp={{}}>
-              <AuthButton
-                gradientColors={Constants.Colors.ButtonGradients}
-                buttonName={"Verify"}
-                buttonStyle={{
-                  ...Platform.select({
-                    web: {
-                      top: moderateScale(15)
-                    }
-                  })
-                }}
-                onPress={() => {
-                  this.verifyOTP();
-                }}
-              />
-            </DivContainer>
+              numberOfInputs={4}
+              keyboardType={"numeric"}
+              inputContainerStyles={Styles.inputContainerStyles}
+              underlineColorAndroid={Constants.Colors.Transparent}
+              inputTextErrorColor={Constants.Colors.Primary}
+              focusedBorderColor={Constants.Colors.Gray}
+              inputStyles={{ color: Constants.Colors.Primary }}
+            />
+          </DivContainer>
+          <DivContainer className={"verifyBTN"}>
+            <AuthButton
+              gradientColors={Constants.Colors.ButtonGradients}
+              buttonName={"Verify"}
+              buttonStyle={{
+                ...Platform.select({
+                  web: {
+                    top: moderateScale(15)
+                  }
+                })
+              }}
+              onPress={() => {
+                this.verifyOTP();
+              }}
+            />
+          </DivContainer>
 
-            <DivContainer
-              styleWeb={Styles.resendOTP}
-              styleApp={Styles.resendOTP}
-              className={"resendOTP"}
-            >
-              <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
-              <Text style={Styles.resend}>{"Resend"}</Text>
-            </DivContainer>
-          </KeyboardAwareScrollView>
-        </DivContainer>
+          <DivContainer
+            styleWeb={Styles.resendOTP}
+            styleApp={Styles.resendOTP}
+            className={"resendOTP"}
+          >
+            <Text style={Styles.newUser}>{"Don't receive OTP?"}</Text>
+            <Text style={Styles.resend}>{"Resend"}</Text>
+          </DivContainer>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
