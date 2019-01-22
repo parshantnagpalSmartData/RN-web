@@ -40,14 +40,6 @@ export const showToast = (type, message) => {
     });
   };
 };
-export const showToast1 = (type, message) => {
-  return dispatch => {
-    dispatch({
-      type: Types.SHOW_TOAST,
-      payload: { type, message, isVisible: true }
-    });
-  };
-};
 
 export const hideToast = () => {
   return dispatch => {
