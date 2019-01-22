@@ -22,6 +22,5 @@ deploy-dev:
   stage: deploy
   script:
     - ls
-    - pwd
     - cd /home/gitlab-runner/builds/a00ff1e2/0/SDM/actproject/
     - pm2 restart server.js --env=production   --name "ActNursesPortalServer"
