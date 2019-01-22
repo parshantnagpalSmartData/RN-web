@@ -2,16 +2,11 @@ import React from "React";
 import { View } from "react-native";
 import PropTypes from "prop-types";
 
-import {
-  TouchableOpacity,
-  Text,
-  Image,
-  StyleSheet,
-  Platform
-} from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 import Constants from "../../../constants";
 import { moderateScale } from "../../../helpers/ResponsiveFonts";
 import LinearGradient from "react-native-linear-gradient";
+import ResourceButton from "../../Common/ResourcesButton";
 
 const RenderForms = props => {
   let { form, key, onFormPress } = props;
@@ -27,13 +22,19 @@ const RenderForms = props => {
     >
       <View style={Styles.continer}>
         <Text style={Styles.formName}>{form.FormName}</Text>
-        <TouchableOpacity style={Styles.iconView} onPress={() => onFormPress()}>
+        <ResourceButton
+          source={Constants.Images.SearchInactive}
+          onFormPress={onFormPress}
+          formUrl={props.key}
+        />
+
+        {/* <TouchableOpacity style={Styles.iconView} onPress={() => onFormPress()}>
           <Image
             source={Constants.Images.SearchInactive}
             resizeMode={"contain"}
             style={Styles.icon}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </LinearGradient>
   );

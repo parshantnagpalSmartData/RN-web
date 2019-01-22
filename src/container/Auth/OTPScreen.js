@@ -61,7 +61,7 @@ class OTPScreen extends Component {
         {Platform.OS !== "web" ? (
           <Header hideDrawer onBackPress={this.onBackPress} />
         ) : null}
-        <DivContainer className={"otpMainScreen"}>
+        <DivContainer className={"otpMainScreen"} styleApp={Styles.container}>
           <KeyboardAwareScrollView
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}

@@ -118,7 +118,10 @@ class Login extends Component {
               }
             ]}
           >
-            <DivContainer className={"loginFormFrame"}>
+            <DivContainer
+              className={"loginFormFrame"}
+              styleApp={Styles.styleAppContainer}
+            >
               <View style={Styles.FloatingInputContainer}>
                 <DivContainer className={"formInput"}>
                   <FormTextInput
@@ -183,6 +186,7 @@ class Login extends Component {
 }
 
 const Styles = StyleSheet.create({
+  styleAppContainer: { flex: 1 },
   containner: {
     // justifyContent: "space-between",
     alignItems: "center"

@@ -11,6 +11,7 @@ import ReactTable from "react-table";
 import { Image, TouchableOpacity, StyleSheet, View } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import ResourceButton from "../../components/Common/ResourcesButton";
 
 let spanHeaderStyle = {
     height: moderateScale(32),
@@ -72,7 +73,7 @@ const RenderPrintableForms = ({ data, onFormPress }) => {
               getProps: () => cellStyle,
               Cell: props => (
                 <span style={spanCellStyle} className="cusor-point">
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     style={Styles.iconView}
                     onPress={() => onFormPress(props.FormUrl)}
                   >
@@ -81,7 +82,12 @@ const RenderPrintableForms = ({ data, onFormPress }) => {
                       resizeMode={"contain"}
                       style={Styles.icon}
                     />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
+                  <ResourceButton
+                    source={Constants.Images.Downloads}
+                    onFormPress={onFormPress}
+                    formUrl={props.value}
+                  />
                 </span>
               )
             }
