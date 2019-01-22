@@ -29,5 +29,5 @@ if (process.env.npm_execpath.indexOf("yarn") === -1) {
     - yarn has more secure checksum matching, ensuring package contents are consistent
 
   `);
-  process.exit(1);
+  // process.exit(1);
 }
