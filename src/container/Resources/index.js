@@ -39,10 +39,9 @@ class Resources extends Component {
       win.focus();
     } else {
       // eslint-disable-next-line
-      Linking.openURL(url).catch(err =>{
+      Linking.openURL(url).catch(err => {
         // console.error("An error occurred", err)
-      }
-      );
+      });
     }
   }, 1000);
 
