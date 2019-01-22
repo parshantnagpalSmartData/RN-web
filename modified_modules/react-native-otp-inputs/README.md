@@ -54,3 +54,7 @@ export default class App extends Component {
 Great thanks to [@kantorm](https://github.com/kantorm).
 
 ### Licence MIT
+
+
+
+    // "prepublish": "yarn clean && yarn build",
