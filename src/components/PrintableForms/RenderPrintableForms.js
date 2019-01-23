@@ -10,7 +10,7 @@ const RenderPrintableForms = props => {
       data={data}
       renderItem={({ item, index }) => (
         <RenderForms
-          form={item}
+          item={item}
           key={index}
           onFormPress={onFormPress}
           printable={printable}

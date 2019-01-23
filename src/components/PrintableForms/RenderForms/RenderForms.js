@@ -9,7 +9,7 @@ import LinearGradient from "react-native-linear-gradient";
 import ResourceButton from "../../Common/ResourcesButton";
 
 const RenderForms = props => {
-  let { form, key, onFormPress } = props;
+  let { item, key, onFormPress, printable } = props;
   return (
     <LinearGradient
       key={key}
@@ -21,11 +21,11 @@ const RenderForms = props => {
       locations={Platform.OS !== "android" ? [0.1] : null}
     >
       <View style={Styles.continer}>
-        <Text style={Styles.formName}>{form.FormName}</Text>
+        <Text style={Styles.formName}>{printable ? item.FormName : item.ResourceName}</Text>
         <ResourceButton
-          source={Constants.Images.SearchInactive}
+          source={printable ? Constants.Images.Downloads : Constants.Images.SearchInactive}
           onFormPress={onFormPress}
-          formUrl={props.key}
+          formUrl={printable ? item.FormUrl : item.ResourceURL}
         />
       </View>
     </LinearGradient>
@@ -59,13 +59,15 @@ const Styles = StyleSheet.create({
 });
 
 RenderForms.defaultProps = {
-  form: {},
+  item: {},
   key: null,
-  onFormPress: null
+  onFormPress: null,
+  printable: false
 };
 
 RenderForms.propTypes = {
-  form: PropTypes.object,
+  item: PropTypes.object,
   key: PropTypes.number,
-  onFormPress: PropTypes.func
+  onFormPress: PropTypes.func,
+  printable: PropTypes.bool
 };
