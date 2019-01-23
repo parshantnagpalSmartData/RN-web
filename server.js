@@ -7,6 +7,11 @@ var cors = require("cors");
 app.use(cors({ credentials: true, origin: true }));
 app.use(express.static(__dirname + "/dist"));
 app.use(function(req, res, next) {
+  var allowedOrigins = ["http://http://52.34.207.5:4223/", "localhost:4223"];
+  var origin = req.headers.host;
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader(
     "Access-Control-Allow-Headers",
     "accept, authorization, content-type, x-requested-with"
@@ -15,8 +20,6 @@ app.use(function(req, res, next) {
     "Access-Control-Allow-Methods",
     "GET,HEAD,PUT,PATCH,POST,DELETE"
   );
-  res.setHeader("Access-Control-Allow-Origin", req.header("origin"));
-
   next();
 });
 // const https = require('https');
@@ -24,6 +27,13 @@ const http = require("http");
 
 app.get("/", function(req, res) {
   return res.end("dfklaaksdjasjkd-----");
+});
+
+/**
+ * On refersh getting the cannot get url error
+ */
+app.get("*", function(req, res) {
+  res.sendfile("./dist/index.html");
 });
 
 // const privateKey = fs.readFileSync('./certs/stagingsdei_com.key', 'utf8');
