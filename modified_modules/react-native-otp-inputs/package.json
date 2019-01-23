@@ -15,7 +15,6 @@
   "scripts": {
     "build": "yarn clean && yarn tsc",
     "clean": "rimraf dist",
-    "prepublish": "yarn clean && yarn build",
     "test": "jest -u",
     "test:ci": "jest --runInBand --coverage --verbose",
     "test:watch": "jest --watch",
