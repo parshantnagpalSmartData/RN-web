@@ -21,9 +21,15 @@ const RenderForms = props => {
       locations={Platform.OS !== "android" ? [0.1] : null}
     >
       <View style={Styles.continer}>
-        <Text style={Styles.formName}>{printable ? item.FormName : item.ResourceName}</Text>
+        <Text style={Styles.formName}>
+          {printable ? item.FormName : item.ResourceName}
+        </Text>
         <ResourceButton
-          source={printable ? Constants.Images.Downloads : Constants.Images.SearchInactive}
+          source={
+            printable
+              ? Constants.Images.Downloads
+              : Constants.Images.SearchInactive
+          }
           onFormPress={onFormPress}
           formUrl={printable ? item.FormUrl : item.ResourceURL}
         />
