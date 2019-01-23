@@ -15,7 +15,7 @@ const RenderForms = props => {
       key={key}
       start={{ x: 1, y: 0 }}
       end={{ x: 0, y: 0 }}
-      colors={Constants.Colors.FormGredient}
+      colors={Constants.Colors.PdfAndUrl}
       angle={280}
       useAngle
       locations={Platform.OS !== "android" ? [0.1] : null}
@@ -27,14 +27,6 @@ const RenderForms = props => {
           onFormPress={onFormPress}
           formUrl={props.key}
         />
-
-        {/* <TouchableOpacity style={Styles.iconView} onPress={() => onFormPress()}>
-          <Image
-            source={Constants.Images.SearchInactive}
-            resizeMode={"contain"}
-            style={Styles.icon}
-          />
-        </TouchableOpacity> */}
       </View>
     </LinearGradient>
   );
@@ -49,7 +41,7 @@ const Styles = StyleSheet.create({
     paddingHorizontal: moderateScale(25),
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: moderateScale(3)
+    marginVertical: moderateScale(10)
   },
   formName: {
     ...Constants.Fonts.Regular,

@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import { TouchableOpacity, Image, StyleSheet, Platform } from "react-native";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import PropTypes from "prop-types";
 
@@ -16,13 +16,28 @@ const ResourceButton = ({ source, onFormPress, formUrl }) => {
 
 const Styles = StyleSheet.create({
   iconView: {
-    height: moderateScale(30),
-    width: moderateScale(30),
+    height: moderateScale(40),
+    width: moderateScale(40),
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: moderateScale(10)
+    marginVertical: moderateScale(10),
+    ...Platform.select({
+      web: {
+        height: moderateScale(30),
+        width: moderateScale(30)
+      }
+    })
   },
-  icon: { height: moderateScale(30), width: moderateScale(30) }
+  icon: {
+    height: moderateScale(40),
+    width: moderateScale(40),
+    ...Platform.select({
+      web: {
+        height: moderateScale(30),
+        width: moderateScale(30)
+      }
+    })
+  }
 });
 
 /**

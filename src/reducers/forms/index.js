@@ -9,7 +9,8 @@
 import * as Types from "../../actionTypes";
 
 const initialState = {
-  myForms: []
+  myForms: [],
+  myUrls: []
 };
 
 export default function forms(state = initialState, action = {}) {
@@ -18,6 +19,11 @@ export default function forms(state = initialState, action = {}) {
       return {
         ...state,
         myForms: action.payload
+      };
+    case Types.RESOURCES_DATA:
+      return {
+        ...state,
+        myUrls: action.payload
       };
     case Types.RESET_USER:
       return {

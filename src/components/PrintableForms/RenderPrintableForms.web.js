@@ -9,6 +9,8 @@
 import React from "react";
 import ReactTable from "react-table";
 import { Image, TouchableOpacity, StyleSheet, View } from "react-native";
+import PropTypes from "prop-types";
+
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import ResourceButton from "../../components/Common/ResourcesButton";
@@ -43,7 +45,50 @@ let spanHeaderStyle = {
       ...Constants.Fonts.Regular
     }
   };
-const RenderPrintableForms = ({ data, onFormPress }) => {
+
+// const getColumns=()=> {
+//   return Object.keys(data.initial_data[0]).map(key => {
+//     return {
+//       Header: key,
+//       accessor: key
+//     };
+//   });
+
+const RenderPrintableForms = ({ data, onFormPress, printable }) => {
+  console.log("datdatadtadtdat", data);
+  const columns = [
+    {
+      // Header: "Date",
+      width: Constants.BaseStyle.DEVICE_WIDTH * 0.6,
+      Header: () => (
+        <span style={spanHeaderStyle}>{printable ? "FORMS" : "RESOURCES"}</span>
+      ),
+      accessor: printable ? "FormName" : "ResourceName",
+      headerStyle: headerStyle,
+      getProps: () => cellStyle,
+      className: "formNameAlignLeft",
+      Cell: props => <span style={spanCellStyle}>{props.value}</span>
+    },
+    {
+      // Header: "Status",
+      width: Constants.BaseStyle.DEVICE_WIDTH * 0.1,
+      Header: () => <span style={spanHeaderStyle}>ACTION</span>,
+      accessor: printable ? "FormUrl" : "ResourceURL",
+      headerStyle: headerStyle,
+      getProps: () => cellStyle,
+      Cell: props => (
+        <span style={spanCellStyle} className="cusor-point">
+          <ResourceButton
+            source={
+              printable ? Constants.Images.Downloads : Constants.Images.Search
+            }
+            onFormPress={onFormPress}
+            formUrl={props.value}
+          />
+        </span>
+      )
+    }
+  ];
   return (
     <div className={""}>
       <View style={Styles.mainContainer}>
@@ -53,45 +98,7 @@ const RenderPrintableForms = ({ data, onFormPress }) => {
             width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
           }}
           data={data}
-          columns={[
-            {
-              // Header: "Date",
-              width: Constants.BaseStyle.DEVICE_WIDTH * 0.6,
-              Header: () => <span style={spanHeaderStyle}>FORMS</span>,
-              accessor: "FormName",
-              headerStyle: headerStyle,
-              getProps: () => cellStyle,
-              className: "formNameAlignLeft",
-              Cell: props => <span style={spanCellStyle}>{props.value}</span>
-            },
-            {
-              // Header: "Status",
-              width: Constants.BaseStyle.DEVICE_WIDTH * 0.1,
-              Header: () => <span style={spanHeaderStyle}>ACTION</span>,
-              accessor: "StatusName",
-              headerStyle: headerStyle,
-              getProps: () => cellStyle,
-              Cell: props => (
-                <span style={spanCellStyle} className="cusor-point">
-                  {/* <TouchableOpacity
-                    style={Styles.iconView}
-                    onPress={() => onFormPress(props.FormUrl)}
-                  >
-                    <Image
-                      source={Constants.Images.Downloads}
-                      resizeMode={"contain"}
-                      style={Styles.icon}
-                    />
-                  </TouchableOpacity> */}
-                  <ResourceButton
-                    source={Constants.Images.Downloads}
-                    onFormPress={onFormPress}
-                    formUrl={props.value}
-                  />
-                </span>
-              )
-            }
-          ]}
+          columns={columns}
           showPagination={false}
           loadingText={"Loading..."}
           noDataText={"No rows found"}
@@ -114,4 +121,17 @@ const Styles = StyleSheet.create({
   },
   icon: { height: moderateScale(30), width: moderateScale(30) }
 });
+
+RenderPrintableForms.defaultProps = {
+  data: [],
+  onFormPress: null,
+  printable: false
+};
+
+RenderPrintableForms.propTypes = {
+  data: PropTypes.array,
+  onFormPress: PropTypes.func,
+  printable: PropTypes.bool
+};
+
 export default RenderPrintableForms;

@@ -10,3 +10,4 @@ export * from "./schedules";
 export * from "./openShift";
 export * from "./potientialCases";
 export * from "./printableForms";
+export * from "./resources";

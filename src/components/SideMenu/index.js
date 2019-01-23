@@ -156,6 +156,11 @@ class SideMenu extends React.Component {
         value: "Printable Forms",
         onPress: this.onMenuPress
       },
+      {
+        key: "Resources",
+        value: "Resources",
+        onPress: this.onMenuPress
+      },
       { key: "MyProfile", value: "My Profile", onPress: this.onMenuPress },
       {
         key: "MessageCenter",

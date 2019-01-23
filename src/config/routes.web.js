@@ -20,6 +20,7 @@ import MySchedule from "../container/MySchedule";
 import OpenShift from "../container/OpenShift";
 import PotientialCases from "../container/PotentialCases";
 import PrintableForms from "../container/PrintableForms";
+import Resources from "../container/Resources";
 import MyProfile from "../container/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
@@ -78,6 +79,14 @@ class Routes extends Component {
             exact
             path="/PrintableForms"
             component={PrintableForms}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/Resources"
+            component={Resources}
             //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
