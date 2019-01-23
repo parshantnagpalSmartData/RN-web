@@ -1,7 +1,7 @@
 //Install express server
 const express = require("express");
 const app = express();
-const fs = require("fs");
+// const fs = require("fs");
 var cors = require("cors");
 // Serve only the static files form the dist directory
 app.use(cors({ credentials: true, origin: true }));

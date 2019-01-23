@@ -55,6 +55,4 @@ Great thanks to [@kantorm](https://github.com/kantorm).
 
 ### Licence MIT
 
-
-
-    // "prepublish": "yarn clean && yarn build",
+ "prepublish": "yarn clean && yarn build",
