@@ -52,3 +52,7 @@ export const UPDATE_OPENSHIFT_LIKE_INDICATOR =
 export const PRINTABLE_FORMS = "PRINTABLE_FORMS";
 
 export const SET_WEB_WIDTH = "SET_WEB_WIDTH";
+
+export const UPDATE_INBOX = "UPDATE_INBOX";
+export const UPDATE_SENT = "UPDATE_SENT";
+export const UPDATE_TRASH = "UPDATE_TRASH";

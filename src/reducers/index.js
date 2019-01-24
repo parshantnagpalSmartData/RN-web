@@ -9,5 +9,6 @@ import app from "./app";
 import user from "./user";
 import schedule from "./schedule";
 import forms from "./forms";
+import messages from "./messages";
 
-export { app, user, schedule, forms };
+export { app, user, schedule, forms, messages };

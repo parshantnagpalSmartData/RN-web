@@ -31,5 +31,8 @@ module.exports = {
   Age: require("../assets/images/Age/Age.png"),
   Search: require("../assets/images/Search/searchActive.png"),
   SearchInactive: require("../assets/images/Search/searchInActive.png"),
-  Downloads: require("../assets/images/Downloads/Downloads.png")
+  Downloads: require("../assets/images/Downloads/Downloads.png"),
+  Inbox: require("../assets/images/MessageCenter/Inbox.png"),
+  Sent: require("../assets/images/MessageCenter/Sent.png"),
+  Trash: require("../assets/images/MessageCenter/Trash.png")
 };
