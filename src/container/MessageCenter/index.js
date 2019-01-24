@@ -56,7 +56,7 @@ const MessageComponent = ({ data, enableScrollingFunction }) => {
       return (
         <Swipeout
           right={rightButtons}
-          sensitivity={400}
+          sensitivity={600}
           scroll={data => {
             enableScrollingFunction(data);
           }}
@@ -147,7 +147,8 @@ class MessageCenter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tab: "inbox"
+      tab: "inbox",
+      enableParentScrolling: true
     };
   }
 
@@ -160,7 +161,6 @@ class MessageCenter extends Component {
   };
   enableScrollingFunction = data => {
     let context = this;
-    console.log("ref", this.refs);
     if (Platform.OS == "ios") {
       this.refs.scrollView.scrollView.setNativeProps({ scrollEnabled: data });
     } else if (Platform.OS == "android") {
@@ -197,7 +197,7 @@ class MessageCenter extends Component {
   };
 
   render() {
-    let { enableParentScrolling } = this.state;
+    let { enableParentScrolling, tab } = this.state;
     let { messages } = this.props;
     console.log("props", this.props);
     let { inbox, sent, trash } = messages;
@@ -210,6 +210,7 @@ class MessageCenter extends Component {
           onChangeTab={tab => {
             this.updateTabIndex(tab.ref.props.tab);
           }}
+          // page={tab}
           ref={"scrollView"}
           locked={!enableParentScrolling}
           tabBarActiveTextColor={Constants.Colors.Primary}
@@ -222,7 +223,7 @@ class MessageCenter extends Component {
         >
           <MessageComponent
             tabLabel="Inbox"
-            tab="index"
+            tab="inbox"
             data={inbox}
             enableScrollingFunction={data => {
               this.enableScrollingFunction(data);

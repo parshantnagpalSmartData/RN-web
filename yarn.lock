@@ -8043,10 +8043,10 @@ react-native-pdf@^5.0.11:
     crypto-js "^3.1.9-1"
     prop-types "^15.5.10"
 
-react-native-scrollable-tab-view@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/react-native-scrollable-tab-view/-/react-native-scrollable-tab-view-0.9.0.tgz#cf8c09018f1e1c88bb26db6a003c90de275a1c6f"
-  integrity sha512-41UYxmiT57+PYKxWbRM8pGNgSapXYvL+bOcj+E7u+vHp0r7nMh1Imvc5J0XGVoPb31xwB0vWj/a88mifQx9p5g==
+react-native-scrollable-tab-view@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-native-scrollable-tab-view/-/react-native-scrollable-tab-view-0.10.0.tgz#8ce7908254685ee37d35df7d849676eaa1e81132"
+  integrity sha512-7FWw9X2hLozWqpGJTAU/p7ONdTTO635bbAZ5AUPDrB4JwaLbhNV6ePjsNUjsCaopgCwz/EdmH0hTCPeja9dh4w==
   dependencies:
     create-react-class "^15.6.2"
     prop-types "^15.6.0"
