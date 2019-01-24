@@ -73,7 +73,7 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
       // Header: "Status",
       width: Constants.BaseStyle.DEVICE_WIDTH * 0.1,
       Header: () => <span style={spanHeaderStyle}>ACTION</span>,
-      accessor: printable ? "FormUrl" : "ResourceURL",
+      accessor: printable ? "FormID" : "ResourceURL",
       headerStyle: headerStyle,
       getProps: () => cellStyle,
       Cell: props => (
@@ -100,8 +100,11 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
         data={data}
         columns={columns}
         showPagination={false}
+        defaultPageSize={data & (data.length > 0) ? data.length : 4}
         loadingText={"Loading..."}
-        noDataText={"No rows found"}
+        noDataText={
+          printable ? "No Priintable forms found" : "No Resources Found"
+        }
       />
     </div>
   );

@@ -33,8 +33,9 @@ class PrintableForms extends Component {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
-  onFormPress = _.debounce(() => {
+  onFormPress = _.debounce(formId => {
     let { appAction, componentId } = this.props;
+    this.props.appAction.fetchBase64DataForPdf(formId);
     appAction.pushToParticularScreen(componentId, "PDFViewer");
   }, 1000);
 

@@ -31,10 +31,24 @@ export const goAuth = () => {
     history.replace("/");
   };
 };
-/* eslint-disable  */
+
+/**
+ * Selecting the Current Sidemenu Current Route
+ */
+
+export const setCurrentSideMenuRoute = screen => {
+  return dispatch => {
+    dispatch({
+      type: Types.CURRENT_SIDEMENU_ROUTE,
+      payload: { screen }
+    });
+  };
+};
+ /* eslint-disable  */
 export const setScrenStack = (componentId = null, screen, visible) => {
   return dispatch => {
     dispatch({ type: Types.SET_SCREEN, payload: screen });
     history.push(`/${screen}`);
   };
 };
+

@@ -28,3 +28,26 @@ export const fetchPrintableForms = () => {
       });
   };
 };
+
+export const fetchBase64DataForPdf = formId => {
+  return (dispatch, getState) => {
+    dispatch(AppActions.startLoader());
+    RestClient.getCall(
+      "downloadforms/download/" + formId,
+      getState().user.token
+    )
+      .then(res => {
+        if (res.status) {
+          // console.log("res.status", res);
+          // dispatch({ type: Types.PRINTABLE_FORMS, payload: res.result.data });
+        } else {
+          dispatch(AppActions.checkLogin(res));
+        }
+        dispatch(AppActions.stopLoader());
+      })
+      .catch(e => {
+        dispatch(AppActions.stopLoader());
+        console.warn("error", e); // eslint-disable-line
+      });
+  };
+};
