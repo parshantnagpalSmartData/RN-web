@@ -4,9 +4,9 @@
  * @date Jan 17, 2018
  */
 
-import RenderPrintableForms from "./RenderPrintableForms";
+import CommonURLHandle from "./CommonUrlHandlerForms";
 import RenderForms from "./RenderForms";
 import PDFViewer from "./PDFViewer";
 
 export { RenderForms, PDFViewer };
-export default RenderPrintableForms;
+export default CommonURLHandle;

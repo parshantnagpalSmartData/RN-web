@@ -14,7 +14,7 @@ import _ from "lodash";
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import SearchBar from "../../components/Common/SearchBar";
-import RenderPrintableForms from "../../components/PrintableForms";
+import CommonURLHandle from "../../components/CommonURLHandle";
 import DivContainer from "../../components/Common/DivContainer";
 
 class PrintableForms extends Component {
@@ -50,7 +50,7 @@ class PrintableForms extends Component {
             onChangeText={searchText => this.setState({ searchText })}
           />
         </DivContainer>
-        <RenderPrintableForms
+        <CommonURLHandle
           data={myForms}
           onFormPress={this.onFormPress}
           printable={true}

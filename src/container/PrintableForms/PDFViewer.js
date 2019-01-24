@@ -12,7 +12,7 @@ import { bindActionCreators } from "redux";
 import axios from "axios";
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
-import PDF from "../../components/PrintableForms/PDFViewer";
+import PDF from "../../components/CommonURLHandle/PDFViewer";
 import DivContainer from "../../components/Common/DivContainer";
 
 class PDFViewer extends Component {

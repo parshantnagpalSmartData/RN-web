@@ -3,7 +3,7 @@ import { FlatList } from "react-native";
 import PropTypes from "prop-types";
 import RenderForms from "./RenderForms";
 
-const RenderPrintableForms = props => {
+const CommonUrlHandlerForms = props => {
   let { data, onFormPress, printable } = props;
   return (
     <FlatList
@@ -20,15 +20,15 @@ const RenderPrintableForms = props => {
   );
 };
 
-export default RenderPrintableForms;
+export default CommonUrlHandlerForms;
 
-RenderPrintableForms.defaultProps = {
+CommonUrlHandlerForms.defaultProps = {
   data: [],
   onFormPress: null,
   printable: false
 };
 
-RenderPrintableForms.propTypes = {
+CommonUrlHandlerForms.propTypes = {
   data: PropTypes.array,
   onFormPress: PropTypes.func,
   printable: PropTypes.bool

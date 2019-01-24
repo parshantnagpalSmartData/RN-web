@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import ResourceButton from "../../components/Common/ResourcesButton";
+import ResourceButton from "../Common/ResourcesButton";
 
 let spanHeaderStyle = {
     height: moderateScale(32),
@@ -54,7 +54,7 @@ let spanHeaderStyle = {
 //     };
 //   });
 
-const RenderPrintableForms = ({ data, onFormPress, printable }) => {
+const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
   console.log("datdatadtadtdat", data);
   const columns = [
     {
@@ -122,16 +122,16 @@ const Styles = StyleSheet.create({
   icon: { height: moderateScale(30), width: moderateScale(30) }
 });
 
-RenderPrintableForms.defaultProps = {
+CommonUrlHandlerForms.defaultProps = {
   data: [],
   onFormPress: null,
   printable: false
 };
 
-RenderPrintableForms.propTypes = {
+CommonUrlHandlerForms.propTypes = {
   data: PropTypes.array,
   onFormPress: PropTypes.func,
   printable: PropTypes.bool
 };
 
-export default RenderPrintableForms;
+export default CommonUrlHandlerForms;
