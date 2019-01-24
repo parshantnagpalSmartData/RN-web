@@ -90,28 +90,27 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
     }
   ];
   return (
-    <div className={""}>
-      <View style={Styles.mainContainer}>
-        <ReactTable
-          style={{
-            maxHeight: "200px",
-            width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
-          }}
-          data={data}
-          columns={columns}
-          showPagination={false}
-          loadingText={"Loading..."}
-          noDataText={"No rows found"}
-        />
-      </View>
+    <div className={"contentScroll printableScroll"}>
+      <ReactTable
+        style={
+          {
+            //maxHeight: "200px"
+          }
+        }
+        data={data}
+        columns={columns}
+        showPagination={false}
+        loadingText={"Loading..."}
+        noDataText={"No rows found"}
+      />
     </div>
   );
 };
 
 const Styles = StyleSheet.create({
-  mainContainer: {
-    alignItems: "center"
-  },
+  // mainContainer: {
+  //   alignItems: "center"
+  // },
   iconView: {
     height: moderateScale(30),
     width: moderateScale(30),

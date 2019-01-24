@@ -24,9 +24,13 @@ body {
   width: 260px;
 }
 .leftContainer > div,
-.rightContentContainer > div {
+.rightContentContainer > div,
+.leftContainer > div > div > div {
   height: 100%;
 }
+
+.leftContainer > div > div > div{min-height: inherit !important; overflow: visible !important;}
+
 .rightContentContainer {
   flex: 1; /*width: 100%;*/
   position: relative;
@@ -67,6 +71,13 @@ body {
 .contentScroll .ReactTable .rt-thead .rt-th .rt-resizable-header-content span {
   font-weight: 600 !important;
 }
+
+.printableScroll .ReactTable .rt-tbody .rt-td,
+.printableScroll .ReactTable .rt-thead .rt-th{max-width: none !important; min-width: 70px;}
+.printableScroll .ReactTable .rt-tbody .rt-td:last-child{padding-left:5px!important;}
+.printableScroll .ReactTable .rt-tbody .rt-td:last-child span,
+.printableScroll .ReactTable .rt-thead .rt-th:last-child span{justify-content: center !important; padding-left:0 !important;}
+
 .contentScroll .ReactTable .rt-tbody .rt-td {
   padding: 11px 5px;
   cursor: hand;
@@ -169,8 +180,23 @@ body {
   }
 }
 
-
-
 .formNameAlignLeft {
   text-align: right;
+}
+
+/*----Printable page----*/
+
+.Searchbar > div > div{padding:25px 15px; }
+.Searchbar > div > div > div{margin:0 !important; height: 48px !important; border-color:#E1E1E1 !important;}
+.Searchbar input{font-size:16px !important;}
+.Searchbar > div > div > div > div,
+.Searchbar > div > div > div > div > div{ width: 48px !important;}
+
+.dBlockContainer{display: block!important;}
+.printableScroll .ReactTable{margin: 0 auto; max-width: 1000px!important;}
+.printableScroll .ReactTable .rt-thead > div > div{font-size: 13px !important;}
+.printableScroll .ReactTable .rt-tbody{max-height:calc(100vh - 260px); overflow: auto;}
+
+@media screen and (max-width:479px){
+  .Searchbar > div > div > div{width:100% !important;}
 }
