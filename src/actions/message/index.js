@@ -8,7 +8,7 @@ Date : 9 January 2019
 import RestClient from "../../helpers/RestClient";
 import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
-// import Constants from "../../constants";
+import Constants from "../../constants";
 
 export const getMessages = folder => {
   return (dispatch, getState) => {
@@ -44,6 +44,90 @@ export const getMessages = folder => {
       })
       .catch(e => {
         dispatch(AppActions.stopLoader());
+        console.warn("error", e); // eslint-disable-line
+      });
+  };
+};
+
+export const deleteMessage = (messageId, sucess) => {
+  return (dispatch, getState) => {
+    RestClient.restCall(
+      `messages/${messageId}`,
+      {},
+      getState().user.token,
+      "DELETE"
+    )
+      .then(res => {
+        if (res.status) {
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
+          sucess();
+        } else {
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
+        }
+      })
+      .catch(e => {
+        console.warn("error", e); // eslint-disable-line
+      });
+  };
+};
+
+export const readMessage = messageId => {
+  return (dispatch, getState) => {
+    RestClient.restCall(`messages/${messageId}/read`, {}, getState().user.token)
+      .then(res => {
+        if (res.status) {
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
+        } else {
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
+        }
+      })
+      .catch(e => {
+        console.warn("error", e); // eslint-disable-line
+      });
+  };
+};
+
+export const composeMessage = postData => {
+  return (dispatch, getState) => {
+    RestClient.restCall("messages", postData, getState().user.token)
+      .then(res => {
+        if (res.status) {
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
+        } else {
+          dispatch(
+            AppActions.showToast(
+              Constants.AppConstants.Notificaitons.Error,
+              res.message
+            )
+          );
+        }
+      })
+      .catch(e => {
         console.warn("error", e); // eslint-disable-line
       });
   };

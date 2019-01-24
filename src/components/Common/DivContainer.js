@@ -44,7 +44,7 @@ DivContainer.defaultProps = {
 
 DivContainer.propTypes = {
   className: PropTypes.string,
-  styleApp: PropTypes.object,
-  styleWeb: PropTypes.object,
+  styleApp: PropTypes.any,
+  styleWeb: PropTypes.any,
   hideFlex: PropTypes.bool
 };

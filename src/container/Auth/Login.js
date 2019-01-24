@@ -120,54 +120,58 @@ class Login extends Component {
           >
             <DivContainer
               className={"loginFormFrame"}
-              styleApp={Styles.styleAppContainer}
+              styleApp={[Styles.styleAppContainer]}
             >
-              <View style={Styles.FloatingInputContainer}>
-                <DivContainer className={"formInput"}>
-                  <FormTextInput
-                    image={Constants.Images.Email}
-                    placeHolderText={"Username"}
-                    onChangeText={email => {
-                      this.setState({ email });
-                    }}
-                    value={this.state.email}
-                    keyboardType={"email-address"}
-                    returnKeyType={"next"}
-                    autoCapitalize={"none"}
-                    ref={ref => (this.email = ref)}
-                    onSubmitEditing={() => {
-                      this.focusNext("password");
-                    }}
-                  />
-                  <FormTextInput
-                    image={Constants.Images.Password}
-                    placeHolderText={"Password"}
-                    onChangeText={password => {
-                      this.setState({ password });
-                    }}
-                    value={this.state.password}
-                    returnKey="done"
-                    onSubmitEditing={() => {
-                      this.submitLogin();
-                    }}
-                    autoCapitalize={"none"}
-                    secureText
-                    ref={ref => (this.password = ref)}
-                  />
-                </DivContainer>
-              </View>
-            </DivContainer>
-
-            <View style={Styles.AuthButton}>
-              <DivContainer className={"webButtonFrame"}>
-                <AuthButton
-                  buttonName={"Log In"}
-                  gradientColors={Constants.Colors.ButtonGradients}
-                  textStyle={{ color: "#fff" }}
-                  onPress={this.submitLogin}
+              <DivContainer
+                styleWeb={Styles.FloatingInputContainer}
+                styleApp={Styles.FloatingInputContainer}
+                className={"formInput"}
+              >
+                <FormTextInput
+                  image={Constants.Images.Email}
+                  placeHolderText={"Username"}
+                  onChangeText={email => {
+                    this.setState({ email });
+                  }}
+                  value={this.state.email}
+                  keyboardType={"email-address"}
+                  returnKeyType={"next"}
+                  autoCapitalize={"none"}
+                  ref={ref => (this.email = ref)}
+                  onSubmitEditing={() => {
+                    this.focusNext("password");
+                  }}
+                />
+                <FormTextInput
+                  image={Constants.Images.Password}
+                  placeHolderText={"Password"}
+                  onChangeText={password => {
+                    this.setState({ password });
+                  }}
+                  value={this.state.password}
+                  returnKey="done"
+                  onSubmitEditing={() => {
+                    this.submitLogin();
+                  }}
+                  autoCapitalize={"none"}
+                  secureText
+                  ref={ref => (this.password = ref)}
                 />
               </DivContainer>
-            </View>
+            </DivContainer>
+
+            <DivContainer
+              styleWeb={[Styles.AuthButton]}
+              styleApp={[Styles.AuthButton]}
+              className={"webButtonFrame"}
+            >
+              <AuthButton
+                buttonName={"Log In"}
+                gradientColors={Constants.Colors.ButtonGradients}
+                textStyle={{ color: "#fff" }}
+                onPress={this.submitLogin}
+              />
+            </DivContainer>
 
             <View style={Styles.forgotView}>
               <Text
@@ -186,18 +190,12 @@ class Login extends Component {
 }
 
 const Styles = StyleSheet.create({
-  styleAppContainer: { flex: 1 },
+  styleAppContainer: { flex: 0.2, top: moderateScale(25) },
   containner: {
-    // justifyContent: "space-between",
     alignItems: "center"
-    // height: Constants.BaseStyle.DEVICE_HEIGHT * 0.9
   },
   formView: {
     ...Platform.select({
-      web: {
-        // height: Constants.BaseStyle.DEVICE_HEIGHT * 0.62,
-        //justifyContent: "space-evenly"
-      },
       ios: {
         height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7,
         justifyContent: "space-evenly",
@@ -212,7 +210,6 @@ const Styles = StyleSheet.create({
     overflow: "hidden"
   },
   FloatingInputContainer: {
-    //flex: 0.5,
     paddingHorizontal: moderateScale(25),
     justifyContent: "center",
     ...Platform.select({

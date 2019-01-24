@@ -32,7 +32,12 @@ module.exports = {
   Search: require("../assets/images/Search/searchActive.png"),
   SearchInactive: require("../assets/images/Search/searchInActive.png"),
   Downloads: require("../assets/images/Downloads/Downloads.png"),
-  Inbox: require("../assets/images/MessageCenter/Inbox.png"),
-  Sent: require("../assets/images/MessageCenter/Sent.png"),
-  Trash: require("../assets/images/MessageCenter/Trash.png")
+  InboxActive: require("../assets/images/MessageCenter/inboxActive.png"),
+  SentActive: require("../assets/images/MessageCenter/sentActive.png"),
+  TrashActive: require("../assets/images/MessageCenter/TrashActive.png"),
+  InboxInactive: require("../assets/images/MessageCenter/inboxInactive.png"),
+  SentInactive: require("../assets/images/MessageCenter/sentInactive.png"),
+  TrashInactive: require("../assets/images/MessageCenter/trashInactive.png"),
+  Delete: require("../assets/images/MessageCenter/delete.png"),
+  Compose: require("../assets/images/MessageCenter/compose.png")
 };
