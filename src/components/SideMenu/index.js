@@ -209,7 +209,7 @@ class SideMenu extends React.Component {
               <View style={{}}>
                 <Text
                   style={styles.firstName}
-                >{`${FirstName} ${LastName}`}</Text>
+                >{`${LastName} ${FirstName}`}</Text>
                 <Text style={styles.userName}>{UserName}</Text>
               </View>
             </DivContainer>

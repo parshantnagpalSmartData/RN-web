@@ -21,6 +21,7 @@ import { bindActionCreators } from "redux";
 import * as appAction from "../../actions";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import DivContainer from "./DivContainer";
 
 const MyToastNotification = props => {
   let { type, message, closeToast } = props; // type 1 for error, 2=for Notification
@@ -43,10 +44,13 @@ const MyToastNotification = props => {
           marginHorizontal: moderateScale(40)
         }}
       >
+      <DivContainer className={"toastWidget"}>
         <View
           style={[Styles.notificationView, { backgroundColor: primaryColor }]}
         >
+        <DivContainer className={"ToastText"}>
           <View style={{ flexDirection: "row" }}>
+          <DivContainer className={"ToastLeftIcon"}>
             <View style={Styles.imageView}>
               <Image
                 style={Styles.image}
@@ -54,6 +58,8 @@ const MyToastNotification = props => {
                 resizeMode={"contain"}
               />
             </View>
+            </DivContainer>
+            <DivContainer className={"ToastRightIcon"}>
             <View
               style={{
                 alignItems: "flex-start",
@@ -74,16 +80,20 @@ const MyToastNotification = props => {
                 {message}
               </Text>
             </View>
+            </DivContainer>
           </View>
-
-          <TouchableOpacity style={Styles.imageView} onPress={closeToast}>
-            <Image
-              style={Styles.image}
-              source={Constants.Images.Cancel}
-              resizeMode={"contain"}
-            />
-          </TouchableOpacity>
+          </DivContainer>
+          <DivContainer className={"closeToast"}>
+            <TouchableOpacity style={Styles.imageView} onPress={closeToast}>
+              <Image
+                style={Styles.image}
+                source={Constants.Images.Cancel}
+                resizeMode={"contain"}
+              />
+            </TouchableOpacity>
+          </DivContainer>
         </View>
+        </DivContainer>
       </View>
     </View>
   );
@@ -193,9 +203,9 @@ const Styles = StyleSheet.create({
     alignItems: "flex-start",
     ...Platform.select({
       ios: {
-        width: Constants.BaseStyle.DEVICE_WIDTH * 0.8
+        width: Constants.BaseStyle.DEVICE_WIDTH * 0.9
       },
-      android: { width: Constants.BaseStyle.DEVICE_WIDTH * 0.8 },
+      android: { width: Constants.BaseStyle.DEVICE_WIDTH * 0.9 },
       web: {
         width:
           Constants.BaseStyle.DEVICE_WIDTH <= 767

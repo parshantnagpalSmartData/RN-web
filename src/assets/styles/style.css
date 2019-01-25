@@ -197,6 +197,17 @@ body {
 .printableScroll .ReactTable .rt-thead > div > div{font-size: 13px !important;}
 .printableScroll .ReactTable .rt-tbody{max-height:calc(100vh - 260px); overflow: auto;}
 
+.toastWidget{position: relative;}
+.toastWidget > div > div{max-width: 250px; padding-left: 15px !important; padding-right: 15px !important;}
+.closeToast{position: absolute; right:15px; top: 15px;}
+.closeToast > div > div,
+.closeToast > div > div > div{width: 15px !important; height: 15px !important;}
+.ToastText{width: 100%;}
+.ToastTextInner{padding-left: 30px; position: relative;}
+.ToastRightIcon > div > div{width:100% !important}
+.ToastRightIcon > div > div > div{padding-left: 0 !important; padding-right: 0 !important; line-height: 1.2;}
+.ToastLeftIcon > div > div{align-items: flex-start;}
+
 @media screen and (max-width:479px){
   .Searchbar > div > div > div{width:100% !important;}
 }
