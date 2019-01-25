@@ -30,8 +30,8 @@ const rightButtons = [
         <Image
           source={Constants.Images.Delete}
           style={{
-            height: moderateScale(30),
-            width: moderateScale(30)
+            height: moderateScale(27),
+            width: moderateScale(17)
           }}
         />
       </LinearGradient>
@@ -44,6 +44,8 @@ const MessageComponent = ({ data, enableScrollingFunction, onOpen }) => {
       key={item => item.MessageID}
       data={data}
       contentContainerStyle={Styles.contentContainerStyle}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
       renderItem={({ item, index }) => {
         return (
           <Swipeout
@@ -87,7 +89,8 @@ const MessageComponent = ({ data, enableScrollingFunction, onOpen }) => {
 
 const Styles = StyleSheet.create({
   contentContainerStyle: {
-    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.7
+    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.75,
+    justifyContent: "flex-start"
   },
   Swipeout: {
     height: moderateScale(60),

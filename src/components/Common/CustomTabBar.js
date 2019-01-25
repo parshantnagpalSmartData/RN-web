@@ -26,6 +26,11 @@ const CustomTabBar = props => {
       key={activeTab}
       data={tabs}
       horizontal
+      style={{
+        maxHeight: moderateScale(60)
+      }}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={[Styles.contentContainerStyle]}
       renderItem={({ item, index }) => {
         var inbox =
@@ -81,21 +86,20 @@ const CustomTabBar = props => {
 const Styles = StyleSheet.create({
   contentContainerStyle: {
     justifyContent: "space-around",
-    height: moderateScale(40),
-    width: Constants.BaseStyle.DEVICE_WIDTH
+    alignItems: "center",
+    width: Constants.BaseStyle.DEVICE_WIDTH,
+    height: moderateScale(60)
   },
   itemContainer: {
-    margin: moderateScale(20),
     borderBottomColor: Constants.Colors.Primary,
     width: Constants.BaseStyle.DEVICE_WIDTH / 4,
-    height: moderateScale(50),
+    height: moderateScale(45),
     justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: moderateScale(10)
+    alignItems: "center"
   },
   imageView: {
-    height: moderateScale(30),
-    width: moderateScale(30),
+    height: moderateScale(25),
+    width: moderateScale(25),
     justifyContent: "center",
     alignItems: "center"
   },

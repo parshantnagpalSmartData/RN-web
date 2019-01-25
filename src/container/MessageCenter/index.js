@@ -33,7 +33,7 @@ class MessageCenter extends Component {
   enableScrollingFunction = data => {
     let context = this;
     if (Platform.OS == "ios") {
-      this.refs.scrollView.scrollView.setNativeProps({ scrollEnabled: data }); //eslint-disable-line
+      this.scrollView.scrollView.setNativeProps({ scrollEnabled: data }); //eslint-disable-line
     } else if (Platform.OS == "android") {
       if (data) {
         setTimeout(() => {
@@ -70,17 +70,17 @@ class MessageCenter extends Component {
     let { messages } = this.props;
     let { inbox, sent, trash } = messages;
     return (
-      <View style={Styles.containner}>
+      <View style={Styles.container}>
         <Header title={"Message Center"} onDrawerPress={this.onDrawerPress} />
         <ScrollableTabView
           initialPage={0}
-          renderTabBar={() => <CustomTabBar />}
+          tabBarPosition={"top"}
+          renderTabBar={() => <CustomTabBar style={this.props.style} />}
           onChangeTab={tab => {
             this.updateTabIndex(tab.ref.props.tab);
           }}
-          ref={() => (this.ref = "scrollView")}
+          ref={ref => (this.scrollView = ref)}
           locked={!enableParentScrolling}
-          style={{}}
         >
           <MessageComponent
             tabLabel="Inbox"
@@ -116,7 +116,7 @@ class MessageCenter extends Component {
 }
 
 const Styles = StyleSheet.create({
-  containner: {
+  container: {
     flex: 1
   }
 });

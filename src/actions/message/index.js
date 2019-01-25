@@ -49,7 +49,7 @@ export const getMessages = folder => {
   };
 };
 
-export const deleteMessage = (messageId, sucess) => {
+export const deleteMessage = (messageId, success) => {
   return (dispatch, getState) => {
     RestClient.restCall(
       `messages/${messageId}`,
@@ -61,11 +61,11 @@ export const deleteMessage = (messageId, sucess) => {
         if (res.status) {
           dispatch(
             AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Error,
-              res.message
+              Constants.AppConstants.Notificaitons.Success,
+              "Message deleted successfully."
             )
           );
-          sucess();
+          success();
         } else {
           dispatch(
             AppActions.showToast(
@@ -88,7 +88,7 @@ export const readMessage = messageId => {
         if (res.status) {
           dispatch(
             AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Error,
+              Constants.AppConstants.Notificaitons.Success,
               res.message
             )
           );
