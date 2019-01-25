@@ -41,7 +41,7 @@ class SideMenu extends React.Component {
   //   }
 
   // }
-// setting the sidemenu on web selected 
+  // setting the sidemenu on web selected
   static getDerivedStateFromProps(nextProps, prevState) {
     if (
       nextProps.app.sideMenuScreen !== prevState.screen &&

@@ -29,7 +29,10 @@ export const fetchPrintableForms = () => {
   };
 };
 
-export const fetchBase64DataForPdf = formId => {
+/**
+ * Fetch base64 data for pdf
+ */
+export const fetchBase64DataForPdf = (formId, cb) => {
   return (dispatch, getState) => {
     dispatch(AppActions.startLoader());
     RestClient.getCall(
@@ -38,8 +41,11 @@ export const fetchBase64DataForPdf = formId => {
     )
       .then(res => {
         if (res.status) {
-          // console.log("res.status", res);
-          // dispatch({ type: Types.PRINTABLE_FORMS, payload: res.result.data });
+          dispatch({ type: Types.PRINTABLE_FORMS_BASE_64_DATA, payload: res.result[0] });
+          if(cb){
+            // After fetching the base 64 pdf data then set that value in reducer so that on reload the pdfviewer component data was there
+            cb();
+          }
         } else {
           dispatch(AppActions.checkLogin(res));
         }

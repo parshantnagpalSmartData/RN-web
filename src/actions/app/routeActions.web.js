@@ -44,11 +44,10 @@ export const setCurrentSideMenuRoute = screen => {
     });
   };
 };
- /* eslint-disable  */
+/* eslint-disable  */
 export const setScrenStack = (componentId = null, screen, visible) => {
   return dispatch => {
     dispatch({ type: Types.SET_SCREEN, payload: screen });
     history.push(`/${screen}`);
   };
 };
-

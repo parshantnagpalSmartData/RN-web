@@ -10,7 +10,8 @@ import * as Types from "../../actionTypes";
 
 const initialState = {
   myForms: [],
-  myUrls: []
+  myUrls: [],
+  base64PrintableData: {}
 };
 
 export default function forms(state = initialState, action = {}) {
@@ -24,6 +25,11 @@ export default function forms(state = initialState, action = {}) {
       return {
         ...state,
         myUrls: action.payload
+      };
+    case Types.PRINTABLE_FORMS_BASE_64_DATA:
+      return {
+        ...state,
+        base64PrintableData: action.payload
       };
     case Types.RESET_USER:
       return {

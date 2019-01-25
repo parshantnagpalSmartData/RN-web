@@ -28,7 +28,16 @@ import Filter from "../../components/Common/Filter";
 import MyScheduleList from "../../components/MySchedule/MyScheduleList";
 import MapApi from "../../helpers/MapApi";
 import { openLinkingURL } from "../../helpers/Linking";
-
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -166,6 +175,7 @@ class Home extends Component {
         <CustomModal
           isVisible={isVisible}
           onBackdropPress={() => this.closeModal()}
+          customStyles={customStyles}
         >
           <View style={Styles.ModalContainer}>
             <TouchableOpacity
