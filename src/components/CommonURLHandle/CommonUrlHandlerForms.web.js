@@ -100,7 +100,7 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
         data={data}
         columns={columns}
         showPagination={false}
-        defaultPageSize={data & (data.length > 0) ? data.length : 4}
+        defaultPageSize={data && (data.length > 0) ? data.length : 4}
         loadingText={"Loading..."}
         noDataText={
           printable ? "No Priintable forms found" : "No Resources Found"
