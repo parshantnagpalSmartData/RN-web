@@ -204,3 +204,8 @@ body {
 /*.pdfpopupScroll{display: flex; height: 100vh; width: 100%; overflow: auto;}*/
 .pdfpopupScroll > div{margin: 0 auto;}
 .pdfPageCount{text-align: center; margin: 20px 0 10px; color: #fff;}
+.imageCrossPopUp > div{background: rgba(0, 0, 0, 0.7); height: 40px; width: 40px; border-radius:50%; -webkit-border-radius:50%; padding:10px;}
+
+@media all and (max-width:767px){
+  .pdfpopupScroll{width:100%; overflow: auto;}
+}
