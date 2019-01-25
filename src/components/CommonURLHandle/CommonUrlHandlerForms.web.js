@@ -59,7 +59,7 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
   const columns = [
     {
       // Header: "Date",
-      width: Constants.BaseStyle.DEVICE_WIDTH * 0.6,
+      width: Constants.BaseStyle.DEVICE_WIDTH * 0.5,
       Header: () => (
         <span style={spanHeaderStyle}>{printable ? "FORMS" : "RESOURCES"}</span>
       ),

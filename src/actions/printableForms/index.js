@@ -41,8 +41,11 @@ export const fetchBase64DataForPdf = (formId, cb) => {
     )
       .then(res => {
         if (res.status) {
-          dispatch({ type: Types.PRINTABLE_FORMS_BASE_64_DATA, payload: res.result[0] });
-          if(cb){
+          dispatch({
+            type: Types.PRINTABLE_FORMS_BASE_64_DATA,
+            payload: res.result[0]
+          });
+          if (cb) {
             // After fetching the base 64 pdf data then set that value in reducer so that on reload the pdfviewer component data was there
             cb();
           }

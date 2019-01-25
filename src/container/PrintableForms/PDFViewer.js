@@ -5,7 +5,7 @@ Description: Display the PDF's
 Date : 13 december 2018
 */
 import React, { Component } from "react";
-import { View, StyleSheet, Platform, Text } from "react-native";
+import { StyleSheet, Platform, TouchableOpacity, Image } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -13,6 +13,9 @@ import axios from "axios";
 import * as appAction from "../../actions";
 import PDF from "../../components/CommonURLHandle/PDFViewer";
 import DivContainer from "../../components/Common/DivContainer";
+import { moderateScale } from "../../helpers/ResponsiveFonts";
+import Constants from "../../constants";
+import Header from "../../components/Common/Header";
 
 class PDFViewer extends Component {
   constructor(props) {
@@ -47,22 +50,39 @@ class PDFViewer extends Component {
       link.click();
     });
   };
-  cancelButton() {
-    if (Platform.OS == "Web") {
+
+  /**
+   * contains cancel button for web and header for app
+   */
+  cancelButtonAndHeaders() {
+    if (Platform.OS == "web") {
+      let { closeModal } = this.props;
       return (
-        <View>
-          <Text>close</Text>
-        </View>
+        <div className="imageCrossPopUp">
+          <TouchableOpacity style={Styles.imageView} onPress={closeModal}>
+            <Image
+              style={Styles.image}
+              source={Constants.Images.Cancel}
+              resizeMode={"contain"}
+            />
+          </TouchableOpacity>
+        </div>
+      );
+    } else {
+      return (
+        <Header title={"Pdf Forms"} hideDrawer onBackPress={this.onBackPress} />
       );
     }
-    return null;
   }
+  onBackPress = () => {
+    this.props.appAction.pop(this.props.componentId);
+  };
   render() {
     const { pageNumber, numPages } = this.state;
     let { base64PrintableData } = this.props.forms;
     return (
       <DivContainer styleApp={Styles.pdfStyle} styleWeb={Styles.pdfStyle}>
-        {this.cancelButton()}
+        {this.cancelButtonAndHeaders()}
         <PDF
           base64Data={base64PrintableData}
           onDocumentLoadSuccess={this.onDocumentLoadSuccess}
@@ -86,6 +106,22 @@ const Styles = StyleSheet.create({
       web: {
         alignItems: "center",
         height: "100%"
+      }
+    })
+  },
+  imageView: {
+    position: Platform.OS == "web" ? "fixed" : "absolute",
+    zIndex: 100,
+    top: moderateScale(20),
+    right: moderateScale(30),
+    height: moderateScale(20),
+    width: moderateScale(20)
+  },
+  image: {
+    ...Platform.select({
+      web: {
+        height: moderateScale(20),
+        width: moderateScale(20)
       }
     })
   }
