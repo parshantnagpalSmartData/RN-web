@@ -54,7 +54,7 @@ class PDFViewer extends Component {
   /**
    * contains cancel button for web and header for app
    */
-  cancelButtonAndHeaders() {
+  cancelButtonAndHeaders(filename) {
     if (Platform.OS == "web") {
       let { closeModal } = this.props;
       return (
@@ -70,7 +70,7 @@ class PDFViewer extends Component {
       );
     } else {
       return (
-        <Header title={"Pdf Forms"} hideDrawer onBackPress={this.onBackPress} />
+        <Header title={filename} hideDrawer onBackPress={this.onBackPress} />
       );
     }
   }
@@ -82,7 +82,7 @@ class PDFViewer extends Component {
     let { base64PrintableData } = this.props.forms;
     return (
       <DivContainer styleApp={Styles.pdfStyle} styleWeb={Styles.pdfStyle}>
-        {this.cancelButtonAndHeaders()}
+        {this.cancelButtonAndHeaders(base64PrintableData.filename)}
         <PDF
           base64Data={base64PrintableData}
           onDocumentLoadSuccess={this.onDocumentLoadSuccess}
