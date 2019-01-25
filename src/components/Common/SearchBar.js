@@ -64,30 +64,15 @@ const Styles = StyleSheet.create({
     })
   },
   SearchIconView: {
-    height: moderateScale(40),
-    width: moderateScale(40),
+    height: moderateScale(42),
+    width: moderateScale(42),
     justifyContent: "center",
     alignItems: "center",
-    margin: moderateScale(5),
-    ...Platform.select({
-      web: {
-        // marginHorizontal: moderateScale(100)
-        margin: moderateScale(0),
-        height: moderateScale(42),
-        width: moderateScale(42)
-      }
-    })
+    margin: moderateScale(0)
   },
   searchIcon: {
-    height: moderateScale(40),
-    width: moderateScale(40),
-    ...Platform.select({
-      web: {
-        // marginHorizontal: moderateScale(100)
-        height: moderateScale(42),
-        width: moderateScale(42)
-      }
-    })
+    height: moderateScale(42),
+    width: moderateScale(42)
   },
   inputView: {
     flex: 1,

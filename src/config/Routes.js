@@ -17,6 +17,7 @@ import MySchedule from "../container/MySchedule";
 import OpenShift from "../container/OpenShift";
 import PotientialCases from "../container/PotentialCases";
 import PrintableForms from "../container/PrintableForms";
+import Resources from "../container/Resources";
 import MyProfile from "../container/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
@@ -84,6 +85,11 @@ export const registerScreens = store => {
     "PrintableForms",
     () => WrapScreen(PrintableForms, store),
     () => PrintableForms
+  );
+  Navigation.registerComponent(
+    "Resources",
+    () => WrapScreen(Resources, store),
+    () => Resources
   );
   Navigation.registerComponent(
     "PDFViewer",

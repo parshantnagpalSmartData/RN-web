@@ -21,7 +21,7 @@ const initialState = Immutable({
     "MessageCenter"
   ],
   componentId: "",
-  screen: "MySchedule",
+  sideMenuScreen: "MySchedule",
   loading: false,
   refreshLoader: false,
   deviceWidthWeb: Constants.BaseStyle.DEVICE_WIDTH,
@@ -81,6 +81,11 @@ export default function app(state = initialState, action = {}) {
       return {
         ...state,
         deviceWidthWeb: action.payload.value
+      };
+    case Types.CURRENT_SIDEMENU_ROUTE:
+      return {
+        ...state,
+        sideMenuScreen: action.payload.screen
       };
     case Types.RESET_USER:
       return {

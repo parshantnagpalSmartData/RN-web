@@ -7,7 +7,8 @@
 import React, { Component } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-
+import { bindActionCreators } from "redux";
+import * as appAction from "../actions";
 import history from "../helpers/history";
 
 import AppRoute from "./AppRoute";
@@ -20,6 +21,7 @@ import MySchedule from "../container/MySchedule";
 import OpenShift from "../container/OpenShift";
 import PotientialCases from "../container/PotentialCases";
 import PrintableForms from "../container/PrintableForms";
+import Resources from "../container/Resources";
 import MyProfile from "../container/MyProfile";
 import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
@@ -27,6 +29,16 @@ import OTPScreen from "../container/Auth/OTPScreen";
 import PDFViewer from "../container/PrintableForms/PDFViewer";
 
 class Routes extends Component {
+  componentDidMount() {
+    let { isLoggedIn } = this.props,
+      { pathname } = history.location;
+    if (isLoggedIn) {
+      // Setting the current side menu selected in reducer
+      this.props.appAction.setCurrentSideMenuRoute(
+        pathname.substring(1, pathname.length)
+      );
+    }
+  }
   render() {
     let { isLoggedIn } = this.props;
     return (
@@ -84,6 +96,14 @@ class Routes extends Component {
           />
           <AppRoute
             exact
+            path="/Resources"
+            component={Resources}
+            //  requireAuth={requireAuth}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
             path="/PDFViewer"
             component={PDFViewer}
             //  requireAuth={requireAuth}
@@ -134,8 +154,11 @@ class Routes extends Component {
 const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn
 });
+const mapDispatchToProps = dispatch => ({
+  appAction: bindActionCreators(appAction, dispatch)
+});
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Routes);

@@ -34,6 +34,27 @@ class SideMenu extends React.Component {
     this.hideSideMenu = this.hideSideMenu.bind(this);
     this.setScrenStack = this.setScrenStack.bind(this);
   }
+  // componentDidMount(){
+  //   let {sideMenuScreen} = this.props.app
+  //   if(Platform.OS == 'web'){
+  //     this.setState({screen: sideMenuScreen})
+  //   }
+
+  // }
+  // setting the sidemenu on web selected
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.app.sideMenuScreen !== prevState.screen &&
+      Platform.OS == "web"
+    ) {
+      return {
+        screen: nextProps.app.sideMenuScreen
+      };
+    }
+
+    // No state update necessary
+    return null;
+  }
 
   hideSideMenu() {
     this.props.appAction.mergeOptions(this.props.componentId, false);
@@ -85,10 +106,13 @@ class SideMenu extends React.Component {
       this.setScrenStack(menu, true);
     }
   };
-  closeToggle = () => {
-    if (Platform.OS === "web" && Constants.BaseStyle.DEVICE_WIDTH < 768) {
-      var element = document.getElementById("leftMenuBar");
-      element.classList.remove("toggleMenu");
+  closeToggle = key => {
+    if (Platform.OS === "web") {
+      this.props.appAction.setCurrentSideMenuRoute(key);
+      if (Constants.BaseStyle.DEVICE_WIDTH < 768) {
+        var element = document.getElementById("leftMenuBar");
+        element.classList.remove("toggleMenu");
+      }
     }
   };
 
@@ -101,7 +125,7 @@ class SideMenu extends React.Component {
             style={styles.text}
             onPress={() => {
               item.onPress(item.key);
-              this.closeToggle();
+              this.closeToggle(item.key);
             }}
           >
             <Text style={[styles.welcome, styles.textSelected]}>
@@ -117,7 +141,7 @@ class SideMenu extends React.Component {
           style={styles.text}
           onPress={() => {
             item.onPress(item.key);
-            this.closeToggle();
+            this.closeToggle(item.key);
           }}
         >
           <Text style={[styles.welcome, styles.textUnSelected]}>
@@ -142,6 +166,11 @@ class SideMenu extends React.Component {
       {
         key: "PrintableForms",
         value: "Printable Forms",
+        onPress: this.onMenuPress
+      },
+      {
+        key: "Resources",
+        value: "Resources",
         onPress: this.onMenuPress
       },
       { key: "MyProfile", value: "My Profile", onPress: this.onMenuPress },

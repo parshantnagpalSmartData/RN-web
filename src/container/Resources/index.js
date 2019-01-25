@@ -6,7 +6,7 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Linking, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import _ from "lodash";
@@ -16,60 +16,38 @@ import Header from "../../components/Common/Header";
 import SearchBar from "../../components/Common/SearchBar";
 import CommonURLHandle from "../../components/CommonURLHandle";
 import DivContainer from "../../components/Common/DivContainer";
-import CustomModal from "../../components/CustomModal";
-import PDFViewer from "./PDFViewer";
 
-const customStyles = {
-  content: {
-    /*top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"*/
-    backgroundColor: "rgba(0,0,0,0.9)",
-    top: "0",
-    left: "0",
-    right: "0",
-    bottom: "0"
-  }
-};
-
-class PrintableForms extends Component {
+class Resources extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: "",
-      isVisible: false
+      searchText: ""
     };
   }
 
   componentDidMount() {
-    this.props.appAction.fetchPrintableForms();
+    this.props.appAction.fetchResourcesUrls();
   }
 
   onDrawerPress = () => {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
 
-  onFormPress = _.debounce(formId => {
-    let { appAction, componentId } = this.props;
-    this.props.appAction.fetchBase64DataForPdf(formId, () => {
-      if (Platform.OS == "web") {
-        this.setState({ isVisible: true });
-      } else {
-        appAction.pushToParticularScreen(componentId, "PDFViewer");
-      }
-    });
+  onFormPress = _.debounce(url => {
+    if (Platform.OS === "web") {
+      var win = window.open(url, "_blank");
+      win.focus();
+    } else {
+      // eslint-disable-next-line
+      Linking.openURL(url).catch(err => {
+        // console.error("An error occurred", err)
+      });
+    }
   }, 1000);
 
-  closeModal() {
-    this.setState({ isVisible: false });
-  }
-
   render() {
-    let { searchText, isVisible } = this.state;
-    let { myForms } = this.props && this.props.forms;
+    let { searchText } = this.state;
+    let { myUrls } = this.props && this.props.forms;
     return (
       <View style={Styles.containner}>
         <Header title={"Printable Forms"} onDrawerPress={this.onDrawerPress} />
@@ -80,17 +58,10 @@ class PrintableForms extends Component {
           />
         </DivContainer>
         <CommonURLHandle
-          data={myForms}
+          data={myUrls}
           onFormPress={this.onFormPress}
-          printable={true}
+          printable={false}
         />
-        <CustomModal
-          isVisible={isVisible}
-          onBackdropPress={() => this.closeModal()}
-          customStyles={customStyles}
-        >
-          <PDFViewer closeModal={() => this.closeModal()} />
-        </CustomModal>
       </View>
     );
   }
@@ -113,4 +84,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PrintableForms);
+)(Resources);

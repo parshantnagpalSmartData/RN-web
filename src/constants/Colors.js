@@ -34,6 +34,7 @@ let colors = {
   BlueWhite: "#F1F5FA",
   LighBlueWhite: "#d1e8f5",
   FormGredient: ["#d1e8f5", "#d1e8f5"],
+  PdfAndUrl: ["rgba(48, 151, 206, 0.18)", "rgba(45, 63, 158, 0.18)"],
   LightWhite: "rgba(255,255,255,0.8)",
   boderSideMenuRGB: "rgba(255,255,255,0.3)"
 };

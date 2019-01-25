@@ -67,7 +67,7 @@ export const checkLogin = res => {
       setTimeout(() => {
         dispatch({ type: Types.RESET_USER });
         dispatch(AppActions.goAuth());
-      }, 5000);
+      }, 1000);
       dispatch(
         showToast(Constants.AppConstants.Notificaitons.Error, res.error)
       );

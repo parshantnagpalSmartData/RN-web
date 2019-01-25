@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 import { View } from "react-native";
 import PropTypes from "prop-types";
 
@@ -9,32 +9,30 @@ import LinearGradient from "react-native-linear-gradient";
 import ResourceButton from "../../Common/ResourcesButton";
 
 const RenderForms = props => {
-  let { form, key, onFormPress } = props;
+  let { item, key, onFormPress, printable } = props;
   return (
     <LinearGradient
       key={key}
       start={{ x: 1, y: 0 }}
       end={{ x: 0, y: 0 }}
-      colors={Constants.Colors.FormGredient}
+      colors={Constants.Colors.PdfAndUrl}
       angle={280}
       useAngle
       locations={Platform.OS !== "android" ? [0.1] : null}
     >
       <View style={Styles.continer}>
-        <Text style={Styles.formName}>{form.FormName}</Text>
+        <Text style={Styles.formName}>
+          {printable ? item.FormName : item.ResourceName}
+        </Text>
         <ResourceButton
-          source={Constants.Images.SearchInactive}
+          source={
+            printable
+              ? Constants.Images.Downloads
+              : Constants.Images.SearchInactive
+          }
           onFormPress={onFormPress}
-          formUrl={props.key}
+          formUrl={printable ? item.FormID : item.ResourceURL}
         />
-
-        {/* <TouchableOpacity style={Styles.iconView} onPress={() => onFormPress()}>
-          <Image
-            source={Constants.Images.SearchInactive}
-            resizeMode={"contain"}
-            style={Styles.icon}
-          />
-        </TouchableOpacity> */}
       </View>
     </LinearGradient>
   );
@@ -49,7 +47,7 @@ const Styles = StyleSheet.create({
     paddingHorizontal: moderateScale(25),
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: moderateScale(3)
+    marginVertical: moderateScale(10)
   },
   formName: {
     ...Constants.Fonts.Regular,
@@ -67,13 +65,15 @@ const Styles = StyleSheet.create({
 });
 
 RenderForms.defaultProps = {
-  form: {},
+  item: {},
   key: null,
-  onFormPress: null
+  onFormPress: null,
+  printable: false
 };
 
 RenderForms.propTypes = {
-  form: PropTypes.object,
+  item: PropTypes.object,
   key: PropTypes.number,
-  onFormPress: PropTypes.func
+  onFormPress: PropTypes.func,
+  printable: PropTypes.bool
 };

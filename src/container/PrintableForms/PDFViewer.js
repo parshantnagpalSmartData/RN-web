@@ -5,14 +5,13 @@ Description: Display the PDF's
 Date : 13 december 2018
 */
 import React, { Component } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform, Text } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import axios from "axios";
 import * as appAction from "../../actions";
-import Header from "../../components/Common/Header";
-import PDF from "../../components/PrintableForms/PDFViewer";
+import PDF from "../../components/CommonURLHandle/PDFViewer";
 import DivContainer from "../../components/Common/DivContainer";
 
 class PDFViewer extends Component {
@@ -48,24 +47,30 @@ class PDFViewer extends Component {
       link.click();
     });
   };
+  cancelButton() {
+    if (Platform.OS == "Web") {
+      return (
+        <View>
+          <Text>close</Text>
+        </View>
+      );
+    }
+    return null;
+  }
   render() {
     const { pageNumber, numPages } = this.state;
+    let { base64PrintableData } = this.props.forms;
     return (
-      <View style={Styles.containner}>
-        <Header
-          title={"Printable Forms"}
-          hideDrawer
-          onBackPress={this.onBackPress}
+      <DivContainer styleApp={Styles.pdfStyle} styleWeb={Styles.pdfStyle}>
+        {this.cancelButton()}
+        <PDF
+          base64Data={base64PrintableData}
+          onDocumentLoadSuccess={this.onDocumentLoadSuccess}
+          loadError={this.loadError}
+          numPages={numPages}
+          pageNumber={pageNumber}
         />
-        <DivContainer styleApp={Styles.pdfStyle} styleWeb={Styles.pdfStyle}>
-          <PDF
-            onDocumentLoadSuccess={this.onDocumentLoadSuccess}
-            loadError={this.loadError}
-            numPages={numPages}
-            pageNumber={pageNumber}
-          />
-        </DivContainer>
-      </View>
+      </DivContainer>
     );
   }
 }
@@ -75,7 +80,7 @@ const Styles = StyleSheet.create({
     flex: 1
   },
   pdfStyle: {
-    height: "80%",
+    height: "100%",
     width: "100%",
     ...Platform.select({
       web: {
