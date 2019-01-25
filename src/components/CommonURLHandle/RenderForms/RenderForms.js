@@ -31,7 +31,7 @@ const RenderForms = props => {
               : Constants.Images.SearchInactive
           }
           onFormPress={onFormPress}
-          formUrl={printable ? item.FormUrl : item.ResourceURL}
+          formUrl={printable ? item.FormID : item.ResourceURL}
         />
       </View>
     </LinearGradient>

@@ -59,7 +59,7 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
   const columns = [
     {
       // Header: "Date",
-      width: Constants.BaseStyle.DEVICE_WIDTH * 0.6,
+      width: Constants.BaseStyle.DEVICE_WIDTH * 0.5,
       Header: () => (
         <span style={spanHeaderStyle}>{printable ? "FORMS" : "RESOURCES"}</span>
       ),
@@ -73,7 +73,7 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
       // Header: "Status",
       width: Constants.BaseStyle.DEVICE_WIDTH * 0.1,
       Header: () => <span style={spanHeaderStyle}>ACTION</span>,
-      accessor: printable ? "FormUrl" : "ResourceURL",
+      accessor: printable ? "FormID" : "ResourceURL",
       headerStyle: headerStyle,
       getProps: () => cellStyle,
       Cell: props => (
@@ -90,28 +90,30 @@ const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
     }
   ];
   return (
-    <div className={""}>
-      <View style={Styles.mainContainer}>
-        <ReactTable
-          style={{
-            maxHeight: "200px",
-            width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
-          }}
-          data={data}
-          columns={columns}
-          showPagination={false}
-          loadingText={"Loading..."}
-          noDataText={"No rows found"}
-        />
-      </View>
+    <div className={"contentScroll printableScroll"}>
+      <ReactTable
+        style={
+          {
+            //maxHeight: "200px"
+          }
+        }
+        data={data}
+        columns={columns}
+        showPagination={false}
+        defaultPageSize={data && data.length > 0 ? data.length : 4}
+        loadingText={"Loading..."}
+        noDataText={
+          printable ? "No Priintable forms found" : "No Resources Found"
+        }
+      />
     </div>
   );
 };
 
 const Styles = StyleSheet.create({
-  mainContainer: {
-    alignItems: "center"
-  },
+  // mainContainer: {
+  //   alignItems: "center"
+  // },
   iconView: {
     height: moderateScale(30),
     width: moderateScale(30),

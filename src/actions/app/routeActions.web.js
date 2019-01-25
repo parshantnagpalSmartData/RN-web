@@ -31,6 +31,19 @@ export const goAuth = () => {
     history.replace("/");
   };
 };
+
+/**
+ * Selecting the Current Sidemenu Current Route
+ */
+
+export const setCurrentSideMenuRoute = screen => {
+  return dispatch => {
+    dispatch({
+      type: Types.CURRENT_SIDEMENU_ROUTE,
+      payload: { screen }
+    });
+  };
+};
 /* eslint-disable  */
 export const setScrenStack = (componentId = null, screen, visible) => {
   return dispatch => {

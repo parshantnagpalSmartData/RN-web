@@ -106,7 +106,7 @@ const MyScheduleList = ({ patitents, onPatientPress }) => {
         previousText={"Previous"}
         nextText={"Next"}
         loadingText={"Loading..."}
-        noDataText={"No rows found"}
+        noDataText={"No Schedule found"}
         // NextComponent={Button}
         className="-striped -highlight"
         getTrProps={(state, rowInfo, column) => {
