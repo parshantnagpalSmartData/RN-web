@@ -44,55 +44,55 @@ const MyToastNotification = props => {
           marginHorizontal: moderateScale(40)
         }}
       >
-      <DivContainer className={"toastWidget"}>
-        <View
-          style={[Styles.notificationView, { backgroundColor: primaryColor }]}
-        >
-        <DivContainer className={"ToastText"}>
-          <View style={{ flexDirection: "row" }}>
-          <DivContainer className={"ToastLeftIcon"}>
-            <View style={Styles.imageView}>
-              <Image
-                style={Styles.image}
-                source={image}
-                resizeMode={"contain"}
-              />
-            </View>
+        <DivContainer className={"toastWidget"}>
+          <View
+            style={[Styles.notificationView, { backgroundColor: primaryColor }]}
+          >
+            <DivContainer className={"ToastText"}>
+              <View style={{ flexDirection: "row" }}>
+                <DivContainer className={"ToastLeftIcon"}>
+                  <View style={Styles.imageView}>
+                    <Image
+                      style={Styles.image}
+                      source={image}
+                      resizeMode={"contain"}
+                    />
+                  </View>
+                </DivContainer>
+                <DivContainer className={"ToastRightIcon"}>
+                  <View
+                    style={{
+                      alignItems: "flex-start",
+                      justifyContent: "flex-start",
+                      ...Platform.select({
+                        web: {
+                          width: moderateScale(170)
+                        }
+                      })
+                    }}
+                  >
+                    <Text style={Styles.heading}>{heading}</Text>
+                    <Text
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                      style={Styles.message}
+                    >
+                      {message}
+                    </Text>
+                  </View>
+                </DivContainer>
+              </View>
             </DivContainer>
-            <DivContainer className={"ToastRightIcon"}>
-            <View
-              style={{
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                ...Platform.select({
-                  web: {
-                    width: moderateScale(170)
-                  }
-                })
-              }}
-            >
-              <Text style={Styles.heading}>{heading}</Text>
-              <Text
-                numberOfLines={2}
-                ellipsizeMode="tail"
-                style={Styles.message}
-              >
-                {message}
-              </Text>
-            </View>
+            <DivContainer className={"closeToast"}>
+              <TouchableOpacity style={Styles.imageView} onPress={closeToast}>
+                <Image
+                  style={Styles.image}
+                  source={Constants.Images.Cancel}
+                  resizeMode={"contain"}
+                />
+              </TouchableOpacity>
             </DivContainer>
           </View>
-          </DivContainer>
-          <DivContainer className={"closeToast"}>
-            <TouchableOpacity style={Styles.imageView} onPress={closeToast}>
-              <Image
-                style={Styles.image}
-                source={Constants.Images.Cancel}
-                resizeMode={"contain"}
-              />
-            </TouchableOpacity>
-          </DivContainer>
-        </View>
         </DivContainer>
       </View>
     </View>
