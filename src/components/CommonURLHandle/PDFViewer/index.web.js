@@ -27,12 +27,7 @@ const createTable = numPages => {
   return table;
 };
 
-const PDF = ({
-  onDocumentLoadSuccess,
-  loadError,
-  numPages,
-  base64Data
-}) => {
+const PDF = ({ onDocumentLoadSuccess, loadError, numPages, base64Data }) => {
   return (
     <div className={"pdfpopupScroll"}>
       <Document

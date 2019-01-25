@@ -5,7 +5,7 @@ Description: Contains the message center component
 Date : 13 december 2018
 */
 import React, { Component } from "React";
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ScrollableTabView from "react-native-scrollable-tab-view";
 
@@ -14,6 +14,7 @@ import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import CustomTabBar from "../../components/Common/CustomTabBar";
 import MessageComponent from "../../components/MessageCenter";
+import { Dialog } from "../../helpers/common";
 class MessageCenter extends Component {
   constructor(props) {
     super(props);
@@ -30,20 +31,20 @@ class MessageCenter extends Component {
   onDrawerPress = () => {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
-  enableScrollingFunction = data => {
-    let context = this;
-    if (Platform.OS == "ios") {
-      this.scrollView.scrollView.setNativeProps({ scrollEnabled: data }); //eslint-disable-line
-    } else if (Platform.OS == "android") {
-      if (data) {
-        setTimeout(() => {
-          context.setState({ enableParentScrolling: data });
-        }, 2000);
-      } else {
-        context.setState({ enableParentScrolling: data });
-      }
-    }
-  };
+  // enableScrollingFunction = data => {
+  //   let context = this;
+  //   if (Platform.OS == "ios") {
+  //     this.scrollView.scrollView.setNativeProps({ scrollEnabled: data }); //eslint-disable-line
+  //   } else if (Platform.OS == "android") {
+  //     if (data) {
+  //       setTimeout(() => {
+  //         context.setState({ enableParentScrolling: data });
+  //       }, 2000);
+  //     } else {
+  //       context.setState({ enableParentScrolling: data });
+  //     }
+  //   }
+  // };
 
   getTabRelatedMessages = () => {
     let { appAction } = this.props;
@@ -55,18 +56,34 @@ class MessageCenter extends Component {
     this.setState({ tab }, () => this.getTabRelatedMessages());
   };
 
-  onOpen = (direction, item) => {
+  onDeletePress = message => {
     let { tab } = this.state;
     let { appAction } = this.props;
-    if (direction === "right" && (tab === "index" || tab === "sent")) {
-      appAction.deleteMessage(item.MessageID, () =>
-        this.getTabRelatedMessages()
-      );
+    if (tab === "index" || tab === "sent") {
+      Dialog("Are you sure want to delete this message?", [
+        { text: "Cancel", onPress: () => {} },
+        {
+          text: "Ok",
+          onPress: () =>
+            appAction.deleteMessage(message.MessageID, () =>
+              this.getTabRelatedMessages()
+            )
+        }
+      ]);
     }
   };
 
+  // onOpen = (direction, item) => {
+  //   let { tab } = this.state;
+  //   let { appAction } = this.props;
+  //   if (direction === "right" && (tab === "index" || tab === "sent")) {
+  //     // appAction.deleteMessage(item.MessageID, () =>
+  //     //   this.getTabRelatedMessages()
+  //     // );
+  //   }
+  // };
+
   render() {
-    let { enableParentScrolling } = this.state;
     let { messages } = this.props;
     let { inbox, sent, trash } = messages;
     return (
@@ -79,35 +96,38 @@ class MessageCenter extends Component {
           onChangeTab={tab => {
             this.updateTabIndex(tab.ref.props.tab);
           }}
-          ref={ref => (this.scrollView = ref)}
-          locked={!enableParentScrolling}
+          // ref={ref => (this.scrollView = ref)}
+          locked
         >
           <MessageComponent
             tabLabel="Inbox"
             tab="inbox"
             data={inbox}
-            enableScrollingFunction={data => {
-              this.enableScrollingFunction(data);
-            }}
-            onOpen={this.onOpen}
+            onDeletePress={this.onDeletePress}
+            // enableScrollingFunction={data => {
+            //   this.enableScrollingFunction(data);
+            // }}
+            // onOpen={this.onOpen}
           />
           <MessageComponent
             tabLabel="Sent"
             tab="sent"
             data={sent}
-            enableScrollingFunction={data => {
-              this.enableScrollingFunction(data);
-            }}
-            onOpen={this.onOpen}
+            onDeletePress={this.onDeletePress}
+            // enableScrollingFunction={data => {
+            //   this.enableScrollingFunction(data);
+            // }}
+            // onOpen={this.onOpen}
           />
           <MessageComponent
             tabLabel="Trash"
             tab="trash"
             data={trash}
-            enableScrollingFunction={data => {
-              this.enableScrollingFunction(data);
-            }}
-            onOpen={this.onOpen}
+            onDeletePress={this.onDeletePress}
+            // enableScrollingFunction={data => {
+            //   this.enableScrollingFunction(data);
+            // }}
+            // onOpen={this.onOpen}
           />
         </ScrollableTabView>
       </View>

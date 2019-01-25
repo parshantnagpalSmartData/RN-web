@@ -14,31 +14,7 @@ import LinearGradient from "react-native-linear-gradient";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
-const rightButtons = [
-  {
-    component: (
-      <LinearGradient
-        start={{ x: 1, y: 0 }}
-        end={{ x: 0, y: 0 }}
-        colors={Constants.Colors.ButtonGradients}
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: moderateScale(60)
-        }}
-      >
-        <Image
-          source={Constants.Images.Delete}
-          style={{
-            height: moderateScale(27),
-            width: moderateScale(17)
-          }}
-        />
-      </LinearGradient>
-    )
-  }
-];
-const MessageComponent = ({ data, enableScrollingFunction, onOpen }) => {
+const MessageComponent = ({ data, onDeletePress }) => {
   return (
     <FlatList
       key={item => item.MessageID}
@@ -52,15 +28,40 @@ const MessageComponent = ({ data, enableScrollingFunction, onOpen }) => {
             close
             autoClose
             key={index}
-            right={rightButtons}
+            right={[
+              {
+                component: (
+                  <LinearGradient
+                    start={{ x: 1, y: 0 }}
+                    end={{ x: 0, y: 0 }}
+                    colors={Constants.Colors.ButtonGradients}
+                    style={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: moderateScale(60)
+                    }}
+                  >
+                    <Image
+                      source={Constants.Images.Delete}
+                      style={{
+                        height: moderateScale(27),
+                        width: moderateScale(17)
+                      }}
+                    />
+                  </LinearGradient>
+                ),
+                onPress: () => onDeletePress(item),
+                type: "delete"
+              }
+            ]}
             sensitivity={1000}
-            scroll={data => {
-              enableScrollingFunction(data);
-            }}
+            // scroll={data => {
+            //   enableScrollingFunction(data);
+            // }}
             /*  eslint-disable-next-line */
-            onOpen={(sectionID, rowId, direction) => {
-              onOpen(direction, item);
-            }}
+            // onOpen={(sectionID, rowId, direction) => {
+            //   onOpen(direction, item);
+            // }}
           >
             <View style={Styles.Swipeout}>
               <View style={Styles.userImgView}>
@@ -144,10 +145,12 @@ export default MessageComponent;
 
 MessageComponent.defaultProps = {
   data: null,
-  enableScrollingFunction: null
+  enableScrollingFunction: null,
+  onDeletePress: null
 };
 
 MessageComponent.propTypes = {
   data: PropTypes.array,
-  enableScrollingFunction: PropTypes.func
+  enableScrollingFunction: PropTypes.func,
+  onDeletePress: PropTypes.func
 };
