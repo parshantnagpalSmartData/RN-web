@@ -59,7 +59,7 @@ class MessageCenter extends Component {
   onDeletePress = message => {
     let { tab } = this.state;
     let { appAction } = this.props;
-    if (tab === "index" || tab === "sent") {
+    if (tab !== "trash") {
       Dialog("Are you sure want to delete this message?", [
         { text: "Cancel", onPress: () => {} },
         {
@@ -84,7 +84,7 @@ class MessageCenter extends Component {
   // };
 
   render() {
-    let { messages } = this.props;
+    let { messages, app } = this.props;
     let { inbox, sent, trash } = messages;
     return (
       <View style={Styles.container}>
@@ -104,6 +104,8 @@ class MessageCenter extends Component {
             tab="inbox"
             data={inbox}
             onDeletePress={this.onDeletePress}
+            refresh={app.refreshLoader}
+            onRefresh={this.getTabRelatedMessages}
             // enableScrollingFunction={data => {
             //   this.enableScrollingFunction(data);
             // }}
@@ -114,6 +116,8 @@ class MessageCenter extends Component {
             tab="sent"
             data={sent}
             onDeletePress={this.onDeletePress}
+            refresh={app.refreshLoader}
+            onRefresh={this.getTabRelatedMessages}
             // enableScrollingFunction={data => {
             //   this.enableScrollingFunction(data);
             // }}
@@ -124,6 +128,8 @@ class MessageCenter extends Component {
             tab="trash"
             data={trash}
             onDeletePress={this.onDeletePress}
+            refresh={app.refreshLoader}
+            onRefresh={this.getTabRelatedMessages}
             // enableScrollingFunction={data => {
             //   this.enableScrollingFunction(data);
             // }}
@@ -141,6 +147,7 @@ const Styles = StyleSheet.create({
   }
 });
 const mapStateToProps = state => ({
+  app: state.app,
   user: state.user,
   messages: state.messages
 });

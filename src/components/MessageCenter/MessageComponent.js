@@ -6,86 +6,117 @@
  */
 
 import React from "React";
-import { View, Image, Text, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator
+} from "react-native";
 import PropTypes from "prop-types";
 import Swipeout from "react-native-swipeout";
 import LinearGradient from "react-native-linear-gradient";
 
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import ListEmptyComponent from "../Common/ListEmptyComponent";
 
-const MessageComponent = ({ data, onDeletePress }) => {
-  return (
-    <FlatList
-      key={item => item.MessageID}
-      data={data}
-      contentContainerStyle={Styles.contentContainerStyle}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
-      renderItem={({ item, index }) => {
-        return (
-          <Swipeout
-            close
-            autoClose
-            key={index}
-            right={[
-              {
-                component: (
-                  <LinearGradient
-                    start={{ x: 1, y: 0 }}
-                    end={{ x: 0, y: 0 }}
-                    colors={Constants.Colors.ButtonGradients}
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: moderateScale(60)
-                    }}
-                  >
-                    <Image
-                      source={Constants.Images.Delete}
+const MessageComponent = ({ data, onDeletePress, refresh, onRefresh }) => {
+  if (!refresh) {
+    return (
+      <FlatList
+        key={item => item.MessageID}
+        data={data}
+        contentContainerStyle={Styles.contentContainerStyle}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        refreshing={refresh}
+        refreshControl={
+          <ActivityIndicator
+            size={"large"}
+            style={{ flex: 1, alignSelf: "center" }}
+            color={Constants.Colors.Primary}
+          />
+        }
+        onRefresh={onRefresh}
+        ListEmptyComponent={
+          <ListEmptyComponent message={"Message Not Found"} loader={refresh} />
+        }
+        renderItem={({ item, index }) => {
+          return (
+            <Swipeout
+              close
+              autoClose
+              key={index}
+              right={[
+                {
+                  component: (
+                    <LinearGradient
+                      start={{ x: 1, y: 0 }}
+                      end={{ x: 0, y: 0 }}
+                      colors={Constants.Colors.ButtonGradients}
                       style={{
-                        height: moderateScale(27),
-                        width: moderateScale(17)
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: moderateScale(60)
                       }}
-                    />
-                  </LinearGradient>
-                ),
-                onPress: () => onDeletePress(item),
-                type: "delete"
-              }
-            ]}
-            sensitivity={1000}
-            // scroll={data => {
-            //   enableScrollingFunction(data);
-            // }}
-            /*  eslint-disable-next-line */
-            // onOpen={(sectionID, rowId, direction) => {
-            //   onOpen(direction, item);
-            // }}
-          >
-            <View style={Styles.Swipeout}>
-              <View style={Styles.userImgView}>
-                <Image
-                  style={Styles.userImg}
-                  source={Constants.Images.UserAvatar}
-                  resizeMode={"contain"}
-                />
-              </View>
-              <View style={Styles.messageView}>
-                <View style={Styles.nameTimeView}>
-                  <Text style={Styles.nameText}>
-                    {`${item.Sender_LastName} ${item.Sender_FirstName}`}
-                  </Text>
-                  <Text style={Styles.timeText}>4 Mins</Text>
+                    >
+                      <Image
+                        source={Constants.Images.Delete}
+                        style={{
+                          height: moderateScale(27),
+                          width: moderateScale(17)
+                        }}
+                      />
+                    </LinearGradient>
+                  ),
+                  onPress: () => onDeletePress(item)
+                }
+              ]}
+              sensitivity={1000}
+              // scroll={data => {
+              //   enableScrollingFunction(data);
+              // }}
+              /*  eslint-disable-next-line */
+              // onOpen={(sectionID, rowId, direction) => {
+              //   onOpen(direction, item);
+              // }}
+            >
+              <View style={Styles.Swipeout}>
+                <View style={Styles.userImgView}>
+                  <Image
+                    style={Styles.userImg}
+                    source={Constants.Images.UserAvatar}
+                    resizeMode={"contain"}
+                  />
                 </View>
-                <Text style={Styles.MessageSubject}>{item.MessageSubject}</Text>
+                <View style={Styles.messageView}>
+                  <View style={Styles.nameTimeView}>
+                    <Text style={Styles.nameText}>
+                      {`${item.Sender_LastName} ${item.Sender_FirstName}`}
+                    </Text>
+                    <Text style={Styles.timeText}>4 Mins</Text>
+                  </View>
+                  <Text style={Styles.MessageSubject}>
+                    {item.MessageSubject}
+                  </Text>
+                </View>
               </View>
-            </View>
-          </Swipeout>
-        );
-      }}
-    />
-  );
+            </Swipeout>
+          );
+        }}
+      />
+    );
+  } else {
+    return (
+      <ActivityIndicator
+        size={"large"}
+        style={{ flex: 1, alignSelf: "center" }}
+        color={Constants.Colors.Primary}
+      />
+    );
+  }
 };
 
 const Styles = StyleSheet.create({

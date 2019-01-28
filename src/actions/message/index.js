@@ -12,10 +12,10 @@ import Constants from "../../constants";
 
 export const getMessages = folder => {
   return (dispatch, getState) => {
-    dispatch(AppActions.startLoader());
+    dispatch(AppActions.startRefreshLoader());
     RestClient.getCall(`messages?folder=${folder}`, getState().user.token)
       .then(res => {
-        dispatch(AppActions.stopLoader());
+        dispatch(AppActions.stopRefreshLoader());
         if (res.status) {
           if (folder === "inbox") {
             dispatch({
@@ -43,7 +43,7 @@ export const getMessages = folder => {
         }
       })
       .catch(e => {
-        dispatch(AppActions.stopLoader());
+        dispatch(AppActions.stopRefreshLoader());
         console.warn("error", e); // eslint-disable-line
       });
   };
