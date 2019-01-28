@@ -11,7 +11,7 @@ import { bindActionCreators } from "redux";
 
 import axios from "axios";
 import * as appAction from "../../actions";
-import PDF from "../../components/CommonURLHandle/PDFViewer";
+import PDF from "../../components/PDFViewer";
 import DivContainer from "../../components/Common/DivContainer";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";

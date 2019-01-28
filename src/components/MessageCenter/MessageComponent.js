@@ -74,7 +74,7 @@ const MessageComponent = ({ data, onDeletePress, refresh, onRefresh }) => {
                   onPress: () => onDeletePress(item)
                 }
               ]}
-              sensitivity={1000}
+              sensitivity={100}
               // scroll={data => {
               //   enableScrollingFunction(data);
               // }}

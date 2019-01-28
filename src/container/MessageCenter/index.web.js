@@ -12,21 +12,31 @@ import { bindActionCreators } from "redux";
 
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
-import UnderDevelopment from "../../components/Common/UnderDevelopment";
-
+import MessageComponent from "../../components/MessageCenter";
 
 class MessageCenter extends Component {
     constructor(props) {
         super(props);
     }
 
-
-
     render() {
+        let { messages, app } = this.props;
+        let { inbox } = messages;
         return (
             <View style={Styles.containner}>
                 <Header title={"Message center"} onDrawerPress={this.onDrawerPress} />
-                <UnderDevelopment />
+                <MessageComponent
+                    tabLabel="Inbox"
+                    tab="inbox"
+                    data={inbox}
+                    onDeletePress={this.onDeletePress}
+                    refresh={app.refreshLoader}
+                    onRefresh={this.getTabRelatedMessages}
+                // enableScrollingFunction={data => {
+                //   this.enableScrollingFunction(data);
+                // }}
+                // onOpen={this.onOpen}
+                />{" "}
             </View>
         );
     }
@@ -39,7 +49,8 @@ const Styles = StyleSheet.create({
 });
 const mapStateToProps = state => ({
     user: state.user,
-    app: state.app
+    app: state.app,
+    messages: state.messages
 });
 const mapDispatchToProps = dispatch => ({
     appAction: bindActionCreators(appAction, dispatch)
