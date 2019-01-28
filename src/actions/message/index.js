@@ -114,8 +114,8 @@ export const composeMessage = postData => {
         if (res.status) {
           dispatch(
             AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Error,
-              res.message
+              Constants.AppConstants.Notificaitons.Success,
+              "Message has been sent successfully."
             )
           );
         } else {
@@ -144,9 +144,8 @@ export const getRecipients = () => {
           let data = [];
           recipients.map(item => {
             data.push({
-              id: item.MessageGroupID,
-              label: item.GroupName,
-              value: item.GroupEmail
+              value: item.MessageGroupID,
+              label: `${item.GroupName} (${item.GroupEmail})`
             });
           });
           dispatch({ type: Types.RECIPIENTS_LIST, payload: data });

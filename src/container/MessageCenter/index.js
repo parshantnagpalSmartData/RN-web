@@ -25,7 +25,10 @@ class MessageCenter extends Component {
     this.state = {
       tab: "inbox",
       enableParentScrolling: true,
-      composeModal: false
+      composeModal: false,
+      message: "",
+      subject: "",
+      MessageGroupID: null
     };
   }
 
@@ -86,6 +89,30 @@ class MessageCenter extends Component {
 
   onComposeModalClose = () => {
     this.setState({ composeModal: false });
+  };
+
+  onChangeRecipient = recipient => {
+    this.setState({ MessageGroupID: recipient });
+  };
+
+  onChangeSubject = subject => {
+    this.setState({ subject });
+  };
+
+  onChangeMessage = message => {
+    this.setState({ message });
+  };
+
+  onComposePress = () => {
+    let { MessageGroupID, subject, message } = this.state;
+    let obj = {
+      MessageSubject: subject,
+      MessageBody: message,
+      ParentMessageID: null,
+      MessageGroupID: MessageGroupID
+    };
+    this.props.appAction.composeMessage(obj);
+    this.onComposeModalClose();
   };
 
   render() {
@@ -155,6 +182,10 @@ class MessageCenter extends Component {
             user={user}
             onClose={this.onComposeModalClose}
             recipients={recipients}
+            onChangeRecipient={this.onChangeRecipient}
+            onChangeMessage={this.onChangeMessage}
+            onChangeSubject={this.onChangeSubject}
+            onComposePress={this.onComposePress}
           />
         </CustomModal>
       </View>

@@ -20,7 +20,15 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 import SafeView from "../../components/Common/SafeView";
 import { Dropdown } from "react-native-material-dropdown";
 
-const Compose = ({ onClose, recipients, user }) => (
+const Compose = ({
+  onClose,
+  recipients,
+  user,
+  onChangeRecipient,
+  onChangeSubject,
+  onChangeMessage,
+  onComposePress
+}) => (
   <View style={Styles.container}>
     <LinearGradient
       start={{ x: 1, y: 0 }}
@@ -40,7 +48,7 @@ const Compose = ({ onClose, recipients, user }) => (
         <Text numberOfLines={2} style={[Styles.headerText]}>
           Compose Message
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onComposePress}>
           <Image source={Constants.Images.SentActive} />
         </TouchableOpacity>
       </View>
@@ -51,6 +59,8 @@ const Compose = ({ onClose, recipients, user }) => (
         data={recipients}
         overlayStyle={Styles.overlayStyle}
         containerStyle={Styles.containerStyle}
+        onChangeText={value => onChangeRecipient(value)}
+        fontSize={11}
       />
       <View style={Styles.options}>
         <Text style={Styles.commonText}>From</Text>
@@ -61,12 +71,14 @@ const Compose = ({ onClose, recipients, user }) => (
       <View style={Styles.options}>
         <Text style={Styles.commonText}>Subject</Text>
         <TextInput
+          onChangeText={value => onChangeSubject(value)}
           numberOfLines={2}
           style={[Styles.TextInput, Styles.textPadding]}
         />
       </View>
       <View style={Styles.msgBody}>
         <TextInput
+          onChangeText={value => onChangeMessage(value)}
           multiline={true}
           numberOfLines={50}
           style={Styles.TextInput}
@@ -111,7 +123,7 @@ const Styles = StyleSheet.create({
   },
   messageBody: { flex: 0.9 },
   overlayStyle: {
-    top: moderateScale(90)
+    top: moderateScale(70)
   },
   containerStyle: {
     paddingHorizontal: moderateScale(10)
