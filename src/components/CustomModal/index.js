@@ -8,11 +8,18 @@
 import React from "react";
 import Modal from "react-native-modal";
 import PropTypes from "prop-types";
+import Constants from "../../constants";
 
 const CustomModal = props => {
-  const { isVisible, onBackdropPress } = props;
+  const { isVisible, onBackdropPress, style } = props;
   return (
-    <Modal isVisible={isVisible} onBackdropPress={() => onBackdropPress()}>
+    <Modal
+      isVisible={isVisible}
+      style={style}
+      deviceWidth={Constants.BaseStyle.DEVICE_WIDTH}
+      deviceHeight={Constants.BaseStyle.DEVICE_WIDTH}
+      onBackdropPress={() => onBackdropPress()}
+    >
       {props.children}
     </Modal>
   );

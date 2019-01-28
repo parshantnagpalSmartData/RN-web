@@ -10,7 +10,8 @@ import * as Types from "../../actionTypes";
 const initialState = {
   inbox: [],
   trash: [],
-  sent: []
+  sent: [],
+  recipients: []
 };
 
 export default function messages(state = initialState, action = {}) {
@@ -30,10 +31,16 @@ export default function messages(state = initialState, action = {}) {
         ...state,
         sent: action.payload
       };
+    case Types.RECIPIENTS_LIST:
+      return {
+        ...state,
+        recipients: action.payload
+      };
     case Types.RESET_USER:
       return {
         ...initialState
       };
+
     default:
       return state;
   }

@@ -7,7 +7,6 @@ Date : 29 Nov 2018
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Constants from "../../constants";
-import OnlineDot from "./OnlineDot";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 /**
@@ -17,7 +16,7 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 const RightComponent = props => {
   let { source, icon } = props;
   return (
-    <View style={Styles.containner}>
+    <View style={Styles.container}>
       {source ? (
         <Image
           source={{ uri: source }}
@@ -27,7 +26,6 @@ const RightComponent = props => {
       ) : (
         <Image source={icon} />
       )}
-      <OnlineDot overlay dotStyle={Styles.dotStyle} />
     </View>
   );
 };
@@ -35,14 +33,16 @@ const RightComponent = props => {
 export default RightComponent;
 
 const Styles = StyleSheet.create({
-  containner: {
+  container: {
     height: moderateScale(40),
     width: moderateScale(40),
     borderRadius: moderateScale(100),
     borderWidth: 0.4,
     overflow: "hidden",
-    backgroundColor: Constants.Colors.White,
-    borderColor: Constants.Colors.gray
+    backgroundColor: Constants.Colors.Transparent,
+    borderColor: Constants.Colors.Transparent,
+    alignItems: "center",
+    justifyContent: "center"
   },
   imgStyle: {
     height: moderateScale(40),

@@ -132,3 +132,31 @@ export const composeMessage = postData => {
       });
   };
 };
+
+export const getRecipients = () => {
+  return (dispatch, getState) => {
+    dispatch(AppActions.startRefreshLoader());
+    RestClient.getCall("messages/groups", getState().user.token)
+      .then(res => {
+        dispatch(AppActions.stopRefreshLoader());
+        if (res.status) {
+          let recipients = res.result.data;
+          let data = [];
+          recipients.map(item => {
+            data.push({
+              id: item.MessageGroupID,
+              label: item.GroupName,
+              value: item.GroupEmail
+            });
+          });
+          dispatch({ type: Types.RECIPIENTS_LIST, payload: data });
+        } else {
+          dispatch(AppActions.checkLogin(res));
+        }
+      })
+      .catch(e => {
+        dispatch(AppActions.stopRefreshLoader());
+        console.warn("error", e); // eslint-disable-line
+      });
+  };
+};

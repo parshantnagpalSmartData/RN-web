@@ -47,7 +47,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
+    "cors": "^2.8.5",
     "css-to-react-native-transform": "^1.8.0",
+    "express": "^4.16.3",
     "halogenium": "^2.2.3",
     "http-server": "^0.11.1",
     "lodash": "^4.17.11",
@@ -62,6 +64,7 @@
     "react-native-geocoding": "^0.3.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-linear-gradient": "^2.5.3",
+    "react-native-material-dropdown": "^0.11.1",
     "react-native-modal": "^7.0.2",
     "react-native-navigation": "^2.5.2",
     "react-native-otp-inputs": "file:./modified_modules/react-native-otp-inputs",
@@ -82,9 +85,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "rn-fetch-blob": "^0.10.15",
-    "seamless-immutable": "^7.1.4",
-    "cors": "^2.8.5",
-    "express": "^4.16.3"
+    "seamless-immutable": "^7.1.4"
   },
   "devDependencies": {
     "babel": "6.23.0",
