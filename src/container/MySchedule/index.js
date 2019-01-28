@@ -47,7 +47,7 @@ class Home extends Component {
       isVisible: false,
       prevDate: moment().format("MM/DD/YYYY"),
       nextDate: moment()
-        .add(7, "d")
+        .add(6, "d")
         .format("MM/DD/YYYY")
     };
     this.closeModal = this.closeModal.bind(this);
@@ -228,7 +228,7 @@ class Home extends Component {
             >
               P{" "}
               <Text style={Styles.commonFontColor}>
-                : +{patient.Scheduler_Phone} /
+                : {patient.Scheduler_Phone} /
               </Text>
               Ext{" "}
               <Text style={Styles.commonFontColor}>
