@@ -120,7 +120,7 @@ class SideMenu extends React.Component {
     let { screen } = this.state;
     if (item.key === screen) {
       return (
-        <CustomLinearGradient index={index}>
+        <CustomLinearGradient index={index} key={index}>
           <TouchableOpacity
             style={styles.text}
             onPress={() => {
@@ -137,6 +137,7 @@ class SideMenu extends React.Component {
     } else {
       return (
         <TouchableOpacity
+          key={index}
           style={styles.text}
           onPress={() => {
             item.onPress(item.key);

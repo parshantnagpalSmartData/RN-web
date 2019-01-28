@@ -21,6 +21,7 @@ const babelLoaderConfiguration = {
     path.resolve(appDirectory, "modified_modules/react-native-otp-inputs"),
     path.resolve(appDirectory, "node_modules/react-native-modal"),
     path.resolve(appDirectory, "node_modules/react-native-animatable"),
+    path.resolve(appDirectory, "node_modules/react-native-scrollable-tab-view"),
     // path.resolve(appDirectory, "node_modules/react-confirm-alert"),
     path.resolve(
       appDirectory,

@@ -15,24 +15,15 @@ import Constants from "../../constants";
 export const signIn = (postData, componentId) => {
   return dispatch => {
     dispatch(AppActions.startLoader());
-    // dispatch({ type: Types.LOGIN_REQUEST });
     RestClient.restCall("users/login", postData)
       .then(res => {
         if (res.status) {
           dispatch(AppActions.stopLoader());
-          // dispatch({ type: Types.LOGIN_SUCESS });
           dispatch({ type: Types.SAVE_USER, payload: res.result });
           dispatch(AppActions.pushToParticularScreen(componentId, "OTPScreen"));
           dispatch({ type: Types.LOGIN });
-          // dispatch(
-          //   AppActions.showToast(
-          //     Constants.AppConstants.Notificaitons.Success,
-          //     res.message
-          //   )
-          // );
         } else {
           dispatch(AppActions.stopLoader());
-          // dispatch({ type: Types.LOGIN_FAIL });
           dispatch(
             AppActions.showToast(
               Constants.AppConstants.Notificaitons.Error,
@@ -43,7 +34,6 @@ export const signIn = (postData, componentId) => {
       })
       .catch(e => {
         dispatch(AppActions.stopLoader());
-        // dispatch({ type: Types.LOGIN_FAIL });
         console.warn("error", e); // eslint-disable-line
       });
   };

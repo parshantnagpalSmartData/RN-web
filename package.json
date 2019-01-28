@@ -41,7 +41,7 @@
     "android-build": "npm run android-bundle && watchman watch-del-all && cd android && ./gradlew --stop && ./gradlew clean && ./gradlew assembleRelease",
     "reset-cache": "watchman watch-del-all && react-native start --reset-cache",
     "android-bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "android-install": "adb install /android/app/build/outputs/apk/release/app-release.apk",
+    "android-install": "adb install ./android/app/build/outputs/apk/release/app-release.apk",
     "android-uninstall": "adb uninstall com.actnursesportal"
   },
   "dependencies": {
@@ -66,7 +66,9 @@
     "react-native-navigation": "^2.5.2",
     "react-native-otp-inputs": "file:./modified_modules/react-native-otp-inputs",
     "react-native-pdf": "^5.0.11",
+    "react-native-scrollable-tab-view": "^0.10.0",
     "react-native-splash-screen": "^3.1.1",
+    "react-native-swipeout": "^2.3.6",
     "react-native-web": "^0.9.13",
     "react-native-web-linear-gradient": "^1.0.5",
     "react-pdf": "^4.0.2",

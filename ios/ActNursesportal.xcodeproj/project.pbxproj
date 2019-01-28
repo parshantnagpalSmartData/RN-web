@@ -1800,7 +1800,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
 				PRODUCT_NAME = ActNursesportal;
 				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = SmartdataActNursesDistributionProvisioning;
+				PROVISIONING_PROFILE_SPECIFIER = "DIS ACT Nurse Portal";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;

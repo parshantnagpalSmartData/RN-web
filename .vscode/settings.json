@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.autoIndent": true,
+  "explorer.confirmDelete": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.rulers": [100],
+  "editor.cursorBlinking": "solid"
+}
