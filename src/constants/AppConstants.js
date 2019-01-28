@@ -4,6 +4,7 @@
  * @date: 9 Jan 2019
  * @author: Parshant Nagpal
  * */
+import { Platform } from "react-native";
 
 let AppConstants = {
   AppName: "ACT Nurses Portal",
@@ -19,7 +20,7 @@ let AppConstants = {
   Alert: {
     Logout: "Are you sure you want to logout?"
   },
-  limit: 15
+  limit: Platform.OS == "web" ? 1000 : 15
 };
 
 module.exports = AppConstants;

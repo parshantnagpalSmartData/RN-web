@@ -1,2 +1,2 @@
-import MessageComponent from "./MessageComponent";
-export default MessageComponent;
+import SwiperContainer from "./SwiperContainer";
+export default SwiperContainer;

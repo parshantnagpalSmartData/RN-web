@@ -39,5 +39,7 @@ module.exports = {
   SentInactive: require("../assets/images/MessageCenter/sentInactive.png"),
   TrashInactive: require("../assets/images/MessageCenter/trashInactive.png"),
   Delete: require("../assets/images/MessageCenter/delete.png"),
-  Compose: require("../assets/images/MessageCenter/compose.png")
+  Compose: require("../assets/images/MessageCenter/compose.png"),
+  Check: require("../assets/images/Check/Check.png"),
+  UnCheck: require("../assets/images/UnCheck/UnCheck.png")
 };

@@ -13,7 +13,7 @@ import { bindActionCreators } from "redux";
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import CustomTabBar from "../../components/Common/CustomTabBar";
-import MessageComponent from "../../components/MessageCenter";
+import SwiperContainer from "../../components/MessageCenter";
 import { Dialog } from "../../helpers/common";
 class MessageCenter extends Component {
   constructor(props) {
@@ -99,7 +99,7 @@ class MessageCenter extends Component {
           // ref={ref => (this.scrollView = ref)}
           locked
         >
-          <MessageComponent
+          <SwiperContainer
             tabLabel="Inbox"
             tab="inbox"
             data={inbox}
@@ -111,7 +111,7 @@ class MessageCenter extends Component {
             // }}
             // onOpen={this.onOpen}
           />
-          <MessageComponent
+          <SwiperContainer
             tabLabel="Sent"
             tab="sent"
             data={sent}
@@ -123,7 +123,7 @@ class MessageCenter extends Component {
             // }}
             // onOpen={this.onOpen}
           />
-          <MessageComponent
+          <SwiperContainer
             tabLabel="Trash"
             tab="trash"
             data={trash}
