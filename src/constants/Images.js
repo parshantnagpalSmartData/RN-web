@@ -40,6 +40,7 @@ module.exports = {
   TrashInactive: require("../assets/images/MessageCenter/trashInactive.png"),
   Delete: require("../assets/images/MessageCenter/delete.png"),
   Compose: require("../assets/images/MessageCenter/compose.png"),
+  Links: require("../assets/images/Links/Links.png"),
   Check: require("../assets/images/Check/Check.png"),
   UnCheck: require("../assets/images/UnCheck/UnCheck.png")
 };

@@ -131,7 +131,9 @@ const Header = props => {
                   <Text style={Styles.skip}>{rightText}</Text>
                 </TouchableOpacity>
               ) : rightComponent ? (
-                <View>{rightComponent}</View>
+                <TouchableOpacity onPress={() => onRightPress()}>
+                  {rightComponent}
+                </TouchableOpacity>
               ) : null}
             </View>
           </View>

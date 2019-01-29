@@ -117,8 +117,8 @@ export const composeMessage = postData => {
         if (res.status) {
           dispatch(
             AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Error,
-              res.message
+              Constants.AppConstants.Notificaitons.Success,
+              "Message has been sent successfully."
             )
           );
         } else {
@@ -131,6 +131,33 @@ export const composeMessage = postData => {
         }
       })
       .catch(e => {
+        console.warn("error", e); // eslint-disable-line
+      });
+  };
+};
+
+export const getRecipients = () => {
+  return (dispatch, getState) => {
+    dispatch(AppActions.startRefreshLoader());
+    RestClient.getCall("messages/groups", getState().user.token)
+      .then(res => {
+        dispatch(AppActions.stopRefreshLoader());
+        if (res.status) {
+          let recipients = res.result.data;
+          let data = [];
+          recipients.map(item => {
+            data.push({
+              value: item.MessageGroupID,
+              label: `${item.GroupName} (${item.GroupEmail})`
+            });
+          });
+          dispatch({ type: Types.RECIPIENTS_LIST, payload: data });
+        } else {
+          dispatch(AppActions.checkLogin(res));
+        }
+      })
+      .catch(e => {
+        dispatch(AppActions.stopRefreshLoader());
         console.warn("error", e); // eslint-disable-line
       });
   };

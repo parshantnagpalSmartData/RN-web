@@ -1,6 +1,6 @@
 /*
 FileName: index.js
-Author :Parshant Nagpal
+Author :Suraj Sanwal
 Description: Contains the message center component
 Date : 13 december 2018
 */
@@ -15,12 +15,20 @@ import Header from "../../components/Common/Header";
 import CustomTabBar from "../../components/Common/CustomTabBar";
 import SwiperContainer from "../../components/MessageCenter";
 import { Dialog } from "../../helpers/common";
+import RightComponent from "../../components/Common/RightComponent";
+import constants from "../../constants";
+import CustomModal from "../../components/CustomModal";
+import Compose from "./Compose.js";
 class MessageCenter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tab: "inbox",
-      enableParentScrolling: true
+      enableParentScrolling: true,
+      composeModal: false,
+      message: "",
+      subject: "",
+      MessageGroupID: null
     };
   }
 
@@ -73,22 +81,51 @@ class MessageCenter extends Component {
     }
   };
 
-  // onOpen = (direction, item) => {
-  //   let { tab } = this.state;
-  //   let { appAction } = this.props;
-  //   if (direction === "right" && (tab === "index" || tab === "sent")) {
-  //     // appAction.deleteMessage(item.MessageID, () =>
-  //     //   this.getTabRelatedMessages()
-  //     // );
-  //   }
-  // };
+  onRightPress = () => {
+    this.setState({ composeModal: true }, () => {
+      this.props.appAction.getRecipients();
+    });
+  };
+
+  onComposeModalClose = () => {
+    this.setState({ composeModal: false });
+  };
+
+  onChangeRecipient = recipient => {
+    this.setState({ MessageGroupID: recipient });
+  };
+
+  onChangeSubject = subject => {
+    this.setState({ subject });
+  };
+
+  onChangeMessage = message => {
+    this.setState({ message });
+  };
+
+  onComposePress = () => {
+    let { MessageGroupID, subject, message } = this.state;
+    let obj = {
+      MessageSubject: subject,
+      MessageBody: message,
+      ParentMessageID: null,
+      MessageGroupID: MessageGroupID
+    };
+    this.props.appAction.composeMessage(obj);
+    this.onComposeModalClose();
+  };
 
   render() {
-    let { messages, app } = this.props;
-    let { inbox, sent, trash } = messages;
+    let { messages, app, user } = this.props;
+    let { inbox, sent, trash, recipients } = messages;
     return (
       <View style={Styles.container}>
-        <Header title={"Message Center"} onDrawerPress={this.onDrawerPress} />
+        <Header
+          title={"Message Center"}
+          onDrawerPress={this.onDrawerPress}
+          rightComponent={<RightComponent icon={constants.Images.Compose} />}
+          onRightPress={this.onRightPress}
+        />
         <ScrollableTabView
           initialPage={0}
           tabBarPosition={"top"}
@@ -136,6 +173,21 @@ class MessageCenter extends Component {
             // onOpen={this.onOpen}
           />
         </ScrollableTabView>
+        <CustomModal
+          isVisible={this.state.composeModal}
+          onBackdropPress={this.onComposeModalClose}
+          style={{ margin: 0 }}
+        >
+          <Compose
+            user={user}
+            onClose={this.onComposeModalClose}
+            recipients={recipients}
+            onChangeRecipient={this.onChangeRecipient}
+            onChangeMessage={this.onChangeMessage}
+            onChangeSubject={this.onChangeSubject}
+            onComposePress={this.onComposePress}
+          />
+        </CustomModal>
       </View>
     );
   }

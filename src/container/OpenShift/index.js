@@ -31,7 +31,7 @@ class OpenShift extends Component {
       page: 1,
       prevDate: moment().format("MM/DD/YYYY"),
       nextDate: moment()
-        .add(7, "d")
+        .add(6, "d")
         .format("MM/DD/YYYY")
     };
   }

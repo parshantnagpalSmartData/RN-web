@@ -62,7 +62,7 @@ const MySchedule = ({ item, index, onPatientPress }) => {
           <View>
             <View>
               <Text style={[Styles.commonFontColor, Styles.itemName]}>
-                {item.Pat_LName}
+                {`${item.Pat_LName} ${item.Pat_FName}`}
               </Text>
             </View>
             <View>

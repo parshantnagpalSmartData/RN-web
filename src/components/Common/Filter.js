@@ -30,10 +30,10 @@ const Filter = ({ prevDate, nextDate, onDateChange }) => {
         onPress={() => {
           onDateChange(
             moment(prevDate)
-              .subtract(7, "d")
+              .subtract(6, "d")
               .format("MM/DD/YYYY"),
             moment(nextDate)
-              .subtract(7, "d")
+              .subtract(6, "d")
               .format("MM/DD/YYYY")
           );
         }}
@@ -57,10 +57,10 @@ const Filter = ({ prevDate, nextDate, onDateChange }) => {
         onPress={() => {
           onDateChange(
             moment(prevDate)
-              .add(7, "d")
+              .add(6, "d")
               .format("MM/DD/YYYY"),
             moment(nextDate)
-              .add(7, "d")
+              .add(6, "d")
               .format("MM/DD/YYYY")
           );
         }}
