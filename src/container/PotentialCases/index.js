@@ -16,7 +16,7 @@ import Shifts from "../../components/Shift/Shifts";
 import ListEmptyComponent from "../../components/Common/ListEmptyComponent";
 import Constants from "../../constants";
 import DivContainer from "../../components/Common/DivContainer";
-
+import { moderateScale } from "../../helpers/ResponsiveFonts";
 class PotientialCases extends Component {
   constructor(props) {
     super(props);
@@ -132,12 +132,14 @@ class PotientialCases extends Component {
             onEndReachedThreshold={0}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            //numColumns={Platform.OS == "web" ? 2 : 1}
             numColumns={
               Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH > 992
                 ? 2
                 : 1
             }
+            contentContainerStyle={{
+              paddingBottom: moderateScale(100)
+            }}
             ListEmptyComponent={
               <ListEmptyComponent
                 message={" Potential Cases Not Found"}

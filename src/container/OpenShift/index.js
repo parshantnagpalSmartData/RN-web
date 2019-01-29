@@ -19,6 +19,7 @@ import Filter from "../../components/Common/Filter";
 import ListEmptyComponent from "../../components/Common/ListEmptyComponent";
 import Constants from "../../constants";
 import DivContainer from "../../components/Common/DivContainer";
+import { moderateScale } from "../../helpers/ResponsiveFonts";
 // import { moderateScale } from "../../helpers/ResponsiveFonts";
 
 class OpenShift extends Component {
@@ -160,14 +161,6 @@ class OpenShift extends Component {
         />
         <DivContainer hideFlex className={"flatListScroll"}>
           <FlatList
-            // horizontal
-            // contentContainerStyle={{
-            //   flex: 1,
-            //   flexWrap: "wrap",
-            //   flexDirection: "row",
-            //   justifyContent: "flex-start",
-            //   width:"100%"
-            // }}
             data={openShift}
             extraData={this.state}
             keyExtractor={item =>
@@ -185,13 +178,15 @@ class OpenShift extends Component {
                 ? 2
                 : 1
             }
+            contentContainerStyle={{
+              paddingBottom: moderateScale(150)
+            }}
             ListEmptyComponent={
               <ListEmptyComponent
                 message={"Shift Not Found!"}
                 loader={app.refreshLoader || app.loading}
               />
             }
-            // columnWrapperStyle={Styles.columnWrapperStyle}
           />
         </DivContainer>
       </View>

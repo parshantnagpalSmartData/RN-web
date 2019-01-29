@@ -188,7 +188,7 @@ class Home extends Component {
             </TouchableOpacity>
             <Avtar source={UserImage} />
             <Text style={[Styles.commonFontColor, Styles.BoldText]}>
-              {`${patient.Pat_LName} ${patient.Pat_FName}`}
+              {`${patient.Pat_LName}, ${patient.Pat_FName}`}
             </Text>
             <Text
               style={[Styles.commonFontColor, Styles.smallOne]}
@@ -220,7 +220,7 @@ class Home extends Component {
                 Styles.schedularFullName
               ]}
             >
-              {`${patient.Scheduler_LastName} ${patient.Scheduler_FirstName}`}
+              {`${patient.Scheduler_LastName}, ${patient.Scheduler_FirstName}`}
             </Text>
             <Text
               style={[Styles.commonFontColorBold, Styles.smallOne]}
