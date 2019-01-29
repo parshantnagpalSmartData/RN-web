@@ -6,7 +6,6 @@
 
 import CommonURLHandle from "./CommonUrlHandlerForms";
 import RenderForms from "./RenderForms";
-import PDFViewer from "./PDFViewer";
 
-export { RenderForms, PDFViewer };
+export { RenderForms };
 export default CommonURLHandle;

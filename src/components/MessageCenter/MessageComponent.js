@@ -1,129 +1,48 @@
 /**
- * @author Suraj Sanwal
- * @name MessageComponent.js
- * @description Contains the Message component.
- * @date 24 Jan 2019
+ * Author:Parshant Nagpal
+ * File Name :  MessageComponent
+ * Description : Contains the message component
  */
 
-import React from "React";
-import {
-  View,
-  Image,
-  Text,
-  FlatList,
-  StyleSheet,
-  ActivityIndicator
-} from "react-native";
-import PropTypes from "prop-types";
-import Swipeout from "react-native-swipeout";
-import LinearGradient from "react-native-linear-gradient";
-
-import Constants from "../../constants";
+import React from "react";
+import { View, Image, Text, StyleSheet, Platform } from "react-native";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import ListEmptyComponent from "../Common/ListEmptyComponent";
+import Constants from "../../constants";
+import CheckBox from "../../components/Common/CheckBox";
 
-const MessageComponent = ({ data, onDeletePress, refresh, onRefresh }) => {
-  if (!refresh) {
-    return (
-      <FlatList
-        key={item => item.MessageID}
-        data={data}
-        contentContainerStyle={Styles.contentContainerStyle}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        refreshing={refresh}
-        refreshControl={
-          <ActivityIndicator
-            size={"large"}
-            style={{ flex: 1, alignSelf: "center" }}
-            color={Constants.Colors.Primary}
-          />
-        }
-        onRefresh={onRefresh}
-        ListEmptyComponent={
-          <ListEmptyComponent message={"Message Not Found"} loader={refresh} />
-        }
-        renderItem={({ item, index }) => {
-          return (
-            <Swipeout
-              close
-              autoClose
-              key={index}
-              right={[
-                {
-                  component: (
-                    <LinearGradient
-                      start={{ x: 1, y: 0 }}
-                      end={{ x: 0, y: 0 }}
-                      colors={Constants.Colors.ButtonGradients}
-                      style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: moderateScale(60)
-                      }}
-                    >
-                      <Image
-                        source={Constants.Images.Delete}
-                        style={{
-                          height: moderateScale(27),
-                          width: moderateScale(17)
-                        }}
-                      />
-                    </LinearGradient>
-                  ),
-                  onPress: () => onDeletePress(item)
-                }
-              ]}
-              sensitivity={100}
-              // scroll={data => {
-              //   enableScrollingFunction(data);
-              // }}
-              /*  eslint-disable-next-line */
-              // onOpen={(sectionID, rowId, direction) => {
-              //   onOpen(direction, item);
-              // }}
-            >
-              <View style={Styles.Swipeout}>
-                <View style={Styles.userImgView}>
-                  <Image
-                    style={Styles.userImg}
-                    source={Constants.Images.UserAvatar}
-                    resizeMode={"contain"}
-                  />
-                </View>
-                <View style={Styles.messageView}>
-                  <View style={Styles.nameTimeView}>
-                    <Text style={Styles.nameText}>
-                      {`${item.Sender_LastName} ${item.Sender_FirstName}`}
-                    </Text>
-                    <Text style={Styles.timeText}>4 Mins</Text>
-                  </View>
-                  <Text style={Styles.MessageSubject}>
-                    {item.MessageSubject}
-                  </Text>
-                </View>
-              </View>
-            </Swipeout>
-          );
-        }}
-      />
-    );
-  } else {
-    return (
-      <ActivityIndicator
-        size={"large"}
-        style={{ flex: 1, alignSelf: "center" }}
-        color={Constants.Colors.Primary}
-      />
-    );
-  }
+const MessageComponent = ({
+  isChecked,
+  SenderLastName,
+  SenderFirstName,
+  MessageSubject,
+  onPressIsChecked
+}) => {
+  return (
+    <View style={Styles.Swipeout}>
+      {Platform.OS == "web" && (
+        <CheckBox isChecked={isChecked} onPress={onPressIsChecked} />
+      )}
+      <View style={Styles.userImgView}>
+        <Image
+          style={Styles.userImg}
+          source={Constants.Images.UserAvatar}
+          resizeMode={"contain"}
+        />
+      </View>
+      <View style={Styles.messageView}>
+        <View style={Styles.nameTimeView}>
+          <Text style={Styles.nameText}>
+            {`${SenderLastName} ${SenderFirstName}`}
+          </Text>
+          <Text style={Styles.timeText}>4 Mins</Text>
+        </View>
+        <Text style={Styles.MessageSubject}>{MessageSubject}</Text>
+      </View>
+    </View>
+  );
 };
 
 const Styles = StyleSheet.create({
-  contentContainerStyle: {
-    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.75,
-    justifyContent: "flex-start"
-  },
   Swipeout: {
     height: moderateScale(60),
     width: Constants.BaseStyle.DEVICE_WIDTH,
@@ -132,7 +51,12 @@ const Styles = StyleSheet.create({
     padding: moderateScale(5),
     backgroundColor: Constants.Colors.White,
     justifyContent: "flex-start",
-    alignItems: "center"
+    alignItems: "center",
+    ...Platform.select({
+      web: {
+        backgroundColor: "yellow"
+      }
+    })
   },
   userImgView: {
     height: moderateScale(40),
@@ -147,8 +71,20 @@ const Styles = StyleSheet.create({
   },
   messageView: {
     flexDirection: "column",
-    flex: 1,
-    padding: moderateScale(5)
+    padding: moderateScale(5),
+    ...Platform.select({
+      web: {
+        backgroundColor: "red",
+        height: moderateScale(50),
+        width: moderateScale(200)
+      },
+      ios: {
+        flex: 1
+      },
+      android: {
+        flex: 1
+      }
+    })
   },
   nameTimeView: {
     flexDirection: "row",
@@ -163,25 +99,23 @@ const Styles = StyleSheet.create({
   nameText: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(16),
-    color: Constants.Colors.Primary
+    color: Constants.Colors.Primary,
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(11)
+      }
+    })
   },
   MessageSubject: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
-    color: Constants.Colors.Black
+    color: Constants.Colors.Black,
+    ...Platform.select({
+      web: {
+        fontSize: moderateScale(16)
+      }
+    })
   }
 });
 
 export default MessageComponent;
-
-MessageComponent.defaultProps = {
-  data: null,
-  enableScrollingFunction: null,
-  onDeletePress: null
-};
-
-MessageComponent.propTypes = {
-  data: PropTypes.array,
-  enableScrollingFunction: PropTypes.func,
-  onDeletePress: PropTypes.func
-};

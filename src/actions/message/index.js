@@ -10,13 +10,16 @@ import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
 import Constants from "../../constants";
 
-export const getMessages = folder => {
+export const getMessages = (folder, cb) => {
   return (dispatch, getState) => {
     dispatch(AppActions.startRefreshLoader());
     RestClient.getCall(`messages?folder=${folder}`, getState().user.token)
       .then(res => {
         dispatch(AppActions.stopRefreshLoader());
         if (res.status) {
+          if (cb) {
+            cb(res.result.data);
+          }
           if (folder === "inbox") {
             dispatch({
               type: Types.UPDATE_INBOX,

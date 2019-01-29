@@ -6,7 +6,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import Pdf from "react-native-pdf";
-import Loader from "../../Common/Loader";
+import Loader from "../Common/Loader";
 // const source = {
 //   uri: "http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf",
 //   cache: true
