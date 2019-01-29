@@ -50,7 +50,7 @@ class Resources extends Component {
     let { myUrls } = this.props && this.props.forms;
     return (
       <View style={Styles.containner}>
-        <Header title={"Printable Forms"} onDrawerPress={this.onDrawerPress} />
+        <Header title={"Resources"} onDrawerPress={this.onDrawerPress} />
         <DivContainer className={"Searchbar"}>
           <SearchBar
             value={searchText}

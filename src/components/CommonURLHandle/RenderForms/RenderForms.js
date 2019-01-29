@@ -26,9 +26,7 @@ const RenderForms = props => {
         </Text>
         <ResourceButton
           source={
-            printable
-              ? Constants.Images.Downloads
-              : Constants.Images.SearchInactive
+            printable ? Constants.Images.Downloads : Constants.Images.Links
           }
           onFormPress={onFormPress}
           formUrl={printable ? item.FormID : item.ResourceURL}
