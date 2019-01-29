@@ -9,11 +9,13 @@ import { View, Image, Text, StyleSheet, Platform } from "react-native";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
 import CheckBox from "../../components/Common/CheckBox";
+import Common from "../../helpers/common";
 
 const MessageComponent = ({
   isChecked,
   SenderLastName,
   SenderFirstName,
+  MessageDate,
   MessageSubject,
   onPressIsChecked
 }) => {
@@ -34,7 +36,7 @@ const MessageComponent = ({
           <Text style={Styles.nameText}>
             {`${SenderLastName} ${SenderFirstName}`}
           </Text>
-          <Text style={Styles.timeText}>4 Mins</Text>
+          <Text style={Styles.timeText}>{Common.timeSince(MessageDate)}</Text>
         </View>
         <Text style={Styles.MessageSubject}>{MessageSubject}</Text>
       </View>

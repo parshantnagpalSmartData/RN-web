@@ -27,6 +27,7 @@ import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/Auth/OTPScreen";
 import PDFViewer from "../container/PrintableForms/PDFViewer";
+import MessageDetails from "../container/MessageCenter/MessageDetails";
 
 class Routes extends Component {
   componentDidMount() {
@@ -48,7 +49,6 @@ class Routes extends Component {
             exact
             path="/"
             component={SignIn}
-            // requireAuth={requireAuth}
             layout={frontLayout}
             isLogin={isLoggedIn}
           />
@@ -56,17 +56,13 @@ class Routes extends Component {
             exact
             path="/ForgotPassword"
             component={ForgotPassword}
-            // requireAuth={requireAuth}
             layout={frontLayout}
             isLogin={isLoggedIn}
           />
-          {/* <Route exact path="/" component={SignIn} /> */}
-          {/* <Route exact path="/ForgotPassword" component={ForgotPassword} /> */}
           <AppRoute
             exact
             path="/OTPScreen"
             component={OTPScreen}
-            //  requireAuth={requireAuth}
             layout={frontLayout}
             isLogin={isLoggedIn}
           />
@@ -74,7 +70,6 @@ class Routes extends Component {
             exact
             path="/MySchedule"
             component={MySchedule}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
@@ -82,7 +77,6 @@ class Routes extends Component {
             exact
             path="/OpenShift"
             component={OpenShift}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
@@ -98,7 +92,6 @@ class Routes extends Component {
             exact
             path="/Resources"
             component={Resources}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
@@ -106,7 +99,6 @@ class Routes extends Component {
             exact
             path="/PDFViewer"
             component={PDFViewer}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
@@ -114,7 +106,6 @@ class Routes extends Component {
             exact
             path="/PotientialCases"
             component={PotientialCases}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
@@ -122,16 +113,20 @@ class Routes extends Component {
             exact
             path="/MessageCenter"
             component={MessageCenter}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
-
+          <AppRoute
+            exact
+            path="/MessageDetails"
+            component={MessageDetails}
+            layout={dashboardLayout}
+            isLogin={isLoggedIn}
+          />
           <AppRoute
             exact
             path="/MyProfile"
             component={MyProfile}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
@@ -139,13 +134,10 @@ class Routes extends Component {
             exact
             path="/ResetPassword"
             component={ResetPassword}
-            //  requireAuth={requireAuth}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
-          {/* <Route exact path="/DashBoard" component={Screen2} /> */}
           <Route component={NotFound} />
-          {/* <Route path="/ToastNotification" component={ToastNotification} /> */}
         </Switch>
       </Router>
     );

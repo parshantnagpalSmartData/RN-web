@@ -4,19 +4,37 @@
 import { Alert, Platform } from "react-native";
 import Constants from "../constants";
 var Common = {
-  // ShowToast: val => {
-  //   setTimeout(() => {
-  //     //console.log("++++++++:",val);
-  //     Toast.show(val);
-  //   }, 50);
-  // },
-  // isNumberPositive: val => {
-  //   if (val >= 0) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // },
+  timeSince: date => {
+    if (!date) {
+      date = new Date();
+    } else {
+      date = new Date(date);
+    }
+    // var seconds = (new Date().getTime() - date.getTime()) / 1000
+    var seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+    if (interval >= 1) {
+      return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval >= 1) {
+      return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval >= 1) {
+      return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval >= 1) {
+      return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval >= 1) {
+      return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  },
   Dialog: (msg, buttons) => {
     if (Platform.OS !== "web") {
       Alert.alert(Constants.AppConstants.AppName, msg, buttons, {

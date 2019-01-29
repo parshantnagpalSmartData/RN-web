@@ -25,6 +25,7 @@ import OTPScreen from "../container/Auth/OTPScreen";
 import SideMenu from "../components/SideMenu";
 import ToastNotification from "../components/Common/ToastNotification";
 import PDFViewer from "../container/PrintableForms/PDFViewer";
+import MessageDetails from "../container/MessageCenter/MessageDetails";
 /* eslint-disable */
 /**
  * HOC for wrapping toast and loader
@@ -85,6 +86,11 @@ export const registerScreens = store => {
     "PrintableForms",
     () => WrapScreen(PrintableForms, store),
     () => PrintableForms
+  );
+  Navigation.registerComponent(
+    "MessageDetails",
+    () => WrapScreen(MessageDetails, store),
+    () => MessageDetails
   );
   Navigation.registerComponent(
     "Resources",

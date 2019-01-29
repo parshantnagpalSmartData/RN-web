@@ -39,20 +39,6 @@ class MessageCenter extends Component {
   onDrawerPress = () => {
     this.props.appAction.mergeOptions(this.props.componentId, true);
   };
-  // enableScrollingFunction = data => {
-  //   let context = this;
-  //   if (Platform.OS == "ios") {
-  //     this.scrollView.scrollView.setNativeProps({ scrollEnabled: data }); //eslint-disable-line
-  //   } else if (Platform.OS == "android") {
-  //     if (data) {
-  //       setTimeout(() => {
-  //         context.setState({ enableParentScrolling: data });
-  //       }, 2000);
-  //     } else {
-  //       context.setState({ enableParentScrolling: data });
-  //     }
-  //   }
-  // };
 
   getTabRelatedMessages = () => {
     let { appAction } = this.props;
@@ -115,6 +101,11 @@ class MessageCenter extends Component {
     this.onComposeModalClose();
   };
 
+  onMessagePress = () => {
+    let { appAction, componentId } = this.props;
+    appAction.pushToParticularScreen(componentId, "MessageDetails");
+  };
+
   render() {
     let { messages, app, user } = this.props;
     let { inbox, sent, trash, recipients } = messages;
@@ -143,10 +134,7 @@ class MessageCenter extends Component {
             onDeletePress={this.onDeletePress}
             refresh={app.refreshLoader}
             onRefresh={this.getTabRelatedMessages}
-            // enableScrollingFunction={data => {
-            //   this.enableScrollingFunction(data);
-            // }}
-            // onOpen={this.onOpen}
+            onMessagePress={this.onMessagePress}
           />
           <SwiperContainer
             tabLabel="Sent"
@@ -155,10 +143,7 @@ class MessageCenter extends Component {
             onDeletePress={this.onDeletePress}
             refresh={app.refreshLoader}
             onRefresh={this.getTabRelatedMessages}
-            // enableScrollingFunction={data => {
-            //   this.enableScrollingFunction(data);
-            // }}
-            // onOpen={this.onOpen}
+            onMessagePress={this.onMessagePress}
           />
           <SwiperContainer
             tabLabel="Trash"
@@ -167,10 +152,7 @@ class MessageCenter extends Component {
             onDeletePress={this.onDeletePress}
             refresh={app.refreshLoader}
             onRefresh={this.getTabRelatedMessages}
-            // enableScrollingFunction={data => {
-            //   this.enableScrollingFunction(data);
-            // }}
-            // onOpen={this.onOpen}
+            onMessagePress={this.onMessagePress}
           />
         </ScrollableTabView>
         <CustomModal
