@@ -56,14 +56,13 @@ const MessageComponent = ({ data, onDeletePress, refresh, onRefresh }) => {
                       start={{ x: 1, y: 0 }}
                       end={{ x: 0, y: 0 }}
                       colors={Constants.Colors.ButtonGradients}
-                      style
-                      ={{
+                      style={{
                         justifyContent: "center",
                         alignItems: "center",
                         height: moderateScale(60)
                       }}
                     >
-                      <Image                          
+                      <Image
                         source={Constants.Images.Delete}
                         style={{
                           height: moderateScale(27),
@@ -85,7 +84,7 @@ const MessageComponent = ({ data, onDeletePress, refresh, onRefresh }) => {
               // }}
             >
               <View style={Styles.Swipeout}>
-                <            View style={Styles.userImgView}>
+                <View style={Styles.userImgView}>
                   <Image
                     style={Styles.userImg}
                     source={Constants.Images.UserAvatar}
