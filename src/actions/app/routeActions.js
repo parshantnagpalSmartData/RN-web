@@ -62,6 +62,12 @@ export const setScrenStack = (componentId, screen, visible) => {
             bottomTabs: {
               visible,
               drawBehind: true
+            },
+            sideMenu: {
+              left: {
+                visible: false,
+                enabled: false
+              }
             }
           }
         }

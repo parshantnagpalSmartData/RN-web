@@ -1,63 +1,76 @@
 import React from "react";
-import { Image, TouchableHighlight } from "react-native";
+import Interactable from "react-native-interactable";
 import LinearGradient from "react-native-linear-gradient";
-import Swipeout from "react-native-swipeout";
-import { moderateScale } from "../../../helpers/ResponsiveFonts";
+
+import { TouchableOpacity, View, Image } from "react-native";
 import Constants from "../../../constants";
+import { moderateScale } from "../../../helpers/ResponsiveFonts";
 import MessageComponent from "../MessageComponent";
 
 const MessageItem = ({ onDeletePress, index, item, onMessagePress }) => {
   return (
-    <Swipeout
-      autoClose="true"
-      key={index}
-      right={[
-        {
-          component: (
-            <LinearGradient
-              start={{ x: 1, y: 0 }}
-              end={{ x: 0, y: 0 }}
-              colors={Constants.Colors.ButtonGradients}
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                height: moderateScale(60)
-              }}
-            >
-              <Image
-                source={Constants.Images.Delete}
-                style={{
-                  height: moderateScale(27),
-                  width: moderateScale(17)
-                }}
-              />
-            </LinearGradient>
-          ),
-          onPress: () => onDeletePress(item)
+    <Interactable.View
+      horizontalOnly={true}
+      animatedNativeDriver={true}
+      // boundaries={{ left: -100, right: 100, bounce: 0.5 }}
+      snapPoints={[{ x: 0 }, { x: -(Constants.BaseStyle.DEVICE_WIDTH + 100) }]}
+      dragEnabled={true}
+      initialPosition={{ x: 0, y: 0 }}
+      onSnap={e => {
+        const { index } = e.nativeEvent;
+        if (index !== 0) {
+          onDeletePress();
         }
-      ]}
-      sensitivity={50}
-      // scroll={data => {
-      //   enableScrollingFunction(data);
+        //
+      }}
+      // onStop={({ x, y }) => {
+      //   console.log("xuuuuuu", x, y);
       // }}
-      /*  eslint-disable-next-line */
-      // onOpen={(sectionID, rowId, direction) => {
-      //   onOpen(direction, item);
-      // }}
+      // snapPoints={[{ y: 0 }]}
+      // onSnap={this.onDrawerSnap}
     >
-      <TouchableHighlight
-        underlayColor="rgba(192,192,192,1,0.6)"
-        onPress={() => onMessagePress()}
-      >
-        <MessageComponent
-          MessageSubject={item.MessageSubject}
-          SenderFirstName={item.Sender_FirstName}
-          SenderLastName={item.Sender_LastName}
-          MessageDate={item.MessageDate}
-        />
-      </TouchableHighlight>
-    </Swipeout>
+      <View style={{ backgroundColor: "green", flexDirection: "row" }}>
+        <TouchableOpacity
+          underlayColor="rgba(192,192,192,0.6)"
+          onPress={() => onMessagePress(item)}
+        >
+          <MessageComponent
+            MessageSubject={item.MessageSubject}
+            SenderFirstName={item.Sender_FirstName}
+            SenderLastName={item.Sender_LastName}
+            MessageDate={item.MessageDate}
+          />
+        </TouchableOpacity>
+        <LinearGradient
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 0 }}
+          colors={Constants.Colors.ButtonGradients}
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            height: moderateScale(60),
+            width: moderateScale(60)
+          }}
+        >
+          <Image
+            source={Constants.Images.Delete}
+            style={{
+              height: moderateScale(27),
+              width: moderateScale(17)
+            }}
+          />
+        </LinearGradient>
+        {/* <TouchableOpacity
+            style={styles.swipeoutSide}
+            onPress={() => {
+              alert("11111221");
+            }}
+          >
+            <Text>tert</Text>
+          </TouchableOpacity> */}
+      </View>
+    </Interactable.View>
+    // </Swipeout>
   );
 };
-
 export default MessageItem;

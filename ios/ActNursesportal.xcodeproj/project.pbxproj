@@ -1099,7 +1099,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 33P3VUARHV;
+						DevelopmentTeam = L86M8UX52H;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1816,11 +1816,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ravi Kumar (D262LLSD63)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ravi Kumar (D262LLSD63)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 33P3VUARHV;
+				DEVELOPMENT_TEAM = L86M8UX52H;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
@@ -1834,10 +1835,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.actnursesportal;
 				PRODUCT_NAME = ActNursesportal;
 				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = "DEV ACT Nurse Portal";
+				PROVISIONING_PROFILE_SPECIFIER = ActNursesDevelopment;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1847,10 +1848,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 33P3VUARHV;
+				DEVELOPMENT_TEAM = L86M8UX52H;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
@@ -1864,10 +1865,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.actnursesportal;
 				PRODUCT_NAME = ActNursesportal;
 				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = SmartdataActNursesDistributionProvisioning;
+				PROVISIONING_PROFILE_SPECIFIER = ActNursesDevelopment;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
