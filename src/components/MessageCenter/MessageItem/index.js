@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, TouchableHighlight } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Swipeout from "react-native-swipeout";
 import { moderateScale } from "../../../helpers/ResponsiveFonts";
@@ -37,17 +37,10 @@ const MessageItem = ({ onDeletePress, index, item, onMessagePress }) => {
         }
       ]}
       sensitivity={50}
-      // scroll={data => {
-      //   enableScrollingFunction(data);
-      // }}
-      /*  eslint-disable-next-line */
-      // onOpen={(sectionID, rowId, direction) => {
-      //   onOpen(direction, item);
-      // }}
     >
-      <TouchableHighlight
-        underlayColor="rgba(192,192,192,1,0.6)"
-        onPress={() => onMessagePress()}
+      <TouchableOpacity
+        underlayColor="rgba(192,192,192,0.6)"
+        onPress={() => onMessagePress(item)}
       >
         <MessageComponent
           MessageSubject={item.MessageSubject}
@@ -55,7 +48,7 @@ const MessageItem = ({ onDeletePress, index, item, onMessagePress }) => {
           SenderLastName={item.Sender_LastName}
           MessageDate={item.MessageDate}
         />
-      </TouchableHighlight>
+      </TouchableOpacity>
     </Swipeout>
   );
 };

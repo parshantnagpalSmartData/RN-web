@@ -4,7 +4,7 @@ Author :Suraj Sanwal
 Description: conatins all messeging related actions for app 
 Date : 9 January 2019
 */
-
+import { Platform } from "react-native";
 import RestClient from "../../helpers/RestClient";
 import * as Types from "../../actionTypes";
 import * as AppActions from "../app";
@@ -13,32 +13,31 @@ import Constants from "../../constants";
 export const getMessages = (folder, cb) => {
   return (dispatch, getState) => {
     dispatch(AppActions.startRefreshLoader());
+    dispatch({ type: Types.UPDATE_CURRENT_TAB, payload: folder });
     RestClient.getCall(`messages?folder=${folder}`, getState().user.token)
       .then(res => {
         dispatch(AppActions.stopRefreshLoader());
         if (res.status) {
-          if (cb) {
-            cb(res.result.data);
-          }
           if (folder === "inbox") {
             dispatch({
               type: Types.UPDATE_INBOX,
               payload: res.result.data
             });
-            return;
           }
           if (folder === "trash") {
             dispatch({
               type: Types.UPDATE_TRASH,
               payload: res.result.data
             });
-            return;
           }
           if (folder === "sent") {
             dispatch({
               type: Types.UPDATE_SENT,
               payload: res.result.data
             });
+          }
+          if (cb) {
+            cb(res.result.data);
             return;
           }
         } else {
@@ -51,7 +50,6 @@ export const getMessages = (folder, cb) => {
       });
   };
 };
-
 export const deleteMessage = (messageId, success) => {
   return (dispatch, getState) => {
     RestClient.restCall(
@@ -160,5 +158,24 @@ export const getRecipients = () => {
         dispatch(AppActions.stopRefreshLoader());
         console.warn("error", e); // eslint-disable-line
       });
+  };
+};
+
+export const updateWebSelectedMessage = messageId => {
+  return dispatch => {
+    dispatch({ type: Types.UPDATE_ACTIVE_MESSAGE, payload: messageId });
+  };
+};
+
+export const setActiveMessage = (messageId, componentId) => {
+  return dispatch => {
+    dispatch(updateWebSelectedMessage(messageId));
+    {
+      Platform.OS !== "web"
+        ? dispatch(
+            AppActions.pushToParticularScreen(componentId, "MessageDetails")
+          )
+        : null;
+    }
   };
 };

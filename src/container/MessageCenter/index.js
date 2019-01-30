@@ -19,6 +19,7 @@ import RightComponent from "../../components/Common/RightComponent";
 import constants from "../../constants";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
+
 class MessageCenter extends Component {
   constructor(props) {
     super(props);
@@ -101,9 +102,9 @@ class MessageCenter extends Component {
     this.onComposeModalClose();
   };
 
-  onMessagePress = () => {
+  onMessagePress = message => {
     let { appAction, componentId } = this.props;
-    appAction.pushToParticularScreen(componentId, "MessageDetails");
+    appAction.setActiveMessage(message.MessageID, componentId);
   };
 
   render() {
