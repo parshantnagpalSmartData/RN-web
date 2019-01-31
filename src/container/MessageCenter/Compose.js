@@ -157,7 +157,7 @@ const Styles = StyleSheet.create({
   },
   TextInput: {
     justifyContent: "flex-start",
-    alignItems: "flex-start", 
+    alignItems: "flex-start",
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
     color: Constants.Colors.Black,

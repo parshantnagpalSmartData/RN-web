@@ -103,13 +103,13 @@ class MessageDetails extends Component {
                         />
                     ) : null}
                     <View style={Styles.messageView}>
-                        <View style={Styles.UserImage}>
-                            <Image
-                                source={Constants.Images.UserImage}
-                                style={Styles.UserImg}
-                            />
-                        </View>
-                        <View style={Styles.userInfo}>
+                        <View style={Styles.header}>
+                            <View style={Styles.UserImage}>
+                                <Image
+                                    source={Constants.Images.UserImage}
+                                    style={Styles.UserImg}
+                                />
+                            </View>
                             <View style={Styles.userNameView}>
                                 <Text style={Styles.userName}>
                                     {message && message.Recipient_GroupName}
@@ -124,6 +124,8 @@ class MessageDetails extends Component {
                                         </Text>
                                     )}
                             </View>
+                        </View>
+                        <View style={Styles.userInfo}>
                             {Platform.OS === "web" ? (
                                 <View style={Styles.MessageSubject}>
                                     <Text style={Styles.userName}>
@@ -141,6 +143,7 @@ class MessageDetails extends Component {
                             </View>
                         </View>
                     </View>
+
                     <CustomModal
                         isVisible={this.state.composeModal}
                         onBackdropPress={this.onComposeModalClose}
@@ -168,9 +171,10 @@ class MessageDetails extends Component {
 
 const Styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
-    messageView: { flexDirection: "row" },
+    messageView: { flexDirection: "column", justifyContent: "flex-start" },
+    header: { flexDirection: "row", borderBottomWidth: 1, paddingVertical: moderateScale(10), borderBottomColor: "rgba(122,122,122,0.5)" },
     UserImage: {
         height: moderateScale(50),
         width: moderateScale(50),
@@ -181,14 +185,16 @@ const Styles = StyleSheet.create({
     userInfo: { padding: moderateScale(10), flex: 1 },
     userNameView: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
         alignItems: "center",
         ...Platform.select({
             web: {
                 flexDirection: "column",
+                justifyContent: "center",
                 alignItems: "flex-start",
-                borderBottomWidth: 1,
-                borderBottomColor: Constants.Colors.Gray
+                borderBottom: 1,
+                borderBottomColor: Constants.Colors.Gray,
+                left: moderateScale(10)
             }
         })
     },
