@@ -5,11 +5,19 @@ Description: Display the PDF's
 Date : 13 december 2018
 */
 import React, { Component } from "react";
-import { StyleSheet, Platform, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+  Image,
+  Button
+} from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import axios from "axios";
+import RNFetchBlob from "rn-fetch-blob";
+import RNPrint from "react-native-print";
 import * as appAction from "../../actions";
 import PDF from "../../components/PDFViewer";
 import DivContainer from "../../components/Common/DivContainer";
@@ -50,6 +58,22 @@ class PDFViewer extends Component {
       link.click();
     });
   };
+  printPDF = async () => {
+    let { base64PrintableData } = this.props.forms;
+
+    const dirs = RNFetchBlob.fs.dirs;
+
+    var path = dirs.DocumentDir + "/data.pdf";
+
+    RNFetchBlob.fs
+      .writeFile(path, base64PrintableData.file, "base64")
+      .then(async () => {
+        await RNPrint.print({ filePath: dirs.DocumentDir + "/data.pdf" });
+      });
+
+    // await RNPrint.print({ filePath: 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf' })
+    // await RNPrint.print({ filePath: "data:application/pdf;base64," + base64PrintableData.file })
+  };
 
   /**
    * contains cancel button for web and header for app
@@ -83,6 +107,7 @@ class PDFViewer extends Component {
     return (
       <DivContainer styleApp={Styles.pdfStyle} styleWeb={Styles.pdfStyle}>
         {this.cancelButtonAndHeaders(base64PrintableData.filename)}
+        <Button onPress={this.printPDF} title="Select Printer" />
         <PDF
           base64Data={base64PrintableData}
           onDocumentLoadSuccess={this.onDocumentLoadSuccess}

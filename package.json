@@ -70,6 +70,7 @@
     "react-native-navigation": "^2.5.2",
     "react-native-otp-inputs": "file:./modified_modules/react-native-otp-inputs",
     "react-native-pdf": "^5.0.11",
+    "react-native-print": "^0.5.1",
     "react-native-scrollable-tab-view": "^0.10.0",
     "react-native-smooth-swipe-list": "^1.4.7",
     "react-native-splash-screen": "^3.1.1",
