@@ -69,6 +69,15 @@ class MessageDetails extends Component {
     this.onComposeModalClose();
   };
 
+  getUserEmail = user => {
+    let {
+      messages: { recipients }
+    } = this.props;
+    let index = _.findIndex(recipients, item => item.name === user);
+    if (index !== -1) {
+      return recipients[index].email;
+    }
+  };
   render() {
     let {
       messages: { activeMessage, inbox, trash, sent, tab, recipients },
@@ -81,96 +90,129 @@ class MessageDetails extends Component {
       message => message.MessageID === activeMessage
     );
     let message = currentTab[index];
-    return (
-      <View style={Styles.container}>
-        {Platform.OS !== "web" ? (
-          <Header
-            title={"Message Details"}
-            hideDrawer
-            onBackPress={this.onBackPress}
-            rightComponent={<RightComponent icon={Constants.Images.Reply} />}
-            onRightPress={() => this.onRightPress(message)}
-          />
-        ) : null}
-        <View style={{ flexDirection: "row" }}>
-          <View
-            style={{
-              height: moderateScale(50),
-              width: moderateScale(50),
-              borderRadius: moderateScale(100),
-              padding: moderateScale(5)
-            }}
-          >
-            <Image
-              source={Constants.Images.UserImage}
-              style={{ height: moderateScale(50), width: moderateScale(50) }}
+    if (index !== -1) {
+      return (
+        <View style={Styles.container}>
+          {Platform.OS !== "web" ? (
+            <Header
+              title={"Message Details"}
+              hideDrawer
+              onBackPress={this.onBackPress}
+              rightComponent={<RightComponent icon={Constants.Images.Reply} />}
+              onRightPress={() => this.onRightPress(message)}
             />
-          </View>
-          <View style={{ padding: moderateScale(10), flex: 1 }}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center"
-              }}
-            >
-              <Text
-                style={{
-                  ...Constants.Fonts.Regular,
-                  fontSize: moderateScale(16),
-                  color: Constants.Colors.Primary
-                }}
-              >{`${message && message.Sender_LastName}, ${message &&
-                message.Sender_FirstName}`}</Text>
-              <Text
-                style={{
-                  ...Constants.Fonts.Regular,
-                  fontSize: moderateScale(11),
-                  color: Constants.Colors.Gray
-                }}
-              >
-                {timeSince(message && message.MessageDate)}
-              </Text>
+          ) : null}
+          <View style={Styles.messageView}>
+            <View style={Styles.UserImage}>
+              <Image
+                source={Constants.Images.UserImage}
+                style={Styles.UserImg}
+              />
             </View>
-            <View style={{ paddingVertical: moderateScale(5) }}>
-              <Text
-                style={{
-                  ...Constants.Fonts.Light,
-                  fontSize: moderateScale(12),
-                  color: Constants.Colors.Black
-                }}
-              >
-                {message && message.MessageBody}
-              </Text>
+            <View style={Styles.userInfo}>
+              <View style={Styles.userNameView}>
+                <Text style={Styles.userName}>
+                  {message && message.Recipient_GroupName}
+                </Text>
+                {Platform.OS !== "web" ? (
+                  <Text style={Styles.timeLine}>
+                    {timeSince(message && message.MessageDate)}
+                  </Text>
+                ) : (
+                  <Text style={Styles.timeLine}>
+                    {this.getUserEmail(message.Recipient_GroupName)}
+                  </Text>
+                )}
+              </View>
+              {Platform.OS === "web" ? (
+                <View style={Styles.MessageSubject}>
+                  <Text style={Styles.userName}>
+                    {message && message.MessageSubject}
+                  </Text>
+                  <Text style={Styles.timeLine}>
+                    {timeSince(message && message.MessageDate)}
+                  </Text>
+                </View>
+              ) : null}
+              <View style={Styles.messageBody}>
+                <Text style={Styles.messageBodyText}>
+                  {message && message.MessageBody}
+                </Text>
+              </View>
             </View>
           </View>
+          <CustomModal
+            isVisible={this.state.composeModal}
+            onBackdropPress={this.onComposeModalClose}
+            style={{ margin: 0 }}
+          >
+            <Compose
+              user={user}
+              onClose={this.onComposeModalClose}
+              recipients={recipients}
+              onChangeRecipient={this.onChangeRecipient}
+              onChangeMessage={this.onChangeMessage}
+              onChangeSubject={this.onChangeSubject}
+              onComposePress={this.onComposePress}
+              subject={subject}
+              to={to}
+              tabLable={"Reply Message"}
+            />
+          </CustomModal>
         </View>
-        <CustomModal
-          isVisible={this.state.composeModal}
-          onBackdropPress={this.onComposeModalClose}
-          style={{ margin: 0 }}
-        >
-          <Compose
-            user={user}
-            onClose={this.onComposeModalClose}
-            recipients={recipients}
-            onChangeRecipient={this.onChangeRecipient}
-            onChangeMessage={this.onChangeMessage}
-            onChangeSubject={this.onChangeSubject}
-            onComposePress={this.onComposePress}
-            subject={subject}
-            to={to}
-            tabLable={"Reply Message"}
-          />
-        </CustomModal>
-      </View>
-    );
+      );
+    }
+    return null;
   }
 }
 
 const Styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  messageView: { flexDirection: "row" },
+  UserImage: {
+    height: moderateScale(50),
+    width: moderateScale(50),
+    borderRadius: moderateScale(100),
+    padding: moderateScale(5)
+  },
+  UserImg: { height: moderateScale(50), width: moderateScale(50) },
+  userInfo: { padding: moderateScale(10), flex: 1 },
+  userNameView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    ...Platform.select({
+      web: {
+        flexDirection: "column",
+        alignItems: "flex-start",
+        borderBottom: 1,
+        borderBottomColor: Constants.Colors.Gray
+      }
+    })
+  },
+  MessageSubject: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: moderateScale(10)
+  },
+  userName: {
+    ...Constants.Fonts.Regular,
+    fontSize: moderateScale(16),
+    color: Constants.Colors.Primary
+  },
+  timeLine: {
+    ...Constants.Fonts.Regular,
+    fontSize: moderateScale(11),
+    color: Constants.Colors.Gray
+  },
+  messageBody: { paddingVertical: moderateScale(5) },
+  messageBodyText: {
+    ...Constants.Fonts.Light,
+    fontSize: moderateScale(12),
+    color: Constants.Colors.Black
   }
 });
 const mapStateToProps = state => ({

@@ -12,6 +12,8 @@ const MessageItem = ({ item, onPress, onPressIsChecked }) => {
           MessageSubject={item.MessageSubject}
           SenderFirstName={item.Sender_FirstName}
           SenderLastName={item.Sender_LastName}
+          Recipient_GroupName={item.Recipient_GroupName}
+          MessageDate={item.MessageDate}
         />
       </TouchableOpacity>
     </div>

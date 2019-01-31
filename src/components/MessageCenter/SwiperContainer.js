@@ -51,8 +51,6 @@ const SwiperContainer = ({
               index={index}
               onDeletePress={() => onDeletePress(item)}
               MessageSubject={item.MessageSubject}
-              SenderFirstName={item.Sender_FirstName}
-              SenderLastName={item.Sender_LastName}
               onMessagePress={onMessagePress}
             />
           );

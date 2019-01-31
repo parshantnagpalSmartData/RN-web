@@ -13,11 +13,12 @@ import Common from "../../helpers/common";
 
 const MessageComponent = ({
   isChecked,
-  SenderLastName,
-  SenderFirstName,
+  // SenderLastName,
+  // SenderFirstName,
   MessageDate,
   MessageSubject,
-  onPressIsChecked
+  onPressIsChecked,
+  Recipient_GroupName
 }) => {
   return (
     <View style={Styles.Swipeout}>
@@ -33,9 +34,7 @@ const MessageComponent = ({
       </View>
       <View style={Styles.messageView}>
         <View style={Styles.nameTimeView}>
-          <Text style={Styles.nameText}>
-            {`${SenderLastName} ${SenderFirstName}`}
-          </Text>
+          <Text style={Styles.nameText}>{Recipient_GroupName}</Text>
           <Text style={Styles.timeText}>{Common.timeSince(MessageDate)}</Text>
         </View>
         <Text style={Styles.MessageSubject}>{MessageSubject}</Text>

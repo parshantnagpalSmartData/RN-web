@@ -146,7 +146,9 @@ export const getRecipients = () => {
           recipients.map(item => {
             data.push({
               value: item.MessageGroupID,
-              label: `${item.GroupName} (${item.GroupEmail})`
+              label: `${item.GroupName} (${item.GroupEmail})`,
+              email: item.GroupEmail,
+              name: item.GroupName
             });
           });
           dispatch({ type: Types.RECIPIENTS_LIST, payload: data });

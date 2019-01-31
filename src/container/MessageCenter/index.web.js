@@ -157,6 +157,7 @@ class MessageCenter extends Component {
 
   componentDidMount() {
     this.getTabRelatedMessages();
+    this.props.appAction.getRecipients();
   }
 
   updateSelectedMessage = () => {

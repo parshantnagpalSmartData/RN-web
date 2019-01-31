@@ -35,6 +35,7 @@ class MessageCenter extends Component {
 
   componentDidMount() {
     this.getTabRelatedMessages();
+    this.props.appAction.getRecipients();
   }
 
   onDrawerPress = () => {
@@ -69,9 +70,7 @@ class MessageCenter extends Component {
   };
 
   onRightPress = () => {
-    this.setState({ composeModal: true }, () => {
-      this.props.appAction.getRecipients();
-    });
+    this.setState({ composeModal: true });
   };
 
   onComposeModalClose = () => {
