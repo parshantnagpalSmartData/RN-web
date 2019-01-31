@@ -2,6 +2,7 @@ package com.actnursesportal;
 
 
 import com.facebook.react.ReactApplication;
+import com.christopherdro.RNPrint.RNPrintPackage;
 import com.wix.interactable.Interactable;
 import org.wonday.pdf.RCTPdfView;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -17,7 +18,9 @@ import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 import com.BV.LinearGradient.LinearGradientPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import com.RNFetchBlob.RNFetchBlobPackage;    
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.christopherdro.RNPrint.RNPrintPackage;
+
 
 
 public class MainApplication extends NavigationApplication {
@@ -46,7 +49,9 @@ public class MainApplication extends NavigationApplication {
                                         new LinearGradientPackage(),
                                         new SplashScreenReactPackage(),
                                         new RNFetchBlobPackage(), 
-                                         new RCTPdfView()
+                                        new RCTPdfView(),
+                                        new Interactable(),
+                                        new RNPrintPackage()
                                 );
             }
 

@@ -33,29 +33,31 @@ const Compose = ({
   onComposePress
 }) => (
   <View style={Styles.container}>
-    <LinearGradient
-      start={{ x: 1, y: 0 }}
-      end={{ x: 0, y: 0 }}
-      colors={
-        Platform.OS === "web"
-          ? Constants.Colors.ButtonGradientsWeb
-          : Constants.Colors.ButtonGradients
-      }
-      style={[Styles.gradientStyle]}
-    >
-      <SafeView />
-      <View style={Styles.header}>
-        <TouchableOpacity onPress={onClose} style={Styles.closeBtn}>
-          <Image source={Constants.Images.Close} />
-        </TouchableOpacity>
-        <Text numberOfLines={2} style={[Styles.headerText]}>
-          {tabLable ? tabLable : "Compose Message"}
-        </Text>
-        <TouchableOpacity onPress={onComposePress}>
-          <Image source={Constants.Images.SentActive} />
-        </TouchableOpacity>
-      </View>
-    </LinearGradient>
+    {Platform.OS !== "web" ? (
+      <LinearGradient
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 0 }}
+        colors={
+          Platform.OS === "web"
+            ? Constants.Colors.ButtonGradientsWeb
+            : Constants.Colors.ButtonGradients
+        }
+        style={[Styles.gradientStyle]}
+      >
+        <SafeView />
+        <View style={Styles.header}>
+          <TouchableOpacity onPress={onClose} style={Styles.closeBtn}>
+            <Image source={Constants.Images.Close} />
+          </TouchableOpacity>
+          <Text numberOfLines={2} style={[Styles.headerText]}>
+            {tabLable ? tabLable : "Compose Message"}
+          </Text>
+          <TouchableOpacity onPress={onComposePress}>
+            <Image source={Constants.Images.SentActive} />
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
+    ) : null}
     <View style={Styles.messageBody}>
       <Dropdown
         value={to && to.toString()}
@@ -146,14 +148,24 @@ const Styles = StyleSheet.create({
     borderBottomWidth: 0.4,
     borderBottomColor: Constants.Colors.Gray,
     paddingVertical: moderateScale(10),
-    paddingHorizontal: moderateScale(10)
+    paddingHorizontal: moderateScale(10),
+    ...Platform.select({
+      web: {
+        minHeight: moderateScale(250)
+      }
+    })
   },
   TextInput: {
     justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "flex-start", 
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
-    color: Constants.Colors.Black
+    color: Constants.Colors.Black,
+    flex: 1,
+    ...Platform.select({ web: { outline: "none" } })
+  },
+  messageBodyText: {
+    minHeight: moderateScale(300)
   },
   commonText: {
     ...Constants.Fonts.Regular,
