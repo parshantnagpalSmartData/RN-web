@@ -53,13 +53,12 @@ const Styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     ...Platform.select({
-      web: {
-
-      },
+      web: {},
       ios: {
-        width: Constants.BaseStyle.DEVICE_WIDTH,
-      }, android: {
-        width: Constants.BaseStyle.DEVICE_WIDTH,
+        width: Constants.BaseStyle.DEVICE_WIDTH
+      },
+      android: {
+        width: Constants.BaseStyle.DEVICE_WIDTH
       }
     })
   },
@@ -79,7 +78,7 @@ const Styles = StyleSheet.create({
     padding: moderateScale(5),
     ...Platform.select({
       web: {
-        height: moderateScale(50),
+        height: moderateScale(50)
       },
       ios: {
         flex: 1

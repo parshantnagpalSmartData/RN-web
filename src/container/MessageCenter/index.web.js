@@ -29,8 +29,8 @@ const RenderSelect = ({ value, handleChange }) => {
           value === "inbox"
             ? Constants.Images.InboxActive
             : value === "sent"
-              ? Constants.Images.SentActive
-              : Constants.Images.TrashActive
+            ? Constants.Images.SentActive
+            : Constants.Images.TrashActive
         }
         style={{
           height: moderateScale(20),
@@ -185,7 +185,7 @@ class MessageCenter extends Component {
     this.setState({ data });
   }
 
-  detailPageOpen() { }
+  detailPageOpen() {}
 
   render() {
     let { app } = this.props,
@@ -210,9 +210,10 @@ class MessageCenter extends Component {
         </div>
 
         <div className={"messageInbox d-flex"}>
-
           <div className={"messageListSection"}>
-            <div className={"messageFilter"}><Filter value={"Sort By"} /></div>
+            <div className={"messageFilter"}>
+              <Filter value={"Sort By"} />
+            </div>
             <MessageComponent
               tabLabel="Inbox"
               tab="inbox"
@@ -222,14 +223,16 @@ class MessageCenter extends Component {
               onRefresh={this.getTabRelatedMessages}
               onPressIsChecked={index => this.toggleChecked(index)}
               onPress={item => this.detailPageOpen(item)}
-            // enableScrollingFunction={data => {
-            //   this.enableScrollingFunction(data);
-            // }}
-            // onOpen={this.onOpen}
+              // enableScrollingFunction={data => {
+              //   this.enableScrollingFunction(data);
+              // }}
+              // onOpen={this.onOpen}
             />
           </div>
           <div className={"messageDetailsSection"}>
-            <div className={"messageCounter"}><MessageCounter /></div>
+            <div className={"messageCounter"}>
+              <MessageCounter />
+            </div>
             <div className={"msgDetailsSection"}>sssss</div>
           </div>
         </div>
