@@ -47,7 +47,7 @@ const MessageComponent = ({
 const Styles = StyleSheet.create({
   Swipeout: {
     height: moderateScale(60),
-    width: Constants.BaseStyle.DEVICE_WIDTH,
+
     flexDirection: "row",
     marginVertical: moderateScale(1),
     padding: moderateScale(5),
@@ -55,8 +55,12 @@ const Styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     ...Platform.select({
-      web: {
-        backgroundColor: "yellow"
+      web: {},
+      ios: {
+        width: Constants.BaseStyle.DEVICE_WIDTH
+      },
+      android: {
+        width: Constants.BaseStyle.DEVICE_WIDTH
       }
     })
   },
@@ -76,9 +80,7 @@ const Styles = StyleSheet.create({
     padding: moderateScale(5),
     ...Platform.select({
       web: {
-        backgroundColor: "red",
-        height: moderateScale(50),
-        width: moderateScale(200)
+        height: moderateScale(50)
       },
       ios: {
         flex: 1

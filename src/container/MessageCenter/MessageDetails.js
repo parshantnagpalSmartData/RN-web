@@ -145,7 +145,6 @@ class MessageDetails extends Component {
             </View>
           </View>
         </View>
-        +
         <CustomModal
           isVisible={this.state.composeModal}
           onBackdropPress={this.onComposeModalClose}
