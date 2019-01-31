@@ -220,3 +220,52 @@ body {
 @media all and (max-width:767px){
   .pdfpopupScroll{width:100%; overflow: auto;}
 }
+
+/*---Message Center---*/
+.messageTopBar{min-height: 75px;}
+.messageTopBar, .messageFilter, .messageCounter{padding:10px 20px; border-bottom:1px #dce2f0 solid;}
+.messageTitle{min-width: 150px;}
+.messageTitle > div{display: -webkit-box;  display: -ms-flexbox;  display: flex; -webkit-box-align: center;  -ms-flex-align: center;  align-items: center;}
+.messageTitle > div > div:first-child{margin-right: 10px; height: 18px !important; width: 21px !important;}
+.messageTitle > div div + div:before{ border: none !important;}
+.messageTitle > div > div + div > div > div{font-size: 18px!important; color:#2E5CAE; font-weight:500; text-transform: uppercase;}
+.messageTitle > div > div > div{background-size:auto 100% !important;}
+.messageTitle .MuiSelect-selectMenu-5{min-height: 1; line-height: 1;}
+
+.messageSearch{min-width: 30%;;}
+.messageSearch > div{margin: 0 !important; width: 100%  !important; border-color: #d7d7d7 !important; height: 45px !important;}
+.composeEmail{font-size: 12px; font-weight: 700; text-transform: uppercase;}
+
+.messageFilter > div, .messageCounter > div{min-height: 34px;}
+.messageCounter > div{padding: 0 !important;}
+.messageFilter > div:first-child:before{border: none !important;}
+.messageFilter > div > div > div{font-size: 16px !important; color: rgba(51,51,51,0.6); font-weight: 500;}
+.messageCounter > div > div{right: 0 !important; color: rgba(51,51,51,0.6);}
+.messageCounter > div > div:first-child{width: 15px !important; height: 19px !important; margin-right: 15px;}
+.messageCounter > div > div:last-child > div{width: 8px !important; height: 14px !important; margin: 0 10px;}
+
+.messageList > div > div{padding: 15px; border-bottom:1px #dce2f0 solid;}
+.messageList > div > div > div:last-child{height: auto !important; display: block !important;}
+
+.msgDetailsSection{padding:0 20px;}
+
+@media screen and (min-width: 768px) {
+  .messageListSection{width:30%;}
+  .messageDetailsSection{width: 70%; border-left:1px #dce2f0 solid;}
+  .d-sm-flex{display: -webkit-box!important;  display: -ms-flexbox!important;  display: flex!important;}
+}
+
+@media screen and (max-width:767px){
+  .composeEmail{position: fixed; height: 44px; width: 44px; right:20px; bottom: 20px; border-radius:50%; background: #333;}
+  .composeEmail > div{margin: auto !important;}
+  .composeEmail div + div{display: none;}
+  .messageSearch{margin-top: 15px;}
+}
+
+
+/*----At Bottom---*/
+.w-100{width: 100%!important;}
+.ml-auto{margin-left: auto;}
+.d-flex{display: -webkit-box!important;  display: -ms-flexbox!important;  display: flex!important;}
+.align-items-center { -webkit-box-align: center!important;  -ms-flex-align: center!important;  align-items: center!important;}
+

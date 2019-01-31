@@ -193,35 +193,26 @@ class MessageCenter extends Component {
     return (
       <View style={Styles.containner}>
         <Header title={"Message center"} onDrawerPress={this.onDrawerPress} />
-        <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: moderateScale(20),
-            justifyContent: "space-between"
-          }}
-        >
-          <RenderSelect
-            value={this.state.tab}
-            handleChange={this.handleChange}
-          />
-          <SearchBar />
-          <View
-            style={{
-              backgroundColor: "red",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
+        <div className={"messageTopBar d-sm-flex align-items-center"}>
+          <div className={"messageTitle"}>
+            <RenderSelect
+              value={this.state.tab}
+              handleChange={this.handleChange}
+            />
+          </div>
+          <div className="messageSearch">
+            <SearchBar />
+          </div>
+          <div className={"composeEmail d-sm-flex align-items-center ml-auto"}>
             <RightComponent icon={Constants.Images.Compose} />
             <Text>Compose</Text>
-          </View>
-        </View>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <View style={{ flex: 0.25 }}>
-            <View style={{ width: moderateScale(50) }}>
-              <Filter value={"Sort By"} />
-            </View>
+          </div>
+        </div>
+
+        <div className={"messageInbox d-flex"}>
+
+          <div className={"messageListSection"}>
+            <div className={"messageFilter"}><Filter value={"Sort By"} /></div>
             <MessageComponent
               tabLabel="Inbox"
               tab="inbox"
@@ -236,11 +227,12 @@ class MessageCenter extends Component {
             // }}
             // onOpen={this.onOpen}
             />
-          </View>
-          <View style={{ flex: 0.75 }}>
-            <MessageCounter />
-          </View>
-        </View>
+          </div>
+          <div className={"messageDetailsSection"}>
+            <div className={"messageCounter"}><MessageCounter /></div>
+            <div className={"msgDetailsSection"}>sssss</div>
+          </div>
+        </div>
       </View>
     );
   }
