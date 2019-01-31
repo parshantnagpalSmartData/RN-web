@@ -187,7 +187,7 @@ const Styles = StyleSheet.create({
       web: {
         flexDirection: "column",
         alignItems: "flex-start",
-        borderBottom: 1,
+        borderBottomWidth: 1,
         borderBottomColor: Constants.Colors.Gray
       }
     })

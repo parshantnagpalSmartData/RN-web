@@ -6,7 +6,14 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "react";
-import { View, StyleSheet, Image, TextInput, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  Text,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -22,6 +29,8 @@ import { moderateScale } from "../../helpers/ResponsiveFonts";
 import RightComponent from "../../components/Common/RightComponent";
 import MessageDetails from "./MessageDetails";
 // import DivContainer from "../../components/Common/DivContainer";
+import CustomModal from "../../components/CustomModal";
+import Compose from "./Compose.js";
 
 const RenderSelect = ({ value, handleChange }) => {
   return (
@@ -149,7 +158,11 @@ class MessageCenter extends Component {
     super(props);
     this.state = {
       tab: "inbox",
-      data: []
+      data: [],
+      composeModal: false,
+      message: "",
+      subject: "",
+      MessageGroupID: null
     };
     this.toggleChecked = this.toggleChecked.bind(this);
     this.detailPageOpen = this.detailPageOpen.bind(this);
@@ -203,16 +216,53 @@ class MessageCenter extends Component {
     data[index].isChecked = !data[index].isChecked;
     this.setState({ data });
   }
-
-  onMessagePress = message => {
-    let { appAction } = this.props;
-    appAction.updateWebSelectedMessage(message.MessageID);
+  onRightPress = () => {
+    this.setState({ composeModal: true });
   };
 
-  detailPageOpen() {}
+  onMessagePress = message => {
+    let { appAction, componentId } = this.props;
+    appAction.setActiveMessage(message.MessageID, componentId);
+  };
+
+  onComposeModalClose = () => {
+    this.setState({ composeModal: false });
+  };
+
+  onChangeRecipient = recipient => {
+    this.setState({ MessageGroupID: recipient });
+  };
+
+  onChangeSubject = subject => {
+    this.setState({ subject });
+  };
+
+  onChangeMessage = message => {
+    this.setState({ message });
+  };
+
+  onComposePress = () => {
+    let { MessageGroupID, subject, message } = this.state;
+    let obj = {
+      MessageSubject: subject,
+      MessageBody: message,
+      ParentMessageID: null,
+      MessageGroupID: MessageGroupID
+    };
+    this.props.appAction.composeMessage(obj);
+    this.onComposeModalClose();
+  };
+
+  detailPageOpen(message) {
+    this.onMessagePress(message);
+  }
 
   render() {
-    let { app } = this.props,
+    let {
+        app,
+        user,
+        messages: { recipients }
+      } = this.props,
       { data } = this.state;
     return (
       <View style={Styles.containner}>
@@ -228,8 +278,10 @@ class MessageCenter extends Component {
             <SearchBar />
           </div>
           <div className={"composeEmail d-sm-flex align-items-center ml-auto"}>
-            <RightComponent icon={Constants.Images.Compose} />
-            <Text>Compose</Text>
+            <TouchableOpacity onPress={() => this.onRightPress()}>
+              <RightComponent icon={Constants.Images.Compose} />
+              <Text>Compose</Text>
+            </TouchableOpacity>
           </div>
         </div>
 
@@ -246,7 +298,7 @@ class MessageCenter extends Component {
               refresh={app.refreshLoader}
               onRefresh={this.getTabRelatedMessages}
               onPressIsChecked={index => this.toggleChecked(index)}
-              onPress={item => this.detailPageOpen(item)}
+              onPress={this.detailPageOpen}
               onMessagePress={this.onMessagePress}
               // enableScrollingFunction={data => {
               //   this.enableScrollingFunction(data);
@@ -263,6 +315,29 @@ class MessageCenter extends Component {
             </div>
           </div>
         </div>
+        <CustomModal
+          isVisible={this.state.composeModal}
+          onBackdropPress={this.onComposeModalClose}
+          style={{ margin: 0 }}
+          customStyles={{
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)"
+          }}
+        >
+          <Compose
+            user={user}
+            onClose={this.onComposeModalClose}
+            recipients={recipients}
+            onChangeRecipient={this.onChangeRecipient}
+            onChangeMessage={this.onChangeMessage}
+            onChangeSubject={this.onChangeSubject}
+            onComposePress={this.onComposePress}
+          />
+        </CustomModal>
       </View>
     );
   }
