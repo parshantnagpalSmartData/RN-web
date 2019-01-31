@@ -8,10 +8,12 @@
 import * as Types from "../../actionTypes";
 
 const initialState = {
+  tab: "index",
   inbox: [],
   trash: [],
   sent: [],
-  recipients: []
+  recipients: [],
+  activeMessage: null
 };
 
 export default function messages(state = initialState, action = {}) {
@@ -36,6 +38,17 @@ export default function messages(state = initialState, action = {}) {
         ...state,
         recipients: action.payload
       };
+    case Types.UPDATE_ACTIVE_MESSAGE:
+      return {
+        ...state,
+        activeMessage: action.payload
+      };
+    case Types.UPDATE_CURRENT_TAB:
+      return {
+        ...state,
+        tab: action.payload
+      };
+
     case Types.RESET_USER:
       return {
         ...initialState

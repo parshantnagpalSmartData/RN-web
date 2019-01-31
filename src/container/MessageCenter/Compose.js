@@ -21,6 +21,9 @@ import SafeView from "../../components/Common/SafeView";
 import { Dropdown } from "react-native-material-dropdown";
 
 const Compose = ({
+  tabLable,
+  to,
+  subject,
   onClose,
   recipients,
   user,
@@ -46,7 +49,7 @@ const Compose = ({
           <Image source={Constants.Images.Close} />
         </TouchableOpacity>
         <Text numberOfLines={2} style={[Styles.headerText]}>
-          Compose Message
+          {tabLable ? tabLable : "Compose Message"}
         </Text>
         <TouchableOpacity onPress={onComposePress}>
           <Image source={Constants.Images.SentActive} />
@@ -55,6 +58,7 @@ const Compose = ({
     </LinearGradient>
     <View style={Styles.messageBody}>
       <Dropdown
+        value={to && to.toString()}
         label="To"
         data={recipients}
         overlayStyle={Styles.overlayStyle}
@@ -71,6 +75,7 @@ const Compose = ({
       <View style={Styles.options}>
         <Text style={Styles.commonText}>Subject</Text>
         <TextInput
+          value={subject}
           onChangeText={value => onChangeSubject(value)}
           numberOfLines={2}
           style={[Styles.TextInput, Styles.textPadding]}

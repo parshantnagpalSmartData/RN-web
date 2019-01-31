@@ -14,11 +14,11 @@ import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import CustomTabBar from "../../components/Common/CustomTabBar";
 import SwiperContainer from "../../components/MessageCenter";
-import { Dialog } from "../../helpers/common";
 import RightComponent from "../../components/Common/RightComponent";
 import constants from "../../constants";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
+
 class MessageCenter extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +51,6 @@ class MessageCenter extends Component {
   };
 
   onDeletePress = message => {
-    console.log("message", message);
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
@@ -105,9 +104,9 @@ class MessageCenter extends Component {
     this.onComposeModalClose();
   };
 
-  onMessagePress = () => {
+  onMessagePress = message => {
     let { appAction, componentId } = this.props;
-    appAction.pushToParticularScreen(componentId, "MessageDetails");
+    appAction.setActiveMessage(message.MessageID, componentId);
   };
 
   render() {
