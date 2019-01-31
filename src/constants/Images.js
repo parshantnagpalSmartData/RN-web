@@ -43,5 +43,6 @@ module.exports = {
   Links: require("../assets/images/Links/Links.png"),
   Check: require("../assets/images/Check/Check.png"),
   UnCheck: require("../assets/images/UnCheck/UnCheck.png"),
-  Reply: require("../assets/images/Reply/reply.png")
+  Reply: require("../assets/images/Reply/reply.png"),
+  Menu: require("../assets/images/Menu/menu.png")
 };
