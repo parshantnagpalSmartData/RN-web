@@ -14,217 +14,223 @@ import Compose from "./Compose.js";
 import CustomModal from "../../components/CustomModal";
 
 class MessageDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      composeModal: false,
-      message: "",
-      subject: "",
-      MessageGroupID: null,
-      ParentMessageID: null
-    };
-  }
-  onBackPress = () => {
-    this.props.appAction.pop(this.props.componentId);
-  };
-
-  onRightPress = message => {
-    this.setState(
-      {
-        composeModal: true,
-        subject: "Re:" + message.MessageSubject,
-        ParentMessageID: message.MessageID
-      },
-      () => {
-        this.props.appAction.getRecipients();
-      }
-    );
-  };
-
-  onComposeModalClose = () => {
-    this.setState({ composeModal: false });
-  };
-
-  onChangeRecipient = recipient => {
-    this.setState({ MessageGroupID: recipient });
-  };
-
-  onChangeSubject = subject => {
-    this.setState({ subject });
-  };
-
-  onChangeMessage = message => {
-    this.setState({ message });
-  };
-
-  onComposePress = () => {
-    let { MessageGroupID, subject, message, ParentMessageID } = this.state;
-    let obj = {
-      MessageSubject: subject,
-      MessageBody: message,
-      ParentMessageID,
-      MessageGroupID
-    };
-    this.props.appAction.composeMessage(obj);
-    this.onComposeModalClose();
-  };
-
-  getUserEmail = user => {
-    let {
-      messages: { recipients }
-    } = this.props;
-    let index = _.findIndex(recipients, item => item.name === user);
-    if (index !== -1) {
-      return recipients[index].email;
+    constructor(props) {
+        super(props);
+        this.state = {
+            composeModal: false,
+            message: "",
+            subject: "",
+            MessageGroupID: null,
+            ParentMessageID: null
+        };
     }
-  };
-  render() {
-    let {
-      messages: { activeMessage, inbox, trash, sent, tab, recipients },
-      user
-    } = this.props;
-    let { subject, to } = this.state;
-    let currentTab = tab === "inbox" ? inbox : tab === "sent" ? sent : trash;
-    let index = _.findIndex(
-      currentTab,
-      message => message.MessageID === activeMessage
-    );
-    let message = currentTab[index];
-    if (index !== -1) {
-      return (
-        <View style={Styles.container}>
-          {Platform.OS !== "web" ? (
-            <Header
-              title={"Message Details"}
-              hideDrawer
-              onBackPress={this.onBackPress}
-              rightComponent={<RightComponent icon={Constants.Images.Reply} />}
-              onRightPress={() => this.onRightPress(message)}
-            />
-          ) : null}
-          <View style={Styles.messageView}>
-            <View style={Styles.UserImage}>
-              <Image
-                source={Constants.Images.UserImage}
-                style={Styles.UserImg}
-              />
-            </View>
-            <View style={Styles.userInfo}>
-              <View style={Styles.userNameView}>
-                <Text style={Styles.userName}>
-                  {message && message.Recipient_GroupName}
-                </Text>
-                {Platform.OS !== "web" ? (
-                  <Text style={Styles.timeLine}>
-                    {timeSince(message && message.MessageDate)}
-                  </Text>
-                ) : (
-                  <Text style={Styles.timeLine}>
-                    {this.getUserEmail(message.Recipient_GroupName)}
-                  </Text>
-                )}
-              </View>
-              {Platform.OS === "web" ? (
-                <View style={Styles.MessageSubject}>
-                  <Text style={Styles.userName}>
-                    {message && message.MessageSubject}
-                  </Text>
-                  <Text style={Styles.timeLine}>
-                    {timeSince(message && message.MessageDate)}
-                  </Text>
+    onBackPress = () => {
+        this.props.appAction.pop(this.props.componentId);
+    };
+
+    onRightPress = message => {
+        this.setState(
+            {
+                composeModal: true,
+                subject: "Re:" + message.MessageSubject,
+                ParentMessageID: message.MessageID
+            },
+            () => {
+                this.props.appAction.getRecipients();
+            }
+        );
+    };
+
+    onComposeModalClose = () => {
+        this.setState({ composeModal: false });
+    };
+
+    onChangeRecipient = recipient => {
+        this.setState({ MessageGroupID: recipient });
+    };
+
+    onChangeSubject = subject => {
+        this.setState({ subject });
+    };
+
+    onChangeMessage = message => {
+        this.setState({ message });
+    };
+
+    onComposePress = () => {
+        let { MessageGroupID, subject, message, ParentMessageID } = this.state;
+        let obj = {
+            MessageSubject: subject,
+            MessageBody: message,
+            ParentMessageID,
+            MessageGroupID
+        };
+        this.props.appAction.composeMessage(obj);
+        this.onComposeModalClose();
+    };
+
+    getUserEmail = user => {
+        let {
+            messages: { recipients }
+        } = this.props;
+        let index = _.findIndex(recipients, item => item.name === user);
+        if (index !== -1) {
+            return recipients[index].email;
+        }
+    };
+    render() {
+        let {
+            messages: { activeMessage, inbox, trash, sent, tab, recipients },
+            user
+        } = this.props;
+        let { subject, to } = this.state;
+        let currentTab = tab === "inbox" ? inbox : tab === "sent" ? sent : trash;
+        let index = _.findIndex(
+            currentTab,
+            message => message.MessageID === activeMessage
+        );
+        let message = currentTab[index];
+        if (index !== -1) {
+            return (
+                <View style={Styles.container}>
+                    {Platform.OS !== "web" ? (
+                        <Header
+                            title={"Message Details"}
+                            hideDrawer
+                            onBackPress={this.onBackPress}
+                            rightComponent={<RightComponent icon={Constants.Images.Reply} />}
+                            onRightPress={() => this.onRightPress(message)}
+                        />
+                    ) : null}
+                    <View style={Styles.messageView}>
+                        <View style={Styles.header}>
+                            <View style={Styles.UserImage}>
+                                <Image
+                                    source={Constants.Images.UserImage}
+                                    style={Styles.UserImg}
+                                />
+                            </View>
+                            <View style={Styles.userNameView}>
+                                <Text style={Styles.userName}>
+                                    {message && message.Recipient_GroupName}
+                                </Text>
+                                {Platform.OS !== "web" ? (
+                                    <Text style={Styles.timeLine}>
+                                        {timeSince(message && message.MessageDate)}
+                                    </Text>
+                                ) : (
+                                        <Text style={Styles.timeLine}>
+                                            {this.getUserEmail(message.Recipient_GroupName)}
+                                        </Text>
+                                    )}
+                            </View>
+                        </View>
+                        <View style={Styles.userInfo}>
+                            {Platform.OS === "web" ? (
+                                <View style={Styles.MessageSubject}>
+                                    <Text style={Styles.userName}>
+                                        {message && message.MessageSubject}
+                                    </Text>
+                                    <Text style={Styles.timeLine}>
+                                        {timeSince(message && message.MessageDate)}
+                                    </Text>
+                                </View>
+                            ) : null}
+                            <View style={Styles.messageBody}>
+                                <Text style={Styles.messageBodyText}>
+                                    {message && message.MessageBody}
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+
+                    <CustomModal
+                        isVisible={this.state.composeModal}
+                        onBackdropPress={this.onComposeModalClose}
+                        style={{ margin: 0 }}
+                    >
+                        <Compose
+                            user={user}
+                            onClose={this.onComposeModalClose}
+                            recipients={recipients}
+                            onChangeRecipient={this.onChangeRecipient}
+                            onChangeMessage={this.onChangeMessage}
+                            onChangeSubject={this.onChangeSubject}
+                            onComposePress={this.onComposePress}
+                            subject={subject}
+                            to={to}
+                            tabLable={"Reply Message"}
+                        />
+                    </CustomModal>
                 </View>
-              ) : null}
-              <View style={Styles.messageBody}>
-                <Text style={Styles.messageBodyText}>
-                  {message && message.MessageBody}
-                </Text>
-              </View>
-            </View>
-          </View>
-          <CustomModal
-            isVisible={this.state.composeModal}
-            onBackdropPress={this.onComposeModalClose}
-            style={{ margin: 0 }}
-          >
-            <Compose
-              user={user}
-              onClose={this.onComposeModalClose}
-              recipients={recipients}
-              onChangeRecipient={this.onChangeRecipient}
-              onChangeMessage={this.onChangeMessage}
-              onChangeSubject={this.onChangeSubject}
-              onComposePress={this.onComposePress}
-              subject={subject}
-              to={to}
-              tabLable={"Reply Message"}
-            />
-          </CustomModal>
-        </View>
-      );
+            );
+        }
+        return null;
     }
-    return null;
-  }
 }
 
 const Styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  messageView: { flexDirection: "row" },
-  UserImage: {
-    height: moderateScale(50),
-    width: moderateScale(50),
-    borderRadius: moderateScale(100),
-    padding: moderateScale(5)
-  },
-  UserImg: { height: moderateScale(50), width: moderateScale(50) },
-  userInfo: { padding: moderateScale(10), flex: 1 },
-  userNameView: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    ...Platform.select({
-      web: {
-        flexDirection: "column",
-        alignItems: "flex-start",
-        borderBottomWidth: 1,
-        borderBottomColor: Constants.Colors.Gray
-      }
-    })
-  },
-  MessageSubject: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginVertical: moderateScale(10)
-  },
-  userName: {
-    ...Constants.Fonts.Regular,
-    fontSize: moderateScale(16),
-    color: Constants.Colors.Primary
-  },
-  timeLine: {
-    ...Constants.Fonts.Regular,
-    fontSize: moderateScale(11),
-    color: Constants.Colors.Gray
-  },
-  messageBody: { paddingVertical: moderateScale(5) },
-  messageBodyText: {
-    ...Constants.Fonts.Light,
-    fontSize: moderateScale(12),
-    color: Constants.Colors.Black
-  }
+    container: {
+        flex: 1,
+    },
+    messageView: { flexDirection: "column", justifyContent: "flex-start" },
+    header: { flexDirection: "row", borderBottomWidth: 1, paddingVertical: moderateScale(10), borderBottomColor: "rgba(122,122,122,0.5)" },
+    UserImage: {
+        height: moderateScale(50),
+        width: moderateScale(50),
+        borderRadius: moderateScale(100),
+        padding: moderateScale(5)
+    },
+    UserImg: { height: moderateScale(50), width: moderateScale(50) },
+    userInfo: { padding: moderateScale(10), flex: 1 },
+    userNameView: {
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        ...Platform.select({
+            web: {
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                borderBottom: 1,
+                borderBottomColor: Constants.Colors.Gray,
+                left: moderateScale(10)
+            }
+        })
+    },
+    MessageSubject: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginVertical: moderateScale(10)
+    },
+    userName: {
+        ...Constants.Fonts.Regular,
+        fontSize: moderateScale(16),
+        color: Constants.Colors.Primary
+    },
+    timeLine: {
+        ...Constants.Fonts.Regular,
+        fontSize: moderateScale(11),
+        color: Constants.Colors.Gray
+    },
+    messageBody: { paddingVertical: moderateScale(5) },
+    messageBodyText: {
+        ...Constants.Fonts.Light,
+        fontSize: moderateScale(12),
+        color: Constants.Colors.Black
+    }
 });
 const mapStateToProps = state => ({
-  user: state.user,
-  app: state.app,
-  messages: state.messages
+    user: state.user,
+    app: state.app,
+    messages: state.messages
 });
 const mapDispatchToProps = dispatch => ({
-  appAction: bindActionCreators(appAction, dispatch)
+    appAction: bindActionCreators(appAction, dispatch)
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(MessageDetails);
