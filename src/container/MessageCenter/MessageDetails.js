@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Platform, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  Image,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import _ from "lodash";
@@ -12,6 +20,8 @@ import { timeSince } from "../../helpers/common";
 import RightComponent from "../../components/Common/RightComponent";
 import Compose from "./Compose.js";
 import CustomModal from "../../components/CustomModal";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 class MessageDetails extends Component {
   constructor(props) {
@@ -111,18 +121,51 @@ class MessageDetails extends Component {
                 />
               </View>
               <View style={Styles.userNameView}>
-                <Text style={Styles.userName}>
-                  {message && message.Recipient_GroupName}
-                </Text>
-                {Platform.OS !== "web" ? (
-                  <Text style={Styles.timeLine}>
-                    {timeSince(message && message.MessageDate)}
+                <View style={Styles.userView}>
+                  <Text style={Styles.userName}>
+                    {message && message.Recipient_GroupName}
                   </Text>
-                ) : (
-                  <Text style={Styles.timeLine}>
-                    {this.getUserEmail(message.Recipient_GroupName)}
-                  </Text>
-                )}
+                  {Platform.OS !== "web" ? (
+                    <Text style={Styles.timeLine}>
+                      {timeSince(message && message.MessageDate)}
+                    </Text>
+                  ) : (
+                    <Text style={Styles.timeLine}>
+                      {this.getUserEmail(message.Recipient_GroupName)}
+                    </Text>
+                  )}
+                </View>
+                {Platform.OS === "web"
+                  ? !this.props.open && (
+                      <TouchableOpacity onPress={this.props.toggleOpen}>
+                        <Image
+                          source={Constants.Images.Menu}
+                          style={{
+                            height: moderateScale(20),
+                            width: moderateScale(20)
+                          }}
+                        />
+                      </TouchableOpacity>
+                    )
+                  : null}
+
+                {this.props.open && Platform.OS === "web" ? (
+                  <Select
+                    value={1}
+                    open={this.props.open}
+                    inputProps={{
+                      name: "folder",
+                      id: "event-name"
+                    }}
+                    onClose={() => {}}
+                    onChange={event => {
+                      this.props.onClose(event.target.value, message);
+                    }}
+                  >
+                    <MenuItem value={"delete"}>Delete</MenuItem>
+                    <MenuItem value={"reply"}>Reply </MenuItem>
+                  </Select>
+                ) : null}
               </View>
             </View>
             <View style={Styles.userInfo}>
@@ -136,11 +179,23 @@ class MessageDetails extends Component {
                   </Text>
                 </View>
               ) : null}
-              <View style={Styles.messageBody}>
-                <Text style={Styles.messageBodyText}>
-                  {message && message.MessageBody}
-                </Text>
-              </View>
+              {Platform.OS !== "web" ? (
+                <ScrollView
+                  contentContainerStyle={Styles.messageBody}
+                  showsHorizontalScrollIndicator={false}
+                  showsVerticalScrollIndicator={false}
+                >
+                  <Text style={Styles.messageBodyText}>
+                    {message && message.MessageBody}
+                  </Text>
+                </ScrollView>
+              ) : (
+                <View style={Styles.messageBody}>
+                  <Text style={Styles.messageBodyText}>
+                    {message && message.MessageBody}
+                  </Text>
+                </View>
+              )}
             </View>
           </View>
 
@@ -173,12 +228,20 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  messageView: { flexDirection: "column", justifyContent: "flex-start" },
+  messageView: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start"
+  },
   header: {
     flexDirection: "row",
-    borderBottomWidth: 1,
-    paddingVertical: moderateScale(10),
-    borderBottomColor: "rgba(122,122,122,0.5)"
+    ...Platform.select({
+      web: {
+        borderBottomWidth: 1,
+        paddingVertical: moderateScale(10),
+        borderBottomColor: "rgba(122,122,122,0.5)"
+      }
+    })
   },
   UserImage: {
     height: moderateScale(50),
@@ -187,19 +250,26 @@ const Styles = StyleSheet.create({
     padding: moderateScale(5)
   },
   UserImg: { height: moderateScale(50), width: moderateScale(50) },
-  userInfo: { padding: moderateScale(10), flex: 1 },
+  userInfo: { padding: moderateScale(5), flex: 1 },
   userNameView: {
+    flex: 1,
+    marginHorizontal: moderateScale(10),
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "center",
     ...Platform.select({
       web: {
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        borderBottom: 1,
-        borderBottomColor: Constants.Colors.Gray,
-        left: moderateScale(10)
+        alignItems: "flex-start"
+      }
+    })
+  },
+  userView: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    ...Platform.select({
+      web: {
+        flexDirection: "column"
       }
     })
   },
@@ -219,11 +289,16 @@ const Styles = StyleSheet.create({
     fontSize: moderateScale(11),
     color: Constants.Colors.Gray
   },
-  messageBody: { paddingVertical: moderateScale(5) },
+  messageBody: {
+    paddingVertical: moderateScale(5),
+    flex: 1
+  },
   messageBodyText: {
     ...Constants.Fonts.Light,
     fontSize: moderateScale(12),
-    color: Constants.Colors.Black
+    color: Constants.Colors.Black,
+    textAlign: "justify",
+    textAlignVertical: "center"
   }
 });
 const mapStateToProps = state => ({

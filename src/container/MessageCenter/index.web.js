@@ -162,7 +162,10 @@ class MessageCenter extends Component {
       composeModal: false,
       message: "",
       subject: "",
-      MessageGroupID: null
+      MessageGroupID: null,
+      open: false,
+      ParentMessageID: null,
+      tabLabel: "Compose Message"
     };
     this.toggleChecked = this.toggleChecked.bind(this);
     this.detailPageOpen = this.detailPageOpen.bind(this);
@@ -257,13 +260,43 @@ class MessageCenter extends Component {
     this.onMessagePress(message);
   }
 
+  menuOption = (value, message) => {
+    this.setState({ open: false });
+    if (value === "reply") {
+      this.replyMessage(message);
+    } else {
+      this.onDeletePress();
+    }
+  };
+  onDeletePress = message => {
+    let { tab } = this.state;
+    let { appAction } = this.props;
+    if (tab !== "trash") {
+      appAction.deleteMessage(message.MessageID, () =>
+        this.getTabRelatedMessages()
+      );
+    }
+  };
+  replyMessage = message => {
+    this.setState(
+      {
+        composeModal: true,
+        subject: "Re:" + message.MessageSubject,
+        ParentMessageID: message.MessageID,
+        tabLabel: "Reply Message"
+      },
+      () => {
+        this.props.appAction.getRecipients();
+      }
+    );
+  };
   render() {
     let {
         app,
         user,
         messages: { recipients }
       } = this.props,
-      { data, MessageGroupID } = this.state;
+      { data, MessageGroupID, subject, tabLabel } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Message center"} onDrawerPress={this.onDrawerPress} />
@@ -297,7 +330,6 @@ class MessageCenter extends Component {
               onDeletePress={this.onDeletePress}
               refresh={app.refreshLoader}
               onRefresh={this.getTabRelatedMessages}
-              onPressIsChecked={index => this.toggleChecked(index)}
               onPress={this.detailPageOpen}
               onMessagePress={this.onMessagePress}
               // enableScrollingFunction={data => {
@@ -311,7 +343,13 @@ class MessageCenter extends Component {
               <MessageCounter />
             </div>
             <div className={"msgDetailsSection"}>
-              <MessageDetails />
+              <MessageDetails
+                open={this.state.open}
+                toggleOpen={() => {
+                  this.setState({ open: !this.state.open });
+                }}
+                onClose={this.menuOption}
+              />
             </div>
           </div>
         </div>
@@ -337,6 +375,8 @@ class MessageCenter extends Component {
             onChangeMessage={this.onChangeMessage}
             onChangeSubject={this.onChangeSubject}
             onComposePress={this.onComposePress}
+            subject={subject}
+            tabLable={tabLabel}
           />
         </CustomModal>
       </View>
