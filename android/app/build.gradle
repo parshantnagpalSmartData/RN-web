@@ -153,7 +153,8 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-interactable')
+    implementation project(':react-native-print')
+    implementation project(':react-native-interactable')
     implementation project(':react-native-pdf')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-splash-screen')

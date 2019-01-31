@@ -48,6 +48,7 @@
 		3D181312EAD641C7939EC2BF /* Montserrat-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3BF20BD57E2459EA28B576D /* Montserrat-ThinItalic.otf */; };
 		559F0BA73BF04FACA771A51D /* MontserratAlternates-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B39A4A86DE94C5180210E32 /* MontserratAlternates-Bold.otf */; };
 		5E2FE50B0E3B436081695B58 /* Montserrat-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6671FFFF720C4484AFFC76FB /* Montserrat-MediumItalic.otf */; };
+		5E785486DBD84F42AA0B2770 /* libRNPrint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27F9F5EAEF54E11B4097DC2 /* libRNPrint.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		5F621FE2D9D049D39C8AC3ED /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B33ECA29824DC0A5698398 /* libInteractable.a */; };
 		636D208469CC41AFAB468B18 /* libRCTPdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62813801DEDE43FD817C2D2C /* libRCTPdf.a */; };
@@ -116,6 +117,7 @@
 		E54143A90B0641239E58575C /* MontserratAlternates-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B8333FDD9014CC28997FF87 /* MontserratAlternates-LightItalic.otf */; };
 		F0E1301FFED349A585F03AFC /* MontserratAlternates-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = C4A89EA326D74566A3FACE46 /* MontserratAlternates-BlackItalic.otf */; };
 		F70F8D54DDDE4119AE17BE8D /* MontserratAlternates-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4FA99D4B69749A5A3A23D3A /* MontserratAlternates-ExtraBold.otf */; };
+		F717393C01D24F5DB06D57D6 /* RNPrintTests.xctest in Frameworks */ = {isa = PBXBuildFile; fileRef = 7728ADBE30374366B172205A /* RNPrintTests.xctest */; };
 		F9EAD8C15D554F9E834E3099 /* Montserrat-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 960407736EB74C7286AF5147 /* Montserrat-BlackItalic.otf */; };
 /* End PBXBuildFile section */
 
@@ -372,6 +374,20 @@
 			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
 			remoteInfo = "RCTAnimation-tvOS";
 		};
+		6608117E2202D5EE00F965FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5F0CA95D81B4FBF97F47A2A /* RNPrint.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1132585C1B99F348005E19FE;
+			remoteInfo = RNPrint;
+		};
+		660811802202D5EE00F965FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5F0CA95D81B4FBF97F47A2A /* RNPrint.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 113258671B99F348005E19FE;
+			remoteInfo = RNPrintTests;
+		};
 		66300AC621EDAEF700FCB200 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D671FCEB321A4FC183AD734C /* RNFetchBlob.xcodeproj */;
@@ -504,6 +520,7 @@
 		669B0D3621C0E1AC00067085 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		6B8333FDD9014CC28997FF87 /* MontserratAlternates-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-LightItalic.otf"; path = "../src/assets/Font/MontserratAlternates-LightItalic.otf"; sourceTree = "<group>"; };
 		71609BFC236040DD8E13E3E7 /* Montserrat-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.otf"; path = "../src/assets/Font/Montserrat-ExtraLight.otf"; sourceTree = "<group>"; };
+		7728ADBE30374366B172205A /* RNPrintTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RNPrintTests.xctest; sourceTree = "<group>"; };
 		7747A371B3E14A859ACA549B /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7F779FC65B2C403CAF08BAE6 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.otf"; path = "../src/assets/Font/Montserrat-Medium.otf"; sourceTree = "<group>"; };
@@ -572,7 +589,9 @@
 		E37ADC9C2B0044939543B84E /* Montserrat-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Thin.otf"; path = "../src/assets/Font/Montserrat-Thin.otf"; sourceTree = "<group>"; };
 		E46A0555176A4F0FB1E75644 /* Montserrat-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-LightItalic.otf"; path = "../src/assets/Font/Montserrat-LightItalic.otf"; sourceTree = "<group>"; };
 		F207B7A4C01A4852B75FB7FD /* MontserratAlternates-SemiBoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-SemiBoldItalic.otf"; path = "../src/assets/Font/MontserratAlternates-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		F27F9F5EAEF54E11B4097DC2 /* libRNPrint.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNPrint.a; sourceTree = "<group>"; };
 		F3BF20BD57E2459EA28B576D /* Montserrat-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ThinItalic.otf"; path = "../src/assets/Font/Montserrat-ThinItalic.otf"; sourceTree = "<group>"; };
+		F5F0CA95D81B4FBF97F47A2A /* RNPrint.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNPrint.xcodeproj; path = "../node_modules/react-native-print/ios/RNPrint.xcodeproj"; sourceTree = "<group>"; };
 		F5FD04B2E97D43FCA146A37C /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.otf"; path = "../src/assets/Font/Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		F81F857BD12441609845C42C /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -610,6 +629,8 @@
 				8243A4A8722547B9A8F576FA /* libRNFetchBlob.a in Frameworks */,
 				636D208469CC41AFAB468B18 /* libRCTPdf.a in Frameworks */,
 				5F621FE2D9D049D39C8AC3ED /* libInteractable.a in Frameworks */,
+				5E785486DBD84F42AA0B2770 /* libRNPrint.a in Frameworks */,
+				F717393C01D24F5DB06D57D6 /* RNPrintTests.xctest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,6 +793,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6608117A2202D5EE00F965FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6608117F2202D5EE00F965FE /* libRNPrint.a */,
+				660811812202D5EE00F965FE /* RNPrintTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		66300AC321EDAEF700FCB200 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,6 +825,8 @@
 				7747A371B3E14A859ACA549B /* libRNFetchBlob.a */,
 				62813801DEDE43FD817C2D2C /* libRCTPdf.a */,
 				99B33ECA29824DC0A5698398 /* libInteractable.a */,
+				F27F9F5EAEF54E11B4097DC2 /* libRNPrint.a */,
+				7728ADBE30374366B172205A /* RNPrintTests.xctest */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -890,6 +922,7 @@
 				D671FCEB321A4FC183AD734C /* RNFetchBlob.xcodeproj */,
 				A34D3348EA164072931BBEF7 /* RCTPdf.xcodeproj */,
 				D738C0AB04424F65A1F38B72 /* Interactable.xcodeproj */,
+				F5F0CA95D81B4FBF97F47A2A /* RNPrint.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1099,7 +1132,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 33P3VUARHV;
+						DevelopmentTeam = L86M8UX52H;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1196,6 +1229,10 @@
 				{
 					ProductGroup = 66300AC321EDAEF700FCB200 /* Products */;
 					ProjectRef = D671FCEB321A4FC183AD734C /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = 6608117A2202D5EE00F965FE /* Products */;
+					ProjectRef = F5F0CA95D81B4FBF97F47A2A /* RNPrint.xcodeproj */;
 				},
 				{
 					ProductGroup = 663137C921D22EF000753AF6 /* Products */;
@@ -1449,6 +1486,20 @@
 			fileType = archive.ar;
 			path = libRCTAnimation.a;
 			remoteRef = 5E9157341DD0AC6500FF2AA8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6608117F2202D5EE00F965FE /* libRNPrint.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNPrint.a;
+			remoteRef = 6608117E2202D5EE00F965FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		660811812202D5EE00F965FE /* RNPrintTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNPrintTests.xctest;
+			remoteRef = 660811802202D5EE00F965FE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		66300AC721EDAEF700FCB200 /* libRNFetchBlob.a */ = {
@@ -1759,12 +1810,15 @@
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = ActNursesportalTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1791,12 +1845,15 @@
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = ActNursesportalTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1816,16 +1873,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ravi Kumar (D262LLSD63)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ravi Kumar (D262LLSD63)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 33P3VUARHV;
+				DEVELOPMENT_TEAM = L86M8UX52H;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = ActNursesportal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1834,10 +1893,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.actnursesportal;
 				PRODUCT_NAME = ActNursesportal;
 				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = "DEV ACT Nurse Portal";
+				PROVISIONING_PROFILE_SPECIFIER = ActNursesDevelopment;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1847,15 +1906,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 33P3VUARHV;
+				DEVELOPMENT_TEAM = L86M8UX52H;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = ActNursesportal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1864,10 +1924,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.actnursesportal;
 				PRODUCT_NAME = ActNursesportal;
 				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = SmartdataActNursesDistributionProvisioning;
+				PROVISIONING_PROFILE_SPECIFIER = ActNursesDevelopment;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1890,11 +1950,14 @@
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = "ActNursesportal-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1930,11 +1993,14 @@
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = "ActNursesportal-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1969,11 +2035,14 @@
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = "ActNursesportal-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2008,11 +2077,14 @@
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-pdf/ios/RCTPdf/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
 				);
 				INFOPLIST_FILE = "ActNursesportal-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

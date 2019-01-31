@@ -14,7 +14,6 @@ import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import CustomTabBar from "../../components/Common/CustomTabBar";
 import SwiperContainer from "../../components/MessageCenter";
-import { Dialog } from "../../helpers/common";
 import RightComponent from "../../components/Common/RightComponent";
 import constants from "../../constants";
 import CustomModal from "../../components/CustomModal";
@@ -56,16 +55,19 @@ class MessageCenter extends Component {
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
-      Dialog("Are you sure want to delete this message?", [
-        { text: "Cancel", onPress: () => {} },
-        {
-          text: "Ok",
-          onPress: () =>
-            appAction.deleteMessage(message.MessageID, () =>
-              this.getTabRelatedMessages()
-            )
-        }
-      ]);
+      appAction.deleteMessage(message.MessageID, () =>
+        this.getTabRelatedMessages()
+      );
+      // Dialog("Are you sure want to delete this message?", [
+      //   { text: "Cancel", onPress: () => {} },
+      //   {
+      //     text: "Ok",
+      //     onPress: () =>
+      //       appAction.deleteMessage(message.MessageID, () =>
+      //         this.getTabRelatedMessages()
+      //       )
+      //   }
+      // ]);
     }
   };
 

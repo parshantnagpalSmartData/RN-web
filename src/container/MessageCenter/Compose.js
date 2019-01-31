@@ -151,18 +151,18 @@ const Styles = StyleSheet.create({
     paddingHorizontal: moderateScale(10),
     ...Platform.select({
       web: {
-        minHeight: moderateScale(300)
+        minHeight: moderateScale(250)
       }
     })
   },
   TextInput: {
     justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "flex-start", 
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
     color: Constants.Colors.Black,
-    outline: "none",
-    flex: 1
+    flex: 1,
+    ...Platform.select({ web: { outline: "none" } })
   },
   messageBodyText: {
     minHeight: moderateScale(300)
