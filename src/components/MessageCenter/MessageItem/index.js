@@ -30,7 +30,7 @@ const MessageItem = ({ onDeletePress, index, item, onMessagePress }) => {
       // snapPoints={[{ y: 0 }]}
       // onSnap={this.onDrawerSnap}
     >
-      <View style={{ backgroundColor: "green", flexDirection: "row" }}>
+      <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           underlayColor="rgba(192,192,192,0.6)"
           onPress={() => onMessagePress(item)}
@@ -40,6 +40,7 @@ const MessageItem = ({ onDeletePress, index, item, onMessagePress }) => {
             SenderFirstName={item.Sender_FirstName}
             SenderLastName={item.Sender_LastName}
             MessageDate={item.MessageDate}
+            Recipient_GroupName={item.Recipient_GroupName}
           />
         </TouchableOpacity>
         <LinearGradient

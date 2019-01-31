@@ -263,7 +263,7 @@ class MessageCenter extends Component {
         user,
         messages: { recipients }
       } = this.props,
-      { data } = this.state;
+      { data, MessageGroupID } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Message center"} onDrawerPress={this.onDrawerPress} />
@@ -329,6 +329,7 @@ class MessageCenter extends Component {
           }}
         >
           <Compose
+            to={MessageGroupID}
             user={user}
             onClose={this.onComposeModalClose}
             recipients={recipients}

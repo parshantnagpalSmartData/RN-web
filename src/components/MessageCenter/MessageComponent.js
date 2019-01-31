@@ -46,7 +46,8 @@ const MessageComponent = ({
 const Styles = StyleSheet.create({
   Swipeout: {
     height: moderateScale(60),
-
+    borderBottomColor: Constants.Colors.Gray,
+    borderBottomWidth: 0.4,
     flexDirection: "row",
     marginVertical: moderateScale(1),
     padding: moderateScale(5),

@@ -19,6 +19,8 @@ import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import SafeView from "../../components/Common/SafeView";
 import { Dropdown } from "react-native-material-dropdown";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const Compose = ({
   tabLable,
@@ -57,17 +59,43 @@ const Compose = ({
           </TouchableOpacity>
         </View>
       </LinearGradient>
-    ) : null}
+    ) : (
+      <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
+        <Image source={Constants.Images.Close} style={Styles.closeImg} />
+      </TouchableOpacity>
+    )}
     <View style={Styles.messageBody}>
-      <Dropdown
-        value={to && to.toString()}
-        label="To"
-        data={recipients}
-        overlayStyle={Styles.overlayStyle}
-        containerStyle={Styles.containerStyle}
-        onChangeText={value => onChangeRecipient(value)}
-        fontSize={11}
-      />
+      {Platform.OS !== "web" ? (
+        <Dropdown
+          value={to && to.toString()}
+          label="To"
+          data={recipients}
+          overlayStyle={Styles.overlayStyle}
+          containerStyle={Styles.containerStyle}
+          onChangeText={value => onChangeRecipient(value)}
+          fontSize={11}
+        />
+      ) : (
+        <View>
+          <Text style={Styles.commonText}>To</Text>
+          <Select
+            value={to}
+            inputProps={{
+              name: "folder",
+              id: "folder-name"
+            }}
+            onChange={event => onChangeRecipient(event.target.value)}
+          >
+            {recipients.map((item, index) => {
+              return (
+                <MenuItem key={index} value={item.value}>
+                  {item.label}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </View>
+      )}
       <View style={Styles.options}>
         <Text style={Styles.commonText}>From</Text>
         <Text style={[Styles.commonText, Styles.textPadding]}>
@@ -93,6 +121,27 @@ const Compose = ({
           placeholderTextColor={Constants.Colors.Gray}
         />
       </View>
+      {Platform.OS === "web" ? (
+        <View
+          style={{
+            // justifyContent: "flex-end",
+            alignItems: "flex-end"
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              // backgroundColor: Constants.Colors.Green,
+              height: moderateScale(30),
+              width: moderateScale(40)
+            }}
+            onPress={onComposePress}
+          >
+            <Image source={Constants.Images.SentActive} />
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </View>
   </View>
 );
@@ -151,13 +200,13 @@ const Styles = StyleSheet.create({
     paddingHorizontal: moderateScale(10),
     ...Platform.select({
       web: {
-        minHeight: moderateScale(250)
+        minHeight: moderateScale(220)
       }
     })
   },
   TextInput: {
     justifyContent: "flex-start",
-    alignItems: "flex-start", 
+    alignItems: "flex-start",
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
     color: Constants.Colors.Black,
@@ -165,14 +214,21 @@ const Styles = StyleSheet.create({
     ...Platform.select({ web: { outline: "none" } })
   },
   messageBodyText: {
-    minHeight: moderateScale(300)
+    minHeight: moderateScale(220)
   },
   commonText: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(11),
     color: Constants.Colors.Gray
   },
-  textPadding: { paddingHorizontal: moderateScale(10) }
+  textPadding: { paddingHorizontal: moderateScale(10) },
+  closeBtnWeb: {
+    alignSelf: "flex-end"
+  },
+  closeImg: {
+    height: moderateScale(15),
+    width: moderateScale(15)
+  }
 });
 
 export default Compose;
