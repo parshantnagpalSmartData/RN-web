@@ -164,10 +164,10 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                      <Text style={Styles.timeLine}>
-                        {this.getUserEmail(message.Recipient_GroupName)}
-                      </Text>
-                    )}
+                        <Text style={Styles.timeLine}>
+                          {this.getUserEmail(message.Recipient_GroupName)}
+                        </Text>
+                      )}
                   </View>
                   {Platform.OS === "web" ? (
                     <DivContainer className={"msgActions"}>
@@ -193,7 +193,7 @@ class MessageDetails extends Component {
                           id: "selectOption"
                         }}
                         className={"SelectSide"}
-                        onClose={() => {}}
+                        onClose={() => { }}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -218,6 +218,7 @@ class MessageDetails extends Component {
                 </View>
               ) : null}
               {Platform.OS !== "web" ? (
+
                 <ScrollView
                   contentContainerStyle={Styles.messageBody}
                   showsHorizontalScrollIndicator={false}
@@ -227,13 +228,16 @@ class MessageDetails extends Component {
                     {message && message.MessageBody}
                   </Text>
                 </ScrollView>
+
               ) : (
-                <View style={Styles.messageBody}>
-                  <Text style={Styles.messageBodyText}>
-                    {message && message.MessageBody}
-                  </Text>
-                </View>
-              )}
+                  <DivContainer className={"messageTextView"}>
+                    <View style={Styles.messageBody}>
+                      <Text style={Styles.messageBodyText}>
+                        {message && message.MessageBody}
+                      </Text>
+                    </View>
+                  </DivContainer>
+                )}
             </View>
           </View>
 

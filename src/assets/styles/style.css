@@ -557,9 +557,8 @@ body {
 .messageDetailTop > div > div > div:first-child {
   padding: 0 !important;
 }
-.messageDetailTop > div > div > div:last-child > div:last-child > div > div {
-  background: red;
-}
+
+.messageTextView  div{font-family: 'Montserrat-Regular' !important;}
 
 @media screen and (min-width: 1366px) {
   .messageList > div > div > div:last-child > div:last-child {
