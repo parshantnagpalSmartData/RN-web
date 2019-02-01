@@ -56,7 +56,7 @@ const SwiperContainer = ({
               onPressIsChecked={() => onPressIsChecked(index)}
               item={item}
               index={index}
-              onDeletePress={(cb) => onDeletePress(item, cb)}
+              onDeletePress={cb => onDeletePress(item, cb)}
               MessageSubject={item.MessageSubject}
               onMessagePress={onMessagePress}
             />
