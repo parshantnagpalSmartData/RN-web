@@ -155,9 +155,11 @@ class MessageDetails extends Component {
                 </View>
                 <View style={Styles.userNameView}>
                   <View style={Styles.userView}>
-                    <Text style={Styles.userName}>
-                      {message && message.Recipient_GroupName}
-                    </Text>
+                    <DivContainer className={"msgUserName"}>
+                      <Text style={Styles.userName}>
+                        {message && message.Recipient_GroupName}
+                      </Text>
+                    </DivContainer>
                     {Platform.OS !== "web" ? (
                       <Text style={Styles.timeLine}>
                         {timeSince(message && message.MessageDate)}
