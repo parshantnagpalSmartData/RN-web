@@ -23,6 +23,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import AuthButton from "../../components/Common/AuthButton";
 import DivContainer from "../../components/Common/DivContainer";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Compose = ({
   tabLable,
@@ -40,7 +41,16 @@ const Compose = ({
   subjectError,
   messageError
 }) => (
-  <View style={Styles.container}>
+  <KeyboardAwareScrollView
+    enableAutomaticScroll={true}
+    scrollEnabled={false}
+    extraHeight={80}
+    enableOnAndroid
+    keyboardShouldPersistTaps="handled"
+    contentContainerStyle={Styles.container}
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
+  >
     {Platform.OS !== "web" ? (
       <LinearGradient
         start={{ x: 1, y: 0 }}
@@ -124,13 +134,14 @@ const Compose = ({
         </View>
       </DivContainer>
       <DivContainer className={"fromSubject"}>
-        <View style={Styles.options}>
+        <View style={[Styles.options]}>
           <Text style={Styles.commonText}>Subject</Text>
           <TextInput
             value={subject}
             onChangeText={value => onChangeSubject(value)}
-            numberOfLines={2}
+            numberOfLines={1}
             style={[Styles.TextInput, Styles.textPadding]}
+            underlineColorAndroid={Constants.Colors.Transparent}
           />
         </View>
         {subjectError ? (
@@ -152,10 +163,11 @@ const Compose = ({
           <TextInput
             onChangeText={value => onChangeMessage(value)}
             multiline={true}
-            numberOfLines={10}
-            style={Styles.TextInput}
+            numberOfLines={1}
+            style={[Styles.TextInput, Styles.messageBodyText]}
             placeholder={"Compose"}
             placeholderTextColor={Constants.Colors.Gray}
+            underlineColorAndroid={Constants.Colors.Transparent}
           />
         </View>
         {messageError ? (
@@ -182,23 +194,28 @@ const Compose = ({
         </div>
       ) : null}
     </View>
-  </View>
+  </KeyboardAwareScrollView>
 );
 
 const Styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: Constants.Colors.White,
-
     ...Platform.select({
       web: {
         borderRadius: moderateScale(10),
-
         alignItems: "center",
         height: moderateScale(350),
         width: moderateScale(400),
         paddingTop: moderateScale(0),
         marginHorizontal: moderateScale(12)
+      },
+      ios: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT,
+        width: Constants.BaseStyle.DEVICE_WIDTH
+      },
+      android: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT,
+        width: Constants.BaseStyle.DEVICE_WIDTH
       }
     })
   },
@@ -207,7 +224,8 @@ const Styles = StyleSheet.create({
   },
   gradientStyle: {
     flex: 0.1,
-    paddingHorizontal: moderateScale(15)
+    paddingHorizontal: moderateScale(15),
+    justifyContent: "center"
   },
   header: {
     flexDirection: "row",
@@ -256,7 +274,8 @@ const Styles = StyleSheet.create({
     borderBottomWidth: 0.4,
     borderBottomColor: Constants.Colors.Gray,
     paddingVertical: moderateScale(10),
-    paddingHorizontal: moderateScale(10)
+    paddingHorizontal: moderateScale(10),
+    alignItems: "center"
   },
   msgBody: {
     flexDirection: "row",
@@ -271,23 +290,45 @@ const Styles = StyleSheet.create({
     })
   },
   TextInput: {
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
     color: Constants.Colors.Black,
-    flex: 1,
-    ...Platform.select({ web: { outline: "none" } })
+    textAlign: "center",
+    textAlignVertical: "center",
+    ...Platform.select({
+      web: {
+        outline: "none",
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "flex-start"
+      }
+    })
   },
   messageBodyText: {
-    minHeight: moderateScale(180)
+    minHeight: moderateScale(180),
+    ...Platform.select({
+      android: {
+        width: Constants.BaseStyle.DEVICE_WIDTH,
+        textAlign: "justify",
+        textAlignVertical: "top"
+      }
+    })
   },
   commonText: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(11),
     color: Constants.Colors.Gray
   },
-  textPadding: { paddingHorizontal: moderateScale(10) },
+  textPadding: {
+    paddingHorizontal: moderateScale(10),
+    ...Platform.select({
+      android: {
+        width: Constants.BaseStyle.DEVICE_WIDTH,
+        textAlign: "justify",
+        textAlignVertical: "top"
+      }
+    })
+  },
   closeBtnWeb: {
     alignSelf: "flex-end"
   },

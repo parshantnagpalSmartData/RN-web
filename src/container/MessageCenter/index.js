@@ -158,7 +158,7 @@ class MessageCenter extends Component {
             this.updateTabIndex(tab.ref.props.tab);
           }}
           // ref={ref => (this.scrollView = ref)}
-          locked={false}
+          locked={true}
         >
           <SwiperContainer
             tabLabel="Inbox"
