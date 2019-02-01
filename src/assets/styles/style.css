@@ -478,7 +478,9 @@ body {
   height: 40px !important;
 }
 
-.messageSearch > div input + div{right:10px !important;}
+.messageSearch > div input + div {
+  right: 10px !important;
+}
 
 .composeEmail {
   font-size: 12px;
@@ -504,16 +506,21 @@ body {
 }
 
 .messageFilter .MuiInput-underline-12:before,
-.msgActions .MuiInput-underline-12:before{border: none !important;}
+.msgActions .MuiInput-underline-12:before {
+  border: none !important;
+}
 
-.messageFilter > div > div > div > div{padding-top:3p !important; padding-bottom:3px !important;}
+.messageFilter > div > div > div > div {
+  padding-top: 3p !important;
+  padding-bottom: 3px !important;
+}
 .messageCounter > div > div {
   right: 0 !important;
   color: rgba(51, 51, 51, 0.6);
 }
 .messageCounter > div > div:first-child {
   width: 15px !important;
-  height: 19px !important;  
+  height: 19px !important;
 }
 .messageCounter > div > div:last-child > div {
   width: 8px !important;
@@ -543,13 +550,17 @@ body {
 .messageList > div > div > div:last-child > div:first-child {
   margin-bottom: 3px !important;
 }
-.messageList > div > div > div:last-child > div:last-child, .msgUserName > div > div, .msgSubject > div > div {
+.messageList > div > div > div:last-child > div:last-child,
+.msgUserName > div > div,
+.msgSubject > div > div {
   font-size: 14px !important;
   font-weight: 600;
   color: #1f2056 !important;
 }
 
-.msgUserName > div > div{margin-bottom: 5px;}
+.msgUserName > div > div {
+  margin-bottom: 5px;
+}
 .msgDetailsSection {
   padding: 0 20px;
 }
@@ -557,8 +568,14 @@ body {
   width: 100%;
 }
 
-.messageScroll > div > div > div > div{max-height: calc(100vh - 220px)!important;}
-.listEmptycopmonent{height: calc(100vh - 220px)!important; display: flex; align-items: center;}
+.messageScroll > div > div > div > div {
+  max-height: calc(100vh - 220px) !important;
+}
+.listEmptycopmonent {
+  height: calc(100vh - 220px) !important;
+  display: flex;
+  align-items: center;
+}
 .messageDetailTop > div > div,
 .messageDetailTop > div > div > div:last-child {
   align-items: center;
@@ -569,28 +586,60 @@ body {
 
 .messageTextView div {
   font-family: "Montserrat-Regular" !important;
+  max-width: 85% !important;
+  text-align: justify !important;
 }
 
-.CloseButttonCompose{position: absolute; right:-20px; top:-10px;}
-.CloseButttonCompose > div > div{height: 20px !important; width: 20px !important;}
-.folderName{position: relative;}
-.folderName > div:first-child{position: absolute; top:9px;}
-.folderName > div:last-child{width: 100%;  padding-left: 35px;}
+.CloseButttonCompose {
+  position: absolute;
+  right: -20px;
+  top: -10px;
+}
+.CloseButttonCompose > div > div {
+  height: 20px !important;
+  width: 20px !important;
+}
+.folderName {
+  position: relative;
+}
+.folderName > div:first-child {
+  position: absolute;
+  top: 9px;
+}
+.folderName > div:last-child {
+  width: 100%;
+  padding-left: 35px;
+}
 
-.fromOptions, .fromSubject, .textInputDivContainer{padding-top: 10px;}
+.fromOptions,
+.fromSubject,
+.textInputDivContainer {
+  padding-top: 10px;
+}
 .fromOptions > div > div,
 .fromSubject > div > div,
-.textInputDivContainer > div > div{padding-left: 0;}
-.textInputDivContainer > div > div{min-height: 180px !important;}
+.textInputDivContainer > div > div {
+  padding-left: 0;
+}
+.textInputDivContainer > div > div {
+  min-height: 180px !important;
+}
 
-.AuthButton > div > div > div{padding: 0 15px !important;
+.AuthButton > div > div > div {
+  padding: 0 15px !important;
   line-height: 60px;
   width: 320px;
-  margin: 10px auto; }
-.AuthButton div{font-size: 18px !important;  font-weight: 400 !important;}
+  margin: 10px auto;
+}
+.AuthButton div {
+  font-size: 18px !important;
+  font-weight: 400 !important;
+}
 
 @media screen and (min-width: 1366px) {
-  .messageList > div > div > div:last-child > div:last-child, .msgUserName > div > div, .msgSubject > div > div {
+  .messageList > div > div > div:last-child > div:last-child,
+  .msgUserName > div > div,
+  .msgSubject > div > div {
     font-size: 16px !important;
   }
 }
@@ -681,4 +730,7 @@ body {
 .msgActions {
   width: 25px;
   margin-left: 10px;
+}
+.textInputDivContainer > div > div {
+  min-height: auto !important;
 }

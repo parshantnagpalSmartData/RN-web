@@ -144,12 +144,15 @@ const Compose = ({
           </Text>
         ) : null}
       </DivContainer>
-      <DivContainer className={"textInputDivContainer"}>
+      <DivContainer
+        className={"textInputDivContainer"}
+        styleApp={Styles.composeMessageApp}
+      >
         <View style={Styles.msgBody}>
           <TextInput
             onChangeText={value => onChangeMessage(value)}
             multiline={true}
-            numberOfLines={50}
+            numberOfLines={10}
             style={Styles.TextInput}
             placeholder={"Compose"}
             placeholderTextColor={Constants.Colors.Gray}
@@ -198,6 +201,9 @@ const Styles = StyleSheet.create({
         marginHorizontal: moderateScale(12)
       }
     })
+  },
+  composeMessageApp: {
+    flex: 1
   },
   gradientStyle: {
     flex: 0.1,
@@ -253,7 +259,6 @@ const Styles = StyleSheet.create({
     paddingHorizontal: moderateScale(10)
   },
   msgBody: {
-    flex: 1,
     flexDirection: "row",
     borderBottomWidth: 0.4,
     borderBottomColor: Constants.Colors.Gray,

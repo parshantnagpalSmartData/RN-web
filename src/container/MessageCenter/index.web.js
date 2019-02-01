@@ -411,10 +411,6 @@ class MessageCenter extends Component {
                 onRefresh={this.getTabRelatedMessages}
                 onPress={this.detailPageOpen}
                 onMessagePress={this.onMessagePress}
-                // enableScrollingFunction={data => {
-                //   this.enableScrollingFunction(data);
-                // }}
-                // onOpen={this.onOpen}
               />
             </div>
           </div>
