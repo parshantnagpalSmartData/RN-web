@@ -558,7 +558,9 @@ body {
   padding: 0 !important;
 }
 
-.messageTextView  div{font-family: 'Montserrat-Regular' !important;}
+.messageTextView div {
+  font-family: "Montserrat-Regular" !important;
+}
 
 @media screen and (min-width: 1366px) {
   .messageList > div > div > div:last-child > div:last-child {
@@ -651,4 +653,7 @@ body {
 .msgActions {
   width: 25px;
   margin-left: 10px;
+}
+. {
+  height: calc(100vh - 220px) !important;
 }
