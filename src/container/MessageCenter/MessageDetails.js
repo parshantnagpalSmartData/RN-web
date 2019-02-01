@@ -142,27 +142,26 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                        <Text style={Styles.timeLine}>
-                          {this.getUserEmail(message.Recipient_GroupName)}
-                        </Text>
-                      )}
+                      <Text style={Styles.timeLine}>
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    )}
                   </View>
                   {Platform.OS === "web"
                     ? !this.props.open && (
-                      <TouchableOpacity onPress={this.props.toggleOpen}>
-                        <Image
-                          source={Constants.Images.Menu}
-                          style={{
-                            height: moderateScale(20),
-                            width: moderateScale(20)
-                          }}
-                        />
-                      </TouchableOpacity>
-                    )
+                        <TouchableOpacity onPress={this.props.toggleOpen}>
+                          <Image
+                            source={Constants.Images.Menu}
+                            style={{
+                              height: moderateScale(20),
+                              width: moderateScale(20)
+                            }}
+                          />
+                        </TouchableOpacity>
+                      )
                     : null}
                   <DivContainer className={"msgActions"}>
                     {this.props.open && Platform.OS === "web" ? (
-
                       <Select
                         value={1}
                         open={this.props.open}
@@ -170,7 +169,7 @@ class MessageDetails extends Component {
                           name: "folder",
                           id: "event-name"
                         }}
-                        onClose={() => { }}
+                        onClose={() => {}}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -178,8 +177,8 @@ class MessageDetails extends Component {
                         <MenuItem value={"delete"}>Delete</MenuItem>
                         <MenuItem value={"reply"}>Reply </MenuItem>
                       </Select>
-
-                    ) : null}</DivContainer>
+                    ) : null}
+                  </DivContainer>
                 </View>
               </View>
             </DivContainer>
@@ -205,12 +204,12 @@ class MessageDetails extends Component {
                   </Text>
                 </ScrollView>
               ) : (
-                  <View style={Styles.messageBody}>
-                    <Text style={Styles.messageBodyText}>
-                      {message && message.MessageBody}
-                    </Text>
-                  </View>
-                )}
+                <View style={Styles.messageBody}>
+                  <Text style={Styles.messageBodyText}>
+                    {message && message.MessageBody}
+                  </Text>
+                </View>
+              )}
             </View>
           </View>
 
@@ -232,7 +231,7 @@ class MessageDetails extends Component {
               tabLable={"Reply Message"}
             />
           </CustomModal>
-        </View >
+        </View>
       );
     }
     return null;
