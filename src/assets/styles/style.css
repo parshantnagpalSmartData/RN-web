@@ -475,17 +475,21 @@ body {
   margin: 0 !important;
   width: 100% !important;
   border-color: #d7d7d7 !important;
-  height: 45px !important;
+  height: 40px !important;
 }
+
+.messageSearch > div input + div{right:10px !important;}
+
 .composeEmail {
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+  color: #333;
 }
 
 .messageFilter > div,
 .messageCounter > div {
-  min-height: 34px;
+  min-height: 28px;
 }
 .messageCounter > div {
   padding: 0 !important;
@@ -498,14 +502,18 @@ body {
   color: rgba(51, 51, 51, 0.6);
   font-weight: 500;
 }
+
+.messageFilter .MuiInput-underline-12:before,
+.msgActions .MuiInput-underline-12:before{border: none !important;}
+
+.messageFilter > div > div > div > div{padding-top:3p !important; padding-bottom:3px !important;}
 .messageCounter > div > div {
   right: 0 !important;
   color: rgba(51, 51, 51, 0.6);
 }
 .messageCounter > div > div:first-child {
   width: 15px !important;
-  height: 19px !important;
-  margin-right: 15px;
+  height: 19px !important;  
 }
 .messageCounter > div > div:last-child > div {
   width: 8px !important;
@@ -535,11 +543,13 @@ body {
 .messageList > div > div > div:last-child > div:first-child {
   margin-bottom: 3px !important;
 }
-.messageList > div > div > div:last-child > div:last-child {
+.messageList > div > div > div:last-child > div:last-child, .msgUserName > div > div, .msgSubject > div > div {
   font-size: 14px !important;
   font-weight: 600;
   color: #1f2056 !important;
 }
+
+.msgUserName > div > div{margin-bottom: 5px;}
 .msgDetailsSection {
   padding: 0 20px;
 }
@@ -547,9 +557,8 @@ body {
   width: 100%;
 }
 
-.msgListWidget {
-  overflow: auto;
-}
+.messageScroll > div > div > div > div{max-height: calc(100vh - 220px)!important;}
+.listEmptycopmonent{height: calc(100vh - 220px)!important; display: flex; align-items: center;}
 .messageDetailTop > div > div,
 .messageDetailTop > div > div > div:last-child {
   align-items: center;
@@ -562,8 +571,26 @@ body {
   font-family: "Montserrat-Regular" !important;
 }
 
+.CloseButttonCompose{position: absolute; right:-20px; top:-10px;}
+.CloseButttonCompose > div > div{height: 20px !important; width: 20px !important;}
+.folderName{position: relative;}
+.folderName > div:first-child{position: absolute; top:9px;}
+.folderName > div:last-child{width: 100%;  padding-left: 35px;}
+
+.fromOptions, .fromSubject, .textInputDivContainer{padding-top: 10px;}
+.fromOptions > div > div,
+.fromSubject > div > div,
+.textInputDivContainer > div > div{padding-left: 0;}
+.textInputDivContainer > div > div{min-height: 180px !important;}
+
+.AuthButton > div > div > div{padding: 0 15px !important;
+  line-height: 60px;
+  width: 320px;
+  margin: 10px auto; }
+.AuthButton div{font-size: 18px !important;  font-weight: 400 !important;}
+
 @media screen and (min-width: 1366px) {
-  .messageList > div > div > div:last-child > div:last-child {
+  .messageList > div > div > div:last-child > div:last-child, .msgUserName > div > div, .msgSubject > div > div {
     font-size: 16px !important;
   }
 }
@@ -616,6 +643,7 @@ body {
   .messageSearch {
     margin-top: 15px;
   }
+
   .messageTitle > div {
     justify-content: center;
   }
@@ -644,16 +672,13 @@ body {
   -ms-flex-align: center !important;
   align-items: center !important;
 }
-.MuiInput-underline-12:before {
+/* .MuiInput-underline-12:before {
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 .MuiInput-underline-12:after {
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
-}
+} */
 .msgActions {
   width: 25px;
   margin-left: 10px;
-}
-. {
-  height: calc(100vh - 220px) !important;
 }

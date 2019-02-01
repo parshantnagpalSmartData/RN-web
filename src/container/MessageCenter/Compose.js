@@ -16,12 +16,13 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Constants from "../../constants";
-import { moderateScale } from "../../helpers/ResponsiveFonts";
+import { moderateScale, verticalScale } from "../../helpers/ResponsiveFonts";
 import SafeView from "../../components/Common/SafeView";
 import { Dropdown } from "react-native-material-dropdown";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import AuthButton from "../../components/Common/AuthButton";
+import DivContainer from "../../components/Common/DivContainer";
 
 const Compose = ({
   tabLable,
@@ -34,7 +35,10 @@ const Compose = ({
   onChangeSubject,
   onChangeMessage,
   onComposePress,
-  getRecipientsLabel
+  getRecipientsLabel,
+  recipientNameError,
+  subjectError,
+  messageError
 }) => (
   <View style={Styles.container}>
     {Platform.OS !== "web" ? (
@@ -62,9 +66,11 @@ const Compose = ({
         </View>
       </LinearGradient>
     ) : (
-      <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
-        <Image source={Constants.Images.Close} style={Styles.closeImg} />
-      </TouchableOpacity>
+      <div className={"CloseButttonCompose"}>
+        <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
+          <Image source={Constants.Images.Close} style={Styles.closeImg} />
+        </TouchableOpacity>
+      </div>
     )}
     <View style={Styles.messageBody}>
       {Platform.OS !== "web" ? (
@@ -78,7 +84,7 @@ const Compose = ({
           fontSize={11}
         />
       ) : (
-        <View>
+        <div className={"folderName"}>
           <Text style={Styles.commonText}>To</Text>
           <Select
             value={to}
@@ -96,43 +102,81 @@ const Compose = ({
               );
             })}
           </Select>
-        </View>
+        </div>
       )}
-      <View style={Styles.options}>
-        <Text style={Styles.commonText}>From</Text>
-        <Text style={[Styles.commonText, Styles.textPadding]}>
-          {user.UserName}
-        </Text>
-      </View>
-      <View style={Styles.options}>
-        <Text style={Styles.commonText}>Subject</Text>
-        <TextInput
-          value={subject}
-          onChangeText={value => onChangeSubject(value)}
-          numberOfLines={2}
-          style={[Styles.TextInput, Styles.textPadding]}
-        />
-      </View>
-      <View style={Styles.msgBody}>
-        <TextInput
-          onChangeText={value => onChangeMessage(value)}
-          multiline={true}
-          numberOfLines={50}
-          style={Styles.TextInput}
-          placeholder={"Compose"}
-          placeholderTextColor={Constants.Colors.Gray}
-        />
-      </View>
-      {Platform.OS === "web" ? (
-        <View
+      {recipientNameError ? (
+        <Text
           style={{
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-            margin: moderateScale(5)
+            color: "rgb(213, 0, 0)",
+            fontSize: 12,
+            marginVertical: verticalScale(2)
           }}
         >
-          <AuthButton onPress={onComposePress} buttonName={"Send"} />
+          {recipientNameError}
+        </Text>
+      ) : null}
+      <DivContainer className={"fromOptions"}>
+        <View style={Styles.options}>
+          <Text style={Styles.commonText}>From</Text>
+          <Text style={[Styles.commonText, Styles.textPadding]}>
+            {user.UserName}
+          </Text>
         </View>
+      </DivContainer>
+      <DivContainer className={"fromSubject"}>
+        <View style={Styles.options}>
+          <Text style={Styles.commonText}>Subject</Text>
+          <TextInput
+            value={subject}
+            onChangeText={value => onChangeSubject(value)}
+            numberOfLines={2}
+            style={[Styles.TextInput, Styles.textPadding]}
+          />
+        </View>
+        {subjectError ? (
+          <Text
+            style={{
+              color: "rgb(213, 0, 0)",
+              fontSize: 12
+            }}
+          >
+            {subjectError}
+          </Text>
+        ) : null}
+      </DivContainer>
+      <DivContainer className={"textInputDivContainer"}>
+        <View style={Styles.msgBody}>
+          <TextInput
+            onChangeText={value => onChangeMessage(value)}
+            multiline={true}
+            numberOfLines={50}
+            style={Styles.TextInput}
+            placeholder={"Compose"}
+            placeholderTextColor={Constants.Colors.Gray}
+          />
+        </View>
+        {messageError ? (
+          <Text
+            style={{
+              color: "rgb(213, 0, 0)",
+              fontSize: 12
+            }}
+          >
+            {messageError}
+          </Text>
+        ) : null}
+      </DivContainer>
+      {Platform.OS === "web" ? (
+        <div className={"AuthButton"}>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <AuthButton onPress={onComposePress} buttonName={"Send"} />
+          </View>
+        </div>
       ) : null}
     </View>
   </View>
@@ -140,8 +184,20 @@ const Compose = ({
 
 const Styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+
+    ...Platform.select({
+      web: {
+        borderRadius: moderateScale(10),
+
+        alignItems: "center",
+        height: moderateScale(350),
+        width: moderateScale(400),
+        paddingTop: moderateScale(0),
+        marginHorizontal: moderateScale(12)
+      }
+    })
   },
   gradientStyle: {
     flex: 0.1,
@@ -169,7 +225,20 @@ const Styles = StyleSheet.create({
   closeBtn: {
     // backgroundColor: "#fff"
   },
-  messageBody: { flex: 0.9 },
+  messageBody: {
+    // flexDirection: "row",
+    ...Platform.select({
+      ios: {
+        flex: 0.9
+      },
+      android: {
+        flex: 0.9
+      },
+      web: {
+        width: "100%"
+      }
+    })
+  },
   overlayStyle: {
     top: moderateScale(70)
   },

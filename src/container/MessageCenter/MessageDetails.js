@@ -23,7 +23,7 @@ import CustomModal from "../../components/CustomModal";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import DivContainer from "../../components/Common/DivContainer";
-import AuthButton from "../../components/Common/AuthButton";
+// import AuthButton from "../../components/Common/AuthButton";
 class MessageDetails extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +32,10 @@ class MessageDetails extends Component {
       message: "",
       subject: "",
       MessageGroupID: null,
-      ParentMessageID: null
+      ParentMessageID: null,
+      recipientNameError: "",
+      subjectError: "",
+      messageError: ""
     };
   }
   onBackPress = () => {
@@ -53,15 +56,15 @@ class MessageDetails extends Component {
   };
 
   onChangeRecipient = recipient => {
-    this.setState({ MessageGroupID: recipient });
+    this.setState({ MessageGroupID: recipient, recipientNameError: "" });
   };
 
   onChangeSubject = subject => {
-    this.setState({ subject });
+    this.setState({ subject, subjectError: "" });
   };
 
   onChangeMessage = message => {
-    this.setState({ message });
+    this.setState({ message, messageError: "" });
   };
 
   getRecipientsIndex = user => {
@@ -85,15 +88,33 @@ class MessageDetails extends Component {
   };
 
   onComposePress = () => {
-    let { MessageGroupID, subject, message, ParentMessageID } = this.state;
-    let obj = {
-      MessageSubject: subject,
-      MessageBody: message,
-      ParentMessageID,
-      MessageGroupID
-    };
-    this.props.appAction.composeMessage(obj);
-    this.onComposeModalClose();
+    let { MessageGroupID, subject, message } = this.state;
+    let { appAction } = this.props;
+    if (MessageGroupID === null || MessageGroupID === undefined) {
+      this.setState({
+        recipientNameError: Constants.Strings.Common.EmptyRecipient
+      });
+      return;
+    } else if (_.isEmpty(subject.trim())) {
+      this.setState({
+        subjectError: Constants.Strings.Common.EmptySubject
+      });
+      return;
+    } else if (_.isEmpty(message.trim())) {
+      this.setState({
+        messageError: Constants.Strings.Common.EmptyMessage
+      });
+      return;
+    } else {
+      let obj = {
+        MessageSubject: subject,
+        MessageBody: message,
+        ParentMessageID: null,
+        MessageGroupID: MessageGroupID
+      };
+      appAction.composeMessage(obj);
+      this.onComposeModalClose();
+    }
   };
 
   getUserEmail = user => {
@@ -110,7 +131,13 @@ class MessageDetails extends Component {
       messages: { activeMessage, inbox, trash, sent, tab, recipients },
       user
     } = this.props;
-    let { subject, MessageGroupID } = this.state;
+    let {
+      subject,
+      MessageGroupID,
+      recipientNameError,
+      subjectError,
+      messageError
+    } = this.state;
     let currentTab = tab === "inbox" ? inbox : tab === "sent" ? sent : trash;
     let index = _.findIndex(
       currentTab,
@@ -201,63 +228,68 @@ class MessageDetails extends Component {
                 </View>
               </View>
             </DivContainer>
-            <View style={Styles.userInfo}>
-              {Platform.OS === "web" ? (
-                <View style={Styles.MessageSubject}>
-                  <Text style={Styles.userName}>
-                    {message && message.MessageSubject}
-                  </Text>
-                  <Text style={Styles.timeLine}>
-                    {timeSince(message && message.MessageDate)}
-                  </Text>
-                </View>
-              ) : null}
-              {Platform.OS !== "web" ? (
-                <ScrollView
-                  contentContainerStyle={Styles.messageBody}
-                  showsHorizontalScrollIndicator={false}
-                  showsVerticalScrollIndicator={false}
-                >
-                  <Text style={Styles.messageBodyText}>
-                    {message && message.MessageBody}
-                  </Text>
-                </ScrollView>
-              ) : (
-                <DivContainer className={"messageTextView"}>
-                  <View style={Styles.messageBody}>
+            <DivContainer className="divWrapper">
+              <View style={Styles.userInfo}>
+                {Platform.OS === "web" ? (
+                  <View style={Styles.MessageSubject}>
+                    <DivContainer className={"msgSubject"}>
+                      <Text style={Styles.userName}>
+                        {message && message.MessageSubject}
+                      </Text>
+                    </DivContainer>
+                    <Text style={Styles.timeLine}>
+                      {timeSince(message && message.MessageDate)}
+                    </Text>
+                  </View>
+                ) : null}
+                {Platform.OS !== "web" ? (
+                  <ScrollView
+                    contentContainerStyle={Styles.messageBody}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                  >
                     <Text style={Styles.messageBodyText}>
                       {message && message.MessageBody}
                     </Text>
-                  </View>
-                </DivContainer>
-              )}
-              {Platform.OS === "web" ? (
-                <DivContainer
-                  styleApp={Styles.divStyle}
-                  styleWeb={Styles.divStyle}
-                  className={"ButtonContainer"}
-                >
-                  <AuthButton
-                    buttonStyle={Styles.buttonStyle}
-                    onPress={() => {}}
-                    gradientStyle={Styles.gradientStyle}
-                    buttonName={"Reply"}
-                  />
-                  <AuthButton
-                    buttonStyle={Styles.buttonStyle}
-                    gradientStyle={Styles.gradientStyle}
-                    onPress={() => {}}
-                    buttonName={"Delete"}
-                  />
-                </DivContainer>
-              ) : null}
-            </View>
+                  </ScrollView>
+                ) : (
+                  <DivContainer className={"messageTextView"}>
+                    <View style={Styles.messageBody}>
+                      <Text style={Styles.messageBodyText}>
+                        {message && message.MessageBody}
+                      </Text>
+                    </View>
+                  </DivContainer>
+                )}
+                {/* {Platform.OS === "web" ? (
+                  <DivContainer
+                    styleApp={Styles.divStyle}
+                    styleWeb={Styles.divStyle}
+                    className={"ButtonContainer"}
+                  >
+                    <AuthButton
+                      buttonStyle={Styles.buttonStyle}
+                      onPress={() => { }}
+                      gradientStyle={Styles.gradientStyle}
+                      buttonName={"Reply"}
+                    />
+                    <AuthButton
+                      buttonStyle={Styles.buttonStyle}
+                      gradientStyle={Styles.gradientStyle}
+                      onPress={() => { }}
+                      buttonName={"Delete"}
+                    />
+                  </DivContainer>
+                ) : null} */}
+              </View>
+            </DivContainer>
           </View>
 
           <CustomModal
             isVisible={this.state.composeModal}
             onBackdropPress={this.onComposeModalClose}
             style={{ margin: 0 }}
+            customStyles={{}}
           >
             <Compose
               user={user}
@@ -271,6 +303,9 @@ class MessageDetails extends Component {
               to={MessageGroupID}
               tabLable={"Reply Message"}
               getRecipientsLabel={this.getRecipientsLabel}
+              recipientNameError={recipientNameError}
+              subjectError={subjectError}
+              messageError={messageError}
             />
           </CustomModal>
         </View>

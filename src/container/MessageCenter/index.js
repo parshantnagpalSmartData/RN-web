@@ -30,7 +30,10 @@ class MessageCenter extends Component {
       composeModal: false,
       message: "",
       subject: "",
-      MessageGroupID: null
+      MessageGroupID: null,
+      recipientNameError: "",
+      subjectError: "",
+      messageError: ""
     };
   }
 
@@ -72,6 +75,8 @@ class MessageCenter extends Component {
             })
         }
       ]);
+    } else {
+      cb();
     }
   };
 
@@ -84,49 +89,45 @@ class MessageCenter extends Component {
   };
 
   onChangeRecipient = recipient => {
-    this.setState({ MessageGroupID: recipient });
+    this.setState({ MessageGroupID: recipient, recipientNameError: "" });
   };
 
   onChangeSubject = subject => {
-    this.setState({ subject });
+    this.setState({ subject, subjectError: "" });
   };
 
   onChangeMessage = message => {
-    this.setState({ message });
+    this.setState({ message, messageError: "" });
   };
 
   onComposePress = () => {
     let { MessageGroupID, subject, message } = this.state;
     let { appAction } = this.props;
     if (MessageGroupID === null || MessageGroupID === undefined) {
-      appAction.showToast(
-        Constants.AppConstants.Notificaitons.Error,
-        Constants.Strings.Common.EmptyRecipient
-      );
+      this.setState({
+        recipientNameError: Constants.Strings.Common.EmptyRecipient
+      });
       return;
-    }
-    if (_.isEmpty(subject.trim())) {
-      appAction.showToast(
-        Constants.AppConstants.Notificaitons.Error,
-        Constants.Strings.Common.EmptySubject
-      );
+    } else if (_.isEmpty(subject.trim())) {
+      this.setState({
+        subjectError: Constants.Strings.Common.EmptySubject
+      });
       return;
-    }
-    if (_.isEmpty(message.trim())) {
-      appAction.showToast(
-        Constants.AppConstants.Notificaitons.Error,
-        Constants.Strings.Common.EmptyMessage
-      );
+    } else if (_.isEmpty(message.trim())) {
+      this.setState({
+        messageError: Constants.Strings.Common.EmptyMessage
+      });
       return;
+    } else {
+      let obj = {
+        MessageSubject: subject,
+        MessageBody: message,
+        ParentMessageID: null,
+        MessageGroupID: MessageGroupID
+      };
+      appAction.composeMessage(obj);
+      this.onComposeModalClose();
     }
-    let obj = {
-      MessageSubject: subject,
-      MessageBody: message,
-      ParentMessageID: null,
-      MessageGroupID: MessageGroupID
-    };
-    this.props.appAction.composeMessage(obj);
-    this.onComposeModalClose();
   };
 
   onMessagePress = message => {
@@ -140,6 +141,7 @@ class MessageCenter extends Component {
       app,
       user
     } = this.props;
+    let { recipientNameError, subjectError, messageError } = this.state;
     return (
       <View style={Styles.container}>
         <Header
@@ -200,6 +202,9 @@ class MessageCenter extends Component {
             onChangeSubject={this.onChangeSubject}
             onComposePress={this.onComposePress}
             getRecipientsLabel={item => item}
+            recipientNameError={recipientNameError}
+            subjectError={subjectError}
+            messageError={messageError}
           />
         </CustomModal>
       </View>
