@@ -156,7 +156,7 @@ class MessageDetails extends Component {
                     </Text>
                   )}
                 </View>
-                {Platform.OS === "web"
+                {/* {Platform.OS === "web"
                   ? !this.props.open && (
                       <TouchableOpacity onPress={this.props.toggleOpen}>
                         <Image
@@ -168,16 +168,35 @@ class MessageDetails extends Component {
                         />
                       </TouchableOpacity>
                     )
-                  : null}
+                  : null} */}
 
-                {this.props.open && Platform.OS === "web" ? (
+                {Platform.OS === "web" ? (
                   <Select
+                    // IconComponent={
+                    //   <RightComponent icon={Constants.Images.Menu} />
+                    // }
+                    IconComponent={props => (
+                      <TouchableOpacity
+                        {...props}
+                        onPress={this.props.toggleOpen}
+                      >
+                        <Image
+                          source={Constants.Images.Menu}
+                          style={{
+                            height: moderateScale(20),
+                            width: moderateScale(20)
+                          }}
+                        />
+                      </TouchableOpacity>
+                    )}
+                    styles={{}}
                     value={1}
-                    open={this.props.open}
+                    // open={this.props.open}
                     inputProps={{
                       name: "folder",
                       id: "event-name"
                     }}
+                    className={"SelectSide"}
                     onClose={() => {}}
                     onChange={event => {
                       this.props.onClose(event.target.value, message);
