@@ -180,8 +180,8 @@ export const setActiveMessage = (messageId, componentId) => {
     {
       Platform.OS !== "web"
         ? dispatch(
-          AppActions.pushToParticularScreen(componentId, "MessageDetails")
-        )
+            AppActions.pushToParticularScreen(componentId, "MessageDetails")
+          )
         : null;
     }
   };

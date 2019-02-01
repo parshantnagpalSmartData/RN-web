@@ -56,13 +56,11 @@ class MessageCenter extends Component {
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
-
       Dialog("Are you sure want to delete this message?", [
-        { text: "Cancel", onPress: () => { } },
+        { text: "Cancel", onPress: () => {} },
         {
           text: "Ok",
-          onPress: () =>
-            appAction.deleteMessage(message.MessageID, tab, null)
+          onPress: () => appAction.deleteMessage(message.MessageID, tab, null)
         }
       ]);
     }

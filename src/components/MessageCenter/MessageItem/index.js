@@ -32,11 +32,11 @@ class MessageItem extends React.Component {
           }
           //
         }}
-      // onStop={({ x, y }) => {
-      //   console.log("xuuuuuu", x, y);
-      // }}
-      // snapPoints={[{ y: 0 }]}
-      // onSnap={this.onDrawerSnap}
+        // onStop={({ x, y }) => {
+        //   console.log("xuuuuuu", x, y);
+        // }}
+        // snapPoints={[{ y: 0 }]}
+        // onSnap={this.onDrawerSnap}
       >
         <View style={{ backgroundColor: "green", flexDirection: "row" }}>
           <TouchableOpacity
