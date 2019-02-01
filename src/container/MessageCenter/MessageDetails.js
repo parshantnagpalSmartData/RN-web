@@ -159,10 +159,10 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                      <Text style={Styles.timeLine}>
-                        {this.getUserEmail(message.Recipient_GroupName)}
-                      </Text>
-                    )}
+                        <Text style={Styles.timeLine}>
+                          {this.getUserEmail(message.Recipient_GroupName)}
+                        </Text>
+                      )}
                   </View>
                   {Platform.OS === "web" ? (
                     <DivContainer className={"msgActions"}>
@@ -188,7 +188,7 @@ class MessageDetails extends Component {
                           id: "selectOption"
                         }}
                         className={"SelectSide"}
-                        onClose={() => {}}
+                        onClose={() => { }}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -201,7 +201,7 @@ class MessageDetails extends Component {
                 </View>
               </View>
             </DivContainer>
-            <DivContainer className="divWrapper">
+            <DivContainer className="divWrapper" styleApp={{ flex: 1 }}>
               <View style={Styles.userInfo}>
                 {Platform.OS === "web" ? (
                   <View style={Styles.MessageSubject}>
@@ -217,7 +217,7 @@ class MessageDetails extends Component {
                 ) : null}
                 {Platform.OS !== "web" ? (
                   <ScrollView
-                    contentContainerStyle={Styles.messageBody}
+                    contentContainerStyle={[Styles.messageBody, { paddingVertical: 0, paddingLeft: moderateScale(65) }]}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                   >
@@ -226,14 +226,14 @@ class MessageDetails extends Component {
                     </Text>
                   </ScrollView>
                 ) : (
-                  <DivContainer className={"messageTextView"}>
-                    <View style={Styles.messageBody}>
-                      <Text style={Styles.messageBodyText}>
-                        {message && message.MessageBody}
-                      </Text>
-                    </View>
-                  </DivContainer>
-                )}
+                    <DivContainer className={"messageTextView"}>
+                      <View style={Styles.messageBody}>
+                        <Text style={Styles.messageBodyText}>
+                          {message && message.MessageBody}
+                        </Text>
+                      </View>
+                    </DivContainer>
+                  )}
                 {/* {Platform.OS === "web" ? (
                   <DivContainer
                     styleApp={Styles.divStyle}
@@ -308,7 +308,17 @@ const Styles = StyleSheet.create({
     height: moderateScale(50),
     width: moderateScale(50),
     borderRadius: moderateScale(100),
-    padding: moderateScale(5)
+    padding: moderateScale(5),
+    ...Platform.select({
+      ios: {
+        paddingTop: moderateScale(20),
+        paddingLeft: moderateScale(10)
+      },
+      android: {
+        paddingTop: moderateScale(20),
+        paddingLeft: moderateScale(10)
+      }
+    })
   },
   UserImg: { height: moderateScale(50), width: moderateScale(50) },
   userInfo: { padding: moderateScale(5), flex: 1 },
@@ -321,7 +331,7 @@ const Styles = StyleSheet.create({
     ...Platform.select({
       web: {
         alignItems: "flex-start"
-      }
+      },
     })
   },
   userView: {
@@ -343,7 +353,15 @@ const Styles = StyleSheet.create({
   userName: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(16),
-    color: Constants.Colors.Primary
+    color: Constants.Colors.Primary,
+    ...Platform.select({
+      ios: {
+        paddingLeft: moderateScale(10)
+      },
+      android: {
+        paddingLeft: moderateScale(10)
+      }
+    })
   },
   timeLine: {
     ...Constants.Fonts.Regular,
