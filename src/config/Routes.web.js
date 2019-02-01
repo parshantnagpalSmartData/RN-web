@@ -27,7 +27,7 @@ import MessageCenter from "../container/MessageCenter";
 import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/Auth/OTPScreen";
 import PDFViewer from "../container/PrintableForms/PDFViewer";
-import MessageDetails from "../container/MessageCenter/MessageDetails";
+// import MessageDetails from "../container/MessageCenter/MessageDetails";
 
 class Routes extends Component {
   componentDidMount() {
@@ -116,13 +116,13 @@ class Routes extends Component {
             layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
-          <AppRoute
+          {/* <AppRoute
             exact
             path="/MessageDetails"
             component={MessageDetails}
             layout={dashboardLayout}
             isLogin={isLoggedIn}
-          />
+          /> */}
           <AppRoute
             exact
             path="/MyProfile"

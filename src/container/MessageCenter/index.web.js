@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import _ from "lodash";
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import MessageComponent from "../../components/MessageCenter";
@@ -32,6 +32,25 @@ import MessageDetails from "./MessageDetails";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
 
+const Filter = ({ value, handleSortChange }) => {
+  return (
+    <div>
+      <Select
+        value={value}
+        inputProps={{
+          name: "sortby",
+          id: "sort-by"
+        }}
+        onChange={event => handleSortChange(event.target.value)}
+      >
+        <MenuItem value={"sortby"}>Sort By</MenuItem>
+        <MenuItem value={"name"}>Name</MenuItem>
+        <MenuItem value={"date"}>Date</MenuItem>
+      </Select>
+    </div>
+  );
+};
+
 const RenderSelect = ({ value, handleChange }) => {
   return (
     <div>
@@ -40,8 +59,8 @@ const RenderSelect = ({ value, handleChange }) => {
           value === "inbox"
             ? Constants.Images.InboxActive
             : value === "sent"
-            ? Constants.Images.SentActive
-            : Constants.Images.TrashActive
+              ? Constants.Images.SentActive
+              : Constants.Images.TrashActive
         }
         style={{
           height: moderateScale(20),
@@ -99,22 +118,6 @@ const SearchBar = () => {
   );
 };
 
-const Filter = ({ value, handleSortChange }) => {
-  return (
-    <Select
-      value={value}
-      inputProps={{
-        name: "sortby",
-        id: "sort-by"
-      }}
-      onChange={event => handleSortChange(event.target.value)}
-    >
-      <MenuItem value={"inbox"}>Name</MenuItem>
-      <MenuItem value={"sent"}>Date</MenuItem>
-    </Select>
-  );
-};
-
 const MessageCounter = () => (
   <View
     style={{
@@ -159,6 +162,7 @@ class MessageCenter extends Component {
     super(props);
     this.state = {
       tab: "inbox",
+      filter: "sortby",
       data: [],
       composeModal: false,
       message: "",
@@ -185,13 +189,27 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
+  };
+
+  getRecipientsIndex = user => {
+    let {
+      messages: { recipients }
+    } = this.props;
+    let index = _.findIndex(recipients, item => item.name === user);
+    if (index !== -1) {
+      return recipients[index].value;
+    }
   };
 
   handleChange = folder => {
     this.setState({ tab: folder }, () => this.getTabRelatedMessages());
+  };
+
+  handleSortChange = filter => {
+    this.setState({ filter });
   };
   /*
    *get all messages
@@ -230,7 +248,13 @@ class MessageCenter extends Component {
   };
 
   onComposeModalClose = () => {
-    this.setState({ composeModal: false });
+    this.setState({
+      composeModal: false,
+      subject: "",
+      ParentMessageID: null,
+      tabLabel: "Compose Message",
+      MessageGroupID: null
+    });
   };
 
   onChangeRecipient = recipient => {
@@ -266,7 +290,7 @@ class MessageCenter extends Component {
     if (value === "reply") {
       this.replyMessage(message);
     } else {
-      this.onDeletePress();
+      this.onDeletePress(message);
     }
   };
   onDeletePress = message => {
@@ -284,7 +308,8 @@ class MessageCenter extends Component {
         composeModal: true,
         subject: "Re:" + message.MessageSubject,
         ParentMessageID: message.MessageID,
-        tabLabel: "Reply Message"
+        tabLabel: "Reply Message",
+        MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
       },
       () => {
         this.props.appAction.getRecipients();
@@ -293,11 +318,11 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients }
-      } = this.props,
-      { data, MessageGroupID, subject, tabLabel } = this.state;
+      app,
+      user,
+      messages: { recipients }
+    } = this.props,
+      { data, MessageGroupID, subject, tabLabel, filter } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Message center"} onDrawerPress={this.onDrawerPress} />
@@ -322,7 +347,7 @@ class MessageCenter extends Component {
         <div className={"messageInbox d-flex"}>
           <div className={"messageListSection"}>
             <div className={"messageFilter"}>
-              <Filter value={"Sort By"} />
+              <Filter value={filter} handleSortChange={this.handleSortChange} />
             </div>
             <div className={"msgListWidget"}>
               <MessageComponent
@@ -334,10 +359,10 @@ class MessageCenter extends Component {
                 onRefresh={this.getTabRelatedMessages}
                 onPress={this.detailPageOpen}
                 onMessagePress={this.onMessagePress}
-                // enableScrollingFunction={data => {
-                //   this.enableScrollingFunction(data);
-                // }}
-                // onOpen={this.onOpen}
+              // enableScrollingFunction={data => {
+              //   this.enableScrollingFunction(data);
+              // }}
+              // onOpen={this.onOpen}
               />
             </div>
           </div>

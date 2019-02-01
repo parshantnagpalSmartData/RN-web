@@ -46,5 +46,7 @@ module.exports = {
   UnCheck: require("../assets/images/UnCheck/UnCheck.png"),
   Reply: require("../assets/images/Reply/reply.png"),
   Menu: require("../assets/images/Menu/menu.png"),
+  CloseModal: require("../assets/images/MessageCenter/close.png"),
+  ComposeWhite: require("../assets/images/MessageCenter/ComposeWhite.png"),
   SearchMessageCenter: require("../assets/images/SearchMessageCenter/search.png")
 };
