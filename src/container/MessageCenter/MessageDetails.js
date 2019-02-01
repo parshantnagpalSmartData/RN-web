@@ -159,10 +159,10 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                        <Text style={Styles.timeLine}>
-                          {this.getUserEmail(message.Recipient_GroupName)}
-                        </Text>
-                      )}
+                      <Text style={Styles.timeLine}>
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    )}
                   </View>
                   {Platform.OS === "web" ? (
                     <DivContainer className={"msgActions"}>
@@ -188,7 +188,7 @@ class MessageDetails extends Component {
                           id: "selectOption"
                         }}
                         className={"SelectSide"}
-                        onClose={() => { }}
+                        onClose={() => {}}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -225,14 +225,14 @@ class MessageDetails extends Component {
                   </Text>
                 </ScrollView>
               ) : (
-                  <DivContainer className={"messageTextView"}>
-                    <View style={Styles.messageBody}>
-                      <Text style={Styles.messageBodyText}>
-                        {message && message.MessageBody}
-                      </Text>
-                    </View>
-                  </DivContainer>
-                )}
+                <DivContainer className={"messageTextView"}>
+                  <View style={Styles.messageBody}>
+                    <Text style={Styles.messageBodyText}>
+                      {message && message.MessageBody}
+                    </Text>
+                  </View>
+                </DivContainer>
+              )}
               {Platform.OS === "web" ? (
                 <DivContainer
                   styleApp={Styles.divStyle}
@@ -241,14 +241,14 @@ class MessageDetails extends Component {
                 >
                   <AuthButton
                     buttonStyle={Styles.buttonStyle}
-                    onPress={() => { }}
+                    onPress={() => {}}
                     gradientStyle={Styles.gradientStyle}
                     buttonName={"Reply"}
                   />
                   <AuthButton
                     buttonStyle={Styles.buttonStyle}
                     gradientStyle={Styles.gradientStyle}
-                    onPress={() => { }}
+                    onPress={() => {}}
                     buttonName={"Delete"}
                   />
                 </DivContainer>
