@@ -88,10 +88,10 @@ const SearchBar = () => {
         }}
       />
       <Image
-        source={Constants.Images.Search}
+        source={Constants.Images.SearchMessageCenter}
         style={{
-          height: moderateScale(30),
-          width: moderateScale(30),
+          height: moderateScale(15),
+          width: moderateScale(15),
           right: moderateScale(5)
         }}
       />
@@ -341,22 +341,24 @@ class MessageCenter extends Component {
             <div className={"messageFilter"}>
               <Filter value={"Sort By"} />
             </div>
-            <MessageComponent
-              tabLabel="Inbox"
-              tab="inbox"
-              data={data}
-              onDeletePress={this.onDeletePress}
-              refresh={app.refreshLoader}
-              onRefresh={this.getTabRelatedMessages}
-              onPress={this.detailPageOpen}
-              onMessagePress={this.onMessagePress}
-              // enableScrollingFunction={data => {
-              //   this.enableScrollingFunction(data);
-              // }}
-              // onOpen={this.onOpen}
-            />
+            <div className={"msgListWidget"}>
+              <MessageComponent
+                tabLabel="Inbox"
+                tab="inbox"
+                data={data}
+                onDeletePress={this.onDeletePress}
+                refresh={app.refreshLoader}
+                onRefresh={this.getTabRelatedMessages}
+                onPress={this.detailPageOpen}
+                onMessagePress={this.onMessagePress}
+                // enableScrollingFunction={data => {
+                //   this.enableScrollingFunction(data);
+                // }}
+                // onOpen={this.onOpen}
+              />
+            </div>
           </div>
-          <div className={"messageDetailsSection"}>
+          <div className={"messageDetailsSection d-none"}>
             <div className={"messageCounter"}>
               <MessageCounter />
             </div>
