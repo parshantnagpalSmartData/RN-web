@@ -27,9 +27,16 @@ export default ListEmptyComponent;
 
 const Styles = StyleSheet.create({
   containner: {
-    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.8,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    ...Platform.select({
+      ios: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT * 0.8
+      },
+      android: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT * 0.8
+      }
+    })
   },
   noScheduleFoundText: {
     ...Constants.Fonts.Medium,
