@@ -59,8 +59,8 @@ const RenderSelect = ({ value, handleChange }) => {
           value === "inbox"
             ? Constants.Images.InboxActive
             : value === "sent"
-            ? Constants.Images.SentActive
-            : Constants.Images.TrashActive
+              ? Constants.Images.SentActive
+              : Constants.Images.TrashActive
         }
         style={{
           height: moderateScale(20),
@@ -189,8 +189,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
@@ -318,10 +318,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients }
-      } = this.props,
+      app,
+      user,
+      messages: { recipients }
+    } = this.props,
       { data, MessageGroupID, subject, tabLabel, filter } = this.state;
     return (
       <View style={Styles.containner}>
@@ -359,14 +359,14 @@ class MessageCenter extends Component {
                 onRefresh={this.getTabRelatedMessages}
                 onPress={this.detailPageOpen}
                 onMessagePress={this.onMessagePress}
-                // enableScrollingFunction={data => {
-                //   this.enableScrollingFunction(data);
-                // }}
-                // onOpen={this.onOpen}
+              // enableScrollingFunction={data => {
+              //   this.enableScrollingFunction(data);
+              // }}
+              // onOpen={this.onOpen}
               />
             </div>
           </div>
-          <div className={"messageDetailsSection d-none"}>
+          <div className={"messageDetailsSection d-xs-none"}>
             <div className={"messageCounter"}>
               <MessageCounter />
             </div>
@@ -381,6 +381,7 @@ class MessageCenter extends Component {
             </div>
           </div>
         </div>
+
         <CustomModal
           isVisible={this.state.composeModal}
           onBackdropPress={this.onComposeModalClose}

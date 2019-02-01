@@ -159,10 +159,10 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                        <Text style={Styles.timeLine}>
-                          {this.getUserEmail(message.Recipient_GroupName)}
-                        </Text>
-                      )}
+                      <Text style={Styles.timeLine}>
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    )}
                   </View>
                   {Platform.OS === "web" ? (
                     <DivContainer className={"msgActions"}>
@@ -188,7 +188,7 @@ class MessageDetails extends Component {
                           id: "selectOption"
                         }}
                         className={"SelectSide"}
-                        onClose={() => { }}
+                        onClose={() => {}}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -204,16 +204,17 @@ class MessageDetails extends Component {
             <View style={Styles.userInfo}>
               {Platform.OS === "web" ? (
                 <View style={Styles.MessageSubject}>
-                  <Text style={Styles.userName}>
-                    {message && message.MessageSubject}
-                  </Text>
+                  <DivContainer className={"msgSubject"}>
+                    <Text style={Styles.userName}>
+                      {message && message.MessageSubject}
+                    </Text>
+                  </DivContainer>
                   <Text style={Styles.timeLine}>
                     {timeSince(message && message.MessageDate)}
                   </Text>
                 </View>
               ) : null}
               {Platform.OS !== "web" ? (
-
                 <ScrollView
                   contentContainerStyle={Styles.messageBody}
                   showsHorizontalScrollIndicator={false}
@@ -223,16 +224,15 @@ class MessageDetails extends Component {
                     {message && message.MessageBody}
                   </Text>
                 </ScrollView>
-
               ) : (
-                  <DivContainer className={"messageTextView"}>
-                    <View style={Styles.messageBody}>
-                      <Text style={Styles.messageBodyText}>
-                        {message && message.MessageBody}
-                      </Text>
-                    </View>
-                  </DivContainer>
-                )}
+                <DivContainer className={"messageTextView"}>
+                  <View style={Styles.messageBody}>
+                    <Text style={Styles.messageBodyText}>
+                      {message && message.MessageBody}
+                    </Text>
+                  </View>
+                </DivContainer>
+              )}
             </View>
           </View>
 
@@ -240,6 +240,7 @@ class MessageDetails extends Component {
             isVisible={this.state.composeModal}
             onBackdropPress={this.onComposeModalClose}
             style={{ margin: 0 }}
+            customStyles={{}}
           >
             <Compose
               user={user}
