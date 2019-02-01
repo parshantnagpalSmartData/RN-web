@@ -23,14 +23,12 @@ export const getMessages = (folder, cb) => {
               type: Types.UPDATE_INBOX,
               payload: res.result.data
             });
-          }
-          if (folder === "trash") {
+          } else if (folder === "trash") {
             dispatch({
               type: Types.UPDATE_TRASH,
               payload: res.result.data
             });
-          }
-          if (folder === "sent") {
+          } else if (folder === "sent") {
             dispatch({
               type: Types.UPDATE_SENT,
               payload: res.result.data
@@ -38,8 +36,8 @@ export const getMessages = (folder, cb) => {
           }
           if (cb) {
             cb(res.result.data);
-            return;
           }
+          return;
         } else {
           dispatch(AppActions.checkLogin(res));
         }
@@ -50,7 +48,7 @@ export const getMessages = (folder, cb) => {
       });
   };
 };
-export const deleteMessage = (messageId, success) => {
+export const deleteMessage = (messageId, category, success) => {
   return (dispatch, getState) => {
     RestClient.restCall(
       `messages/${messageId}`,
@@ -60,13 +58,20 @@ export const deleteMessage = (messageId, success) => {
     )
       .then(res => {
         if (res.status) {
+          dispatch({
+            type: Types.DELETE_MESSAGE,
+            payload: { category, messageId }
+          });
+
           dispatch(
             AppActions.showToast(
               Constants.AppConstants.Notificaitons.Success,
               "Message deleted successfully."
             )
           );
-          success();
+          if (success) {
+            success();
+          }
         } else {
           dispatch(
             AppActions.showToast(
@@ -175,8 +180,8 @@ export const setActiveMessage = (messageId, componentId) => {
     {
       Platform.OS !== "web"
         ? dispatch(
-            AppActions.pushToParticularScreen(componentId, "MessageDetails")
-          )
+          AppActions.pushToParticularScreen(componentId, "MessageDetails")
+        )
         : null;
     }
   };

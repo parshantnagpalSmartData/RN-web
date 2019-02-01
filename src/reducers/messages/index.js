@@ -4,7 +4,7 @@
  * @date: 14 Jan 2019
  * @author: Suraj Sanwal
  * */
-
+import _ from "underscore";
 import * as Types from "../../actionTypes";
 
 const initialState = {
@@ -28,6 +28,27 @@ export default function messages(state = initialState, action = {}) {
         ...state,
         trash: action.payload
       };
+    case Types.DELETE_MESSAGE:
+      if (action.payload.category === "inbox") {
+        let inboxData = [...state.inbox],
+          delIndex = _.findIndex(state.inbox, {
+            MessageID: action.payload.messageId
+          });
+        if (delIndex != -1) {
+          inboxData.splice(delIndex, 1);
+        }
+        return { ...state, inbox: inboxData };
+      } else if (action.payload.category === "sent") {
+        let sentData = [...state.sent],
+          delIndex = _.findIndex(state.sent, {
+            MessageID: action.payload.messageId
+          });
+        if (delIndex != -1) {
+          sentData.splice(delIndex, 1);
+        }
+        return { ...state, sent: sentData };
+      }
+      return { ...state };
     case Types.UPDATE_SENT:
       return {
         ...state,

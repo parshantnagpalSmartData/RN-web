@@ -18,6 +18,7 @@ import RightComponent from "../../components/Common/RightComponent";
 import constants from "../../constants";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
+import { Dialog } from "../../helpers/common";
 
 class MessageCenter extends Component {
   constructor(props) {
@@ -55,19 +56,15 @@ class MessageCenter extends Component {
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
-      appAction.deleteMessage(message.MessageID, () =>
-        this.getTabRelatedMessages()
-      );
-      // Dialog("Are you sure want to delete this message?", [
-      //   { text: "Cancel", onPress: () => {} },
-      //   {
-      //     text: "Ok",
-      //     onPress: () =>
-      //       appAction.deleteMessage(message.MessageID, () =>
-      //         this.getTabRelatedMessages()
-      //       )
-      //   }
-      // ]);
+
+      Dialog("Are you sure want to delete this message?", [
+        { text: "Cancel", onPress: () => { } },
+        {
+          text: "Ok",
+          onPress: () =>
+            appAction.deleteMessage(message.MessageID, tab, null)
+        }
+      ]);
     }
   };
 
@@ -127,7 +124,7 @@ class MessageCenter extends Component {
             this.updateTabIndex(tab.ref.props.tab);
           }}
           // ref={ref => (this.scrollView = ref)}
-          locked
+          locked={false}
         >
           <SwiperContainer
             tabLabel="Inbox"

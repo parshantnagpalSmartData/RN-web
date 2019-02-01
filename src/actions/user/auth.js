@@ -84,12 +84,12 @@ export const verifyOTP = postData => {
   return dispatch => {
     setTimeout(() => {
       if (postData.otpValue === 1234) {
-        dispatch(
-          AppActions.showToast(
-            Constants.AppConstants.Notificaitons.Success,
-            "OTP Verified Sucessfully"
-          )
-        );
+        // dispatch(
+        //   AppActions.showToast(
+        //     Constants.AppConstants.Notificaitons.Success,
+        //     "OTP Verified Sucessfully"
+        //   )
+        // );
         if (Platform.OS !== "web") {
           dispatch(AppActions.goToHome());
         } else {
