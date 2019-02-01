@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import _ from "lodash";
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import MessageComponent from "../../components/MessageCenter";
@@ -189,6 +189,16 @@ class MessageCenter extends Component {
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
+  getRecipientsIndex = user => {
+    let {
+      messages: { recipients }
+    } = this.props;
+    let index = _.findIndex(recipients, item => item.name === user);
+    if (index !== -1) {
+      return recipients[index].value;
+    }
+  };
+
   handleChange = folder => {
     this.setState({ tab: folder }, () => this.getTabRelatedMessages());
   };
@@ -229,7 +239,13 @@ class MessageCenter extends Component {
   };
 
   onComposeModalClose = () => {
-    this.setState({ composeModal: false });
+    this.setState({
+      composeModal: false,
+      subject: "",
+      ParentMessageID: null,
+      tabLabel: "Compose Message",
+      MessageGroupID: null
+    });
   };
 
   onChangeRecipient = recipient => {
@@ -265,7 +281,7 @@ class MessageCenter extends Component {
     if (value === "reply") {
       this.replyMessage(message);
     } else {
-      this.onDeletePress();
+      this.onDeletePress(message);
     }
   };
   onDeletePress = message => {
@@ -283,7 +299,8 @@ class MessageCenter extends Component {
         composeModal: true,
         subject: "Re:" + message.MessageSubject,
         ParentMessageID: message.MessageID,
-        tabLabel: "Reply Message"
+        tabLabel: "Reply Message",
+        MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
       },
       () => {
         this.props.appAction.getRecipients();

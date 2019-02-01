@@ -165,6 +165,7 @@ class MessageCenter extends Component {
             onChangeMessage={this.onChangeMessage}
             onChangeSubject={this.onChangeSubject}
             onComposePress={this.onComposePress}
+            getRecipientsLabel={item => item}
           />
         </CustomModal>
       </View>

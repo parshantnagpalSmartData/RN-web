@@ -21,6 +21,7 @@ import SafeView from "../../components/Common/SafeView";
 import { Dropdown } from "react-native-material-dropdown";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import AuthButton from "../../components/Common/AuthButton";
 
 const Compose = ({
   tabLable,
@@ -32,7 +33,8 @@ const Compose = ({
   onChangeRecipient,
   onChangeSubject,
   onChangeMessage,
-  onComposePress
+  onComposePress,
+  getRecipientsLabel
 }) => (
   <View style={Styles.container}>
     {Platform.OS !== "web" ? (
@@ -49,13 +51,13 @@ const Compose = ({
         <SafeView />
         <View style={Styles.header}>
           <TouchableOpacity onPress={onClose} style={Styles.closeBtn}>
-            <Image source={Constants.Images.Close} />
+            <Image source={Constants.Images.CloseModal} />
           </TouchableOpacity>
           <Text numberOfLines={2} style={[Styles.headerText]}>
             {tabLable ? tabLable : "Compose Message"}
           </Text>
           <TouchableOpacity onPress={onComposePress}>
-            <Image source={Constants.Images.SentActive} />
+            <Image source={Constants.Images.ComposeWhite} />
           </TouchableOpacity>
         </View>
       </LinearGradient>
@@ -67,7 +69,7 @@ const Compose = ({
     <View style={Styles.messageBody}>
       {Platform.OS !== "web" ? (
         <Dropdown
-          value={to && to.toString()}
+          value={getRecipientsLabel(to)}
           label="To"
           data={recipients}
           overlayStyle={Styles.overlayStyle}
@@ -124,22 +126,12 @@ const Compose = ({
       {Platform.OS === "web" ? (
         <View
           style={{
-            // justifyContent: "flex-end",
-            alignItems: "flex-end"
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+            margin: moderateScale(5)
           }}
         >
-          <TouchableOpacity
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              // backgroundColor: Constants.Colors.Green,
-              height: moderateScale(30),
-              width: moderateScale(40)
-            }}
-            onPress={onComposePress}
-          >
-            <Image source={Constants.Images.SentActive} />
-          </TouchableOpacity>
+          <AuthButton onPress={onComposePress} buttonName={"Send"} />
         </View>
       ) : null}
     </View>
@@ -175,7 +167,7 @@ const Styles = StyleSheet.create({
     })
   },
   closeBtn: {
-    backgroundColor: "#fff"
+    // backgroundColor: "#fff"
   },
   messageBody: { flex: 0.9 },
   overlayStyle: {
@@ -200,7 +192,7 @@ const Styles = StyleSheet.create({
     paddingHorizontal: moderateScale(10),
     ...Platform.select({
       web: {
-        minHeight: moderateScale(220)
+        minHeight: moderateScale(180)
       }
     })
   },
@@ -214,7 +206,7 @@ const Styles = StyleSheet.create({
     ...Platform.select({ web: { outline: "none" } })
   },
   messageBodyText: {
-    minHeight: moderateScale(220)
+    minHeight: moderateScale(180)
   },
   commonText: {
     ...Constants.Fonts.Regular,

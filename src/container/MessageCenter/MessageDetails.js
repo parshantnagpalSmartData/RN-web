@@ -43,7 +43,8 @@ class MessageDetails extends Component {
       {
         composeModal: true,
         subject: "Re:" + message.MessageSubject,
-        ParentMessageID: message.MessageID
+        ParentMessageID: message.MessageID,
+        MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
       },
       () => {
         this.props.appAction.getRecipients();
@@ -65,6 +66,26 @@ class MessageDetails extends Component {
 
   onChangeMessage = message => {
     this.setState({ message });
+  };
+
+  getRecipientsIndex = user => {
+    let {
+      messages: { recipients }
+    } = this.props;
+    let index = _.findIndex(recipients, item => item.name === user);
+    if (index !== -1) {
+      return recipients[index].index;
+    }
+  };
+
+  getRecipientsLabel = user => {
+    let {
+      messages: { recipients }
+    } = this.props;
+    let index = _.findIndex(recipients, item => item.name === user);
+    if (index !== -1) {
+      return recipients[index].label;
+    }
   };
 
   onComposePress = () => {
@@ -93,7 +114,7 @@ class MessageDetails extends Component {
       messages: { activeMessage, inbox, trash, sent, tab, recipients },
       user
     } = this.props;
-    let { subject, to } = this.state;
+    let { subject, MessageGroupID } = this.state;
     let currentTab = tab === "inbox" ? inbox : tab === "sent" ? sent : trash;
     let index = _.findIndex(
       currentTab,
@@ -213,8 +234,9 @@ class MessageDetails extends Component {
               onChangeSubject={this.onChangeSubject}
               onComposePress={this.onComposePress}
               subject={subject}
-              to={to}
+              to={MessageGroupID}
               tabLable={"Reply Message"}
+              getRecipientsLabel={this.getRecipientsLabel}
             />
           </CustomModal>
         </View>
