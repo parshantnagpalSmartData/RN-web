@@ -31,6 +31,16 @@ import MessageDetails from "./MessageDetails";
 // import DivContainer from "../../components/Common/DivContainer";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
 
 const Filter = ({ value, handleSortChange }) => {
   return (
@@ -59,8 +69,8 @@ const RenderSelect = ({ value, handleChange }) => {
           value === "inbox"
             ? Constants.Images.InboxActive
             : value === "sent"
-            ? Constants.Images.SentActive
-            : Constants.Images.TrashActive
+              ? Constants.Images.SentActive
+              : Constants.Images.TrashActive
         }
         style={{
           height: moderateScale(20),
@@ -189,8 +199,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
@@ -300,7 +310,7 @@ class MessageCenter extends Component {
       appAction.deleteMessage(
         message.MessageID,
         tab,
-        () => {}
+        () => { }
         // this.getTabRelatedMessages()
       );
     }
@@ -321,10 +331,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients, inbox, sent, trash }
-      } = this.props,
+      app,
+      user,
+      messages: { recipients, inbox, sent, trash }
+    } = this.props,
       data,
       { MessageGroupID, subject, tabLabel, filter, tab } = this.state;
     if (tab == "inbox") {
@@ -371,10 +381,10 @@ class MessageCenter extends Component {
                 onRefresh={this.getTabRelatedMessages}
                 onPress={this.detailPageOpen}
                 onMessagePress={this.onMessagePress}
-                // enableScrollingFunction={data => {
-                //   this.enableScrollingFunction(data);
-                // }}
-                // onOpen={this.onOpen}
+              // enableScrollingFunction={data => {
+              //   this.enableScrollingFunction(data);
+              // }}
+              // onOpen={this.onOpen}
               />
             </div>
           </div>
@@ -398,14 +408,7 @@ class MessageCenter extends Component {
           isVisible={this.state.composeModal}
           onBackdropPress={this.onComposeModalClose}
           style={{ margin: 0 }}
-          customStyles={{
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)"
-          }}
+          customStyles={customStyles}
         >
           <Compose
             to={MessageGroupID}

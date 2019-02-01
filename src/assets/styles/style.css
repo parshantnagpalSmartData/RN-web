@@ -554,7 +554,7 @@ body {
   width: 100%;
 }
 
-.messageScroll > div > div > div > div{max-height: calc(100vh - 220px)!important;}
+.messageScroll > div > div > div > div, .listEmptycopmonent{max-height: calc(100vh - 220px)!important;}
 .messageDetailTop > div > div,
 .messageDetailTop > div > div > div:last-child {
   align-items: center;

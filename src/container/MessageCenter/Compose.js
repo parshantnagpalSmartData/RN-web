@@ -36,112 +36,126 @@ const Compose = ({
   onComposePress,
   getRecipientsLabel
 }) => (
-  <View style={Styles.container}>
-    {Platform.OS !== "web" ? (
-      <LinearGradient
-        start={{ x: 1, y: 0 }}
-        end={{ x: 0, y: 0 }}
-        colors={
-          Platform.OS === "web"
-            ? Constants.Colors.ButtonGradientsWeb
-            : Constants.Colors.ButtonGradients
-        }
-        style={[Styles.gradientStyle]}
-      >
-        <SafeView />
-        <View style={Styles.header}>
-          <TouchableOpacity onPress={onClose} style={Styles.closeBtn}>
-            <Image source={Constants.Images.CloseModal} />
-          </TouchableOpacity>
-          <Text numberOfLines={2} style={[Styles.headerText]}>
-            {tabLable ? tabLable : "Compose Message"}
-          </Text>
-          <TouchableOpacity onPress={onComposePress}>
-            <Image source={Constants.Images.ComposeWhite} />
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    ) : (
-      <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
-        <Image source={Constants.Images.Close} style={Styles.closeImg} />
-      </TouchableOpacity>
-    )}
-    <View style={Styles.messageBody}>
+    <View style={Styles.container}>
       {Platform.OS !== "web" ? (
-        <Dropdown
-          value={getRecipientsLabel(to)}
-          label="To"
-          data={recipients}
-          overlayStyle={Styles.overlayStyle}
-          containerStyle={Styles.containerStyle}
-          onChangeText={value => onChangeRecipient(value)}
-          fontSize={11}
-        />
-      ) : (
-        <View>
-          <Text style={Styles.commonText}>To</Text>
-          <Select
-            value={to}
-            inputProps={{
-              name: "folder",
-              id: "folder-name"
-            }}
-            onChange={event => onChangeRecipient(event.target.value)}
-          >
-            {recipients.map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </View>
-      )}
-      <View style={Styles.options}>
-        <Text style={Styles.commonText}>From</Text>
-        <Text style={[Styles.commonText, Styles.textPadding]}>
-          {user.UserName}
-        </Text>
-      </View>
-      <View style={Styles.options}>
-        <Text style={Styles.commonText}>Subject</Text>
-        <TextInput
-          value={subject}
-          onChangeText={value => onChangeSubject(value)}
-          numberOfLines={2}
-          style={[Styles.TextInput, Styles.textPadding]}
-        />
-      </View>
-      <View style={Styles.msgBody}>
-        <TextInput
-          onChangeText={value => onChangeMessage(value)}
-          multiline={true}
-          numberOfLines={50}
-          style={Styles.TextInput}
-          placeholder={"Compose"}
-          placeholderTextColor={Constants.Colors.Gray}
-        />
-      </View>
-      {Platform.OS === "web" ? (
-        <View
-          style={{
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-            margin: moderateScale(5)
-          }}
+        <LinearGradient
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 0 }}
+          colors={
+            Platform.OS === "web"
+              ? Constants.Colors.ButtonGradientsWeb
+              : Constants.Colors.ButtonGradients
+          }
+          style={[Styles.gradientStyle]}
         >
-          <AuthButton onPress={onComposePress} buttonName={"Send"} />
+          <SafeView />
+          <View style={Styles.header}>
+            <TouchableOpacity onPress={onClose} style={Styles.closeBtn}>
+              <Image source={Constants.Images.CloseModal} />
+            </TouchableOpacity>
+            <Text numberOfLines={2} style={[Styles.headerText]}>
+              {tabLable ? tabLable : "Compose Message"}
+            </Text>
+            <TouchableOpacity onPress={onComposePress}>
+              <Image source={Constants.Images.ComposeWhite} />
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
+      ) : (
+          <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
+            <Image source={Constants.Images.Close} style={Styles.closeImg} />
+          </TouchableOpacity>
+        )}
+      <View style={Styles.messageBody}>
+        {Platform.OS !== "web" ? (
+          <Dropdown
+            value={getRecipientsLabel(to)}
+            label="To"
+            data={recipients}
+            overlayStyle={Styles.overlayStyle}
+            containerStyle={Styles.containerStyle}
+            onChangeText={value => onChangeRecipient(value)}
+            fontSize={11}
+          />
+        ) : (
+            <View>
+              <Text style={Styles.commonText}>To</Text>
+              <Select
+                value={to}
+                inputProps={{
+                  name: "folder",
+                  id: "folder-name"
+                }}
+                onChange={event => onChangeRecipient(event.target.value)}
+              >
+                {recipients.map((item, index) => {
+                  return (
+                    <MenuItem key={index} value={item.value}>
+                      {item.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </View>
+          )}
+        <View style={Styles.options}>
+          <Text style={Styles.commonText}>From</Text>
+          <Text style={[Styles.commonText, Styles.textPadding]}>
+            {user.UserName}
+          </Text>
         </View>
-      ) : null}
+        <View style={Styles.options}>
+          <Text style={Styles.commonText}>Subject</Text>
+          <TextInput
+            value={subject}
+            onChangeText={value => onChangeSubject(value)}
+            numberOfLines={2}
+            style={[Styles.TextInput, Styles.textPadding]}
+          />
+        </View>
+        <View style={Styles.msgBody}>
+          <TextInput
+            onChangeText={value => onChangeMessage(value)}
+            multiline={true}
+            numberOfLines={50}
+            style={Styles.TextInput}
+            placeholder={"Compose"}
+            placeholderTextColor={Constants.Colors.Gray}
+          />
+        </View>
+        {Platform.OS === "web" ? (
+          <View
+            style={{
+              justifyContent: "flex-end",
+              alignItems: "flex-end",
+              margin: moderateScale(5)
+            }}
+          >
+            <AuthButton onPress={onComposePress} buttonName={"Send"} />
+          </View>
+        ) : null}
+      </View>
     </View>
-  </View>
-);
+  );
 
 const Styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+
+    ...Platform.select({
+      web: {
+
+
+        borderRadius: moderateScale(10),
+
+        alignItems: "center",
+        height: moderateScale(350),
+        width: moderateScale(400),
+        paddingTop: moderateScale(0),
+        marginHorizontal: moderateScale(12)
+      }
+    })
   },
   gradientStyle: {
     flex: 0.1,
