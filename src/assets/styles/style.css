@@ -503,6 +503,9 @@ body {
   font-weight: 500;
 }
 
+.messageFilter .MuiInput-underline-12:before,
+.msgActions .MuiInput-underline-12:before{border: none !important;}
+
 .messageFilter > div > div > div > div{padding-top:3p !important; padding-bottom:3px !important;}
 .messageCounter > div > div {
   right: 0 !important;
@@ -554,7 +557,8 @@ body {
   width: 100%;
 }
 
-.messageScroll > div > div > div > div, .listEmptycopmonent{max-height: calc(100vh - 220px)!important;}
+.messageScroll > div > div > div > div{max-height: calc(100vh - 220px)!important;}
+.listEmptycopmonent{height: calc(100vh - 220px)!important; display: flex; align-items: center;}
 .messageDetailTop > div > div,
 .messageDetailTop > div > div > div:last-child {
   align-items: center;
@@ -566,6 +570,24 @@ body {
 .messageTextView div {
   font-family: "Montserrat-Regular" !important;
 }
+
+.CloseButttonCompose{position: absolute; right:-20px; top:-10px;}
+.CloseButttonCompose > div > div{height: 20px !important; width: 20px !important;}
+.folderName{position: relative;}
+.folderName > div:first-child{position: absolute; top:9px;}
+.folderName > div:last-child{width: 100%;  padding-left: 35px;}
+
+.fromOptions, .fromSubject, .textInputDivContainer{padding-top: 10px;}
+.fromOptions > div > div,
+.fromSubject > div > div,
+.textInputDivContainer > div > div{padding-left: 0;}
+.textInputDivContainer > div > div{min-height: 180px !important;}
+
+.AuthButton > div > div > div{padding: 0 15px !important;
+  line-height: 60px;
+  width: 320px;
+  margin: 10px auto; }
+.AuthButton div{font-size: 18px !important;  font-weight: 400 !important;}
 
 @media screen and (min-width: 1366px) {
   .messageList > div > div > div:last-child > div:last-child, .msgUserName > div > div, .msgSubject > div > div {
@@ -659,7 +681,4 @@ body {
 .msgActions {
   width: 25px;
   margin-left: 10px;
-}
-. {
-  height: calc(100vh - 220px) !important;
 }

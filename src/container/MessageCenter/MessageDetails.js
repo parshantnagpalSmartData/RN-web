@@ -23,7 +23,7 @@ import CustomModal from "../../components/CustomModal";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import DivContainer from "../../components/Common/DivContainer";
-import AuthButton from "../../components/Common/AuthButton";
+// import AuthButton from "../../components/Common/AuthButton";
 class MessageDetails extends Component {
   constructor(props) {
     super(props);
@@ -201,59 +201,61 @@ class MessageDetails extends Component {
                 </View>
               </View>
             </DivContainer>
-            <View style={Styles.userInfo}>
-              {Platform.OS === "web" ? (
-                <View style={Styles.MessageSubject}>
-                  <DivContainer className={"msgSubject"}>
-                    <Text style={Styles.userName}>
-                      {message && message.MessageSubject}
+            <DivContainer className="divWrapper">
+              <View style={Styles.userInfo}>
+                {Platform.OS === "web" ? (
+                  <View style={Styles.MessageSubject}>
+                    <DivContainer className={"msgSubject"}>
+                      <Text style={Styles.userName}>
+                        {message && message.MessageSubject}
+                      </Text>
+                    </DivContainer>
+                    <Text style={Styles.timeLine}>
+                      {timeSince(message && message.MessageDate)}
                     </Text>
-                  </DivContainer>
-                  <Text style={Styles.timeLine}>
-                    {timeSince(message && message.MessageDate)}
-                  </Text>
-                </View>
-              ) : null}
-              {Platform.OS !== "web" ? (
-                <ScrollView
-                  contentContainerStyle={Styles.messageBody}
-                  showsHorizontalScrollIndicator={false}
-                  showsVerticalScrollIndicator={false}
-                >
-                  <Text style={Styles.messageBodyText}>
-                    {message && message.MessageBody}
-                  </Text>
-                </ScrollView>
-              ) : (
-                <DivContainer className={"messageTextView"}>
-                  <View style={Styles.messageBody}>
+                  </View>
+                ) : null}
+                {Platform.OS !== "web" ? (
+                  <ScrollView
+                    contentContainerStyle={Styles.messageBody}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                  >
                     <Text style={Styles.messageBodyText}>
                       {message && message.MessageBody}
                     </Text>
-                  </View>
-                </DivContainer>
-              )}
-              {Platform.OS === "web" ? (
-                <DivContainer
-                  styleApp={Styles.divStyle}
-                  styleWeb={Styles.divStyle}
-                  className={"ButtonContainer"}
-                >
-                  <AuthButton
-                    buttonStyle={Styles.buttonStyle}
-                    onPress={() => {}}
-                    gradientStyle={Styles.gradientStyle}
-                    buttonName={"Reply"}
-                  />
-                  <AuthButton
-                    buttonStyle={Styles.buttonStyle}
-                    gradientStyle={Styles.gradientStyle}
-                    onPress={() => {}}
-                    buttonName={"Delete"}
-                  />
-                </DivContainer>
-              ) : null}
-            </View>
+                  </ScrollView>
+                ) : (
+                  <DivContainer className={"messageTextView"}>
+                    <View style={Styles.messageBody}>
+                      <Text style={Styles.messageBodyText}>
+                        {message && message.MessageBody}
+                      </Text>
+                    </View>
+                  </DivContainer>
+                )}
+                {/* {Platform.OS === "web" ? (
+                  <DivContainer
+                    styleApp={Styles.divStyle}
+                    styleWeb={Styles.divStyle}
+                    className={"ButtonContainer"}
+                  >
+                    <AuthButton
+                      buttonStyle={Styles.buttonStyle}
+                      onPress={() => { }}
+                      gradientStyle={Styles.gradientStyle}
+                      buttonName={"Reply"}
+                    />
+                    <AuthButton
+                      buttonStyle={Styles.buttonStyle}
+                      gradientStyle={Styles.gradientStyle}
+                      onPress={() => { }}
+                      buttonName={"Delete"}
+                    />
+                  </DivContainer>
+                ) : null} */}
+              </View>
+            </DivContainer>
           </View>
 
           <CustomModal
