@@ -28,6 +28,10 @@ export default function messages(state = initialState, action = {}) {
         ...state,
         trash: action.payload
       };
+    case Types.ADD_MESSAGE:
+      let pushRequest = [...state.sent];
+      pushRequest.unshift(action.payload[0]);
+      return { ...state, sent: pushRequest };
     case Types.DELETE_MESSAGE:
       if (action.payload.category === "inbox") {
         let inboxData = [...state.inbox],

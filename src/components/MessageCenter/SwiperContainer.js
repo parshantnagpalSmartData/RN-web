@@ -6,12 +6,18 @@
  */
 
 import React from "react";
-import { FlatList, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+  Platform
+} from "react-native";
 import PropTypes from "prop-types";
 
 import Constants from "../../constants";
 import ListEmptyComponent from "../Common/ListEmptyComponent";
 import MessageItem from "./MessageItem";
+import DivContainer from "../Common/DivContainer";
 
 const SwiperContainer = ({
   data,
@@ -22,15 +28,16 @@ const SwiperContainer = ({
   onPress,
   onMessagePress
 }) => {
-  if (!refresh) {
-    return (
+  // if (!refresh) {
+  return (
+    <DivContainer className={"messageScroll"}>
       <FlatList
         key={item => item.MessageID}
         data={data}
         contentContainerStyle={Styles.contentContainerStyle}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        refreshing={refresh}
+        refreshing={Platform.OS !== "web" ? refresh : false}
         refreshControl={
           <ActivityIndicator
             size={"large"}
@@ -56,16 +63,17 @@ const SwiperContainer = ({
           );
         }}
       />
-    );
-  } else {
-    return (
-      <ActivityIndicator
-        size={"large"}
-        style={{ flex: 1, alignSelf: "center" }}
-        color={Constants.Colors.Primary}
-      />
-    );
-  }
+    </DivContainer>
+  );
+  // } else {
+  //   return (
+  //     <ActivityIndicator
+  //       size={"large"}
+  //       style={{ flex: 1, alignSelf: "center" }}
+  //       color={Constants.Colors.Primary}
+  //     />
+  //   );
+  // }
 };
 
 const Styles = StyleSheet.create({
