@@ -20,8 +20,10 @@ import { timeSince } from "../../helpers/common";
 import RightComponent from "../../components/Common/RightComponent";
 import Compose from "./Compose.js";
 import CustomModal from "../../components/CustomModal";
+import DivContainer from "../../components/Common/DivContainer";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+
 
 class MessageDetails extends Component {
   constructor(props) {
@@ -112,31 +114,42 @@ class MessageDetails extends Component {
               onRightPress={() => this.onRightPress(message)}
             />
           ) : null}
+
           <View style={Styles.messageView}>
-            <View style={Styles.header}>
-              <View style={Styles.UserImage}>
-                <Image
-                  source={Constants.Images.UserImage}
-                  style={Styles.UserImg}
-                />
-              </View>
-              <View style={Styles.userNameView}>
-                <View style={Styles.userView}>
-                  <Text style={Styles.userName}>
-                    {message && message.Recipient_GroupName}
-                  </Text>
-                  {Platform.OS !== "web" ? (
-                    <Text style={Styles.timeLine}>
-                      {timeSince(message && message.MessageDate)}
-                    </Text>
-                  ) : (
-                    <Text style={Styles.timeLine}>
-                      {this.getUserEmail(message.Recipient_GroupName)}
-                    </Text>
-                  )}
+            <DivContainer
+              className={"messageDetailTop"}
+              styleApp={
+                {
+                  // justifyContent:"center",
+                  // alignItem:'center'
+                }
+              }
+              styleWeb={{}}
+            >
+              <View style={Styles.header}>
+                <View style={Styles.UserImage}>
+                  <Image
+                    source={Constants.Images.UserImage}
+                    style={Styles.UserImg}
+                  />
                 </View>
-                {Platform.OS === "web"
-                  ? !this.props.open && (
+                <View style={Styles.userNameView}>
+                  <View style={Styles.userView}>
+                    <Text style={Styles.userName}>
+                      {message && message.Recipient_GroupName}
+                    </Text>
+                    {Platform.OS !== "web" ? (
+                      <Text style={Styles.timeLine}>
+                        {timeSince(message && message.MessageDate)}
+                      </Text>
+                    ) : (
+                        <Text style={Styles.timeLine}>
+                          {this.getUserEmail(message.Recipient_GroupName)}
+                        </Text>
+                      )}
+                  </View>
+                  {Platform.OS === "web"
+                    ? !this.props.open && (
                       <TouchableOpacity onPress={this.props.toggleOpen}>
                         <Image
                           source={Constants.Images.Menu}
@@ -147,27 +160,30 @@ class MessageDetails extends Component {
                         />
                       </TouchableOpacity>
                     )
-                  : null}
+                    : null}
 
-                {this.props.open && Platform.OS === "web" ? (
-                  <Select
-                    value={1}
-                    open={this.props.open}
-                    inputProps={{
-                      name: "folder",
-                      id: "event-name"
-                    }}
-                    onClose={() => {}}
-                    onChange={event => {
-                      this.props.onClose(event.target.value, message);
-                    }}
-                  >
-                    <MenuItem value={"delete"}>Delete</MenuItem>
-                    <MenuItem value={"reply"}>Reply </MenuItem>
-                  </Select>
-                ) : null}
+                  {this.props.open && Platform.OS === "web" ? (
+                    <DivContainer className={"msgActions"}>
+                      <Select
+                        value={1}
+                        open={this.props.open}
+                        inputProps={{
+                          name: "folder",
+                          id: "event-name"
+                        }}
+                        onClose={() => { }}
+                        onChange={event => {
+                          this.props.onClose(event.target.value, message);
+                        }}
+                      >
+                        <MenuItem value={"delete"}>Delete</MenuItem>
+                        <MenuItem value={"reply"}>Reply </MenuItem>
+                      </Select>
+                    </DivContainer>
+                  ) : null}
+                </View>
               </View>
-            </View>
+            </DivContainer>
             <View style={Styles.userInfo}>
               {Platform.OS === "web" ? (
                 <View style={Styles.MessageSubject}>
@@ -190,12 +206,12 @@ class MessageDetails extends Component {
                   </Text>
                 </ScrollView>
               ) : (
-                <View style={Styles.messageBody}>
-                  <Text style={Styles.messageBodyText}>
-                    {message && message.MessageBody}
-                  </Text>
-                </View>
-              )}
+                  <View style={Styles.messageBody}>
+                    <Text style={Styles.messageBodyText}>
+                      {message && message.MessageBody}
+                    </Text>
+                  </View>
+                )}
             </View>
           </View>
 
