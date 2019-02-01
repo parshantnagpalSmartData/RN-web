@@ -22,6 +22,7 @@ import { Dropdown } from "react-native-material-dropdown";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import AuthButton from "../../components/Common/AuthButton";
+import DivContainer from "../../components/Common/DivContainer";
 
 const Compose = ({
   tabLable,
@@ -62,9 +63,11 @@ const Compose = ({
         </View>
       </LinearGradient>
     ) : (
-      <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
-        <Image source={Constants.Images.Close} style={Styles.closeImg} />
-      </TouchableOpacity>
+      <div className={"CloseButttonCompose"}>
+        <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
+          <Image source={Constants.Images.Close} style={Styles.closeImg} />
+        </TouchableOpacity>
+      </div>
     )}
     <View style={Styles.messageBody}>
       {Platform.OS !== "web" ? (
@@ -78,7 +81,7 @@ const Compose = ({
           fontSize={11}
         />
       ) : (
-        <View>
+        <div className={"folderName"}>
           <Text style={Styles.commonText}>To</Text>
           <Select
             value={to}
@@ -96,43 +99,51 @@ const Compose = ({
               );
             })}
           </Select>
-        </View>
+        </div>
       )}
-      <View style={Styles.options}>
-        <Text style={Styles.commonText}>From</Text>
-        <Text style={[Styles.commonText, Styles.textPadding]}>
-          {user.UserName}
-        </Text>
-      </View>
-      <View style={Styles.options}>
-        <Text style={Styles.commonText}>Subject</Text>
-        <TextInput
-          value={subject}
-          onChangeText={value => onChangeSubject(value)}
-          numberOfLines={2}
-          style={[Styles.TextInput, Styles.textPadding]}
-        />
-      </View>
-      <View style={Styles.msgBody}>
-        <TextInput
-          onChangeText={value => onChangeMessage(value)}
-          multiline={true}
-          numberOfLines={50}
-          style={Styles.TextInput}
-          placeholder={"Compose"}
-          placeholderTextColor={Constants.Colors.Gray}
-        />
-      </View>
-      {Platform.OS === "web" ? (
-        <View
-          style={{
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-            margin: moderateScale(5)
-          }}
-        >
-          <AuthButton onPress={onComposePress} buttonName={"Send"} />
+      <DivContainer className={"fromOptions"}>
+        <View style={Styles.options}>
+          <Text style={Styles.commonText}>From</Text>
+          <Text style={[Styles.commonText, Styles.textPadding]}>
+            {user.UserName}
+          </Text>
         </View>
+      </DivContainer>
+      <DivContainer className={"fromSubject"}>
+        <View style={Styles.options}>
+          <Text style={Styles.commonText}>Subject</Text>
+          <TextInput
+            value={subject}
+            onChangeText={value => onChangeSubject(value)}
+            numberOfLines={2}
+            style={[Styles.TextInput, Styles.textPadding]}
+          />
+        </View>
+      </DivContainer>
+      <DivContainer className={"textInputDivContainer"}>
+        <View style={Styles.msgBody}>
+          <TextInput
+            onChangeText={value => onChangeMessage(value)}
+            multiline={true}
+            numberOfLines={50}
+            style={Styles.TextInput}
+            placeholder={"Compose"}
+            placeholderTextColor={Constants.Colors.Gray}
+          />
+        </View>
+      </DivContainer>
+      {Platform.OS === "web" ? (
+        <div className={"AuthButton"}>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              margin: moderateScale(5)
+            }}
+          >
+            <AuthButton onPress={onComposePress} buttonName={"Send"} />
+          </View>
+        </div>
       ) : null}
     </View>
   </View>
@@ -181,7 +192,19 @@ const Styles = StyleSheet.create({
   closeBtn: {
     // backgroundColor: "#fff"
   },
-  messageBody: { flex: 0.9 },
+  messageBody: {
+    ...Platform.select({
+      ios: {
+        flex: 0.9
+      },
+      android: {
+        flex: 0.9
+      },
+      web: {
+        width: "100%"
+      }
+    })
+  },
   overlayStyle: {
     top: moderateScale(70)
   },
