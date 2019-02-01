@@ -8,23 +8,23 @@ import React from "react";
 import { View, Image, Text, StyleSheet, Platform } from "react-native";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import Constants from "../../constants";
-import CheckBox from "../../components/Common/CheckBox";
+// import CheckBox from "../../components/Common/CheckBox";
 import Common from "../../helpers/common";
 
 const MessageComponent = ({
-  isChecked,
+  // isChecked,
   // SenderLastName,
   // SenderFirstName,
   MessageDate,
   MessageSubject,
-  onPressIsChecked,
+  // onPressIsChecked,
   Recipient_GroupName
 }) => {
   return (
     <View style={Styles.Swipeout}>
-      {Platform.OS == "web" && (
+      {/* {Platform.OS == "web" && (
         <CheckBox isChecked={isChecked} onPress={onPressIsChecked} />
-      )}
+      )} */}
       <View style={Styles.userImgView}>
         <Image
           style={Styles.userImg}

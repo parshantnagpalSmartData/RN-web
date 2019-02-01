@@ -40,6 +40,7 @@ module.exports = {
   TrashInactive: require("../assets/images/TrashInActive/trashInactive.png"),
   Delete: require("../assets/images/Delete/delete.png"),
   Compose: require("../assets/images/Compose/compose.png"),
+  ComposeBlack: require("../assets/images/ComposeBlack/compose.png"),
   Links: require("../assets/images/Links/Links.png"),
   Check: require("../assets/images/Check/Check.png"),
   UnCheck: require("../assets/images/UnCheck/UnCheck.png"),

@@ -121,18 +121,19 @@ const MessageCounter = () => (
       flexDirection: "row",
       justifyContent: "flex-end",
       alignItems: "center",
+
       padding: moderateScale(10)
     }}
   >
-    <Image
+    {/* <Image
       source={Constants.Images.TrashInactive}
       style={{
         height: moderateScale(15),
         width: moderateScale(15),
         right: moderateScale(5)
       }}
-    />
-    <Text>1-50 of 200</Text>
+    /> */}
+    {/* <Text style={{width}}>1-50 of 200</Text> */}
     <View
       style={{
         flexDirection: "row",
@@ -312,7 +313,7 @@ class MessageCenter extends Component {
           </div>
           <div className={"composeEmail d-sm-flex align-items-center ml-auto"}>
             <TouchableOpacity onPress={() => this.onRightPress()}>
-              <RightComponent icon={Constants.Images.Compose} />
+              <RightComponent icon={Constants.Images.ComposeBlack} />
               <Text>Compose</Text>
             </TouchableOpacity>
           </div>
