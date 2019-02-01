@@ -38,7 +38,7 @@ class MessageItem extends React.Component {
         // snapPoints={[{ y: 0 }]}
         // onSnap={this.onDrawerSnap}
       >
-        <View style={{ backgroundColor: "green", flexDirection: "row" }}>
+        <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             underlayColor="rgba(192,192,192,0.6)"
             onPress={() => onMessagePress(item)}

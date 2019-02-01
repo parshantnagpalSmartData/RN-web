@@ -6,7 +6,12 @@
  */
 
 import React from "react";
-import { FlatList, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+  Platform
+} from "react-native";
 import PropTypes from "prop-types";
 
 import Constants from "../../constants";
@@ -22,50 +27,50 @@ const SwiperContainer = ({
   onPress,
   onMessagePress
 }) => {
-  if (!refresh) {
-    return (
-      <FlatList
-        key={item => item.MessageID}
-        data={data}
-        contentContainerStyle={Styles.contentContainerStyle}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        refreshing={refresh}
-        refreshControl={
-          <ActivityIndicator
-            size={"large"}
-            style={{ flex: 1, alignSelf: "center" }}
-            color={Constants.Colors.Primary}
+  // if (!refresh) {
+  return (
+    <FlatList
+      key={item => item.MessageID}
+      data={data}
+      contentContainerStyle={Styles.contentContainerStyle}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
+      refreshing={Platform.OS !== "web" ? refresh : false}
+      refreshControl={
+        <ActivityIndicator
+          size={"large"}
+          style={{ flex: 1, alignSelf: "center" }}
+          color={Constants.Colors.Primary}
+        />
+      }
+      onRefresh={onRefresh}
+      ListEmptyComponent={
+        <ListEmptyComponent message={"Message Not Found"} loader={refresh} />
+      }
+      renderItem={({ item, index }) => {
+        return (
+          <MessageItem
+            onPress={() => onPress(item)}
+            onPressIsChecked={() => onPressIsChecked(index)}
+            item={item}
+            index={index}
+            onDeletePress={() => onDeletePress(item)}
+            MessageSubject={item.MessageSubject}
+            onMessagePress={onMessagePress}
           />
-        }
-        onRefresh={onRefresh}
-        ListEmptyComponent={
-          <ListEmptyComponent message={"Message Not Found"} loader={refresh} />
-        }
-        renderItem={({ item, index }) => {
-          return (
-            <MessageItem
-              onPress={() => onPress(item)}
-              onPressIsChecked={() => onPressIsChecked(index)}
-              item={item}
-              index={index}
-              onDeletePress={() => onDeletePress(item)}
-              MessageSubject={item.MessageSubject}
-              onMessagePress={onMessagePress}
-            />
-          );
-        }}
-      />
-    );
-  } else {
-    return (
-      <ActivityIndicator
-        size={"large"}
-        style={{ flex: 1, alignSelf: "center" }}
-        color={Constants.Colors.Primary}
-      />
-    );
-  }
+        );
+      }}
+    />
+  );
+  // } else {
+  //   return (
+  //     <ActivityIndicator
+  //       size={"large"}
+  //       style={{ flex: 1, alignSelf: "center" }}
+  //       color={Constants.Colors.Primary}
+  //     />
+  //   );
+  // }
 };
 
 const Styles = StyleSheet.create({

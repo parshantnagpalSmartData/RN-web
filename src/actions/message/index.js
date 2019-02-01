@@ -12,11 +12,21 @@ import Constants from "../../constants";
 
 export const getMessages = (folder, cb) => {
   return (dispatch, getState) => {
-    dispatch(AppActions.startRefreshLoader());
+    let startLoader = () => {
+      Platform.OS === "web"
+        ? dispatch(AppActions.startLoader())
+        : dispatch(AppActions.startRefreshLoader());
+    };
+    let stopLoader = () => {
+      Platform.OS === "web"
+        ? dispatch(AppActions.stopLoader())
+        : dispatch(AppActions.stopRefreshLoader());
+    };
+    startLoader();
     dispatch({ type: Types.UPDATE_CURRENT_TAB, payload: folder });
     RestClient.getCall(`messages?folder=${folder}`, getState().user.token)
       .then(res => {
-        dispatch(AppActions.stopRefreshLoader());
+        stopLoader();
         if (res.status) {
           if (folder === "inbox") {
             dispatch({
@@ -43,7 +53,7 @@ export const getMessages = (folder, cb) => {
         }
       })
       .catch(e => {
-        dispatch(AppActions.stopRefreshLoader());
+        stopLoader();
         console.warn("error", e); // eslint-disable-line
       });
   };
