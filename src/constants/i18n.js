@@ -17,7 +17,10 @@ let Strings = {
     NewPassword: "Enter your new password.",
     confirmPassword: "Confirm your new password.",
     PasswordNotMatched: "Your Password Not Matched.",
-    OTPDigit: "OTP must be 4 digit."
+    OTPDigit: "OTP must be 4 digit.",
+    EmptySubject: "Enter subject",
+    EmptyRecipient: "Select a recipient from list",
+    EmptyMessage: "Enter Message"
   },
   Error: {},
   Sucess: {

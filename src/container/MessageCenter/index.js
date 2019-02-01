@@ -8,6 +8,7 @@ import React, { Component } from "React";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ScrollableTabView from "react-native-scrollable-tab-view";
+import _ from "lodash";
 
 import { bindActionCreators } from "redux";
 import * as appAction from "../../actions";
@@ -15,7 +16,7 @@ import Header from "../../components/Common/Header";
 import CustomTabBar from "../../components/Common/CustomTabBar";
 import SwiperContainer from "../../components/MessageCenter";
 import RightComponent from "../../components/Common/RightComponent";
-import constants from "../../constants";
+import Constants from "../../constants";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
 import { Dialog } from "../../helpers/common";
@@ -96,6 +97,28 @@ class MessageCenter extends Component {
 
   onComposePress = () => {
     let { MessageGroupID, subject, message } = this.state;
+    let { appAction } = this.props;
+    if (MessageGroupID === null || MessageGroupID === undefined) {
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.EmptyRecipient
+      );
+      return;
+    }
+    if (_.isEmpty(subject.trim())) {
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.EmptySubject
+      );
+      return;
+    }
+    if (_.isEmpty(message.trim())) {
+      appAction.showToast(
+        Constants.AppConstants.Notificaitons.Error,
+        Constants.Strings.Common.EmptyMessage
+      );
+      return;
+    }
     let obj = {
       MessageSubject: subject,
       MessageBody: message,
@@ -122,7 +145,7 @@ class MessageCenter extends Component {
         <Header
           title={"Message Center"}
           onDrawerPress={this.onDrawerPress}
-          rightComponent={<RightComponent icon={constants.Images.Compose} />}
+          rightComponent={<RightComponent icon={Constants.Images.Compose} />}
           onRightPress={this.onRightPress}
         />
         <ScrollableTabView
