@@ -106,10 +106,12 @@ class PDFViewer extends Component {
     return (
       <DivContainer styleApp={Styles.pdfStyle} styleWeb={Styles.pdfStyle}>
         {this.cancelButtonAndHeaders(base64PrintableData.filename)}
-        {Platform.OS !== "web" && <Button
-          onPress={() => printPDF(base64PrintableData)}
-          title="Select Printer"
-        />}
+        {Platform.OS !== "web" && (
+          <Button
+            onPress={() => printPDF(base64PrintableData)}
+            title="Select Printer"
+          />
+        )}
         <PDF
           base64Data={base64PrintableData}
           onDocumentLoadSuccess={this.onDocumentLoadSuccess}

@@ -14,11 +14,6 @@ export const startLoader = () => {
     dispatch({ type: Types.START_LOADER });
   };
 };
-export const stopLoader123 = () => {
-  return dispatch => {
-    dispatch({ type: Types.STOP_LOADER });
-  };
-};
 
 export const stopLoader = () => {
   return dispatch => {
