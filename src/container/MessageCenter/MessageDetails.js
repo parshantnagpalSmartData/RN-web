@@ -24,7 +24,6 @@ import DivContainer from "../../components/Common/DivContainer";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-
 class MessageDetails extends Component {
   constructor(props) {
     super(props);
@@ -143,23 +142,23 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                        <Text style={Styles.timeLine}>
-                          {this.getUserEmail(message.Recipient_GroupName)}
-                        </Text>
-                      )}
+                      <Text style={Styles.timeLine}>
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    )}
                   </View>
                   {Platform.OS === "web"
                     ? !this.props.open && (
-                      <TouchableOpacity onPress={this.props.toggleOpen}>
-                        <Image
-                          source={Constants.Images.Menu}
-                          style={{
-                            height: moderateScale(20),
-                            width: moderateScale(20)
-                          }}
-                        />
-                      </TouchableOpacity>
-                    )
+                        <TouchableOpacity onPress={this.props.toggleOpen}>
+                          <Image
+                            source={Constants.Images.Menu}
+                            style={{
+                              height: moderateScale(20),
+                              width: moderateScale(20)
+                            }}
+                          />
+                        </TouchableOpacity>
+                      )
                     : null}
 
                   {this.props.open && Platform.OS === "web" ? (
@@ -171,7 +170,7 @@ class MessageDetails extends Component {
                           name: "folder",
                           id: "event-name"
                         }}
-                        onClose={() => { }}
+                        onClose={() => {}}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -206,12 +205,12 @@ class MessageDetails extends Component {
                   </Text>
                 </ScrollView>
               ) : (
-                  <View style={Styles.messageBody}>
-                    <Text style={Styles.messageBodyText}>
-                      {message && message.MessageBody}
-                    </Text>
-                  </View>
-                )}
+                <View style={Styles.messageBody}>
+                  <Text style={Styles.messageBodyText}>
+                    {message && message.MessageBody}
+                  </Text>
+                </View>
+              )}
             </View>
           </View>
 
