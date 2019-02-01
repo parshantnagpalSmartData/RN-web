@@ -23,4 +23,4 @@ deploy-dev:
   script:
     - pwd
     - cd /home/gitlab-runner/builds/a63fa2eb/0/SDM/actproject/
-    - pm2 start server.js --env=production   --name "ActNursesPortalServer"
+    - pm2 restart server.js --env=production   --name "ActNursesPortalServer"
