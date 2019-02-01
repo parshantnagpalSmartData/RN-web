@@ -256,6 +256,7 @@ body {
 .messageDetailTop > div > div,
 .messageDetailTop > div > div > div:last-child{align-items: center;}
 .messageDetailTop > div > div > div:first-child{padding:0 !important;}
+.messageDetailTop > div > div > div:last-child > div:last-child > div > div{background: red;}
 
 @media screen and (min-width:1366px){
   .messageList > div > div > div:last-child > div:last-child{font-size: 16px !important;}
