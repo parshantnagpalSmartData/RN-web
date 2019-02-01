@@ -6,19 +6,24 @@ Date : 17 Sept 2018
 */
 
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import propTypes from "prop-types";
+import DivContainer from "./DivContainer";
 
 const ListEmptyComponent = props => {
   let { message, loader } = props;
   if (!loader) {
     return (
-      <View style={Styles.containner}>
+      <DivContainer
+        className={"listEmptycopmonent"}
+        styleWeb={Styles.containner}
+        styleApp={Styles.containner}
+      >
         <Text style={Styles.noScheduleFoundText}>{message}</Text>
-      </View>
+      </DivContainer>
     );
   }
   return null;

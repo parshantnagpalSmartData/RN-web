@@ -26,9 +26,10 @@ class MessageItem extends React.Component {
         onSnap={e => {
           const { index } = e.nativeEvent;
           if (index !== 0) {
-            onDeletePress();
+            onDeletePress(() => {
+              this.animatedViewRef.changePosition({ x: 0, y: 0 });
+            });
             // this.animatedViewRef.snapTo({ index: 0 })
-            this.animatedViewRef.changePosition({ x: 0, y: 0 });
           }
           //
         }}

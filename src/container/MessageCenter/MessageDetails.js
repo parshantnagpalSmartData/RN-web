@@ -23,7 +23,7 @@ import CustomModal from "../../components/CustomModal";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import DivContainer from "../../components/Common/DivContainer";
-
+import AuthButton from "../../components/Common/AuthButton";
 class MessageDetails extends Component {
   constructor(props) {
     super(props);
@@ -159,10 +159,10 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                      <Text style={Styles.timeLine}>
-                        {this.getUserEmail(message.Recipient_GroupName)}
-                      </Text>
-                    )}
+                        <Text style={Styles.timeLine}>
+                          {this.getUserEmail(message.Recipient_GroupName)}
+                        </Text>
+                      )}
                   </View>
                   {Platform.OS === "web" ? (
                     <DivContainer className={"msgActions"}>
@@ -188,7 +188,7 @@ class MessageDetails extends Component {
                           id: "selectOption"
                         }}
                         className={"SelectSide"}
-                        onClose={() => {}}
+                        onClose={() => { }}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -225,14 +225,34 @@ class MessageDetails extends Component {
                   </Text>
                 </ScrollView>
               ) : (
-                <DivContainer className={"messageTextView"}>
-                  <View style={Styles.messageBody}>
-                    <Text style={Styles.messageBodyText}>
-                      {message && message.MessageBody}
-                    </Text>
-                  </View>
+                  <DivContainer className={"messageTextView"}>
+                    <View style={Styles.messageBody}>
+                      <Text style={Styles.messageBodyText}>
+                        {message && message.MessageBody}
+                      </Text>
+                    </View>
+                  </DivContainer>
+                )}
+              {Platform.OS === "web" ? (
+                <DivContainer
+                  styleApp={Styles.divStyle}
+                  styleWeb={Styles.divStyle}
+                  className={"ButtonContainer"}
+                >
+                  <AuthButton
+                    buttonStyle={Styles.buttonStyle}
+                    onPress={() => { }}
+                    gradientStyle={Styles.gradientStyle}
+                    buttonName={"Reply"}
+                  />
+                  <AuthButton
+                    buttonStyle={Styles.buttonStyle}
+                    gradientStyle={Styles.gradientStyle}
+                    onPress={() => { }}
+                    buttonName={"Delete"}
+                  />
                 </DivContainer>
-              )}
+              ) : null}
             </View>
           </View>
 
@@ -338,6 +358,19 @@ const Styles = StyleSheet.create({
     color: Constants.Colors.Black,
     textAlign: "justify",
     textAlignVertical: "center"
+  },
+  divStyle: {
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    margin: moderateScale(5),
+    flexDirection: "row"
+  },
+  buttonStyle: {
+    minWidth: moderateScale(100),
+    margin: moderateScale(10)
+  },
+  gradientStyle: {
+    padding: moderateScale(5)
   }
 });
 const mapStateToProps = state => ({
