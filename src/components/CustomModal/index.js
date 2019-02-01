@@ -17,7 +17,7 @@ const CustomModal = props => {
       isVisible={isVisible}
       style={style}
       deviceWidth={Constants.BaseStyle.DEVICE_WIDTH}
-      deviceHeight={Constants.BaseStyle.DEVICE_WIDTH}
+      deviceHeight={Constants.BaseStyle.DEVICE_HEIGHT}
       onBackdropPress={() => onBackdropPress()}
     >
       {props.children}

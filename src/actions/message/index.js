@@ -118,6 +118,10 @@ export const composeMessage = postData => {
     RestClient.restCall("messages", postData, getState().user.token)
       .then(res => {
         if (res.status) {
+          dispatch({
+            type: Types.ADD_MESSAGE,
+            payload: res.result.data
+          });
           dispatch(
             AppActions.showToast(
               Constants.AppConstants.Notificaitons.Success,
@@ -180,8 +184,8 @@ export const setActiveMessage = (messageId, componentId) => {
     {
       Platform.OS !== "web"
         ? dispatch(
-            AppActions.pushToParticularScreen(componentId, "MessageDetails")
-          )
+          AppActions.pushToParticularScreen(componentId, "MessageDetails")
+        )
         : null;
     }
   };
