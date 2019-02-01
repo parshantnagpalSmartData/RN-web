@@ -71,6 +71,8 @@ class MessageCenter extends Component {
             })
         }
       ]);
+    } else {
+      cb();
     }
   };
 
