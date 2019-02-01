@@ -52,15 +52,23 @@ class MessageCenter extends Component {
     this.setState({ tab }, () => this.getTabRelatedMessages());
   };
 
-  onDeletePress = message => {
+  onDeletePress = (message, cb) => {
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
       Dialog("Are you sure want to delete this message?", [
-        { text: "Cancel", onPress: () => {} },
+        {
+          text: "Cancel",
+          onPress: () => {
+            cb();
+          }
+        },
         {
           text: "Ok",
-          onPress: () => appAction.deleteMessage(message.MessageID, tab, null)
+          onPress: () =>
+            appAction.deleteMessage(message.MessageID, tab, () => {
+              cb();
+            })
         }
       ]);
     }
@@ -104,8 +112,11 @@ class MessageCenter extends Component {
   };
 
   render() {
-    let { messages, app, user } = this.props;
-    let { inbox, sent, trash, recipients } = messages;
+    let {
+      messages: { inbox, sent, trash, recipients },
+      app,
+      user
+    } = this.props;
     return (
       <View style={Styles.container}>
         <Header
