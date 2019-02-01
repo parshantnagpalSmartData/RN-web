@@ -159,10 +159,10 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                        <Text style={Styles.timeLine}>
-                          {this.getUserEmail(message.Recipient_GroupName)}
-                        </Text>
-                      )}
+                      <Text style={Styles.timeLine}>
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    )}
                   </View>
                   {Platform.OS === "web" ? (
                     <DivContainer className={"msgActions"}>
@@ -188,7 +188,7 @@ class MessageDetails extends Component {
                           id: "selectOption"
                         }}
                         className={"SelectSide"}
-                        onClose={() => { }}
+                        onClose={() => {}}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -217,7 +217,10 @@ class MessageDetails extends Component {
                 ) : null}
                 {Platform.OS !== "web" ? (
                   <ScrollView
-                    contentContainerStyle={[Styles.messageBody, { paddingVertical: 0, paddingLeft: moderateScale(65) }]}
+                    contentContainerStyle={[
+                      Styles.messageBody,
+                      { paddingVertical: 0, paddingLeft: moderateScale(65) }
+                    ]}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                   >
@@ -226,14 +229,14 @@ class MessageDetails extends Component {
                     </Text>
                   </ScrollView>
                 ) : (
-                    <DivContainer className={"messageTextView"}>
-                      <View style={Styles.messageBody}>
-                        <Text style={Styles.messageBodyText}>
-                          {message && message.MessageBody}
-                        </Text>
-                      </View>
-                    </DivContainer>
-                  )}
+                  <DivContainer className={"messageTextView"}>
+                    <View style={Styles.messageBody}>
+                      <Text style={Styles.messageBodyText}>
+                        {message && message.MessageBody}
+                      </Text>
+                    </View>
+                  </DivContainer>
+                )}
                 {/* {Platform.OS === "web" ? (
                   <DivContainer
                     styleApp={Styles.divStyle}
@@ -331,7 +334,7 @@ const Styles = StyleSheet.create({
     ...Platform.select({
       web: {
         alignItems: "flex-start"
-      },
+      }
     })
   },
   userView: {
