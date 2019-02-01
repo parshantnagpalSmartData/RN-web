@@ -40,17 +40,12 @@ class MessageDetails extends Component {
   };
 
   onRightPress = message => {
-    this.setState(
-      {
-        composeModal: true,
-        subject: "Re:" + message.MessageSubject,
-        ParentMessageID: message.MessageID,
-        MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
-      },
-      () => {
-        this.props.appAction.getRecipients();
-      }
-    );
+    this.setState({
+      composeModal: true,
+      subject: "Re:" + message.MessageSubject,
+      ParentMessageID: message.MessageID,
+      MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
+    });
   };
 
   onComposeModalClose = () => {
@@ -75,7 +70,7 @@ class MessageDetails extends Component {
     } = this.props;
     let index = _.findIndex(recipients, item => item.name === user);
     if (index !== -1) {
-      return recipients[index].index;
+      return recipients[index].value;
     }
   };
 
@@ -83,7 +78,7 @@ class MessageDetails extends Component {
     let {
       messages: { recipients }
     } = this.props;
-    let index = _.findIndex(recipients, item => item.name === user);
+    let index = _.findIndex(recipients, item => item.value === user);
     if (index !== -1) {
       return recipients[index].label;
     }
