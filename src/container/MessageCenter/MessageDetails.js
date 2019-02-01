@@ -158,7 +158,7 @@ class MessageDetails extends Component {
                   )}
                 </View>
                 {Platform.OS === "web" ? (
-                  <DivContainer className={"messageOptions"}>
+                  <DivContainer className={"msgActions"}>
                     <Select
                       IconComponent={props => (
                         <TouchableOpacity

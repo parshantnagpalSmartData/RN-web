@@ -59,8 +59,8 @@ const RenderSelect = ({ value, handleChange }) => {
           value === "inbox"
             ? Constants.Images.InboxActive
             : value === "sent"
-            ? Constants.Images.SentActive
-            : Constants.Images.TrashActive
+              ? Constants.Images.SentActive
+              : Constants.Images.TrashActive
         }
         style={{
           height: moderateScale(20),
@@ -107,10 +107,10 @@ const SearchBar = () => {
         }}
       />
       <Image
-        source={Constants.Images.Search}
+        source={Constants.Images.SearchMessageCenter}
         style={{
-          height: moderateScale(30),
-          width: moderateScale(30),
+          height: moderateScale(15),
+          width: moderateScale(15),
           right: moderateScale(5)
         }}
       />
@@ -189,8 +189,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
@@ -318,10 +318,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients }
-      } = this.props,
+      app,
+      user,
+      messages: { recipients }
+    } = this.props,
       { data, MessageGroupID, subject, tabLabel, filter } = this.state;
     return (
       <View style={Styles.containner}>
@@ -349,22 +349,24 @@ class MessageCenter extends Component {
             <div className={"messageFilter"}>
               <Filter value={filter} handleSortChange={this.handleSortChange} />
             </div>
-            <MessageComponent
-              tabLabel="Inbox"
-              tab="inbox"
-              data={data}
-              onDeletePress={this.onDeletePress}
-              refresh={app.refreshLoader}
-              onRefresh={this.getTabRelatedMessages}
-              onPress={this.detailPageOpen}
-              onMessagePress={this.onMessagePress}
+            <div className={"msgListWidget"}>
+              <MessageComponent
+                tabLabel="Inbox"
+                tab="inbox"
+                data={data}
+                onDeletePress={this.onDeletePress}
+                refresh={app.refreshLoader}
+                onRefresh={this.getTabRelatedMessages}
+                onPress={this.detailPageOpen}
+                onMessagePress={this.onMessagePress}
               // enableScrollingFunction={data => {
               //   this.enableScrollingFunction(data);
               // }}
               // onOpen={this.onOpen}
-            />
+              />
+            </div>
           </div>
-          <div className={"messageDetailsSection"}>
+          <div className={"messageDetailsSection d-none"}>
             <div className={"messageCounter"}>
               <MessageCounter />
             </div>

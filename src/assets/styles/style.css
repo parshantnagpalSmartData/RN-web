@@ -514,10 +514,13 @@ body {
 }
 
 .messageList > div > div {
-  padding: 15px;
+  padding: 10px 15px;
   border-bottom: 1px #dce2f0 solid;
   height: auto;
   line-height: 1.4;
+}
+.messageList > div > div > div:first-child {
+  margin-left: 0 !important;
 }
 .messageList > div > div > div:last-child {
   height: auto !important;
@@ -530,7 +533,7 @@ body {
   color: #8f8f8f !important;
 }
 .messageList > div > div > div:last-child > div:first-child {
-  margin-bottom: 8px !important;
+  margin-bottom: 3px !important;
 }
 .messageList > div > div > div:last-child > div:last-child {
   font-size: 14px !important;
@@ -540,6 +543,23 @@ body {
 .msgDetailsSection {
   padding: 0 20px;
 }
+.messageListSection {
+  width: 100%;
+}
+
+.msgListWidget {
+  overflow: auto;
+}
+.messageDetailTop > div > div,
+.messageDetailTop > div > div > div:last-child {
+  align-items: center;
+}
+.messageDetailTop > div > div > div:first-child {
+  padding: 0 !important;
+}
+.messageDetailTop > div > div > div:last-child > div:last-child > div > div {
+  background: red;
+}
 
 @media screen and (min-width: 1366px) {
   .messageList > div > div > div:last-child > div:last-child {
@@ -548,6 +568,17 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+  .composeEmail > div {
+    display: -wedkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+  }
+  .composeEmail > div > div:first-child {
+    height: 22px !important;
+    width: 22px !important;
+    margin-right: 10px;
+  }
   .messageTopBar {
     min-height: 75px;
   }
@@ -584,9 +615,14 @@ body {
   .messageSearch {
     margin-top: 15px;
   }
-
   .messageTitle > div {
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .d-xs-none {
+    display: none !important;
   }
 }
 
@@ -613,8 +649,7 @@ body {
 .MuiInput-underline-12:after {
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
-.messageOptions {
-  width: 25px !important;
-  margin-left: 10px !important;
-  padding-top: 10px !important;
+.msgActions {
+  width: 25px;
+  margin-left: 10px;
 }
