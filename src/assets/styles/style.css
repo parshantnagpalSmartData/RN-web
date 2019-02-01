@@ -288,4 +288,10 @@ body {
 .ml-auto{margin-left: auto;}
 .d-flex{display: -webkit-box!important;  display: -ms-flexbox!important;  display: flex!important;}
 .align-items-center { -webkit-box-align: center!important;  -ms-flex-align: center!important;  align-items: center!important;}
+.MuiInput-underline-12:before {
+    border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
+}
+.MuiInput-underline-12:after {
+    border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
+}
 

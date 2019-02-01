@@ -32,6 +32,25 @@ import MessageDetails from "./MessageDetails";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
 
+const Filter = ({ value, handleSortChange }) => {
+  return (
+    <div>
+      <Select
+        value={value}
+        inputProps={{
+          name: "sortby",
+          id: "sort-by"
+        }}
+        onChange={event => handleSortChange(event.target.value)}
+      >
+        <MenuItem value={"sortby"}>Sort By</MenuItem>
+        <MenuItem value={"name"}>Name</MenuItem>
+        <MenuItem value={"date"}>Date</MenuItem>
+      </Select>
+    </div>
+  );
+};
+
 const RenderSelect = ({ value, handleChange }) => {
   return (
     <div>
@@ -99,22 +118,6 @@ const SearchBar = () => {
   );
 };
 
-const Filter = ({ value, handleSortChange }) => {
-  return (
-    <Select
-      value={value}
-      inputProps={{
-        name: "sortby",
-        id: "sort-by"
-      }}
-      onChange={event => handleSortChange(event.target.value)}
-    >
-      <MenuItem value={"inbox"}>Name</MenuItem>
-      <MenuItem value={"sent"}>Date</MenuItem>
-    </Select>
-  );
-};
-
 const MessageCounter = () => (
   <View
     style={{
@@ -159,6 +162,7 @@ class MessageCenter extends Component {
     super(props);
     this.state = {
       tab: "inbox",
+      filter: "sortby",
       data: [],
       composeModal: false,
       message: "",
@@ -202,6 +206,10 @@ class MessageCenter extends Component {
 
   handleChange = folder => {
     this.setState({ tab: folder }, () => this.getTabRelatedMessages());
+  };
+
+  handleSortChange = filter => {
+    this.setState({ filter });
   };
   /*
    *get all messages
@@ -314,7 +322,7 @@ class MessageCenter extends Component {
         user,
         messages: { recipients }
       } = this.props,
-      { data, MessageGroupID, subject, tabLabel } = this.state;
+      { data, MessageGroupID, subject, tabLabel, filter } = this.state;
     return (
       <View style={Styles.containner}>
         <Header title={"Message center"} onDrawerPress={this.onDrawerPress} />
@@ -339,7 +347,7 @@ class MessageCenter extends Component {
         <div className={"messageInbox d-flex"}>
           <div className={"messageListSection"}>
             <div className={"messageFilter"}>
-              <Filter value={"Sort By"} />
+              <Filter value={filter} handleSortChange={this.handleSortChange} />
             </div>
             <div className={"msgListWidget"}>
               <MessageComponent
