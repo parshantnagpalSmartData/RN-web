@@ -59,8 +59,8 @@ const RenderSelect = ({ value, handleChange }) => {
           value === "inbox"
             ? Constants.Images.InboxActive
             : value === "sent"
-            ? Constants.Images.SentActive
-            : Constants.Images.TrashActive
+              ? Constants.Images.SentActive
+              : Constants.Images.TrashActive
         }
         style={{
           height: moderateScale(20),
@@ -189,8 +189,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
@@ -217,19 +217,19 @@ class MessageCenter extends Component {
   getTabRelatedMessages = () => {
     let { appAction } = this.props;
     let { tab } = this.state;
-    appAction.getMessages(tab, data => {
+    appAction.getMessages(tab, () => {
       /**
        * adding the ischecked attribute in data array
        */
-      data = data.map(item => {
-        return { ...item, isChecked: false };
-      });
-      this.setState(
-        {
-          data
-        },
-        () => this.updateSelectedMessage()
-      );
+      // data = data.map(item => {
+      //   return { ...item, isChecked: false };
+      // });
+      // this.setState(
+      //   {
+      //     data
+      //   },
+      //   () => this.updateSelectedMessage()
+      // );
     });
   };
 
@@ -297,8 +297,11 @@ class MessageCenter extends Component {
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
-      appAction.deleteMessage(message.MessageID, () =>
-        this.getTabRelatedMessages()
+      appAction.deleteMessage(
+        message.MessageID,
+        tab,
+        () => { }
+        // this.getTabRelatedMessages()
       );
     }
   };
@@ -318,11 +321,20 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients }
-      } = this.props,
-      { data, MessageGroupID, subject, tabLabel, filter } = this.state;
+      app,
+      user,
+      messages: { recipients, inbox, sent, trash }
+    } = this.props,
+      data,
+      { MessageGroupID, subject, tabLabel, filter, tab } = this.state;
+    if (tab == "inbox") {
+      data = inbox;
+    } else if (tab == "sent") {
+      data = sent;
+    } else {
+      data = trash;
+    }
+
     return (
       <View style={Styles.containner}>
         <Header title={"Message center"} onDrawerPress={this.onDrawerPress} />
@@ -359,10 +371,10 @@ class MessageCenter extends Component {
                 onRefresh={this.getTabRelatedMessages}
                 onPress={this.detailPageOpen}
                 onMessagePress={this.onMessagePress}
-                // enableScrollingFunction={data => {
-                //   this.enableScrollingFunction(data);
-                // }}
-                // onOpen={this.onOpen}
+              // enableScrollingFunction={data => {
+              //   this.enableScrollingFunction(data);
+              // }}
+              // onOpen={this.onOpen}
               />
             </div>
           </div>
