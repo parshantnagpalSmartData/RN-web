@@ -20,9 +20,9 @@ import { timeSince } from "../../helpers/common";
 import RightComponent from "../../components/Common/RightComponent";
 import Compose from "./Compose.js";
 import CustomModal from "../../components/CustomModal";
-import DivContainer from "../../components/Common/DivContainer";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import DivContainer from "../../components/Common/DivContainer";
 
 class MessageDetails extends Component {
   constructor(props) {
@@ -134,7 +134,6 @@ class MessageDetails extends Component {
               onRightPress={() => this.onRightPress(message)}
             />
           ) : null}
-
           <View style={Styles.messageView}>
             <DivContainer
               className={"messageDetailTop"}
@@ -170,28 +169,30 @@ class MessageDetails extends Component {
                       </Text>
                     )}
                   </View>
-                  {Platform.OS === "web"
-                    ? !this.props.open && (
-                        <TouchableOpacity onPress={this.props.toggleOpen}>
-                          <Image
-                            source={Constants.Images.Menu}
-                            style={{
-                              height: moderateScale(20),
-                              width: moderateScale(20)
-                            }}
-                          />
-                        </TouchableOpacity>
-                      )
-                    : null}
-                  <DivContainer className={"msgActions"}>
-                    {this.props.open && Platform.OS === "web" ? (
+                  {Platform.OS === "web" ? (
+                    <DivContainer className={"msgActions"}>
                       <Select
+                        IconComponent={props => (
+                          <TouchableOpacity
+                            {...props}
+                            onPress={this.props.toggleOpen}
+                          >
+                            <Image
+                              source={Constants.Images.Menu}
+                              style={{
+                                height: moderateScale(20),
+                                width: moderateScale(20)
+                              }}
+                            />
+                          </TouchableOpacity>
+                        )}
+                        styles={{}}
                         value={1}
-                        open={this.props.open}
                         inputProps={{
-                          name: "folder",
-                          id: "event-name"
+                          name: "selectOption",
+                          id: "selectOption"
                         }}
+                        className={"SelectSide"}
                         onClose={() => {}}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
@@ -200,8 +201,8 @@ class MessageDetails extends Component {
                         <MenuItem value={"delete"}>Delete</MenuItem>
                         <MenuItem value={"reply"}>Reply </MenuItem>
                       </Select>
-                    ) : null}
-                  </DivContainer>
+                    </DivContainer>
+                  ) : null}
                 </View>
               </View>
             </DivContainer>
