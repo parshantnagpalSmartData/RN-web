@@ -26,6 +26,8 @@ import SideMenu from "../components/SideMenu";
 import ToastNotification from "../components/Common/ToastNotification";
 import PDFViewer from "../container/PrintableForms/PDFViewer";
 import MessageDetails from "../container/MessageCenter/MessageDetails";
+import EditProfile from "../container/MyProfile/EditProfile";
+
 /* eslint-disable */
 /**
  * HOC for wrapping toast and loader
@@ -107,7 +109,11 @@ export const registerScreens = store => {
     () => WrapScreen(ResetPassword, store),
     () => ResetPassword
   );
-
+  Navigation.registerComponent(
+    "EditProfile",
+    () => WrapScreen(EditProfile, store),
+    () => EditProfile
+  );
   Navigation.registerComponentWithRedux(
     "SideMenu",
     () => SideMenu,

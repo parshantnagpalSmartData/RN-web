@@ -6,7 +6,15 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "react";
-import { View, StyleSheet, Platform, Text, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Platform,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -16,54 +24,76 @@ import Header from "../../components/Common/Header";
 import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import RightComponent from "../../components/Common/RightComponent";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class MyProfile extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      firstName:
+        (this.props && this.props.user && this.props.user.FirstName) || "",
+      lastName:
+        (this.props && this.props.user && this.props.user.LastName) || "",
+      contact:
+        (this.props && this.props.user && this.props.user.contact) || null,
+      about: (this.props && this.props.user && this.props.user.about) || ""
+    };
   }
 
-  onDrawerPress = () => {
-    this.props.appAction.mergeOptions(this.props.componentId, true);
+  updateProfile = () => {
+    alert("UnderDevelopment");
   };
 
-  onRightPress = () => {
-    let { appAction, componentId } = this.props;
-    appAction.pushToParticularScreen(componentId, "EditProfile");
-  };
-  resetPassword = () => {
-    let { appAction, componentId } = this.props;
-    appAction.pushToParticularScreen(componentId, "ResetPassword");
+  onBackPress = () => {
+    this.props.appAction.pop(this.props.componentId);
   };
 
   render() {
     let { user } = this.props;
+    let { firstName, lastName, contact, about } = this.state;
     return (
       <View style={Styles.containner}>
         <Header
-          title={"My Profile"}
-          rightComponent={<RightComponent icon={Constants.Images.Compose} />}
-          onDrawerPress={this.onDrawerPress}
-          onRightPress={this.onRightPress}
+          title={"Edit Profile"}
+          hideDrawer
+          onBackPress={this.onBackPress}
         />
-        {/* <UnderDevelopment /> */}
-        <View style={Styles.userContainer}>
+        <KeyboardAwareScrollView
+          // scrollEnabled={false}
+          enableAutomaticScroll={true}
+          extraHeight={50}
+          keyboardShouldPersistTaps="handled"
+          enableOnAndroid
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          style={{ height: Constants.BaseStyle.DEVICE_HEIGHT }}
+          contentContainerStyle={Styles.userContainer}
+        >
           <View style={Styles.userDetailsContainer}>
             <View style={Styles.userImgContainer}>
-              <View style={Styles.userImgView}>
+              <TouchableOpacity style={Styles.userImgView}>
                 <Image
                   source={Constants.Images.UserAvatar}
                   resizeMethod={"center"}
                   style={Styles.userImg}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={Styles.userInfoView}>
               <View style={Styles.userRow}>
                 <Text style={Styles.infoRow}>Name :</Text>
-                <Text style={Styles.dataRow}>
-                  {`${user.LastName}, ${user.FirstName}`}
-                </Text>
+                <TextInput
+                  style={Styles.dataRow}
+                  placeholder={"Last Name"}
+                  value={lastName}
+                  onChangeText={lastName => this.setState({ lastName })}
+                />
+                <TextInput
+                  style={Styles.dataRow}
+                  placeholder={"First Name"}
+                  value={firstName}
+                  onChangeText={firstName => this.setState({ firstName })}
+                />
               </View>
               <View style={Styles.userRow}>
                 <Text style={Styles.infoRow}>Email :</Text>
@@ -71,7 +101,12 @@ class MyProfile extends Component {
               </View>
               <View style={Styles.userRow}>
                 <Text style={Styles.infoRow}>Contact :</Text>
-                <Text style={Styles.dataRow}>{user && user.contact}</Text>
+                <TextInput
+                  placeholder={"Contact Number"}
+                  style={Styles.dataRow}
+                  value={contact}
+                  onChangeText={contact => this.setState({ contact })}
+                />
               </View>
               <View style={Styles.userRow}>
                 <Text style={Styles.infoRow}>Role :</Text>
@@ -79,21 +114,20 @@ class MyProfile extends Component {
               </View>
               <View style={[Styles.userRow, { flexDirection: "column" }]}>
                 <Text style={Styles.infoRow}>About:</Text>
-                <Text
-                  numberOfLines={11}
+                <TextInput
+                  multiline
+                  placeholder={"Say something about your self"}
                   style={[Styles.dataRow, Styles.infoRow]}
-                >
-                  {
-                    "In literary theory, a text is any object that can be read, whether this object is a work of literature, a street sign, an arrangement of buildings on a city block, or styles of clothing. It is a coherent set of signs that transmits some kind of informative message."
-                  }
-                </Text>
+                  value={about}
+                  onChangeText={about => this.setState({ about })}
+                />
               </View>
             </View>
           </View>
           <AuthButton
-            buttonName={"Reset Password"}
+            buttonName={"Update Profile"}
             gradientColors={Constants.Colors.ButtonGradients}
-            onPress={this.resetPassword}
+            onPress={this.updateProfile}
             gradientStyle={{ borderRadius: moderateScale(70) }}
             buttonStyle={{
               marginHorizontal: moderateScale(30),
@@ -105,7 +139,14 @@ class MyProfile extends Component {
               })
             }}
           />
-        </View>
+          <TouchableOpacity style={Styles.CameraView}>
+            <Image
+              source={Constants.Images.Camera}
+              resizeMethod={"center"}
+              style={Styles.camera}
+            />
+          </TouchableOpacity>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
@@ -150,9 +191,32 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Light,
     color: Constants.Colors.Primary,
     fontSize: moderateScale(16),
-    paddingHorizontal: moderateScale(10),
-    textAlign: "justify"
-  }
+    paddingHorizontal: moderateScale(5),
+    textAlign: "justify",
+    ...Platform.select({
+      web: {
+        outline: "none",
+        paddingHorizontal: moderateScale(0)
+      }
+    })
+  },
+  CameraView: {
+    height: moderateScale(30),
+    width: moderateScale(30),
+    position: "absolute",
+    backgroundColor: Constants.Colors.Primary,
+    borderRadius: moderateScale(100),
+    justifyContent: "center",
+    alignItems: "center",
+    top: moderateScale(70),
+    right: moderateScale(150),
+    ...Platform.select({
+      web: {
+        right: Constants.BaseStyle.DEVICE_WIDTH * 0.375
+      }
+    })
+  },
+  camera: { height: moderateScale(20), width: moderateScale(20) }
 });
 const mapStateToProps = state => ({
   user: state.user,
