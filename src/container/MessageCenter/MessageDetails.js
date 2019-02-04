@@ -171,6 +171,7 @@ class MessageDetails extends Component {
                 <View style={Styles.UserImage}>
                   <Image
                     source={Constants.Images.UserImage}
+                    resizeMode={"contain"}
                     style={Styles.UserImg}
                   />
                 </View>
@@ -339,7 +340,7 @@ const Styles = StyleSheet.create({
   },
   UserImage: {
     height: moderateScale(50),
-    width: moderateScale(50),
+    width: moderateScale(60),
     borderRadius: moderateScale(100),
     padding: moderateScale(5),
     ...Platform.select({
@@ -348,8 +349,8 @@ const Styles = StyleSheet.create({
         paddingLeft: moderateScale(10)
       },
       android: {
-        paddingTop: moderateScale(20),
-        paddingLeft: moderateScale(10)
+        // paddingTop: moderateScale(20),
+        // paddingLeft: moderateScale(10)
       }
     })
   },
