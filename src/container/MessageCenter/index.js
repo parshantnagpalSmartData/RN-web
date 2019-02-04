@@ -8,6 +8,7 @@ import React, { Component } from "React";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ScrollableTabView from "react-native-scrollable-tab-view";
+import _ from "lodash";
 
 import { bindActionCreators } from "redux";
 import * as appAction from "../../actions";
@@ -15,7 +16,7 @@ import Header from "../../components/Common/Header";
 import CustomTabBar from "../../components/Common/CustomTabBar";
 import SwiperContainer from "../../components/MessageCenter";
 import RightComponent from "../../components/Common/RightComponent";
-import constants from "../../constants";
+import Constants from "../../constants";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
 import { Dialog } from "../../helpers/common";
@@ -29,7 +30,10 @@ class MessageCenter extends Component {
       composeModal: false,
       message: "",
       subject: "",
-      MessageGroupID: null
+      MessageGroupID: null,
+      recipientNameError: "",
+      subjectError: "",
+      messageError: ""
     };
   }
 
@@ -85,27 +89,45 @@ class MessageCenter extends Component {
   };
 
   onChangeRecipient = recipient => {
-    this.setState({ MessageGroupID: recipient });
+    this.setState({ MessageGroupID: recipient, recipientNameError: "" });
   };
 
   onChangeSubject = subject => {
-    this.setState({ subject });
+    this.setState({ subject, subjectError: "" });
   };
 
   onChangeMessage = message => {
-    this.setState({ message });
+    this.setState({ message, messageError: "" });
   };
 
   onComposePress = () => {
     let { MessageGroupID, subject, message } = this.state;
-    let obj = {
-      MessageSubject: subject,
-      MessageBody: message,
-      ParentMessageID: null,
-      MessageGroupID: MessageGroupID
-    };
-    this.props.appAction.composeMessage(obj);
-    this.onComposeModalClose();
+    let { appAction } = this.props;
+    if (MessageGroupID === null || MessageGroupID === undefined) {
+      this.setState({
+        recipientNameError: Constants.Strings.Common.EmptyRecipient
+      });
+      return;
+    } else if (_.isEmpty(subject.trim())) {
+      this.setState({
+        subjectError: Constants.Strings.Common.EmptySubject
+      });
+      return;
+    } else if (_.isEmpty(message.trim())) {
+      this.setState({
+        messageError: Constants.Strings.Common.EmptyMessage
+      });
+      return;
+    } else {
+      let obj = {
+        MessageSubject: subject,
+        MessageBody: message,
+        ParentMessageID: null,
+        MessageGroupID: MessageGroupID
+      };
+      appAction.composeMessage(obj);
+      this.onComposeModalClose();
+    }
   };
 
   onMessagePress = message => {
@@ -119,12 +141,13 @@ class MessageCenter extends Component {
       app,
       user
     } = this.props;
+    let { recipientNameError, subjectError, messageError } = this.state;
     return (
       <View style={Styles.container}>
         <Header
           title={"Message Center"}
           onDrawerPress={this.onDrawerPress}
-          rightComponent={<RightComponent icon={constants.Images.Compose} />}
+          rightComponent={<RightComponent icon={Constants.Images.Compose} />}
           onRightPress={this.onRightPress}
         />
         <ScrollableTabView
@@ -135,7 +158,7 @@ class MessageCenter extends Component {
             this.updateTabIndex(tab.ref.props.tab);
           }}
           // ref={ref => (this.scrollView = ref)}
-          locked={false}
+          locked={true}
         >
           <SwiperContainer
             tabLabel="Inbox"
@@ -179,6 +202,9 @@ class MessageCenter extends Component {
             onChangeSubject={this.onChangeSubject}
             onComposePress={this.onComposePress}
             getRecipientsLabel={item => item}
+            recipientNameError={recipientNameError}
+            subjectError={subjectError}
+            messageError={messageError}
           />
         </CustomModal>
       </View>

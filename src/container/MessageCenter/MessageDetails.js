@@ -32,7 +32,10 @@ class MessageDetails extends Component {
       message: "",
       subject: "",
       MessageGroupID: null,
-      ParentMessageID: null
+      ParentMessageID: null,
+      recipientNameError: "",
+      subjectError: "",
+      messageError: ""
     };
   }
   onBackPress = () => {
@@ -53,15 +56,15 @@ class MessageDetails extends Component {
   };
 
   onChangeRecipient = recipient => {
-    this.setState({ MessageGroupID: recipient });
+    this.setState({ MessageGroupID: recipient, recipientNameError: "" });
   };
 
   onChangeSubject = subject => {
-    this.setState({ subject });
+    this.setState({ subject, subjectError: "" });
   };
 
   onChangeMessage = message => {
-    this.setState({ message });
+    this.setState({ message, messageError: "" });
   };
 
   getRecipientsIndex = user => {
@@ -85,15 +88,33 @@ class MessageDetails extends Component {
   };
 
   onComposePress = () => {
-    let { MessageGroupID, subject, message, ParentMessageID } = this.state;
-    let obj = {
-      MessageSubject: subject,
-      MessageBody: message,
-      ParentMessageID,
-      MessageGroupID
-    };
-    this.props.appAction.composeMessage(obj);
-    this.onComposeModalClose();
+    let { MessageGroupID, subject, message } = this.state;
+    let { appAction } = this.props;
+    if (MessageGroupID === null || MessageGroupID === undefined) {
+      this.setState({
+        recipientNameError: Constants.Strings.Common.EmptyRecipient
+      });
+      return;
+    } else if (_.isEmpty(subject.trim())) {
+      this.setState({
+        subjectError: Constants.Strings.Common.EmptySubject
+      });
+      return;
+    } else if (_.isEmpty(message.trim())) {
+      this.setState({
+        messageError: Constants.Strings.Common.EmptyMessage
+      });
+      return;
+    } else {
+      let obj = {
+        MessageSubject: subject,
+        MessageBody: message,
+        ParentMessageID: null,
+        MessageGroupID: MessageGroupID
+      };
+      appAction.composeMessage(obj);
+      this.onComposeModalClose();
+    }
   };
 
   getUserEmail = user => {
@@ -110,7 +131,13 @@ class MessageDetails extends Component {
       messages: { activeMessage, inbox, trash, sent, tab, recipients },
       user
     } = this.props;
-    let { subject, MessageGroupID } = this.state;
+    let {
+      subject,
+      MessageGroupID,
+      recipientNameError,
+      subjectError,
+      messageError
+    } = this.state;
     let currentTab = tab === "inbox" ? inbox : tab === "sent" ? sent : trash;
     let index = _.findIndex(
       currentTab,
@@ -144,6 +171,7 @@ class MessageDetails extends Component {
                 <View style={Styles.UserImage}>
                   <Image
                     source={Constants.Images.UserImage}
+                    resizeMode={"contain"}
                     style={Styles.UserImg}
                   />
                 </View>
@@ -279,6 +307,9 @@ class MessageDetails extends Component {
               to={MessageGroupID}
               tabLable={"Reply Message"}
               getRecipientsLabel={this.getRecipientsLabel}
+              recipientNameError={recipientNameError}
+              subjectError={subjectError}
+              messageError={messageError}
             />
           </CustomModal>
         </View>
@@ -309,7 +340,7 @@ const Styles = StyleSheet.create({
   },
   UserImage: {
     height: moderateScale(50),
-    width: moderateScale(50),
+    width: moderateScale(60),
     borderRadius: moderateScale(100),
     padding: moderateScale(5),
     ...Platform.select({
@@ -318,8 +349,8 @@ const Styles = StyleSheet.create({
         paddingLeft: moderateScale(10)
       },
       android: {
-        paddingTop: moderateScale(20),
-        paddingLeft: moderateScale(10)
+        // paddingTop: moderateScale(20),
+        // paddingLeft: moderateScale(10)
       }
     })
   },

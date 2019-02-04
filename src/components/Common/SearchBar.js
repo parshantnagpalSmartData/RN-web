@@ -27,7 +27,10 @@ const SearchBar = props => {
         <View style={Styles.inputView}>
           <TextInput
             underlineColorAndroid={"#fff"}
-            onChangeText={onChangeText}
+            onChangeText={value1 => {
+              onChangeText(value1);
+              console.log(onChangeText);
+            }}
             onEndEditing={onEndEditing}
             value={value}
             style={[Styles.inputStyle, inputStyle]}

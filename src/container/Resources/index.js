@@ -39,22 +39,51 @@ class Resources extends Component {
       win.focus();
     } else {
       // eslint-disable-next-line
-      Linking.openURL(url).catch(err => {
-        // console.error("An error occurred", err)
-      });
+      if (url) {
+        Linking.canOpenURL(url)
+          .then(supported => {
+            if (!supported) {
+              alert("Unable to open File");
+            } else {
+              return Linking.openURL(url).catch(err => {
+                // console.error("An error occurred", err)
+              });
+            }
+          })
+          .catch(err => console.error("An error occurred", err));
+      } else {
+        alert("Url is invalid");
+      }
     }
   }, 1000);
 
   render() {
     let { searchText } = this.state;
     let { myUrls } = this.props && this.props.forms;
+    if (searchText) {
+      let SearchText = searchText.toLowerCase();
+      myUrls = myUrls.filter(element => {
+        if (
+          (element.ResourceCategory &&
+            element.ResourceCategory.toLowerCase().includes(SearchText)) ||
+          (element.ResourceDescription &&
+            element.ResourceDescription.toLowerCase().includes(SearchText)) ||
+          (element.ResourceName &&
+            element.ResourceName.toLowerCase().includes(SearchText))
+        ) {
+          return element;
+        }
+      });
+    }
     return (
       <View style={Styles.containner}>
         <Header title={"Resources"} onDrawerPress={this.onDrawerPress} />
         <DivContainer className={"Searchbar"}>
           <SearchBar
             value={searchText}
-            onChangeText={searchText => this.setState({ searchText })}
+            onChangeText={searchTextData =>
+              this.setState({ searchText: searchTextData })
+            }
           />
         </DivContainer>
         <CommonURLHandle

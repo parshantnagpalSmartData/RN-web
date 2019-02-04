@@ -68,19 +68,34 @@ class PrintableForms extends Component {
   }
 
   render() {
-    let { searchText, isVisible } = this.state;
-    let { myForms } = this.props && this.props.forms;
+    let { searchText, isVisible } = this.state,
+      { myForms } = this.props && this.props.forms,
+      pdfdata = myForms;
+    if (searchText) {
+      let SearchText = searchText.toLowerCase();
+      pdfdata = pdfdata.filter(element => {
+        if (
+          element.FormName.toLowerCase().includes(SearchText) ||
+          element.FormUrl.toLowerCase().includes(SearchText)
+        ) {
+          return element;
+        }
+      });
+    }
+
     return (
       <View style={Styles.containner}>
         <Header title={"Printable Forms"} onDrawerPress={this.onDrawerPress} />
         <DivContainer className={"Searchbar"}>
           <SearchBar
             value={searchText}
-            onChangeText={searchText => this.setState({ searchText })}
+            onChangeText={value2 => {
+              this.setState({ searchText: value2 });
+            }}
           />
         </DivContainer>
         <CommonURLHandle
-          data={myForms}
+          data={pdfdata}
           onFormPress={this.onFormPress}
           printable={true}
         />

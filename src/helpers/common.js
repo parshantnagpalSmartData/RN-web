@@ -2,15 +2,25 @@
 "use strict";
 //import Toast from "react-native-root-toast";
 import { Alert, Platform } from "react-native";
+import moment from "moment";
 import Constants from "../constants";
+
 var Common = {
   timeSince: date => {
     if (!date) {
       date = new Date();
     } else {
       date = new Date(date);
+      console.log(
+        "datdatadtadta",
+        date,
+        date.toLocaleString(),
+        date.toString()
+      );
     }
     // var seconds = (new Date().getTime() - date.getTime()) / 1000
+    // var seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
+    // var seconds = Math.floor(moment.duration(date).asSeconds());
     var seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
 
     var interval = Math.floor(seconds / 31536000);

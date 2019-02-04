@@ -4,7 +4,6 @@
  * Date : 3 Jan 2019
  * File: MyScheduleList.web.js
  */
-/* eslint-disable*/
 
 import React from "react";
 import ReactTable from "react-table";
@@ -55,7 +54,7 @@ let spanHeaderStyle = {
 //   });
 
 const CommonUrlHandlerForms = ({ data, onFormPress, printable }) => {
-  console.log("datdatadtadtdat", data);
+  console.log("datadata", data);
   const columns = [
     {
       // Header: "Date",

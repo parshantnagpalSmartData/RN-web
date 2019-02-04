@@ -31,6 +31,10 @@ import MessageDetails from "./MessageDetails";
 // import DivContainer from "../../components/Common/DivContainer";
 import CustomModal from "../../components/CustomModal";
 import Compose from "./Compose.js";
+import Filter from "../../Components/Common/DropDownWeb";
+import RenderSelect from "../../components/Common/DropDownWithImage";
+import SearchBar from "../../components/Common/SearchBarMessageCenter";
+import MessageCounter from "../../components/MessageCenter/MessageCounter";
 const customStyles = {
   content: {
     top: "50%",
@@ -42,130 +46,24 @@ const customStyles = {
   }
 };
 
-const Filter = ({ value, handleSortChange }) => {
-  return (
-    <div>
-      <Select
-        value={value}
-        inputProps={{
-          name: "sortby",
-          id: "sort-by"
-        }}
-        onChange={event => handleSortChange(event.target.value)}
-      >
-        <MenuItem value={"sortby"}>Sort By</MenuItem>
-        <MenuItem value={"name"}>Name</MenuItem>
-        <MenuItem value={"date"}>Date</MenuItem>
-      </Select>
-    </div>
-  );
-};
-
-const RenderSelect = ({ value, handleChange }) => {
-  return (
-    <div>
-      <Image
-        source={
-          value === "inbox"
-            ? Constants.Images.InboxActive
-            : value === "sent"
-            ? Constants.Images.SentActive
-            : Constants.Images.TrashActive
-        }
-        style={{
-          height: moderateScale(20),
-          width: moderateScale(20)
-        }}
-      />
-      <Select
-        value={value}
-        inputProps={{
-          name: "folder",
-          id: "folder-name"
-        }}
-        onChange={event => handleChange(event.target.value)}
-      >
-        <MenuItem value={"inbox"}>Inbox</MenuItem>
-        <MenuItem value={"sent"}>Sent</MenuItem>
-        <MenuItem value={"trash"}>Trash</MenuItem>
-      </Select>
-    </div>
-  );
-};
-
-const SearchBar = () => {
-  return (
-    <View
-      style={{
-        backgroundColor: Constants.Colors.Transparent,
-        height: moderateScale(40),
-        borderColor: Constants.Colors.Gray,
-        borderWidth: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "25%",
-        borderRadius: moderateScale(25),
-        margin: moderateScale(10)
-      }}
-    >
-      <TextInput
-        style={{
-          flex: 1,
-          outline: "none",
-          paddingHorizontal: moderateScale(20)
-        }}
-      />
-      <Image
-        source={Constants.Images.SearchMessageCenter}
-        style={{
-          height: moderateScale(15),
-          width: moderateScale(15),
-          right: moderateScale(5)
-        }}
-      />
-    </View>
-  );
-};
-
-const MessageCounter = () => (
-  <View
-    style={{
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      alignItems: "center",
-
-      padding: moderateScale(10)
-    }}
-  >
-    {/* <Image
-      source={Constants.Images.TrashInactive}
-      style={{
-        height: moderateScale(15),
-        width: moderateScale(15),
-        right: moderateScale(5)
-      }}
-    /> */}
-    {/* <Text style={{width}}>1-50 of 200</Text> */}
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "flex-end",
-        alignItems: "center",
-        left: moderateScale(5)
-      }}
-    >
-      <Image
-        source={Constants.Images.Next}
-        style={{ height: moderateScale(15), width: moderateScale(15) }}
-      />
-      <Image
-        source={Constants.Images.Previous}
-        style={{ height: moderateScale(15), width: moderateScale(15) }}
-      />
-    </View>
-  </View>
-);
+const SelectData = [
+    { key: "Inbox", value: "inbox" },
+    { key: "Sent", value: "sent" },
+    { key: "Trash", value: "trash" }
+  ],
+  selectDataId = {
+    name: "folder",
+    id: "folder-name"
+  },
+  sortByDataId = {
+    name: "sortby",
+    id: "sort-by"
+  },
+  sortData = [
+    { key: "Sort", value: "sortby" },
+    { key: "Name", value: "name" },
+    { key: "Date", value: "date" }
+  ];
 
 class MessageCenter extends Component {
   constructor(props) {
@@ -180,15 +78,25 @@ class MessageCenter extends Component {
       MessageGroupID: null,
       open: false,
       ParentMessageID: null,
-      tabLabel: "Compose Message"
+      tabLabel: "Compose Message",
+      searchText: ""
     };
     this.toggleChecked = this.toggleChecked.bind(this);
     this.detailPageOpen = this.detailPageOpen.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   componentDidMount() {
     this.getTabRelatedMessages();
     this.props.appAction.getRecipients();
+  }
+
+  /**
+   * On searching the searchText text value is set
+   */
+  onSearch(value) {
+    console.log("onSaerchhhh", value);
+    this.setState({ searchText: value });
   }
 
   updateSelectedMessage = () => {
@@ -263,32 +171,53 @@ class MessageCenter extends Component {
       subject: "",
       ParentMessageID: null,
       tabLabel: "Compose Message",
-      MessageGroupID: null
+      MessageGroupID: null,
+      recipientNameError: "",
+      subjectError: "",
+      messageError: ""
     });
   };
 
   onChangeRecipient = recipient => {
-    this.setState({ MessageGroupID: recipient });
+    this.setState({ MessageGroupID: recipient, recipientNameError: "" });
   };
 
   onChangeSubject = subject => {
-    this.setState({ subject });
+    this.setState({ subject, subjectError: "" });
   };
 
   onChangeMessage = message => {
-    this.setState({ message });
+    this.setState({ message, messageError: "" });
   };
 
   onComposePress = () => {
     let { MessageGroupID, subject, message } = this.state;
-    let obj = {
-      MessageSubject: subject,
-      MessageBody: message,
-      ParentMessageID: null,
-      MessageGroupID: MessageGroupID
-    };
-    this.props.appAction.composeMessage(obj);
-    this.onComposeModalClose();
+    let { appAction } = this.props;
+    if (MessageGroupID === null || MessageGroupID === undefined) {
+      this.setState({
+        recipientNameError: Constants.Strings.Common.EmptyRecipient
+      });
+      return;
+    } else if (_.isEmpty(subject.trim())) {
+      this.setState({
+        subjectError: Constants.Strings.Common.EmptySubject
+      });
+      return;
+    } else if (_.isEmpty(message.trim())) {
+      this.setState({
+        messageError: Constants.Strings.Common.EmptyMessage
+      });
+      return;
+    } else {
+      let obj = {
+        MessageSubject: subject,
+        MessageBody: message,
+        ParentMessageID: null,
+        MessageGroupID: MessageGroupID
+      };
+      appAction.composeMessage(obj);
+      this.onComposeModalClose();
+    }
   };
 
   detailPageOpen(message) {
@@ -336,13 +265,60 @@ class MessageCenter extends Component {
         messages: { recipients, inbox, sent, trash }
       } = this.props,
       data,
-      { MessageGroupID, subject, tabLabel, filter, tab } = this.state;
+      {
+        MessageGroupID,
+        subject,
+        tabLabel,
+        filter,
+        tab,
+        recipientNameError,
+        subjectError,
+        messageError,
+        searchText
+      } = this.state;
     if (tab == "inbox") {
       data = inbox;
     } else if (tab == "sent") {
       data = sent;
     } else {
       data = trash;
+    }
+
+    if (searchText) {
+      let SearchText = searchText.toLowerCase();
+      data = data.filter(element => {
+        if (
+          element.MessageBody.toLowerCase().includes(SearchText) ||
+          element.Recipient_GroupName.toLowerCase().includes(SearchText) ||
+          element.MessageSubject.toLowerCase().includes(SearchText)
+        ) {
+          return element;
+        }
+      });
+    }
+
+    if (filter === "name") {
+      data = data.sort(function(a, b) {
+        //compare two values
+        if (
+          a.Recipient_GroupName.toLowerCase() <
+          b.Recipient_GroupName.toLowerCase()
+        )
+          return -1;
+        if (
+          a.Recipient_GroupName.toLowerCase() >
+          b.Recipient_GroupName.toLowerCase()
+        )
+          return 1;
+        return 0;
+      });
+    } else if (filter === "date") {
+      data = data.sort(function(a, b) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        console.log(new Date(b.MessageDate), new Date(a.MessageDate));
+        return new Date(b.MessageDate) - new Date(a.MessageDate);
+      });
     }
 
     return (
@@ -353,10 +329,12 @@ class MessageCenter extends Component {
             <RenderSelect
               value={this.state.tab}
               handleChange={this.handleChange}
+              selectData={SelectData}
+              selectDataId={selectDataId}
             />
           </div>
           <div className="messageSearch">
-            <SearchBar />
+            <SearchBar searchText={searchText} onSearch={this.onSearch} />
           </div>
           <div className={"composeEmail d-sm-flex align-items-center ml-auto"}>
             <TouchableOpacity onPress={() => this.onRightPress()}>
@@ -369,7 +347,12 @@ class MessageCenter extends Component {
         <div className={"messageInbox d-flex"}>
           <div className={"messageListSection"}>
             <div className={"messageFilter"}>
-              <Filter value={filter} handleSortChange={this.handleSortChange} />
+              <Filter
+                value={filter}
+                handleChange={this.handleSortChange}
+                selectDataId={sortByDataId}
+                selectData={sortData}
+              />
             </div>
             <div className={"msgListWidget"}>
               <MessageComponent
@@ -381,10 +364,6 @@ class MessageCenter extends Component {
                 onRefresh={this.getTabRelatedMessages}
                 onPress={this.detailPageOpen}
                 onMessagePress={this.onMessagePress}
-                // enableScrollingFunction={data => {
-                //   this.enableScrollingFunction(data);
-                // }}
-                // onOpen={this.onOpen}
               />
             </div>
           </div>
@@ -421,6 +400,9 @@ class MessageCenter extends Component {
             onComposePress={this.onComposePress}
             subject={subject}
             tabLable={tabLabel}
+            recipientNameError={recipientNameError}
+            subjectError={subjectError}
+            messageError={messageError}
           />
         </CustomModal>
       </View>

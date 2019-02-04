@@ -16,13 +16,14 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Constants from "../../constants";
-import { moderateScale } from "../../helpers/ResponsiveFonts";
+import { moderateScale, verticalScale } from "../../helpers/ResponsiveFonts";
 import SafeView from "../../components/Common/SafeView";
 import { Dropdown } from "react-native-material-dropdown";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import AuthButton from "../../components/Common/AuthButton";
 import DivContainer from "../../components/Common/DivContainer";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Compose = ({
   tabLable,
@@ -35,9 +36,21 @@ const Compose = ({
   onChangeSubject,
   onChangeMessage,
   onComposePress,
-  getRecipientsLabel
+  getRecipientsLabel,
+  recipientNameError,
+  subjectError,
+  messageError
 }) => (
-  <View style={Styles.container}>
+  <KeyboardAwareScrollView
+    enableAutomaticScroll={true}
+    scrollEnabled={false}
+    extraHeight={80}
+    enableOnAndroid
+    keyboardShouldPersistTaps="handled"
+    contentContainerStyle={Styles.container}
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
+  >
     {Platform.OS !== "web" ? (
       <LinearGradient
         start={{ x: 1, y: 0 }}
@@ -101,6 +114,17 @@ const Compose = ({
           </Select>
         </div>
       )}
+      {recipientNameError ? (
+        <Text
+          style={{
+            color: "rgb(213, 0, 0)",
+            fontSize: 12,
+            marginVertical: verticalScale(2)
+          }}
+        >
+          {recipientNameError}
+        </Text>
+      ) : null}
       <DivContainer className={"fromOptions"}>
         <View style={Styles.options}>
           <Text style={Styles.commonText}>From</Text>
@@ -110,15 +134,26 @@ const Compose = ({
         </View>
       </DivContainer>
       <DivContainer className={"fromSubject"}>
-        <View style={Styles.options}>
+        <View style={[Styles.options]}>
           <Text style={Styles.commonText}>Subject</Text>
           <TextInput
             value={subject}
             onChangeText={value => onChangeSubject(value)}
-            numberOfLines={2}
+            numberOfLines={1}
             style={[Styles.TextInput, Styles.textPadding]}
+            underlineColorAndroid={Constants.Colors.Transparent}
           />
         </View>
+        {subjectError ? (
+          <Text
+            style={{
+              color: "rgb(213, 0, 0)",
+              fontSize: 12
+            }}
+          >
+            {subjectError}
+          </Text>
+        ) : null}
       </DivContainer>
       <DivContainer
         className={"textInputDivContainer"}
@@ -128,20 +163,30 @@ const Compose = ({
           <TextInput
             onChangeText={value => onChangeMessage(value)}
             multiline={true}
-            numberOfLines={50}
-            style={Styles.TextInput}
+            numberOfLines={1}
+            style={[Styles.TextInput, Styles.messageBodyText]}
             placeholder={"Compose"}
             placeholderTextColor={Constants.Colors.Gray}
+            underlineColorAndroid={Constants.Colors.Transparent}
           />
         </View>
+        {messageError ? (
+          <Text
+            style={{
+              color: "rgb(213, 0, 0)",
+              fontSize: 12
+            }}
+          >
+            {messageError}
+          </Text>
+        ) : null}
       </DivContainer>
       {Platform.OS === "web" ? (
         <div className={"AuthButton"}>
           <View
             style={{
               justifyContent: "center",
-              alignItems: "center",
-              margin: moderateScale(5)
+              alignItems: "center"
             }}
           >
             <AuthButton onPress={onComposePress} buttonName={"Send"} />
@@ -149,23 +194,28 @@ const Compose = ({
         </div>
       ) : null}
     </View>
-  </View>
+  </KeyboardAwareScrollView>
 );
 
 const Styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: Constants.Colors.White,
-
     ...Platform.select({
       web: {
         borderRadius: moderateScale(10),
-
         alignItems: "center",
         height: moderateScale(350),
         width: moderateScale(400),
         paddingTop: moderateScale(0),
         marginHorizontal: moderateScale(12)
+      },
+      ios: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT,
+        width: Constants.BaseStyle.DEVICE_WIDTH
+      },
+      android: {
+        height: Constants.BaseStyle.DEVICE_HEIGHT,
+        width: Constants.BaseStyle.DEVICE_WIDTH
       }
     })
   },
@@ -174,7 +224,8 @@ const Styles = StyleSheet.create({
   },
   gradientStyle: {
     flex: 0.1,
-    paddingHorizontal: moderateScale(15)
+    paddingHorizontal: moderateScale(15),
+    justifyContent: "center"
   },
   header: {
     flexDirection: "row",
@@ -199,6 +250,7 @@ const Styles = StyleSheet.create({
     // backgroundColor: "#fff"
   },
   messageBody: {
+    // flexDirection: "row",
     ...Platform.select({
       ios: {
         flex: 0.9
@@ -222,10 +274,10 @@ const Styles = StyleSheet.create({
     borderBottomWidth: 0.4,
     borderBottomColor: Constants.Colors.Gray,
     paddingVertical: moderateScale(10),
-    paddingHorizontal: moderateScale(10)
+    paddingHorizontal: moderateScale(10),
+    alignItems: "center"
   },
   msgBody: {
-    flex: 1,
     flexDirection: "row",
     borderBottomWidth: 0.4,
     borderBottomColor: Constants.Colors.Gray,
@@ -238,23 +290,45 @@ const Styles = StyleSheet.create({
     })
   },
   TextInput: {
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
     color: Constants.Colors.Black,
-    flex: 1,
-    ...Platform.select({ web: { outline: "none" } })
+    textAlign: "center",
+    textAlignVertical: "center",
+    ...Platform.select({
+      web: {
+        outline: "none",
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "flex-start"
+      }
+    })
   },
   messageBodyText: {
-    minHeight: moderateScale(180)
+    minHeight: moderateScale(180),
+    ...Platform.select({
+      android: {
+        width: Constants.BaseStyle.DEVICE_WIDTH,
+        textAlign: "justify",
+        textAlignVertical: "top"
+      }
+    })
   },
   commonText: {
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(11),
     color: Constants.Colors.Gray
   },
-  textPadding: { paddingHorizontal: moderateScale(10) },
+  textPadding: {
+    paddingHorizontal: moderateScale(10),
+    ...Platform.select({
+      android: {
+        width: Constants.BaseStyle.DEVICE_WIDTH,
+        textAlign: "justify",
+        textAlignVertical: "top"
+      }
+    })
+  },
   closeBtnWeb: {
     alignSelf: "flex-end"
   },
