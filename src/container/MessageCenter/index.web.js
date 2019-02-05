@@ -9,8 +9,6 @@ import React, { Component } from "react";
 import {
   View,
   StyleSheet,
-  Image,
-  TextInput,
   Text,
   TouchableOpacity
 } from "react-native";
@@ -21,16 +19,11 @@ import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 import MessageComponent from "../../components/MessageCenter";
 
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-// import InputLabel from "@material-ui/core/InputLabel";
 import Constants from "../../constants";
-import { moderateScale } from "../../helpers/ResponsiveFonts";
 import RightComponent from "../../components/Common/RightComponent";
 import MessageDetails from "./MessageDetails";
-// import DivContainer from "../../components/Common/DivContainer";
 import CustomModal from "../../components/CustomModal";
-import Compose from "./Compose.js";
+import Compose from "./Compose";
 import Filter from "../../Components/Common/DropDownWeb";
 import RenderSelect from "../../components/Common/DropDownWithImage";
 import SearchBar from "../../components/Common/SearchBarMessageCenter";
@@ -47,10 +40,10 @@ const customStyles = {
 };
 
 const SelectData = [
-    { key: "Inbox", value: "inbox" },
-    { key: "Sent", value: "sent" },
-    { key: "Trash", value: "trash" }
-  ],
+  { key: "Inbox", value: "inbox" },
+  { key: "Sent", value: "sent" },
+  { key: "Trash", value: "trash" }
+],
   selectDataId = {
     name: "folder",
     id: "folder-name"
@@ -95,7 +88,6 @@ class MessageCenter extends Component {
    * On searching the searchText text value is set
    */
   onSearch(value) {
-    console.log("onSaerchhhh", value);
     this.setState({ searchText: value });
   }
 
@@ -107,8 +99,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
@@ -221,7 +213,12 @@ class MessageCenter extends Component {
   };
 
   detailPageOpen(message) {
-    this.onMessagePress(message);
+    let { appAction, componentId } = this.props;
+    if (Constants.BaseStyle.DEVICE_WIDTH > 772) {
+      this.onMessagePress(message);
+    } else {
+      appAction.setActiveMessage(message.MessageID, componentId);
+    }
   }
 
   menuOption = (value, message) => {
@@ -239,7 +236,7 @@ class MessageCenter extends Component {
       appAction.deleteMessage(
         message.MessageID,
         tab,
-        () => {}
+        () => { }
         // this.getTabRelatedMessages()
       );
     }
@@ -260,10 +257,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients, inbox, sent, trash }
-      } = this.props,
+      app,
+      user,
+      messages: { recipients, inbox, sent, trash }
+    } = this.props,
       data,
       {
         MessageGroupID,
@@ -298,7 +295,7 @@ class MessageCenter extends Component {
     }
 
     if (filter === "name") {
-      data = data.sort(function(a, b) {
+      data = data.sort(function (a, b) {
         //compare two values
         if (
           a.Recipient_GroupName.toLowerCase() <
@@ -313,10 +310,9 @@ class MessageCenter extends Component {
         return 0;
       });
     } else if (filter === "date") {
-      data = data.sort(function(a, b) {
+      data = data.sort(function (a, b) {
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
-        console.log(new Date(b.MessageDate), new Date(a.MessageDate));
         return new Date(b.MessageDate) - new Date(a.MessageDate);
       });
     }
@@ -338,7 +334,13 @@ class MessageCenter extends Component {
           </div>
           <div className={"composeEmail d-sm-flex align-items-center ml-auto"}>
             <TouchableOpacity onPress={() => this.onRightPress()}>
-              <RightComponent icon={Constants.Images.ComposeBlack} />
+              <RightComponent
+                icon={
+                  Constants.BaseStyle.DEVICE_WIDTH > 767
+                    ? Constants.Images.ComposeBlack
+                    : Constants.Images.Compose
+                }
+              />
               <Text>Compose</Text>
             </TouchableOpacity>
           </div>

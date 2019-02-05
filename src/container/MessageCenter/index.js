@@ -18,7 +18,7 @@ import SwiperContainer from "../../components/MessageCenter";
 import RightComponent from "../../components/Common/RightComponent";
 import Constants from "../../constants";
 import CustomModal from "../../components/CustomModal";
-import Compose from "./Compose.js";
+import Compose from "./Compose";
 import { Dialog } from "../../helpers/common";
 
 class MessageCenter extends Component {

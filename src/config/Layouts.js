@@ -26,7 +26,11 @@ export const frontLayout = props => {
 
 export const dashboardLayout = props => {
   let isToggleOpen = false;
-  let { isLogin } = props.children.props;
+  let {
+    isLogin,
+    match: { path },
+    history
+  } = props.children.props;
   return (
     <View style={{ flex: 1 }}>
       {isLogin ? (
@@ -45,6 +49,10 @@ export const dashboardLayout = props => {
               href="javascript:void(0)"
               className="menuToggle"
               onClick={() => {
+                if (path === "/MessageDetails") {
+                  history.goBack();
+                  return;
+                }
                 var element = document.getElementById("leftMenuBar");
                 if (isToggleOpen) {
                   isToggleOpen = false;
@@ -55,9 +63,15 @@ export const dashboardLayout = props => {
                 }
               }}
             >
-              <span />
-              <span />
-              <span />
+              {path !== "/MessageDetails" ? (
+                <div>
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              ) : (
+                  <i className="fa fa-angle-left" aria-hidden="true" />
+                )}
             </a>
             {props.children}
             <Loader />

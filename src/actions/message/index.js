@@ -192,7 +192,8 @@ export const setActiveMessage = (messageId, componentId) => {
   return dispatch => {
     dispatch(updateWebSelectedMessage(messageId));
     {
-      Platform.OS !== "web"
+      Platform.OS !== "web" ||
+      (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772)
         ? dispatch(
             AppActions.pushToParticularScreen(componentId, "MessageDetails")
           )

@@ -18,7 +18,7 @@ import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import { timeSince } from "../../helpers/common";
 import RightComponent from "../../components/Common/RightComponent";
-import Compose from "./Compose.js";
+import Compose from "./Compose";
 import CustomModal from "../../components/CustomModal";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -147,7 +147,8 @@ class MessageDetails extends Component {
     if (index !== -1) {
       return (
         <View style={Styles.container}>
-          {Platform.OS !== "web" ? (
+          {Platform.OS !== "web" ||
+          (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772) ? (
             <Header
               title={"Message Details"}
               hideDrawer

@@ -15,15 +15,14 @@ import {
   TextInput
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Constants from "../../constants";
-import { moderateScale, verticalScale } from "../../helpers/ResponsiveFonts";
-import SafeView from "../../components/Common/SafeView";
+import Constants from "../../../constants";
+import { moderateScale, verticalScale } from "../../../helpers/ResponsiveFonts";
+import SafeView from "../../../components/Common/SafeView";
 import { Dropdown } from "react-native-material-dropdown";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import AuthButton from "../../components/Common/AuthButton";
-import DivContainer from "../../components/Common/DivContainer";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AuthButton from "../../../components/Common/AuthButton";
+import DivContainer from "../../../components/Common/DivContainer";
 
 const Compose = ({
   tabLable,
@@ -41,16 +40,7 @@ const Compose = ({
   subjectError,
   messageError
 }) => (
-  <KeyboardAwareScrollView
-    enableAutomaticScroll={true}
-    scrollEnabled={false}
-    extraHeight={80}
-    enableOnAndroid
-    keyboardShouldPersistTaps="handled"
-    contentContainerStyle={Styles.container}
-    showsHorizontalScrollIndicator={false}
-    showsVerticalScrollIndicator={false}
-  >
+  <View style={{ flex: 1 }}>
     {Platform.OS !== "web" ? (
       <LinearGradient
         start={{ x: 1, y: 0 }}
@@ -194,31 +184,10 @@ const Compose = ({
         </div>
       ) : null}
     </View>
-  </KeyboardAwareScrollView>
+  </View>
 );
 
 const Styles = StyleSheet.create({
-  container: {
-    backgroundColor: Constants.Colors.White,
-    ...Platform.select({
-      web: {
-        borderRadius: moderateScale(10),
-        alignItems: "center",
-        height: moderateScale(350),
-        width: moderateScale(400),
-        paddingTop: moderateScale(0),
-        marginHorizontal: moderateScale(12)
-      },
-      ios: {
-        height: Constants.BaseStyle.DEVICE_HEIGHT,
-        width: Constants.BaseStyle.DEVICE_WIDTH
-      },
-      android: {
-        height: Constants.BaseStyle.DEVICE_HEIGHT,
-        width: Constants.BaseStyle.DEVICE_WIDTH
-      }
-    })
-  },
   composeMessageApp: {
     flex: 1
   },
