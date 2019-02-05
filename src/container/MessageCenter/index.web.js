@@ -6,12 +6,7 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import _ from "lodash";
@@ -40,10 +35,10 @@ const customStyles = {
 };
 
 const SelectData = [
-  { key: "Inbox", value: "inbox" },
-  { key: "Sent", value: "sent" },
-  { key: "Trash", value: "trash" }
-],
+    { key: "Inbox", value: "inbox" },
+    { key: "Sent", value: "sent" },
+    { key: "Trash", value: "trash" }
+  ],
   selectDataId = {
     name: "folder",
     id: "folder-name"
@@ -99,8 +94,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-          ? sent && sent.length && sent[0].MessageID
-          : trash && trash.length && trash[0].MessageID;
+        ? sent && sent.length && sent[0].MessageID
+        : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
@@ -236,7 +231,7 @@ class MessageCenter extends Component {
       appAction.deleteMessage(
         message.MessageID,
         tab,
-        () => { }
+        () => {}
         // this.getTabRelatedMessages()
       );
     }
@@ -257,10 +252,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-      app,
-      user,
-      messages: { recipients, inbox, sent, trash }
-    } = this.props,
+        app,
+        user,
+        messages: { recipients, inbox, sent, trash }
+      } = this.props,
       data,
       {
         MessageGroupID,
@@ -295,7 +290,7 @@ class MessageCenter extends Component {
     }
 
     if (filter === "name") {
-      data = data.sort(function (a, b) {
+      data = data.sort(function(a, b) {
         //compare two values
         if (
           a.Recipient_GroupName.toLowerCase() <
@@ -310,7 +305,7 @@ class MessageCenter extends Component {
         return 0;
       });
     } else if (filter === "date") {
-      data = data.sort(function (a, b) {
+      data = data.sort(function(a, b) {
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
         return new Date(b.MessageDate) - new Date(a.MessageDate);

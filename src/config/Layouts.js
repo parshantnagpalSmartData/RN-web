@@ -70,8 +70,8 @@ export const dashboardLayout = props => {
                   <span />
                 </div>
               ) : (
-                  <i className="fa fa-angle-left" aria-hidden="true" />
-                )}
+                <i className="fa fa-angle-left" aria-hidden="true" />
+              )}
             </a>
             {props.children}
             <Loader />
