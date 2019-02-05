@@ -48,5 +48,6 @@ module.exports = {
   Menu: require("../assets/images/Menu/menu.png"),
   CloseModal: require("../assets/images/MessageCenter/close.png"),
   ComposeWhite: require("../assets/images/MessageCenter/ComposeWhite.png"),
-  SearchMessageCenter: require("../assets/images/SearchMessageCenter/search.png")
+  SearchMessageCenter: require("../assets/images/SearchMessageCenter/search.png"),
+  Camera: require("../assets/images/profile/camera.png")
 };

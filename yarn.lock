@@ -7117,9 +7117,19 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-custom-actionsheet@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-custom-actionsheet/-/react-native-custom-actionsheet-0.0.4.tgz#21560576bf8030a51a04d8988276f52eb6955029"
+  integrity sha512-3vEwCr8yQyUWAindNCf0upE5lOT+I0b0h6HYOKt8wXOX70KJZqSoySObvZYJ3Gwq/sCiyC8FraY2GPc7B6S78w==
+
 react-native-geocoding@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/react-native-geocoding/-/react-native-geocoding-0.3.0.tgz#7987ad98f52b2b5a912688e80347f5222861f2a9"
+
+react-native-image-crop-picker@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.22.0.tgz#8f7f657dcde45cc366ac529a624205155571c03f"
+  integrity sha512-F8ytcTAbrUgsCaz3v+jm/qi4XAgv4qywxNnFH/qC3cApI0KwvHZ/WjiyzJbWiLQ+6UKDUeUCGum4oY4fzOlzpA==
 
 react-native-interactable@^0.1.10:
   version "0.1.10"

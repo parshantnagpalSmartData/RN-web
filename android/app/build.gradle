@@ -153,6 +153,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-crop-picker')
     implementation project(':react-native-print')
     implementation project(':react-native-interactable')
     implementation project(':react-native-pdf')

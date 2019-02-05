@@ -28,6 +28,7 @@ import ResetPassword from "../container/ResetPassword";
 import OTPScreen from "../container/Auth/OTPScreen";
 import PDFViewer from "../container/PrintableForms/PDFViewer";
 import MessageDetails from "../container/MessageCenter/MessageDetails";
+import EditProfile from "../container/MyProfile/EditProfile";
 
 class Routes extends Component {
   componentDidMount() {
@@ -64,6 +65,13 @@ class Routes extends Component {
             path="/OTPScreen"
             component={OTPScreen}
             layout={frontLayout}
+            isLogin={isLoggedIn}
+          />
+          <AppRoute
+            exact
+            path="/EditProfile"
+            component={EditProfile}
+            layout={dashboardLayout}
             isLogin={isLoggedIn}
           />
           <AppRoute

@@ -2,6 +2,7 @@ package com.actnursesportal;
 
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.christopherdro.RNPrint.RNPrintPackage;
 import com.wix.interactable.Interactable;
 import org.wonday.pdf.RCTPdfView;
