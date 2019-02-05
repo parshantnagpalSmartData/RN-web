@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import _ from "lodash";
 import * as appAction from "../../actions";
 import Header from "../../components/Common/Header";
 // import UnderDevelopment from "../../components/Common/UnderDevelopment";
@@ -25,6 +25,8 @@ import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import ImagePicker from "react-native-image-crop-picker";
+import { ActionSheetCustom as ActionSheet } from "react-native-custom-actionsheet";
 
 class MyProfile extends Component {
   constructor(props) {
@@ -48,9 +50,102 @@ class MyProfile extends Component {
     this.props.appAction.pop(this.props.componentId);
   };
 
+  picker = option => {
+    //case for the camera
+    if (option == 1) {
+      this.openCamera();
+      return;
+    }
+    //case of the gallery
+    if (option == 2) {
+      this.openGalary();
+      return;
+    }
+  };
+  openCamera = _.debounce(() => {
+    let { navigator } = this.props;
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+      multiple: false,
+      maxFiles: 1,
+      compressImageQuality: 0.5,
+      includeBase64: true,
+      cropperCircleOverlay: true,
+      mediaType: "photo",
+      hideBottomControls: true,
+      useFrontCamera: true,
+      avoidEmptySpaceAroundImage: true
+    })
+      .then(image => {
+        this.setState({ image }, () => {
+          this.props.appActions.updateProfileImage(image, navigator);
+          this.actionSheet.hide();
+        });
+      })
+      .catch(() => {
+        this.actionSheet.hide();
+      });
+  });
+
+  openGalary = _.debounce(() => {
+    let { navigator } = this.props;
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+      multiple: false,
+      maxFiles: 1,
+      compressImageQuality: 0.5,
+      includeBase64: true,
+      cropperCircleOverlay: true,
+      mediaType: "photo",
+      hideBottomControls: true,
+      useFrontCamera: true,
+      avoidEmptySpaceAroundImage: true
+    })
+      .then(image => {
+        this.setState({ image }, () => {
+          this.props.appActions.updateProfileImage(image, navigator);
+          this.actionSheet.hide();
+        });
+      })
+      .catch(() => {
+        this.actionSheet.hide();
+      });
+  });
+
+  _handleImageChange = e => {
+    // e.preventDefault();
+    // let reader = new FileReader();
+    let file = e.target.files[0];
+    // let context = this;
+    // let ext = file.name.split(".").pop();
+    // let exts = ["jpg", "png", "bmp", "jpeg", "gif"];
+    // console.log("file", file);
+    if (file && !file.name) {
+      return;
+    }
+    // let token = this.props.user.auth;
+    if (e.target.files[0].size / 1000 > 3072) {
+      // context.setState({
+      // 	open: true,
+      // 	msg: 'Image must not be greater than 5Mb!',
+      // 	msgType: 'Error',
+      // 	msgStatus: false
+      // });
+
+      return;
+    }
+  };
   render() {
-    let { user } = this.props;
-    let { firstName, lastName, contact, about } = this.state;
+    let { user, activeColor, baseColor, overlayColor } = this.props;
+    let { firstName, lastName, contact, about, active, loaded } = this.state;
+    let labelClass = `uploader ${loaded && "loaded"}`;
+    let borderColor = active ? activeColor : baseColor;
+    let iconColor = active ? activeColor : loaded ? overlayColor : baseColor;
+
     return (
       <View style={Styles.containner}>
         <Header
@@ -71,12 +166,48 @@ class MyProfile extends Component {
         >
           <View style={Styles.userDetailsContainer}>
             <View style={Styles.userImgContainer}>
-              <TouchableOpacity style={Styles.userImgView}>
-                <Image
-                  source={Constants.Images.UserAvatar}
-                  resizeMethod={"center"}
-                  style={Styles.userImg}
-                />
+              <TouchableOpacity
+                style={Styles.userImgView}
+                onPress={() => this.actionSheet.show()}
+              >
+                {Platform.OS === "web" ? (
+                  <label
+                    className={labelClass}
+                    // onDragEnter={this.onDragEnter}
+                    // onDragLeave={this.onDragLeave}
+                    // onDragOver={this.onDragOver}
+                    // onDrop={this.onDrop}
+                    style={{ outlineColor: borderColor }}
+                  >
+                    {/* <input
+                    type={"file"}
+                    id="filePicker"
+                    value={this.state.image}
+                    accept="image/*"
+                    onChange={this._handleImageChange}
+                  /> */}
+                    <img
+                      src={Constants.Images.Camera}
+                      className={loaded && "loaded"}
+                    />
+                    <i
+                      className="icon icon-upload"
+                      style={{ color: iconColor }}
+                    />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={this.onFileChange}
+                      ref={ref => (this.input = ref)}
+                    />
+                  </label>
+                ) : (
+                  <Image
+                    source={Constants.Images.UserAvatar}
+                    resizeMethod={"resize"}
+                    style={Styles.userImg}
+                  />
+                )}
               </TouchableOpacity>
             </View>
             <View style={Styles.userInfoView}>
@@ -139,14 +270,54 @@ class MyProfile extends Component {
               })
             }}
           />
-          <TouchableOpacity style={Styles.CameraView}>
+          <TouchableOpacity
+            style={Styles.CameraView}
+            onPress={() => this.actionSheet.show()}
+          >
             <Image
               source={Constants.Images.Camera}
-              resizeMethod={"center"}
+              resizeMethod={"resize"}
               style={Styles.camera}
             />
           </TouchableOpacity>
         </KeyboardAwareScrollView>
+        {Platform.OS !== "web" ? (
+          <ActionSheet
+            ref={ref => (this.actionSheet = ref)}
+            title={"Choose Image From"}
+            options={[
+              "Cancel",
+              {
+                component: (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.picker(1);
+                    }}
+                    style={Styles.actionWrapper}
+                  >
+                    <Text style={Styles.actionText}>{"Camera"}</Text>
+                  </TouchableOpacity>
+                ),
+                height: (Constants.BaseStyle.DEVICE_HEIGHT / 100) * 10
+              },
+              {
+                component: (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.picker(2);
+                    }}
+                    style={Styles.actionWrapper}
+                  >
+                    <Text style={Styles.actionText}>{"Gallary"}</Text>
+                  </TouchableOpacity>
+                ),
+                height: (Constants.BaseStyle.DEVICE_HEIGHT / 100) * 10
+              }
+            ]}
+            cancelButtonIndex={0}
+            destructiveButtonIndex={4}
+          />
+        ) : null}
       </View>
     );
   }
@@ -216,7 +387,19 @@ const Styles = StyleSheet.create({
       }
     })
   },
-  camera: { height: moderateScale(20), width: moderateScale(20) }
+  camera: { height: moderateScale(20), width: moderateScale(20) },
+  actionWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: Constants.BaseStyle.DEVICE_WIDTH,
+    borderBottomColor: Constants.Colors.placehoder,
+    borderBottomWidth: 1
+  },
+  actionText: {
+    ...Constants.Fonts.Regular,
+    fontSize: moderateScale(16)
+  }
 });
 const mapStateToProps = state => ({
   user: state.user,
