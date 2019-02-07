@@ -7,7 +7,7 @@
 /* eslint-disable */
 import { Platform } from "react-native";
 import firebase from "react-native-firebase";
-// eslint-disable-next-line
+// eslint-disable-next-line no-console
 import type { Notification, NotificationOpen } from "react-native-firebase";
 
 /*
@@ -16,7 +16,7 @@ Get the Fcm token of the device
 const getToken = async () => {
   const fcmToken = await firebase.messaging().getToken();
   if (fcmToken) {
-    // console.log("fcmToken", fcmToken);
+    console.log("fcmToken", fcmToken);
   } else {
     // user doesn't have a device token yet
   }
@@ -29,33 +29,31 @@ export const listeners = () => {
   this.notificationDisplayedListener = firebase
     .notifications()
     .onNotificationDisplayed(notification => {
-      // console.log("onNotificationDisplayed", notification);
+      console.log("onNotificationDisplayed", notification);
     });
   this.notificationListener = firebase
     .notifications()
     .onNotification(notification => {
       // When app is in forground  and push come immedialtely show (Without Touch)
-      // console.log("onNotification", notification);
+      console.log("onNotification", notification);
     });
   this.notificationOpenedListener = firebase
     .notifications()
     .onNotificationOpened((notificationOpen: NotificationOpen) => {
-      // eslint-disable
       //when app is in background (not killed ) tapping on the push notification call that
-      // console.log("notificationOpen", notificationOpen);
+      console.log("notificationOpen", notificationOpen);
     });
 };
 /*
 when app is killed or not in memory push noptification come then cick on the push notification will call that function
 */
 const getInitialNotification = async () => {
-  // eslint-disable-next-line
   const notificationOpen: NotificationOpen = await firebase
     .notifications()
     .getInitialNotification();
   if (notificationOpen) {
     //When the app is killed and tapping on the push will call this function
-    // console.log("getInitialNotification", notificationOpen);
+    console.log("getInitialNotification", notificationOpen);
   }
 };
 /**

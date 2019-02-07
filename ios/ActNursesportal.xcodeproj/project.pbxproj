@@ -55,6 +55,11 @@
 		636D208469CC41AFAB468B18 /* libRCTPdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62813801DEDE43FD817C2D2C /* libRCTPdf.a */; };
 		654252418F43401A970C9A9A /* MontserratAlternates-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D6591FE29944618AC56D933 /* MontserratAlternates-Light.otf */; };
 		669B0D6421C0E1F100067085 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 669B0D6121C0E1AC00067085 /* libReactNativeNavigation.a */; };
+		66EF9BA7220C5D2D004EEFDC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66EF9B73220C5D2D004EEFDC /* GoogleService-Info.plist */; };
+		66EF9BC2220C675E004EEFDC /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EF9BC1220C675E004EEFDC /* RSKImageCropper.framework */; };
+		66EF9BC3220C675E004EEFDC /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66EF9BC1220C675E004EEFDC /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		66EF9BF9220C676A004EEFDC /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EF9BF8220C676A004EEFDC /* QBImagePicker.framework */; };
+		66EF9BFA220C676A004EEFDC /* QBImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66EF9BF8220C676A004EEFDC /* QBImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6D1493F91C1E42108497B07A /* Montserrat-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47BAA9585BC1495B850DC5F0 /* Montserrat-BoldItalic.otf */; };
 		72D0B8AD4FFF464DB2EC8ED9 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = ABDFBCAF9E3546F382CE9D7D /* Montserrat-Bold.otf */; };
 		7A41D7B40A8A4565BF2FCC21 /* Montserrat-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0EEDEB767E4A15B1BEB06A /* Montserrat-ExtraBoldItalic.otf */; };
@@ -113,6 +118,7 @@
 		C5755C1C0ADB46B89F81BC02 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B33583765494485ABAABD3EC /* Montserrat-Regular.otf */; };
 		C9AF715285B44D97BBC2A3D8 /* MontserratAlternates-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F207B7A4C01A4852B75FB7FD /* MontserratAlternates-SemiBoldItalic.otf */; };
 		CBA8F7177B014A7BB6DF01FC /* MontserratAlternates-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 646A7298B38444208F39DC99 /* MontserratAlternates-ThinItalic.otf */; };
+		D10B8C2CDE0925D649CFBE46 /* libPods-ActNursesportal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3E96D0320D1E4C7DE6AFC3 /* libPods-ActNursesportal.a */; };
 		D1D2A557730A4ADC8CFE1CF7 /* MontserratAlternates-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE345066CB244D6F8FA47584 /* MontserratAlternates-ExtraLightItalic.otf */; };
 		DF014D8952734F24A6A0C80E /* Montserrat-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93AB894EBC274FBEAAA1E081 /* Montserrat-ExtraLightItalic.otf */; };
 		E069D0204F9644C4885CC5BC /* MontserratAlternates-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 64C7148FEA9941C686B0BE38 /* MontserratAlternates-Regular.otf */; };
@@ -497,6 +503,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		66EF9BF7220C675F004EEFDC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				66EF9BC3220C675E004EEFDC /* RSKImageCropper.framework in Embed Frameworks */,
+				66EF9BFA220C676A004EEFDC /* QBImagePicker.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -535,15 +556,21 @@
 		64C7148FEA9941C686B0BE38 /* MontserratAlternates-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-Regular.otf"; path = "../src/assets/Font/MontserratAlternates-Regular.otf"; sourceTree = "<group>"; };
 		6671FFFF720C4484AFFC76FB /* Montserrat-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-MediumItalic.otf"; path = "../src/assets/Font/Montserrat-MediumItalic.otf"; sourceTree = "<group>"; };
 		669B0D3621C0E1AC00067085 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
+		66EF9B73220C5D2D004EEFDC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ActNursesportal/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		66EF9BA8220C602A004EEFDC /* ActNursesportal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ActNursesportal.entitlements; path = ActNursesportal/ActNursesportal.entitlements; sourceTree = "<group>"; };
+		66EF9BC1220C675E004EEFDC /* RSKImageCropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66EF9BF8220C676A004EEFDC /* QBImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QBImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8333FDD9014CC28997FF87 /* MontserratAlternates-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-LightItalic.otf"; path = "../src/assets/Font/MontserratAlternates-LightItalic.otf"; sourceTree = "<group>"; };
 		71609BFC236040DD8E13E3E7 /* Montserrat-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.otf"; path = "../src/assets/Font/Montserrat-ExtraLight.otf"; sourceTree = "<group>"; };
 		7728ADBE30374366B172205A /* RNPrintTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RNPrintTests.xctest; sourceTree = "<group>"; };
 		7747A371B3E14A859ACA549B /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		785909F1E9264842B3140C53 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7D3E96D0320D1E4C7DE6AFC3 /* libPods-ActNursesportal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ActNursesportal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F779FC65B2C403CAF08BAE6 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.otf"; path = "../src/assets/Font/Montserrat-Medium.otf"; sourceTree = "<group>"; };
 		82386658759D42198FF73B52 /* MontserratAlternates-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-Thin.otf"; path = "../src/assets/Font/MontserratAlternates-Thin.otf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9322F459C862C0EEDF204673 /* Pods-ActNursesportal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActNursesportal.release.xcconfig"; path = "Pods/Target Support Files/Pods-ActNursesportal/Pods-ActNursesportal.release.xcconfig"; sourceTree = "<group>"; };
 		939FAE50BEEC4B458D4FB3A1 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.otf"; path = "../src/assets/Font/Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
 		93AB894EBC274FBEAAA1E081 /* Montserrat-ExtraLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLightItalic.otf"; path = "../src/assets/Font/Montserrat-ExtraLightItalic.otf"; sourceTree = "<group>"; };
 		960407736EB74C7286AF5147 /* Montserrat-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BlackItalic.otf"; path = "../src/assets/Font/Montserrat-BlackItalic.otf"; sourceTree = "<group>"; };
@@ -596,6 +623,7 @@
 		B4DF971021C8D374006FF5AC /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
 		C4A89EA326D74566A3FACE46 /* MontserratAlternates-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-BlackItalic.otf"; path = "../src/assets/Font/MontserratAlternates-BlackItalic.otf"; sourceTree = "<group>"; };
 		C63D1F68B0344EEAB561C2F2 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
+		C66521A2157A00D4AA528BEA /* Pods-ActNursesportal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActNursesportal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ActNursesportal/Pods-ActNursesportal.debug.xcconfig"; sourceTree = "<group>"; };
 		C7AD7D39681548C4B33E0D5B /* Montserrat-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Italic.otf"; path = "../src/assets/Font/Montserrat-Italic.otf"; sourceTree = "<group>"; };
 		C941FEECBBC04C2BB389BEC7 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		CE345066CB244D6F8FA47584 /* MontserratAlternates-ExtraLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-ExtraLightItalic.otf"; path = "../src/assets/Font/MontserratAlternates-ExtraLightItalic.otf"; sourceTree = "<group>"; };
@@ -638,6 +666,7 @@
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
+				66EF9BC2220C675E004EEFDC /* RSKImageCropper.framework in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -653,6 +682,8 @@
 				F717393C01D24F5DB06D57D6 /* RNPrintTests.xctest in Frameworks */,
 				AA8207DA6A7644BEBAE4792C /* libimageCropPicker.a in Frameworks */,
 				1EB2F2DA790A4648B39BD797 /* libRNFirebase.a in Frameworks */,
+				D10B8C2CDE0925D649CFBE46 /* libPods-ActNursesportal.a in Frameworks */,
+				66EF9BF9220C676A004EEFDC /* QBImagePicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +795,8 @@
 		13B07FAE1A68108700A75B9A /* ActNursesportal */ = {
 			isa = PBXGroup;
 			children = (
+				66EF9BA8220C602A004EEFDC /* ActNursesportal.entitlements */,
+				66EF9B73220C5D2D004EEFDC /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -802,6 +835,7 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				7D3E96D0320D1E4C7DE6AFC3 /* libPods-ActNursesportal.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -973,6 +1007,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				66EF9BF8220C676A004EEFDC /* QBImagePicker.framework */,
+				66EF9BC1220C675E004EEFDC /* RSKImageCropper.framework */,
 				B4DF96EC21C8D374006FF5AC /* Font */,
 				13B07FAE1A68108700A75B9A /* ActNursesportal */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -981,6 +1017,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				737A467D00B546EA9CF8963E /* Resources */,
 				6631379D21D22EEC00753AF6 /* Recovered References */,
+				A58A03A731F4681C45614AD7 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -996,6 +1033,15 @@
 				2D02E4901E0B4A5D006451C7 /* ActNursesportal-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A58A03A731F4681C45614AD7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C66521A2157A00D4AA528BEA /* Pods-ActNursesportal.debug.xcconfig */,
+				9322F459C862C0EEDF204673 /* Pods-ActNursesportal.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -1110,10 +1156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ActNursesportal" */;
 			buildPhases = (
+				8069DA79FC3F7D90A7FE1907 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				66EF9BF7220C675F004EEFDC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1174,8 +1222,16 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 33P3VUARHV;
+						DevelopmentTeam = L86M8UX52H;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1673,6 +1729,7 @@
 			files = (
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				66EF9BA7220C5D2D004EEFDC /* GoogleService-Info.plist in Resources */,
 				B4DF971F21C8D374006FF5AC /* MontserratAlternates-ExtraLightItalic.otf in Resources */,
 				B4DF972221C8D374006FF5AC /* Montserrat-Medium.otf in Resources */,
 				B4DF972C21C8D374006FF5AC /* Montserrat-ExtraLightItalic.otf in Resources */,
@@ -1793,6 +1850,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		8069DA79FC3F7D90A7FE1907 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ActNursesportal-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1942,15 +2017,17 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C66521A2157A00D4AA528BEA /* Pods-ActNursesportal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: smartData Enterprises (India) Limited (33P3VUARHV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: smartData Enterprises (India) Limited (33P3VUARHV)";
+				CODE_SIGN_ENTITLEMENTS = ActNursesportal/ActNursesportal.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ravi Kumar (D262LLSD63)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ravi Kumar (D262LLSD63)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 33P3VUARHV;
+				DEVELOPMENT_TEAM = L86M8UX52H;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
@@ -1967,23 +2044,25 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.actnursesportal;
 				PRODUCT_NAME = ActNursesportal;
-				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = SmartdataActNursesDistributionProvisioning;
+				PROVISIONING_PROFILE = "9418bb3f-dfb5-4a76-bfda-c0ebb4b645a8";
+				PROVISIONING_PROFILE_SPECIFIER = ActNursesDevelopment;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9322F459C862C0EEDF204673 /* Pods-ActNursesportal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: smartData Enterprises (India) Limited (33P3VUARHV)";
+				CODE_SIGN_ENTITLEMENTS = ActNursesportal/ActNursesportal.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ravi Kumar (D262LLSD63)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 33P3VUARHV;
+				DEVELOPMENT_TEAM = L86M8UX52H;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
@@ -2000,10 +2079,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.ACTNursePortal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdata.actnursesportal;
 				PRODUCT_NAME = ActNursesportal;
-				PROVISIONING_PROFILE = "0003db12-5131-42ad-859c-9daba503dd9f";
-				PROVISIONING_PROFILE_SPECIFIER = SmartdataActNursesDistributionProvisioning;
+				PROVISIONING_PROFILE = "9418bb3f-dfb5-4a76-bfda-c0ebb4b645a8";
+				PROVISIONING_PROFILE_SPECIFIER = ActNursesDevelopment;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

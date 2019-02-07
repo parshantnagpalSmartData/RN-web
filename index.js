@@ -11,7 +11,8 @@ import { addListeners } from "./src/helpers/listeners";
 // import { Provider } from "react-redux";
 import setup from "./src/store/setup";
 import Events from "./src/helpers/registerevents";
-import { pushNotifificationInit } from "./src/helpers/PushNotification";
+import { pushNotifificationInit } from "./src/helpers/pushnotification";
+
 
 // console.disableYellowBox = true; // eslint-disable-line
 

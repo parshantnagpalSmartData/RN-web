@@ -205,7 +205,7 @@ const Styles = StyleSheet.create({
       ios: {
         width: Constants.BaseStyle.DEVICE_WIDTH * 0.9
       },
-      android: { width: Constants.BaseStyle.DEVICE_WIDTH * 0.85 },
+      android: { width: Constants.BaseStyle.DEVICE_WIDTH * 0.9 },
       web: {
         width:
           Constants.BaseStyle.DEVICE_WIDTH <= 767
