@@ -55,9 +55,8 @@ body {
 }
 
 @media screen and (max-width: 767px) {
-  .menuToggle {
-    display: block;
-  }
+  .menuToggle { display: block; }
+  .menuToggle .fa{color: #fff; font-size: 30px;}
   .leftContainer {
     margin-left: -260px;
     transition: 1s ease;
@@ -562,13 +561,14 @@ body {
   margin-bottom: 5px;
 }
 .msgDetailsSection {
-  padding: 0 20px;
+  padding: 0 20px;  
 }
 .messageListSection {
   width: 100%;
 }
 
-.messageScroll > div > div > div > div {
+.messageScroll > div > div > div > div, .msgDetailsSection,
+ .rightMSGHeight > div{
   max-height: calc(100vh - 220px) !important;
 }
 .listEmptycopmonent {
@@ -590,10 +590,11 @@ body {
   text-align: justify !important;
 }
 
+/* .modal > div > div{width: 100% !important; margin-left: 0 !important; margin-right: 0 !important;} */
 .CloseButttonCompose {
   position: absolute;
-  right: -20px;
-  top: -10px;
+  right: -10px;
+  top: -15px;
 }
 .CloseButttonCompose > div > div {
   height: 20px !important;
@@ -621,8 +622,9 @@ body {
 .textInputDivContainer > div > div {
   padding-left: 0;
 }
-.textInputDivContainer > div > div {
+.textInputDivContainer > div > div, .textInputDivContainer > div > div textarea{
   min-height: 180px !important;
+  text-align: left;
 }
 
 .AuthButton > div > div > div {
@@ -636,6 +638,11 @@ body {
   font-weight: 400 !important;
 }
 
+/*----Modal Compose----*/
+.OverlayCopmose{position: fixed;  overflow: auto; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; background-color: rgba(255, 255, 255, 0.75);}
+.ModalCompose{background: #fff; border: 1px #ccc solid; max-width: 450px; padding:30px; border-radius:10px; -webkit-border-radius:10px;}
+.ModalCompose .modal > div > div{width: 100% !important; height: min-content;margin-left: 0!important; margin-right: 0!important;}
+
 @media screen and (min-width: 1366px) {
   .messageList > div > div > div:last-child > div:last-child,
   .msgUserName > div > div,
@@ -645,6 +652,18 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+
+  .OverlayCopmose {    
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    justify-content: center;
+   
+  }
+
   .composeEmail > div {
     display: -wedkit-box;
     display: -ms-flexbox;
@@ -682,6 +701,7 @@ body {
     bottom: 20px;
     border-radius: 50%;
     background: #333;
+    z-index: 999999;
   }
   .composeEmail > div {
     margin: auto !important;
@@ -696,6 +716,15 @@ body {
   .messageTitle > div {
     justify-content: center;
   }
+
+  .ModalCompose{max-width: 280px; padding: 20px 15px; margin: 40px auto;}
+
+  .messageDetailTop > div > div, .divWrapper{padding-left: 20px; padding-right: 20px;}
+  .messageScroll > div > div > div > div, 
+  .listEmptycopmonent, .msgDetailsSection,
+  .rightMSGHeight > div{max-height: calc(100vh - 225px) !important;}
+  .AuthButton > div > div > div{width: 250px;}
+  
 }
 
 @media screen and (max-width: 768px) {

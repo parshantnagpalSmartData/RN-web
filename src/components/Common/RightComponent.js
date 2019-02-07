@@ -8,6 +8,7 @@ import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+import DivContainer from "./DivContainer";
 
 /**
  *
@@ -17,15 +18,17 @@ const RightComponent = props => {
   let { source, icon } = props;
   return (
     <View style={Styles.container}>
-      {source ? (
-        <Image
-          source={{ uri: source }}
-          style={Styles.imgStyle}
-          resizeMode={"center"}
-        />
-      ) : (
-        <Image source={icon} />
-      )}
+      <DivContainer className={"replyTopIcon"}>
+        {source ? (
+          <Image
+            source={{ uri: source }}
+            style={Styles.imgStyle}
+            resizeMode={"center"}
+          />
+        ) : (
+            <Image source={icon} />
+          )}
+      </DivContainer>
     </View>
   );
 };

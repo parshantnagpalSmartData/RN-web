@@ -23,22 +23,23 @@ import Filter from "../../Components/Common/DropDownWeb";
 import RenderSelect from "../../components/Common/DropDownWithImage";
 import SearchBar from "../../components/Common/SearchBarMessageCenter";
 import MessageCounter from "../../components/MessageCenter/MessageCounter";
+
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
+    // top: "50%",
+    // left: "50%",
+    // right: "auto",
+    // bottom: "auto",
+    // marginRight: "-50%",
+    // transform: "translate(-50%, -50%)"
   }
 };
 
 const SelectData = [
-    { key: "Inbox", value: "inbox" },
-    { key: "Sent", value: "sent" },
-    { key: "Trash", value: "trash" }
-  ],
+  { key: "Inbox", value: "inbox" },
+  { key: "Sent", value: "sent" },
+  { key: "Trash", value: "trash" }
+],
   selectDataId = {
     name: "folder",
     id: "folder-name"
@@ -94,8 +95,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
     appAction.updateWebSelectedMessage(selectedMessage);
   };
 
@@ -231,7 +232,7 @@ class MessageCenter extends Component {
       appAction.deleteMessage(
         message.MessageID,
         tab,
-        () => {}
+        () => { }
         // this.getTabRelatedMessages()
       );
     }
@@ -252,10 +253,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients, inbox, sent, trash }
-      } = this.props,
+      app,
+      user,
+      messages: { recipients, inbox, sent, trash }
+    } = this.props,
       data,
       {
         MessageGroupID,
@@ -290,7 +291,7 @@ class MessageCenter extends Component {
     }
 
     if (filter === "name") {
-      data = data.sort(function(a, b) {
+      data = data.sort(function (a, b) {
         //compare two values
         if (
           a.Recipient_GroupName.toLowerCase() <
@@ -305,7 +306,7 @@ class MessageCenter extends Component {
         return 0;
       });
     } else if (filter === "date") {
-      data = data.sort(function(a, b) {
+      data = data.sort(function (a, b) {
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
         return new Date(b.MessageDate) - new Date(a.MessageDate);
@@ -383,12 +384,15 @@ class MessageCenter extends Component {
         <CustomModal
           isVisible={this.state.composeModal}
           onBackdropPress={this.onComposeModalClose}
-          style={{ margin: 0 }}
+          // style={{ margin: 0 }}
+          className={"ModalCompose"}
+          overlayClassName={"OverlayCopmose"}
           customStyles={customStyles}
         >
           <Compose
             to={MessageGroupID}
             user={user}
+
             onClose={this.onComposeModalClose}
             recipients={recipients}
             onChangeRecipient={this.onChangeRecipient}

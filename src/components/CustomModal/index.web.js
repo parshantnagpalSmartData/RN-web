@@ -11,12 +11,15 @@ import PropTypes from "prop-types";
 import DivContainer from "../Common/DivContainer";
 
 const CustomModal = props => {
-  const { isVisible, onBackdropPress, customStyles } = props;
+  const { isVisible, onBackdropPress, customStyles, className, overlayClassName } = props;
+
   return (
     <Modal
       isOpen={isVisible}
       onRequestClose={() => onBackdropPress()}
       style={customStyles}
+      className={className}
+      overlayClassName={overlayClassName}
     >
       <DivContainer className={"modal"}>{props.children}</DivContainer>
     </Modal>
@@ -28,11 +31,15 @@ const CustomModal = props => {
  * */
 CustomModal.propTypes = {
   isOpen: PropTypes.bool,
-  onRequestClose: PropTypes.func
+  onRequestClose: PropTypes.func,
+  className: PropTypes.string,
+  overlayClassName: PropTypes.string,
 };
 CustomModal.defaultProps = {
   isOpen: false,
-  onRequestClose: null
+  onRequestClose: null,
+  className: "",
+  overlayClassName: ""
 };
 
 export default CustomModal;

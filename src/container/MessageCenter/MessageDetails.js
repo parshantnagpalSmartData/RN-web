@@ -146,127 +146,128 @@ class MessageDetails extends Component {
     let message = currentTab[index];
     if (index !== -1) {
       return (
-        <View style={Styles.container}>
-          {Platform.OS !== "web" ||
-          (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772) ? (
-            <Header
-              title={"Message Details"}
-              hideDrawer
-              onBackPress={this.onBackPress}
-              rightComponent={<RightComponent icon={Constants.Images.Reply} />}
-              onRightPress={() => this.onRightPress(message)}
-            />
-          ) : null}
-          <View style={Styles.messageView}>
-            <DivContainer
-              className={"messageDetailTop"}
-              styleApp={
-                {
-                  // justifyContent:"center",
-                  // alignItem:'center'
+        <DivContainer className={"rightMSGHeight"} styleWeb={Styles.conCatContaner}>
+          <ScrollView style={Styles.container}>
+            {Platform.OS !== "web" ||
+              (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772) ? (
+                <Header
+                  title={"Message Details"}
+                  hideDrawer
+                  onBackPress={this.onBackPress}
+                  rightComponent={<RightComponent icon={Constants.Images.Reply} />}
+                  onRightPress={() => this.onRightPress(message)}
+                />
+              ) : null}
+            <View style={Styles.messageView}>
+              <DivContainer
+                className={"messageDetailTop"}
+                styleApp={
+                  {
+                    // justifyContent:"center",
+                    // alignItem:'center'
+                  }
                 }
-              }
-              styleWeb={{}}
-            >
-              <View style={Styles.header}>
-                <View style={Styles.UserImage}>
-                  <Image
-                    source={Constants.Images.UserImage}
-                    resizeMode={"contain"}
-                    style={Styles.UserImg}
-                  />
+                styleWeb={{}}
+              >
+                <View style={Styles.header}>
+                  <View style={Styles.UserImage}>
+                    <Image
+                      source={Constants.Images.UserImage}
+                      resizeMode={"contain"}
+                      style={Styles.UserImg}
+                    />
+                  </View>
+                  <View style={Styles.userNameView}>
+                    <View style={Styles.userView}>
+                      <DivContainer className={"msgUserName"}>
+                        <Text style={Styles.userName}>
+                          {message && message.Recipient_GroupName}
+                        </Text>
+                      </DivContainer>
+                      {Platform.OS !== "web" ? (
+                        <Text style={Styles.timeLine}>
+                          {timeSince(message && message.MessageDate)}
+                        </Text>
+                      ) : (
+                          <Text style={Styles.timeLine}>
+                            {this.getUserEmail(message.Recipient_GroupName)}
+                          </Text>
+                        )}
+                    </View>
+                    {Platform.OS === "web" ? (
+                      <DivContainer className={"msgActions"}>
+                        <Select
+                          IconComponent={props => (
+                            <TouchableOpacity
+                              {...props}
+                              onPress={this.props.toggleOpen}
+                            >
+                              <Image
+                                source={Constants.Images.Menu}
+                                style={{
+                                  height: moderateScale(20),
+                                  width: moderateScale(20)
+                                }}
+                              />
+                            </TouchableOpacity>
+                          )}
+                          styles={{}}
+                          value={1}
+                          inputProps={{
+                            name: "selectOption",
+                            id: "selectOption"
+                          }}
+                          className={"SelectSide"}
+                          onClose={() => { }}
+                          onChange={event => {
+                            this.props.onClose(event.target.value, message);
+                          }}
+                        >
+                          <MenuItem value={"delete"}>Delete</MenuItem>
+                          <MenuItem value={"reply"}>Reply </MenuItem>
+                        </Select>
+                      </DivContainer>
+                    ) : null}
+                  </View>
                 </View>
-                <View style={Styles.userNameView}>
-                  <View style={Styles.userView}>
-                    <DivContainer className={"msgUserName"}>
-                      <Text style={Styles.userName}>
-                        {message && message.Recipient_GroupName}
-                      </Text>
-                    </DivContainer>
-                    {Platform.OS !== "web" ? (
+              </DivContainer>
+              <DivContainer className="divWrapper" styleApp={{ flex: 1 }}>
+                <View style={Styles.userInfo}>
+                  {Platform.OS === "web" ? (
+                    <View style={Styles.MessageSubject}>
+                      <DivContainer className={"msgSubject"}>
+                        <Text style={Styles.userName}>
+                          {message && message.MessageSubject}
+                        </Text>
+                      </DivContainer>
                       <Text style={Styles.timeLine}>
                         {timeSince(message && message.MessageDate)}
                       </Text>
-                    ) : (
-                      <Text style={Styles.timeLine}>
-                        {this.getUserEmail(message.Recipient_GroupName)}
-                      </Text>
-                    )}
-                  </View>
-                  {Platform.OS === "web" ? (
-                    <DivContainer className={"msgActions"}>
-                      <Select
-                        IconComponent={props => (
-                          <TouchableOpacity
-                            {...props}
-                            onPress={this.props.toggleOpen}
-                          >
-                            <Image
-                              source={Constants.Images.Menu}
-                              style={{
-                                height: moderateScale(20),
-                                width: moderateScale(20)
-                              }}
-                            />
-                          </TouchableOpacity>
-                        )}
-                        styles={{}}
-                        value={1}
-                        inputProps={{
-                          name: "selectOption",
-                          id: "selectOption"
-                        }}
-                        className={"SelectSide"}
-                        onClose={() => {}}
-                        onChange={event => {
-                          this.props.onClose(event.target.value, message);
-                        }}
-                      >
-                        <MenuItem value={"delete"}>Delete</MenuItem>
-                        <MenuItem value={"reply"}>Reply </MenuItem>
-                      </Select>
-                    </DivContainer>
+                    </View>
                   ) : null}
-                </View>
-              </View>
-            </DivContainer>
-            <DivContainer className="divWrapper" styleApp={{ flex: 1 }}>
-              <View style={Styles.userInfo}>
-                {Platform.OS === "web" ? (
-                  <View style={Styles.MessageSubject}>
-                    <DivContainer className={"msgSubject"}>
-                      <Text style={Styles.userName}>
-                        {message && message.MessageSubject}
-                      </Text>
-                    </DivContainer>
-                    <Text style={Styles.timeLine}>
-                      {timeSince(message && message.MessageDate)}
-                    </Text>
-                  </View>
-                ) : null}
-                {Platform.OS !== "web" ? (
-                  <ScrollView
-                    contentContainerStyle={[
-                      Styles.messageBody,
-                      { paddingVertical: 0, paddingLeft: moderateScale(65) }
-                    ]}
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
-                  >
-                    <Text style={Styles.messageBodyText}>
-                      {message && message.MessageBody}
-                    </Text>
-                  </ScrollView>
-                ) : (
-                  <DivContainer className={"messageTextView"}>
-                    <View style={Styles.messageBody}>
+                  {Platform.OS !== "web" ? (
+                    <ScrollView
+                      contentContainerStyle={[
+                        Styles.messageBody,
+                        { paddingVertical: 0, paddingLeft: moderateScale(65) }
+                      ]}
+                      showsHorizontalScrollIndicator={false}
+                      showsVerticalScrollIndicator={false}
+                    >
                       <Text style={Styles.messageBodyText}>
                         {message && message.MessageBody}
                       </Text>
-                    </View>
-                  </DivContainer>
-                )}
-                {/* {Platform.OS === "web" ? (
+                    </ScrollView>
+                  ) : (
+                      <DivContainer className={"messageTextView"}>
+                        <View style={Styles.messageBody}>
+                          <Text style={Styles.messageBodyText}>
+                            {message && message.MessageBody}
+                          </Text>
+                        </View>
+                      </DivContainer>
+                    )}
+                  {/* {Platform.OS === "web" ? (
                   <DivContainer
                     styleApp={Styles.divStyle}
                     styleWeb={Styles.divStyle}
@@ -286,34 +287,35 @@ class MessageDetails extends Component {
                     />
                   </DivContainer>
                 ) : null} */}
-              </View>
-            </DivContainer>
-          </View>
+                </View>
+              </DivContainer>
+            </View>
 
-          <CustomModal
-            isVisible={this.state.composeModal}
-            onBackdropPress={this.onComposeModalClose}
-            style={{ margin: 0 }}
-            customStyles={{}}
-          >
-            <Compose
-              user={user}
-              onClose={this.onComposeModalClose}
-              recipients={recipients}
-              onChangeRecipient={this.onChangeRecipient}
-              onChangeMessage={this.onChangeMessage}
-              onChangeSubject={this.onChangeSubject}
-              onComposePress={this.onComposePress}
-              subject={subject}
-              to={MessageGroupID}
-              tabLable={"Reply Message"}
-              getRecipientsLabel={this.getRecipientsLabel}
-              recipientNameError={recipientNameError}
-              subjectError={subjectError}
-              messageError={messageError}
-            />
-          </CustomModal>
-        </View>
+            <CustomModal
+              isVisible={this.state.composeModal}
+              onBackdropPress={this.onComposeModalClose}
+              style={{ margin: 0 }}
+              customStyles={{}}
+            >
+              <Compose
+                user={user}
+                onClose={this.onComposeModalClose}
+                recipients={recipients}
+                onChangeRecipient={this.onChangeRecipient}
+                onChangeMessage={this.onChangeMessage}
+                onChangeSubject={this.onChangeSubject}
+                onComposePress={this.onComposePress}
+                subject={subject}
+                to={MessageGroupID}
+                tabLable={"Reply Message"}
+                getRecipientsLabel={this.getRecipientsLabel}
+                recipientNameError={recipientNameError}
+                subjectError={subjectError}
+                messageError={messageError}
+              />
+            </CustomModal>
+          </ScrollView>
+        </DivContainer >
       );
     }
     return null;
@@ -323,6 +325,9 @@ class MessageDetails extends Component {
 const Styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  conCatContaner: {
+    height: Constants.BaseStyle.DEVICE_WIDTH * 0.70
   },
   messageView: {
     flex: 1,
