@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1062802944016",
+    "firebase_url": "https://actnursesportal-1c091.firebaseio.com",
+    "project_id": "actnursesportal-1c091",
+    "storage_bucket": "actnursesportal-1c091.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062802944016:android:ef609386a2f6b942",
+        "android_client_info": {
+          "package_name": "com.actnursesportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062802944016-m5n7bupqlo6uertafcjpsb5v5555gnla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8XX0SPLmz478wfeuGJchNWI8uvF9gW_s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
