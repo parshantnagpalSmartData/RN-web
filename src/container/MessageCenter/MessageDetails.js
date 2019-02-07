@@ -146,18 +146,23 @@ class MessageDetails extends Component {
     let message = currentTab[index];
     if (index !== -1) {
       return (
-        <DivContainer className={"rightMSGHeight"} styleWeb={Styles.conCatContaner}>
+        <DivContainer
+          className={"rightMSGHeight"}
+          styleWeb={Styles.conCatContaner}
+        >
           <ScrollView style={Styles.container}>
             {Platform.OS !== "web" ||
-              (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772) ? (
-                <Header
-                  title={"Message Details"}
-                  hideDrawer
-                  onBackPress={this.onBackPress}
-                  rightComponent={<RightComponent icon={Constants.Images.Reply} />}
-                  onRightPress={() => this.onRightPress(message)}
-                />
-              ) : null}
+            (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772) ? (
+              <Header
+                title={"Message Details"}
+                hideDrawer
+                onBackPress={this.onBackPress}
+                rightComponent={
+                  <RightComponent icon={Constants.Images.Reply} />
+                }
+                onRightPress={() => this.onRightPress(message)}
+              />
+            ) : null}
             <View style={Styles.messageView}>
               <DivContainer
                 className={"messageDetailTop"}
@@ -189,10 +194,10 @@ class MessageDetails extends Component {
                           {timeSince(message && message.MessageDate)}
                         </Text>
                       ) : (
-                          <Text style={Styles.timeLine}>
-                            {this.getUserEmail(message.Recipient_GroupName)}
-                          </Text>
-                        )}
+                        <Text style={Styles.timeLine}>
+                          {this.getUserEmail(message.Recipient_GroupName)}
+                        </Text>
+                      )}
                     </View>
                     {Platform.OS === "web" ? (
                       <DivContainer className={"msgActions"}>
@@ -218,7 +223,7 @@ class MessageDetails extends Component {
                             id: "selectOption"
                           }}
                           className={"SelectSide"}
-                          onClose={() => { }}
+                          onClose={() => {}}
                           onChange={event => {
                             this.props.onClose(event.target.value, message);
                           }}
@@ -259,14 +264,14 @@ class MessageDetails extends Component {
                       </Text>
                     </ScrollView>
                   ) : (
-                      <DivContainer className={"messageTextView"}>
-                        <View style={Styles.messageBody}>
-                          <Text style={Styles.messageBodyText}>
-                            {message && message.MessageBody}
-                          </Text>
-                        </View>
-                      </DivContainer>
-                    )}
+                    <DivContainer className={"messageTextView"}>
+                      <View style={Styles.messageBody}>
+                        <Text style={Styles.messageBodyText}>
+                          {message && message.MessageBody}
+                        </Text>
+                      </View>
+                    </DivContainer>
+                  )}
                   {/* {Platform.OS === "web" ? (
                   <DivContainer
                     styleApp={Styles.divStyle}
@@ -315,7 +320,7 @@ class MessageDetails extends Component {
               />
             </CustomModal>
           </ScrollView>
-        </DivContainer >
+        </DivContainer>
       );
     }
     return null;
@@ -327,7 +332,7 @@ const Styles = StyleSheet.create({
     flex: 1
   },
   conCatContaner: {
-    height: Constants.BaseStyle.DEVICE_WIDTH * 0.70
+    height: Constants.BaseStyle.DEVICE_WIDTH * 0.7
   },
   messageView: {
     flex: 1,

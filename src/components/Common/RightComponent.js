@@ -26,8 +26,8 @@ const RightComponent = props => {
             resizeMode={"center"}
           />
         ) : (
-            <Image source={icon} />
-          )}
+          <Image source={icon} />
+        )}
       </DivContainer>
     </View>
   );
