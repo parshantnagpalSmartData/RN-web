@@ -11,11 +11,13 @@ import { addListeners } from "./src/helpers/listeners";
 // import { Provider } from "react-redux";
 import setup from "./src/store/setup";
 import Events from "./src/helpers/registerevents";
+import { pushNotifificationInit } from "./src/helpers/PushNotification";
 
 // console.disableYellowBox = true; // eslint-disable-line
 
 Navigation.events().registerAppLaunchedListener(() => {
   const store = setup();
+  pushNotifificationInit();
   registerScreens(store);
   addListeners();
   Events.RegisterNetEvents();

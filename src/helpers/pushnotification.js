@@ -1,75 +1,110 @@
 /*
  * @file: PushNotification.js
- * @description: Initiliazing push notification , Redirection on push notifications
+ * @description: Contains all function related push notification.
+ * @date: 9.Oct.2018
  * @author: Parshant Nagpal
  * */
 /* eslint-disable */
-"use strict";
-import React, { Component } from "react";
 import { Platform } from "react-native";
-import FCM, {
-  FCMEvent,
-  RemoteNotificationResult,
-  WillPresentNotificationResult,
-  NotificationType
-} from "react-native-fcm";
-import {
-  HIDE_NOTIFICATIONBAR,
-  SHOW_NOTIFICATIONBAR,
-  UPDATE_MESSAGE,
-  UPDATE_TITLE,
-  UPDATE_FCM_TOKEN
-} from "../actions/types";
-let notificationListener, refreshTokenListener;
-let notificationToken = "dummytoken";
+import firebase from "react-native-firebase";
+// eslint-disable-next-line
+import type { Notification, NotificationOpen } from "react-native-firebase";
 
-/**
- * Initiliazing push notification
- */
-
-export function pushNotificationInit(callback) {
-  if (Platform.OS === "ios") {
-    //for ios
-    FCM.requestPermissions({ badge: false, sound: true, alert: true })
-      .then(() => {})
-      .catch(() => {});
+/*
+Get the Fcm token of the device
+*/
+const getToken = async () => {
+  const fcmToken = await firebase.messaging().getToken();
+  if (fcmToken) {
+    // console.log("fcmToken", fcmToken);
   } else {
-    FCM.requestPermissions(); // for android
+    // user doesn't have a device token yet
   }
-  // FCM token on intial app load.
-  FCM.getFCMToken().then(token => {
-    callback(token);
-  });
-}
-export function registerFCMEvents(store) {
-  // // Receive Notification in kill state, inactive state or bankground state.
-  FCM.getInitialNotification().then(res => {});
-  // Receive Notification in forground
-  notificationListener = FCM.on(FCMEvent.Notification, async res => {
-    let { body, title } = res;
-    store.dispatch({ type: UPDATE_TITLE, payload: title });
-    store.dispatch({ type: UPDATE_MESSAGE, payload: body });
-    store.dispatch({ type: SHOW_NOTIFICATIONBAR });
-    setTimeout(() => {
-      store.dispatch({ type: HIDE_NOTIFICATIONBAR });
-    }, 3000);
-    console.log("Receive Notification in forground", res);
-  });
-  // Fcm token may not be available on first load, catch it here
-  refreshTokenListener = FCM.on(FCMEvent.RefreshToken, token => {
-    if (token) {
-      store.dispatch({ type: UPDATE_FCM_TOKEN, payload: token });
-    }
-  });
-}
-/**
- *  Removes all future local notifications.
- */
-export function cancelAllLocalNotifications() {
-  FCM.cancelAllLocalNotifications();
-}
+};
 
-export function pushNotificationRemove(store) {
-  notificationListener.remove();
-  refreshTokenListener.remove();
-}
+/*
+All Listeners related to Firebase
+*/
+export const listeners = () => {
+  this.notificationDisplayedListener = firebase
+    .notifications()
+    .onNotificationDisplayed(notification => {
+      // console.log("onNotificationDisplayed", notification);
+    });
+  this.notificationListener = firebase
+    .notifications()
+    .onNotification(notification => {
+      // When app is in forground  and push come immedialtely show (Without Touch)
+      // console.log("onNotification", notification);
+    });
+  this.notificationOpenedListener = firebase
+    .notifications()
+    .onNotificationOpened((notificationOpen: NotificationOpen) => {
+      // eslint-disable
+      //when app is in background (not killed ) tapping on the push notification call that
+      // console.log("notificationOpen", notificationOpen);
+    });
+};
+/*
+when app is killed or not in memory push noptification come then cick on the push notification will call that function
+*/
+const getInitialNotification = async () => {
+  // eslint-disable-next-line
+  const notificationOpen: NotificationOpen = await firebase
+    .notifications()
+    .getInitialNotification();
+  if (notificationOpen) {
+    //When the app is killed and tapping on the push will call this function
+    // console.log("getInitialNotification", notificationOpen);
+  }
+};
+/**
+ * Checking the app has permission for using firebase in ios
+ */
+const checkPermision = async () => {
+  const enabled = await firebase.messaging().hasPermission();
+  if (enabled) {
+    trigerAllEvents();
+  } else {
+    requestpermission();
+  }
+};
+/**
+ * Requesting the app permission for firebase in ios
+ */
+const requestpermission = async () => {
+  try {
+    const enabled = await firebase.messaging().requestPermission();
+    if (enabled) {
+      trigerAllEvents();
+    } else {
+      requestpermission();
+    }
+  } catch (error) {
+    // User has rejected permissions
+  }
+};
+
+const trigerAllEvents = () => {
+  getToken();
+  getInitialNotification();
+  listeners();
+};
+/*
+Remove All Listeners
+*/
+export const removeListeners = () => {
+  this.notificationDisplayedListener();
+  this.notificationListener();
+  this.notificationOpenedListener();
+};
+/**
+ It loads the fcm
+ */
+export const pushNotifificationInit = async () => {
+  if (Platform.OS === "ios") {
+    checkPermision();
+  } else {
+    trigerAllEvents();
+  }
+};

@@ -2,6 +2,7 @@ package com.actnursesportal;
 
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.christopherdro.RNPrint.RNPrintPackage;
 import com.wix.interactable.Interactable;
@@ -21,6 +22,10 @@ import com.BV.LinearGradient.LinearGradientPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.christopherdro.RNPrint.RNPrintPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+
 
 
 
@@ -52,7 +57,10 @@ public class MainApplication extends NavigationApplication {
                                         new RNFetchBlobPackage(), 
                                         new RCTPdfView(),
                                         new Interactable(),
-                                        new RNPrintPackage()
+                                        new RNPrintPackage(),
+                                        new RNFirebasePackage(),
+                                        new RNFirebaseMessagingPackage(),
+                                        new RNFirebaseNotificationsPackage()
                                 );
             }
 
