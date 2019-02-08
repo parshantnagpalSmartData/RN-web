@@ -6,7 +6,14 @@ Date : 13 december 2018
 */
 
 import React, { Component } from "react";
-import { View, StyleSheet, Platform, Text, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Platform,
+  Text,
+  Image,
+  ScrollView
+} from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -49,7 +56,13 @@ class MyProfile extends Component {
         />
         {/* <UnderDevelopment /> */}
 
-        <View style={Styles.userContainer}>
+        <ScrollView
+          contentContainerStyle={Styles.userContainer}
+          scrollEnabled
+          style={Styles.scrollStyle}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
           <DivContainer className={"profileFrame flatListScroll"}>
             <View style={Styles.userDetailsContainer}>
               <View style={Styles.userImgContainer}>
@@ -119,25 +132,25 @@ class MyProfile extends Component {
                 </DivContainer>
               </View>
             </View>
-            <DivContainer className={"AuthButton profileAuthButton"}>
-              <AuthButton
-                buttonName={"Reset Password"}
-                gradientColors={Constants.Colors.ButtonGradients}
-                onPress={this.resetPassword}
-                gradientStyle={{ borderRadius: moderateScale(70) }}
-                buttonStyle={{
-                  marginHorizontal: moderateScale(30),
-                  bottom: moderateScale(50),
-                  ...Platform.select({
-                    web: {
-                      marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2
-                    }
-                  })
-                }}
-              />
-            </DivContainer>
           </DivContainer>
-        </View>
+          <DivContainer className={"AuthButton profileAuthButton"}>
+            <AuthButton
+              buttonName={"Reset Password"}
+              gradientColors={Constants.Colors.ButtonGradients}
+              onPress={this.resetPassword}
+              gradientStyle={{ borderRadius: moderateScale(70) }}
+              buttonStyle={{
+                marginHorizontal: moderateScale(30),
+                bottom: moderateScale(10),
+                ...Platform.select({
+                  web: {
+                    marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2
+                  }
+                })
+              }}
+            />
+          </DivContainer>
+        </ScrollView>
       </View>
     );
   }
@@ -153,8 +166,10 @@ const Styles = StyleSheet.create({
       }
     })
   },
+  scrollStyle: {
+    height: Constants.BaseStyle.DEVICE_HEIGHT
+  },
   userContainer: {
-    flex: 1,
     justifyContent: "space-between",
     flexDirection: "column"
   },

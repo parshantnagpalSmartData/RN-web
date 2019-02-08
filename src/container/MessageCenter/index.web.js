@@ -36,10 +36,10 @@ const customStyles = {
 };
 
 const SelectData = [
-    { key: "Inbox", value: "inbox" },
-    { key: "Sent", value: "sent" },
-    { key: "Trash", value: "trash" }
-  ],
+  { key: "Inbox", value: "inbox" },
+  { key: "Sent", value: "sent" },
+  { key: "Trash", value: "trash" }
+],
   selectDataId = {
     name: "folder",
     id: "folder-name"
@@ -95,9 +95,9 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-        ? sent && sent.length && sent[0].MessageID
-        : trash && trash.length && trash[0].MessageID;
-    appAction.updateWebSelectedMessage(selectedMessage);
+          ? sent && sent.length && sent[0].MessageID
+          : trash && trash.length && trash[0].MessageID;
+    appAction.setActiveMessage(selectedMessage);
   };
 
   getRecipientsIndex = user => {
@@ -123,20 +123,7 @@ class MessageCenter extends Component {
   getTabRelatedMessages = () => {
     let { appAction } = this.props;
     let { tab } = this.state;
-    appAction.getMessages(tab, () => {
-      /**
-       * adding the ischecked attribute in data array
-       */
-      // data = data.map(item => {
-      //   return { ...item, isChecked: false };
-      // });
-      // this.setState(
-      //   {
-      //     data
-      //   },
-      //   () => this.updateSelectedMessage()
-      // );
-    });
+    appAction.getMessages(tab, () => this.updateSelectedMessage());
   };
 
   toggleChecked(index) {
@@ -240,19 +227,19 @@ class MessageCenter extends Component {
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
-      appAction.deleteMessage(
-        message.MessageID,
-        tab,
-        () => {}
-        // this.getTabRelatedMessages()
-      );
+      appAction.deleteMessage(message.MessageID, tab);
     }
   };
   replyMessage = message => {
+    let subject = message.MessageSubject;
+    let test = subject.search(/[Rr]e:/i);
+    if (test === -1) {
+      subject = "Re: " + subject;
+    }
     this.setState(
       {
         composeModal: true,
-        subject: "Re:" + message.MessageSubject,
+        subject,
         ParentMessageID: message.MessageID,
         tabLabel: "Reply Message",
         MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
@@ -264,10 +251,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-        app,
-        user,
-        messages: { recipients, inbox, sent, trash }
-      } = this.props,
+      app,
+      user,
+      messages: { recipients, inbox, sent, trash }
+    } = this.props,
       data,
       {
         MessageGroupID,
@@ -289,12 +276,12 @@ class MessageCenter extends Component {
     }
 
     if (searchText) {
-      let SearchText = searchText.toLowerCase();
+      let SearchText = searchText && searchText.toLowerCase();
       data = data.filter(element => {
         if (
-          element.MessageBody.toLowerCase().includes(SearchText) ||
-          element.Recipient_GroupName.toLowerCase().includes(SearchText) ||
-          element.MessageSubject.toLowerCase().includes(SearchText)
+          (element.MessageBody && element.MessageBody.toLowerCase().includes(SearchText)) ||
+          (element.Recipient_GroupName && element.Recipient_GroupName.toLowerCase().includes(SearchText)) ||
+          (element.MessageSubject && element.MessageSubject.toLowerCase().includes(SearchText))
         ) {
           return element;
         }
@@ -302,22 +289,22 @@ class MessageCenter extends Component {
     }
 
     if (filter === "name") {
-      data = data.sort(function(a, b) {
+      data = data.sort(function (a, b) {
         //compare two values
-        if (
+        if (a.Recipient_GroupName && (
           a.Recipient_GroupName.toLowerCase() <
           b.Recipient_GroupName.toLowerCase()
-        )
+        ))
           return -1;
-        if (
+        if (a.Recipient_GroupName && (
           a.Recipient_GroupName.toLowerCase() >
           b.Recipient_GroupName.toLowerCase()
-        )
+        ))
           return 1;
         return 0;
       });
     } else if (filter === "date") {
-      data = data.sort(function(a, b) {
+      data = data.sort(function (a, b) {
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
         return new Date(b.MessageDate) - new Date(a.MessageDate);

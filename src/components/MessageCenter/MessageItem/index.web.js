@@ -20,6 +20,7 @@ const MessageItem = ({ item, onPress, onPressIsChecked }) => {
           SenderLastName={item.Sender_LastName}
           Recipient_GroupName={item.Recipient_GroupName}
           MessageDate={item.MessageDate}
+          isRead={item.IsRead}
         />
       </TouchableOpacity>
     </div>

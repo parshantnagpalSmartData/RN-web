@@ -154,7 +154,7 @@ class MyProfile extends Component {
           onBackPress={this.onBackPress}
         />
         <KeyboardAwareScrollView
-          // scrollEnabled={false}
+          scrollEnabled={false}
           enableAutomaticScroll={true}
           extraHeight={50}
           keyboardShouldPersistTaps="handled"
@@ -214,12 +214,14 @@ class MyProfile extends Component {
               <View style={Styles.userRow}>
                 <Text style={Styles.infoRow}>Name :</Text>
                 <TextInput
+                  underlineColorAndroid={Constants.Colors.Transparent}
                   style={Styles.dataRow}
                   placeholder={"Last Name"}
                   value={lastName}
                   onChangeText={lastName => this.setState({ lastName })}
                 />
                 <TextInput
+                  underlineColorAndroid={Constants.Colors.Transparent}
                   style={Styles.dataRow}
                   placeholder={"First Name"}
                   value={firstName}
@@ -233,6 +235,7 @@ class MyProfile extends Component {
               <View style={Styles.userRow}>
                 <Text style={Styles.infoRow}>Contact :</Text>
                 <TextInput
+                  underlineColorAndroid={Constants.Colors.Transparent}
                   placeholder={"Contact Number"}
                   style={Styles.dataRow}
                   value={contact}
@@ -246,6 +249,7 @@ class MyProfile extends Component {
               <View style={[Styles.userRow, { flexDirection: "column" }]}>
                 <Text style={Styles.infoRow}>About:</Text>
                 <TextInput
+                  underlineColorAndroid={Constants.Colors.Transparent}
                   multiline
                   placeholder={"Say something about your self"}
                   style={[Styles.dataRow, Styles.infoRow]}
@@ -262,7 +266,7 @@ class MyProfile extends Component {
             gradientStyle={{ borderRadius: moderateScale(70) }}
             buttonStyle={{
               marginHorizontal: moderateScale(30),
-              bottom: moderateScale(50),
+              bottom: moderateScale(15),
               ...Platform.select({
                 web: {
                   marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2
@@ -356,9 +360,11 @@ const Styles = StyleSheet.create({
   infoRow: {
     ...Constants.Fonts.Light,
     color: Constants.Colors.placehoder,
-    fontSize: moderateScale(16)
+    fontSize: moderateScale(16),
   },
   dataRow: {
+    flex: 1,
+    height: moderateScale(40),
     ...Constants.Fonts.Light,
     color: Constants.Colors.Primary,
     fontSize: moderateScale(16),
@@ -374,13 +380,14 @@ const Styles = StyleSheet.create({
   CameraView: {
     height: moderateScale(30),
     width: moderateScale(30),
-    position: "absolute",
+    // position: "absolute",
     backgroundColor: Constants.Colors.Primary,
     borderRadius: moderateScale(100),
     justifyContent: "center",
     alignItems: "center",
     top: moderateScale(70),
     right: moderateScale(150),
+    zIndex: 999,
     ...Platform.select({
       web: {
         right: Constants.BaseStyle.DEVICE_WIDTH * 0.375

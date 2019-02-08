@@ -86,8 +86,8 @@ const Header = props => {
                 />
               </TouchableOpacity>
             ) : (
-                  <View style={Styles.iconBtn} />
-                )}
+              <View style={Styles.iconBtn} />
+            )}
             <View
               style={[
                 Styles.header,
