@@ -688,16 +688,34 @@ body {
   .ModalCompose{width: 280px; padding: 20px 15px; margin: 40px auto;}
 }
 
+.profileFrame div{font-family: Montserrat-Regular !important;}
+.userInfo > div > div:first-child,
+.userAboutusContent > div > div:first-child{text-transform: uppercase; font-size: 12px !important; font-weight: 700; }
+.userInfo > div > div:last-child,
+.userAboutusContent > div > div:last-child{padding:10px 0 !important; min-height: 45px; font-size: 16px !important;}
+.userAboutusContent > div > div:last-child{font-size: 16px !important; line-height: 1.5;}
+.profileAuthButton > div > div{margin-right: 0 !important; margin-left: 0 !important; bottom: 0 !important;}
+.userInfo > div{border-bottom: 1px rgba(0, 0, 0, 0.1) solid; flex-direction: column; justify-content: center;}
+.userAboutusContent{padding-left: 15px; padding-right: 15px;}
+.profilePic > div > div{border:none;}
+.pdfModal .modal > div > div > div{overflow: auto;}
+
+@media screen and (min-width:576px){
+  .userInfoWrapper > div, .userInfo > div{display: flex; }
+  .userInfoWrapper > div{flex-direction: row; justify-content: center;}
+  .userInfo{width:50%; padding: 0 15px;}  
+  .profileFrame{padding:30px;}
+  .profileFrame > div{box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; background: #fff; padding: 30px 15px;}
+}
+
+@media screen and (max-width:800px){
+  .pdfModal .modal > div > div > div{display: block;}
+}
+
 /*----At Bottom---*/
 .w-100 {width: 100% !important;}
 .ml-auto {margin-left: auto;}
 .d-flex { display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important;}
 .align-items-center {-webkit-box-align: center !important; -ms-flex-align: center !important; align-items: center !important;}
-/* .MuiInput-underline-12:before {
-  border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
-}
-.MuiInput-underline-12:after {
-  border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
-} */
 .msgActions { width: 25px; margin-left: 10px;}
 .textInputDivContainer > div > div { min-height: auto !important;}

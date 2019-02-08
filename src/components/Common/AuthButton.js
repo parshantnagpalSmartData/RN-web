@@ -19,6 +19,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+// import DivContainer from "./DivContainer";
 const Button = props => {
   let {
     buttonName,
@@ -48,14 +49,14 @@ const Button = props => {
         {loading ? (
           <ActivityIndicator size="large" color={Constants.Colors.White} />
         ) : (
-          <View>
-            <View style={{ flexDirection: "row" }}>
-              {icon ? <Image source={icon} /> : null}
-              <Text style={[Styles.buttonText, textStyle]}>{buttonName}</Text>
+            <View>
+              <View style={{ flexDirection: "row" }}>
+                {icon ? <Image source={icon} /> : null}
+                <Text style={[Styles.buttonText, textStyle]}>{buttonName}</Text>
+              </View>
+              {arrow ? <Image source={Constants.Images.Common.Next} /> : null}
             </View>
-            {arrow ? <Image source={Constants.Images.Common.Next} /> : null}
-          </View>
-        )}
+          )}
       </LinearGradient>
       {/* <View style={{ flex: 0.7 }} /> */}
     </TouchableOpacity>

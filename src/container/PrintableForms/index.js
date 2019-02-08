@@ -103,6 +103,8 @@ class PrintableForms extends Component {
           isVisible={isVisible}
           onBackdropPress={() => this.closeModal()}
           customStyles={customStyles}
+          className={"pdfModal"}
+          overlayClassName={"pdfModalOverlay"}
         >
           <PDFViewer closeModal={() => this.closeModal()} />
         </CustomModal>
