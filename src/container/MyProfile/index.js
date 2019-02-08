@@ -57,7 +57,7 @@ class MyProfile extends Component {
                   <View style={Styles.userImgView}>
                     <Image
                       source={Constants.Images.UserAvatar}
-                      resizeMethod={"center"}
+                      resizeMethod={"resize"}
                       style={Styles.userImg}
                     />
                   </View>

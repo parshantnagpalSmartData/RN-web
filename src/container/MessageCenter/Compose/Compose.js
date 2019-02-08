@@ -40,152 +40,152 @@ const Compose = ({
   subjectError,
   messageError
 }) => (
-  <View style={{ flex: 1 }}>
-    {Platform.OS !== "web" ? (
-      <LinearGradient
-        start={{ x: 1, y: 0 }}
-        end={{ x: 0, y: 0 }}
-        colors={
-          Platform.OS === "web"
-            ? Constants.Colors.ButtonGradientsWeb
-            : Constants.Colors.ButtonGradients
-        }
-        style={[Styles.gradientStyle]}
-      >
-        <SafeView />
-        <View style={Styles.header}>
-          <TouchableOpacity onPress={onClose} style={Styles.closeBtn}>
-            <Image source={Constants.Images.CloseModal} />
-          </TouchableOpacity>
-          <Text numberOfLines={2} style={[Styles.headerText]}>
-            {tabLable ? tabLable : "Compose Message"}
-          </Text>
-          <TouchableOpacity onPress={onComposePress}>
-            <Image source={Constants.Images.ComposeWhite} />
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    ) : (
-      <div className={"CloseButttonCompose"}>
-        <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
-          <Image source={Constants.Images.Close} style={Styles.closeImg} />
-        </TouchableOpacity>
-      </div>
-    )}
-    <View style={Styles.messageBody}>
+    <View style={{ flex: 1 }}>
       {Platform.OS !== "web" ? (
-        <Dropdown
-          value={getRecipientsLabel(to)}
-          label="To"
-          data={recipients}
-          overlayStyle={Styles.overlayStyle}
-          containerStyle={Styles.containerStyle}
-          onChangeText={value => onChangeRecipient(value)}
-          fontSize={11}
-        />
-      ) : (
-        <div className={"folderName"}>
-          <Text style={Styles.commonText}>To</Text>
-          <Select
-            value={to}
-            inputProps={{
-              name: "folder",
-              id: "folder-name"
-            }}
-            onChange={event => onChangeRecipient(event.target.value)}
-          >
-            {recipients.map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </div>
-      )}
-      {recipientNameError ? (
-        <Text
-          style={{
-            color: "rgb(213, 0, 0)",
-            fontSize: 12,
-            marginVertical: verticalScale(2)
-          }}
+        <LinearGradient
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 0 }}
+          colors={
+            Platform.OS === "web"
+              ? Constants.Colors.ButtonGradientsWeb
+              : Constants.Colors.ButtonGradients
+          }
+          style={[Styles.gradientStyle]}
         >
-          {recipientNameError}
-        </Text>
-      ) : null}
-      <DivContainer className={"fromOptions"}>
-        <View style={Styles.options}>
-          <Text style={Styles.commonText}>From</Text>
-          <Text style={[Styles.commonText, Styles.textPadding]}>
-            {user.UserName}
-          </Text>
-        </View>
-      </DivContainer>
-      <DivContainer className={"fromSubject"}>
-        <View style={[Styles.options]}>
-          <Text style={Styles.commonText}>Subject</Text>
-          <TextInput
-            value={subject}
-            onChangeText={value => onChangeSubject(value)}
-            numberOfLines={2}
-            style={[Styles.TextInput, Styles.textPadding]}
-            underlineColorAndroid={Constants.Colors.Transparent}
-          />
-        </View>
-        {subjectError ? (
-          <Text
-            style={{
-              color: "rgb(213, 0, 0)",
-              fontSize: 12
-            }}
-          >
-            {subjectError}
-          </Text>
-        ) : null}
-      </DivContainer>
-      <DivContainer
-        className={"textInputDivContainer"}
-        styleApp={Styles.composeMessageApp}
-      >
-        <View style={Styles.msgBody}>
-          <TextInput
-            onChangeText={value => onChangeMessage(value)}
-            multiline={true}
-            numberOfLines={2}
-            style={[Styles.TextInput, Styles.messageBodyText]}
-            placeholder={"Compose"}
-            placeholderTextColor={Constants.Colors.Gray}
-            underlineColorAndroid={Constants.Colors.Transparent}
-          />
-        </View>
-        {messageError ? (
-          <Text
-            style={{
-              color: "rgb(213, 0, 0)",
-              fontSize: 12
-            }}
-          >
-            {messageError}
-          </Text>
-        ) : null}
-      </DivContainer>
-      {Platform.OS === "web" ? (
-        <div className={"AuthButton"}>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <AuthButton onPress={onComposePress} buttonName={"Send"} />
+          <SafeView />
+          <View style={Styles.header}>
+            <TouchableOpacity onPress={onClose} style={Styles.closeBtn}>
+              <Image source={Constants.Images.CloseModal} />
+            </TouchableOpacity>
+            <Text numberOfLines={2} style={[Styles.headerText]}>
+              {tabLable ? tabLable : "Compose Message"}
+            </Text>
+            <TouchableOpacity onPress={onComposePress}>
+              <Image source={Constants.Images.ComposeWhite} />
+            </TouchableOpacity>
           </View>
-        </div>
-      ) : null}
+        </LinearGradient>
+      ) : (
+          <div className={"CloseButttonCompose"}>
+            <TouchableOpacity onPress={onClose} style={Styles.closeBtnWeb}>
+              <Image source={Constants.Images.Close} style={Styles.closeImg} />
+            </TouchableOpacity>
+          </div>
+        )}
+      <View style={Styles.messageBody}>
+        {Platform.OS !== "web" ? (
+          <Dropdown
+            value={getRecipientsLabel(to)}
+            label="To"
+            data={recipients}
+            overlayStyle={Styles.overlayStyle}
+            containerStyle={Styles.containerStyle}
+            onChangeText={value => onChangeRecipient(value)}
+            fontSize={11}
+          />
+        ) : (
+            <div className={"folderName"}>
+              <Text style={Styles.commonText}>To</Text>
+              <Select
+                value={to}
+                inputProps={{
+                  name: "folder",
+                  id: "folder-name"
+                }}
+                onChange={event => onChangeRecipient(event.target.value)}
+              >
+                {recipients.map((item, index) => {
+                  return (
+                    <MenuItem key={index} value={item.value}>
+                      {item.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </div>
+          )}
+        {recipientNameError ? (
+          <Text
+            style={{
+              color: "rgb(213, 0, 0)",
+              fontSize: 12,
+              marginVertical: verticalScale(2)
+            }}
+          >
+            {recipientNameError}
+          </Text>
+        ) : null}
+        <DivContainer className={"fromOptions"}>
+          <View style={Styles.options}>
+            <Text style={Styles.commonText}>From</Text>
+            <Text style={[Styles.commonText, Styles.textPadding]}>
+              {user.UserName}
+            </Text>
+          </View>
+        </DivContainer>
+        <DivContainer className={"fromSubject"}>
+          <View style={[Styles.options]}>
+            <Text style={Styles.commonText}>Subject</Text>
+            <TextInput
+              value={subject}
+              onChangeText={value => onChangeSubject(value)}
+              numberOfLines={2}
+              style={[Styles.TextInput, Styles.textPadding]}
+              underlineColorAndroid={Constants.Colors.Transparent}
+            />
+          </View>
+          {subjectError ? (
+            <Text
+              style={{
+                color: "rgb(213, 0, 0)",
+                fontSize: 12
+              }}
+            >
+              {subjectError}
+            </Text>
+          ) : null}
+        </DivContainer>
+        <DivContainer
+          className={"textInputDivContainer"}
+          styleApp={Styles.composeMessageApp}
+        >
+          <View style={Styles.msgBody}>
+            <TextInput
+              onChangeText={value => onChangeMessage(value)}
+              multiline={true}
+              numberOfLines={2}
+              style={[Styles.TextInput, Styles.messageBodyText]}
+              placeholder={"Compose"}
+              placeholderTextColor={Constants.Colors.Gray}
+              underlineColorAndroid={Constants.Colors.Transparent}
+            />
+          </View>
+          {messageError ? (
+            <Text
+              style={{
+                color: "rgb(213, 0, 0)",
+                fontSize: 12
+              }}
+            >
+              {messageError}
+            </Text>
+          ) : null}
+        </DivContainer>
+        {Platform.OS === "web" ? (
+          <div className={"AuthButton"}>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <AuthButton onPress={onComposePress} buttonName={"Send"} />
+            </View>
+          </div>
+        ) : null}
+      </View>
     </View>
-  </View>
-);
+  );
 
 const Styles = StyleSheet.create({
   composeMessageApp: {
@@ -275,7 +275,8 @@ const Styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "flex-start"
-      }
+      },
+
     })
   },
   messageBodyText: {
@@ -298,8 +299,8 @@ const Styles = StyleSheet.create({
     ...Platform.select({
       android: {
         width: Constants.BaseStyle.DEVICE_WIDTH,
-        textAlign: "justify",
-        textAlignVertical: "top"
+        // textAlign: "justify",
+        // textAlignVertical: "top"
       }
     })
   },

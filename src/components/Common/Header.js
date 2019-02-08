@@ -86,8 +86,8 @@ const Header = props => {
                 />
               </TouchableOpacity>
             ) : (
-              <View style={Styles.iconBtn} />
-            )}
+                  <View style={Styles.iconBtn} />
+                )}
             <View
               style={[
                 Styles.header,
@@ -190,14 +190,7 @@ const Styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: moderateScale(40),
-    ...Platform.select({
-      ios: {
-        width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
-      },
-      android: {
-        width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
-      }
-    })
+    width: Constants.BaseStyle.DEVICE_WIDTH * 0.7
   },
   headerText: {
     ...Constants.Fonts.SemiBold,
