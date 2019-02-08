@@ -1,3 +1,9 @@
+/**
+ * @author Suraj Sanwal
+ * @name MessageItem.js
+ * @description Contains the Message Details for web.
+ * @date 24 Jan 2019
+ */
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import MessageComponent from "../MessageComponent";

@@ -60,6 +60,17 @@ export const getMessages = (folder, cb) => {
 };
 export const deleteMessage = (messageId, category, success) => {
   return (dispatch, getState) => {
+    let startLoader = () => {
+      Platform.OS === "web"
+        ? dispatch(AppActions.startLoader())
+        : dispatch(AppActions.startRefreshLoader());
+    };
+    let stopLoader = () => {
+      Platform.OS === "web"
+        ? dispatch(AppActions.stopLoader())
+        : dispatch(AppActions.stopRefreshLoader());
+    };
+    startLoader();
     RestClient.restCall(
       `messages/${messageId}`,
       {},
@@ -67,6 +78,7 @@ export const deleteMessage = (messageId, category, success) => {
       "DELETE"
     )
       .then(res => {
+        stopLoader();
         if (res.status) {
           dispatch({
             type: Types.DELETE_MESSAGE,
@@ -92,6 +104,7 @@ export const deleteMessage = (messageId, category, success) => {
         }
       })
       .catch(e => {
+        stopLoader();
         console.warn("error", e); // eslint-disable-line
       });
   };
@@ -102,19 +115,9 @@ export const readMessage = messageId => {
     RestClient.restCall(`messages/${messageId}/read`, {}, getState().user.token)
       .then(res => {
         if (res.status) {
-          dispatch(
-            AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Success,
-              res.message
-            )
-          );
+          dispatch({ type: Types.READ_MESSAGE, payload: messageId });
         } else {
-          dispatch(
-            AppActions.showToast(
-              Constants.AppConstants.Notificaitons.Error,
-              res.message
-            )
-          );
+          dispatch(AppActions.checkLogin(res));
         }
       })
       .catch(e => {
@@ -125,8 +128,20 @@ export const readMessage = messageId => {
 
 export const composeMessage = postData => {
   return (dispatch, getState) => {
+    let startLoader = () => {
+      Platform.OS === "web"
+        ? dispatch(AppActions.startLoader())
+        : dispatch(AppActions.startRefreshLoader());
+    };
+    let stopLoader = () => {
+      Platform.OS === "web"
+        ? dispatch(AppActions.stopLoader())
+        : dispatch(AppActions.stopRefreshLoader());
+    };
+    startLoader();
     RestClient.restCall("messages", postData, getState().user.token)
       .then(res => {
+        stopLoader();
         if (res.status) {
           dispatch({
             type: Types.ADD_MESSAGE,
@@ -148,6 +163,7 @@ export const composeMessage = postData => {
         }
       })
       .catch(e => {
+        stopLoader();
         console.warn("error", e); // eslint-disable-line
       });
   };
@@ -188,8 +204,9 @@ export const updateWebSelectedMessage = messageId => {
   };
 };
 
-export const setActiveMessage = (messageId, componentId) => {
+export const setActiveMessage = (messageId, componentId, isRead) => {
   return dispatch => {
+    !isRead ? dispatch(readMessage(messageId)) : null;
     dispatch(updateWebSelectedMessage(messageId));
     {
       Platform.OS !== "web" ||

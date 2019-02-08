@@ -1,3 +1,9 @@
+/**
+ * @author Suraj Sanwal
+ * @name MessageItem.js
+ * @description Contains the Message Details for mobile.
+ * @date 24 Jan 2019
+ */
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import Interactable from "react-native-interactable";
@@ -16,7 +22,6 @@ class MessageItem extends React.Component {
         horizontalOnly={true}
         animatedNativeDriver={true}
         ref={ref => (this.animatedViewRef = ref)}
-        // boundaries={{ left: -100, right: 100, bounce: 0.5 }}
         snapPoints={[
           { x: 0 },
           { x: -(Constants.BaseStyle.DEVICE_WIDTH + 100) }
@@ -29,15 +34,8 @@ class MessageItem extends React.Component {
             onDeletePress(() => {
               this.animatedViewRef.changePosition({ x: 0, y: 0 });
             });
-            // this.animatedViewRef.snapTo({ index: 0 })
           }
-          //
         }}
-        // onStop={({ x, y }) => {
-        //   console.log("xuuuuuu", x, y);
-        // }}
-        // snapPoints={[{ y: 0 }]}
-        // onSnap={this.onDrawerSnap}
       >
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
@@ -50,6 +48,7 @@ class MessageItem extends React.Component {
               SenderLastName={item.Sender_LastName}
               MessageDate={item.MessageDate}
               Recipient_GroupName={item.Recipient_GroupName}
+              isRead={item.IsRead}
             />
           </TouchableOpacity>
           <LinearGradient
@@ -71,17 +70,8 @@ class MessageItem extends React.Component {
               }}
             />
           </LinearGradient>
-          {/* <TouchableOpacity
-              style={styles.swipeoutSide}
-              onPress={() => {
-                alert("11111221");
-              }}
-            >
-              <Text>tert</Text>
-            </TouchableOpacity> */}
         </View>
       </Interactable.View>
-      // </Swipeout>
     );
   }
 }

@@ -64,3 +64,4 @@ export const UPDATE_CURRENT_TAB = "UPDATE_CURRENT_TAB";
 
 export const DELETE_MESSAGE = "DELETE_MESSAGE";
 export const ADD_MESSAGE = "ADD_MESSAGE";
+export const READ_MESSAGE = "READ_MESSAGE";

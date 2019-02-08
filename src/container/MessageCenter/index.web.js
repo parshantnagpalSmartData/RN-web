@@ -149,7 +149,7 @@ class MessageCenter extends Component {
 
   onMessagePress = message => {
     let { appAction, componentId } = this.props;
-    appAction.setActiveMessage(message.MessageID, componentId);
+    appAction.setActiveMessage(message.MessageID, componentId, message.IsRead);
   };
 
   onComposeModalClose = () => {
@@ -212,7 +212,11 @@ class MessageCenter extends Component {
     if (Constants.BaseStyle.DEVICE_WIDTH > 772) {
       this.onMessagePress(message);
     } else {
-      appAction.setActiveMessage(message.MessageID, componentId);
+      appAction.setActiveMessage(
+        message.MessageID,
+        componentId,
+        message.IsRead
+      );
     }
   }
 

@@ -28,11 +28,12 @@ const SwiperContainer = ({
   onPress,
   onMessagePress
 }) => {
-  // if (!refresh) {
   return (
     <DivContainer className={"messageScroll"}>
       <FlatList
         key={item => item.MessageID}
+        keyExtractor={item => item.MessageID.toString()}
+        scrollEnabled
         data={data}
         contentContainerStyle={Styles.contentContainerStyle}
         showsHorizontalScrollIndicator={false}
@@ -52,6 +53,7 @@ const SwiperContainer = ({
         renderItem={({ item, index }) => {
           return (
             <MessageItem
+              key={index}
               onPress={() => onPress(item)}
               onPressIsChecked={() => onPressIsChecked(index)}
               item={item}
@@ -65,20 +67,11 @@ const SwiperContainer = ({
       />
     </DivContainer>
   );
-  // } else {
-  //   return (
-  //     <ActivityIndicator
-  //       size={"large"}
-  //       style={{ flex: 1, alignSelf: "center" }}
-  //       color={Constants.Colors.Primary}
-  //     />
-  //   );
-  // }
 };
 
 const Styles = StyleSheet.create({
   contentContainerStyle: {
-    height: Constants.BaseStyle.DEVICE_HEIGHT * 0.75,
+    // height: Constants.BaseStyle.DEVICE_HEIGHT * 0.75,
     justifyContent: "flex-start"
   }
 });

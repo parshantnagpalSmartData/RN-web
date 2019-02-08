@@ -226,7 +226,18 @@ class MessageDetails extends Component {
                         <MenuItem value={"reply"}>Reply </MenuItem>
                       </Select>
                     </DivContainer>
-                  ) : null}
+                  ) : (
+                    <View style={Styles.userView}>
+                      <Text
+                        style={[
+                          Styles.timeLine,
+                          { paddingLeft: moderateScale(10) }
+                        ]}
+                      >
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    </View>
+                  )}
                 </View>
               </View>
             </DivContainer>
@@ -248,7 +259,10 @@ class MessageDetails extends Component {
                   <ScrollView
                     contentContainerStyle={[
                       Styles.messageBody,
-                      { paddingVertical: 0, paddingLeft: moderateScale(65) }
+                      {
+                        paddingVertical: 0,
+                        paddingLeft: moderateScale(10)
+                      }
                     ]}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
@@ -331,6 +345,7 @@ const Styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
+    padding: moderateScale(10),
     ...Platform.select({
       web: {
         borderBottomWidth: 1,
@@ -342,30 +357,24 @@ const Styles = StyleSheet.create({
   UserImage: {
     height: moderateScale(50),
     width: moderateScale(60),
-    borderRadius: moderateScale(100),
-    padding: moderateScale(5),
-    ...Platform.select({
-      ios: {
-        paddingTop: moderateScale(20),
-        paddingLeft: moderateScale(10)
-      },
-      android: {
-        // paddingTop: moderateScale(20),
-        // paddingLeft: moderateScale(10)
-      }
-    })
+    borderRadius: moderateScale(100)
   },
   UserImg: { height: moderateScale(50), width: moderateScale(50) },
-  userInfo: { padding: moderateScale(5), flex: 1 },
+  userInfo: { flex: 1 },
   userNameView: {
     flex: 1,
-    marginHorizontal: moderateScale(10),
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+
     ...Platform.select({
       web: {
         alignItems: "flex-start"
+      },
+      ios: {
+        flexDirection: "column"
+      },
+      android: {
+        flexDirection: "column"
       }
     })
   },

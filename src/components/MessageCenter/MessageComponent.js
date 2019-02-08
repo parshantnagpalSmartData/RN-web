@@ -12,16 +12,22 @@ import Constants from "../../constants";
 import Common from "../../helpers/common";
 
 const MessageComponent = ({
-  // isChecked,
-  // SenderLastName,
-  // SenderFirstName,
   MessageDate,
   MessageSubject,
-  // onPressIsChecked,
-  Recipient_GroupName
+  Recipient_GroupName,
+  isRead
 }) => {
   return (
-    <View style={Styles.Swipeout}>
+    <View
+      style={[
+        Styles.Swipeout,
+        {
+          backgroundColor: !isRead
+            ? Constants.Colors.LighBlueWhite
+            : Constants.Colors.White
+        }
+      ]}
+    >
       {/* {Platform.OS == "web" && (
         <CheckBox isChecked={isChecked} onPress={onPressIsChecked} />
       )} */}

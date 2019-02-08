@@ -132,7 +132,7 @@ class MessageCenter extends Component {
 
   onMessagePress = message => {
     let { appAction, componentId } = this.props;
-    appAction.setActiveMessage(message.MessageID, componentId);
+    appAction.setActiveMessage(message.MessageID, componentId, message.IsRead);
   };
 
   render() {

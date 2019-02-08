@@ -13,7 +13,6 @@ import setup from "./src/store/setup";
 import Events from "./src/helpers/registerevents";
 import { pushNotifificationInit } from "./src/helpers/pushnotification";
 
-
 // console.disableYellowBox = true; // eslint-disable-line
 
 Navigation.events().registerAppLaunchedListener(() => {

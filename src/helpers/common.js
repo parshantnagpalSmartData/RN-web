@@ -11,12 +11,12 @@ var Common = {
       date = new Date();
     } else {
       date = new Date(date);
-      console.log(
-        "datdatadtadta",
-        date,
-        date.toLocaleString(),
-        date.toString()
-      );
+      // console.log(
+      //   "datdatadtadta",
+      //   date,
+      //   date.toLocaleString(),
+      //   date.toString()
+      // );
     }
     // var seconds = (new Date().getTime() - date.getTime()) / 1000
     // var seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);

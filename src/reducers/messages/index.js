@@ -73,7 +73,53 @@ export default function messages(state = initialState, action = {}) {
         ...state,
         tab: action.payload
       };
-
+    case Types.READ_MESSAGE:
+      if (state.tab === "inbox") {
+        let messages = [...state.inbox];
+        let index = _.findIndex(
+          messages,
+          item => item.MessageID === action.payload
+        );
+        if (index !== -1) {
+          let currentIndex = { ...messages[index] };
+          currentIndex.IsRead = true;
+          messages[index] = currentIndex;
+        }
+        return {
+          ...state,
+          inbox: messages
+        };
+      } else if (state.tab === "sent") {
+        let messages = [...state.sent];
+        let index = _.findIndex(
+          messages,
+          item => item.MessageID === action.payload
+        );
+        if (index !== -1) {
+          let currentIndex = { ...messages[index] };
+          currentIndex.IsRead = true;
+          messages[index] = currentIndex;
+        }
+        return {
+          ...state,
+          sent: messages
+        };
+      } else {
+        let messages = [...state.trash];
+        let index = _.findIndex(
+          messages,
+          item => item.MessageID === action.payload
+        );
+        if (index !== -1) {
+          let currentIndex = { ...messages[index] };
+          currentIndex.IsRead = true;
+          messages[index] = currentIndex;
+        }
+        return {
+          ...state,
+          trash: messages
+        };
+      }
     case Types.RESET_USER:
       return {
         ...initialState
