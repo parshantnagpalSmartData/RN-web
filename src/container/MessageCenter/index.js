@@ -101,7 +101,8 @@ class MessageCenter extends Component {
   };
 
   onComposePress = () => {
-    let { MessageGroupID, subject, message } = this.state;
+    let { MessageGroupID, subject, message } = this.state,
+      context = this;
     let { appAction } = this.props;
     if (MessageGroupID === null || MessageGroupID === undefined) {
       this.setState({
@@ -125,7 +126,13 @@ class MessageCenter extends Component {
         ParentMessageID: null,
         MessageGroupID: MessageGroupID
       };
-      appAction.composeMessage(obj);
+      appAction.composeMessage(obj, () => {
+        context.setState({
+          message: "",
+          subject: "",
+          MessageGroupID: null
+        });
+      });
       this.onComposeModalClose();
     }
   };

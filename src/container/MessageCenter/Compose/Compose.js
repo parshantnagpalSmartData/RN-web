@@ -129,7 +129,7 @@ const Compose = ({
           <TextInput
             value={subject}
             onChangeText={value => onChangeSubject(value)}
-            numberOfLines={1}
+            numberOfLines={2}
             style={[Styles.TextInput, Styles.textPadding]}
             underlineColorAndroid={Constants.Colors.Transparent}
           />
@@ -153,7 +153,7 @@ const Compose = ({
           <TextInput
             onChangeText={value => onChangeMessage(value)}
             multiline={true}
-            numberOfLines={1}
+            numberOfLines={2}
             style={[Styles.TextInput, Styles.messageBodyText]}
             placeholder={"Compose"}
             placeholderTextColor={Constants.Colors.Gray}
@@ -262,11 +262,16 @@ const Styles = StyleSheet.create({
     ...Constants.Fonts.Regular,
     fontSize: moderateScale(12),
     color: Constants.Colors.Black,
-    textAlign: "center",
-    textAlignVertical: "center",
+    // textAlign: "center",
+    // textAlignVertical: "center",
     ...Platform.select({
       web: {
         outline: "none",
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "flex-start"
+      },
+      ios: {
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "flex-start"

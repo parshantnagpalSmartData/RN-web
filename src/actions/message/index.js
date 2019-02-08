@@ -126,7 +126,7 @@ export const readMessage = messageId => {
   };
 };
 
-export const composeMessage = postData => {
+export const composeMessage = (postData, cb) => {
   return (dispatch, getState) => {
     let startLoader = () => {
       Platform.OS === "web"
@@ -153,6 +153,9 @@ export const composeMessage = postData => {
               "Message has been sent successfully."
             )
           );
+          if (cb) {
+            cb();
+          }
         } else {
           dispatch(
             AppActions.showToast(

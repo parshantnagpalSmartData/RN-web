@@ -60,21 +60,37 @@ class MyProfile extends Component {
               </View>
             </View>
             <View style={Styles.userInfoView}>
-              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
+              <DivContainer
+                className={"userInfo"}
+                styleApp={Styles.userRow}
+                styleWeb={Styles.userRow}
+              >
                 <Text style={Styles.infoRow}>Name :</Text>
                 <Text style={Styles.dataRow}>
                   {`${user.LastName}, ${user.FirstName}`}
                 </Text>
               </DivContainer>
-              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
+              <DivContainer
+                className={"userInfo"}
+                styleApp={Styles.userRow}
+                styleWeb={Styles.userRow}
+              >
                 <Text style={Styles.infoRow}>Email :</Text>
                 <Text style={Styles.dataRow}>{user.UserName}</Text>
               </DivContainer>
-              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
+              <DivContainer
+                className={"userInfo"}
+                styleApp={Styles.userRow}
+                styleWeb={Styles.userRow}
+              >
                 <Text style={Styles.infoRow}>Contact :</Text>
                 <Text style={Styles.dataRow}>{user && user.contact}</Text>
               </DivContainer>
-              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
+              <DivContainer
+                className={"userInfo"}
+                styleApp={Styles.userRow}
+                styleWeb={Styles.userRow}
+              >
                 <Text style={Styles.infoRow}>Role :</Text>
                 <Text style={Styles.dataRow}>{user.Rights}</Text>
               </DivContainer>
@@ -141,7 +157,7 @@ const Styles = StyleSheet.create({
     width: moderateScale(92)
   },
   userInfoView: {
-    padding: moderateScale(20),
+    padding: moderateScale(20)
   },
   userRow: { flexDirection: "row", marginVertical: moderateScale(10) },
   infoRow: {
