@@ -17,6 +17,7 @@ import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
 import RightComponent from "../../components/Common/RightComponent";
+import DivContainer from "../../components/Common/DivContainer";
 
 class MyProfile extends Component {
   constructor(props) {
@@ -59,24 +60,24 @@ class MyProfile extends Component {
               </View>
             </View>
             <View style={Styles.userInfoView}>
-              <View style={Styles.userRow}>
+              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
                 <Text style={Styles.infoRow}>Name :</Text>
                 <Text style={Styles.dataRow}>
                   {`${user.LastName}, ${user.FirstName}`}
                 </Text>
-              </View>
-              <View style={Styles.userRow}>
+              </DivContainer>
+              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
                 <Text style={Styles.infoRow}>Email :</Text>
                 <Text style={Styles.dataRow}>{user.UserName}</Text>
-              </View>
-              <View style={Styles.userRow}>
+              </DivContainer>
+              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
                 <Text style={Styles.infoRow}>Contact :</Text>
                 <Text style={Styles.dataRow}>{user && user.contact}</Text>
-              </View>
-              <View style={Styles.userRow}>
+              </DivContainer>
+              <DivContainer className={"userInfo"} styleApp={Styles.userRow} styleWeb={Styles.userRow}>
                 <Text style={Styles.infoRow}>Role :</Text>
                 <Text style={Styles.dataRow}>{user.Rights}</Text>
-              </View>
+              </DivContainer>
               <View style={[Styles.userRow, { flexDirection: "column" }]}>
                 <Text style={Styles.infoRow}>About:</Text>
                 <Text
@@ -139,7 +140,9 @@ const Styles = StyleSheet.create({
     height: moderateScale(92),
     width: moderateScale(92)
   },
-  userInfoView: { padding: moderateScale(20) },
+  userInfoView: {
+    padding: moderateScale(20),
+  },
   userRow: { flexDirection: "row", marginVertical: moderateScale(10) },
   infoRow: {
     ...Constants.Fonts.Light,

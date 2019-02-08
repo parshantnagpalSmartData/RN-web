@@ -504,6 +504,7 @@ body {
   font-weight: 500;
 }
 
+.messageTitle .MuiInput-underline-12:before,
 .messageFilter .MuiInput-underline-12:before,
 .msgActions .MuiInput-underline-12:before {
   border: none !important;
@@ -636,12 +637,14 @@ body {
 .AuthButton div {
   font-size: 18px !important;
   font-weight: 400 !important;
+  min-width: inherit !important;
 }
 
 /*----Modal Compose----*/
 .OverlayCopmose{position: fixed;  overflow: auto; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; background-color: rgba(255, 255, 255, 0.75);}
-.ModalCompose{background: #fff; border: 1px #ccc solid; max-width: 450px; padding:30px; border-radius:10px; -webkit-border-radius:10px;}
-.ModalCompose .modal > div > div{width: 100% !important; height: min-content;margin-left: 0!important; margin-right: 0!important;}
+.ModalCompose{background: #fff; border: 1px #ccc solid; width: 450px; padding:30px; border-radius:10px; -webkit-border-radius:10px;}
+.ModalCompose .modal > div > div{ height: min-content;margin-left: 0!important; margin-right: 0!important;}
+.ModalCompose .modal > div > div, .ModalCompose .modal > div > div > div{width: 100% !important;}
 
 @media screen and (min-width: 1366px) {
   .messageList > div > div > div:last-child > div:last-child,
@@ -651,115 +654,50 @@ body {
   }
 }
 
-@media screen and (min-width: 768px) {
-
-  .OverlayCopmose {    
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
-    -webkit-box-align: center !important;
-    -ms-flex-align: center !important;
-    align-items: center !important;
-    justify-content: center;
-   
-  }
-
-  .composeEmail > div {
-    display: -wedkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-direction: row;
-  }
-  .composeEmail > div > div:first-child {
-    height: 22px !important;
-    width: 22px !important;
-    margin-right: 10px;
-  }
-  .messageTopBar {
-    min-height: 75px;
-  }
-  .messageListSection {
-    width: 30%;
-  }
-  .messageDetailsSection {
-    width: 70%;
-    border-left: 1px #dce2f0 solid;
-  }
-  .d-sm-flex {
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
-  }
+@media screen and (min-width: 768px) {  
+  .composeEmail > div { display: -wedkit-box; display: -ms-flexbox; display: flex; flex-direction: row; }
+  .composeEmail > div > div:first-child { height: 22px !important; width: 22px !important; margin-right: 10px; }
+  .messageTopBar { min-height: 75px;}
+  .messageListSection { width: 30%; }
+  .messageDetailsSection { width: 70%; border-left: 1px #dce2f0 solid;}
+  .d-sm-flex { display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; }
 }
 
 @media screen and (max-width: 767px) {
-  .composeEmail {
-    position: fixed;
-    height: 44px;
-    width: 44px;
-    right: 20px;
-    bottom: 20px;
-    border-radius: 50%;
-    background: #333;
-    z-index: 999999;
-  }
-  .composeEmail > div {
-    margin: auto !important;
-  }
-  .composeEmail div + div {
-    display: none;
-  }
-  .messageSearch {
-    margin-top: 15px;
-  }
-
-  .messageTitle > div {
-    justify-content: center;
-  }
-
-  .ModalCompose{max-width: 280px; padding: 20px 15px; margin: 40px auto;}
-
-  .messageDetailTop > div > div, .divWrapper{padding-left: 20px; padding-right: 20px;}
+  .composeEmail { position: fixed; height: 44px; width: 44px; right: 20px; bottom: 20px; border-radius: 50%; background: #333; z-index: 999999; }
+  .composeEmail > div { margin: auto !important; }
+  .composeEmail div + div { display: none; }
+  .messageSearch { margin-top: 15px; }
+  .messageTitle > div { justify-content: center; }
+   .messageDetailTop > div > div, .divWrapper{padding-left: 20px; padding-right: 20px;}
   .messageScroll > div > div > div > div, 
   .listEmptycopmonent, .msgDetailsSection,
   .rightMSGHeight > div{max-height: calc(100vh - 225px) !important;}
-  .AuthButton > div > div > div{width: 250px;}
-  
+  .AuthButton > div > div > div{width: 250px;}  
 }
 
 @media screen and (max-width: 768px) {
-  .d-xs-none {
-    display: none !important;
-  }
+  .d-xs-none { display: none !important; }
+}
+
+@media screen and (min-width:480px){
+  .OverlayCopmose {display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -webkit-box-align: center !important; -ms-flex-align: center !important; align-items: center !important; justify-content: center;}
+}
+
+@media screen and (max-width: 479px){
+  .ModalCompose{width: 280px; padding: 20px 15px; margin: 40px auto;}
 }
 
 /*----At Bottom---*/
-.w-100 {
-  width: 100% !important;
-}
-.ml-auto {
-  margin-left: auto;
-}
-.d-flex {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-}
-.align-items-center {
-  -webkit-box-align: center !important;
-  -ms-flex-align: center !important;
-  align-items: center !important;
-}
+.w-100 {width: 100% !important;}
+.ml-auto {margin-left: auto;}
+.d-flex { display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important;}
+.align-items-center {-webkit-box-align: center !important; -ms-flex-align: center !important; align-items: center !important;}
 /* .MuiInput-underline-12:before {
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 .MuiInput-underline-12:after {
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 } */
-.msgActions {
-  width: 25px;
-  margin-left: 10px;
-}
-.textInputDivContainer > div > div {
-  min-height: auto !important;
-}
+.msgActions { width: 25px; margin-left: 10px;}
+.textInputDivContainer > div > div { min-height: auto !important;}
