@@ -48,80 +48,95 @@ class MyProfile extends Component {
           onRightPress={this.onRightPress}
         />
         {/* <UnderDevelopment /> */}
+
         <View style={Styles.userContainer}>
-          <View style={Styles.userDetailsContainer}>
-            <View style={Styles.userImgContainer}>
-              <View style={Styles.userImgView}>
-                <Image
-                  source={Constants.Images.UserAvatar}
-                  resizeMethod={"center"}
-                  style={Styles.userImg}
-                />
+          <DivContainer className={"profileFrame flatListScroll"}>
+            <View style={Styles.userDetailsContainer}>
+              <View style={Styles.userImgContainer}>
+                <DivContainer className={"profilePic"}>
+                  <View style={Styles.userImgView}>
+                    <Image
+                      source={Constants.Images.UserAvatar}
+                      resizeMethod={"center"}
+                      style={Styles.userImg}
+                    />
+                  </View>
+                </DivContainer>
+              </View>
+              <View style={Styles.userInfoView}>
+                <DivContainer className={"userInfoWrapper"}>
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Name :</Text>
+                    <Text style={Styles.dataRow}>
+                      {`${user.LastName}, ${user.FirstName}`}
+                    </Text>
+                  </DivContainer>
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Email :</Text>
+                    <Text style={Styles.dataRow}>{user.UserName}</Text>
+                  </DivContainer>
+                </DivContainer>
+                <DivContainer className={"userInfoWrapper"}>
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Contact :</Text>
+                    <Text style={Styles.dataRow}>{user && user.contact}</Text>
+                  </DivContainer>
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Role :</Text>
+                    <Text style={Styles.dataRow}>{user.Rights}</Text>
+                  </DivContainer>
+                </DivContainer>
+                <DivContainer className={"userAboutus"}>
+                  <View style={[Styles.userRow, { flexDirection: "column" }]}>
+                    <DivContainer className={"userAboutusContent"}>
+                      <Text style={Styles.infoRow}>About:</Text>
+                      <Text
+                        numberOfLines={11}
+                        style={[Styles.dataRow, Styles.infoRow]}
+                      >
+                        {
+                          "In literary theory, a text is any object that can be read, whether this object is a work of literature, a street sign, an arrangement of buildings on a city block, or styles of clothing. It is a coherent set of signs that transmits some kind of informative message."
+                        }
+                      </Text>
+                    </DivContainer>
+                  </View>
+                </DivContainer>
               </View>
             </View>
-            <View style={Styles.userInfoView}>
-              <DivContainer
-                className={"userInfo"}
-                styleApp={Styles.userRow}
-                styleWeb={Styles.userRow}
-              >
-                <Text style={Styles.infoRow}>Name :</Text>
-                <Text style={Styles.dataRow}>
-                  {`${user.LastName}, ${user.FirstName}`}
-                </Text>
-              </DivContainer>
-              <DivContainer
-                className={"userInfo"}
-                styleApp={Styles.userRow}
-                styleWeb={Styles.userRow}
-              >
-                <Text style={Styles.infoRow}>Email :</Text>
-                <Text style={Styles.dataRow}>{user.UserName}</Text>
-              </DivContainer>
-              <DivContainer
-                className={"userInfo"}
-                styleApp={Styles.userRow}
-                styleWeb={Styles.userRow}
-              >
-                <Text style={Styles.infoRow}>Contact :</Text>
-                <Text style={Styles.dataRow}>{user && user.contact}</Text>
-              </DivContainer>
-              <DivContainer
-                className={"userInfo"}
-                styleApp={Styles.userRow}
-                styleWeb={Styles.userRow}
-              >
-                <Text style={Styles.infoRow}>Role :</Text>
-                <Text style={Styles.dataRow}>{user.Rights}</Text>
-              </DivContainer>
-              <View style={[Styles.userRow, { flexDirection: "column" }]}>
-                <Text style={Styles.infoRow}>About:</Text>
-                <Text
-                  numberOfLines={11}
-                  style={[Styles.dataRow, Styles.infoRow]}
-                >
-                  {
-                    "In literary theory, a text is any object that can be read, whether this object is a work of literature, a street sign, an arrangement of buildings on a city block, or styles of clothing. It is a coherent set of signs that transmits some kind of informative message."
-                  }
-                </Text>
-              </View>
-            </View>
-          </View>
-          <AuthButton
-            buttonName={"Reset Password"}
-            gradientColors={Constants.Colors.ButtonGradients}
-            onPress={this.resetPassword}
-            gradientStyle={{ borderRadius: moderateScale(70) }}
-            buttonStyle={{
-              marginHorizontal: moderateScale(30),
-              bottom: moderateScale(50),
-              ...Platform.select({
-                web: {
-                  marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2
-                }
-              })
-            }}
-          />
+            <DivContainer className={"AuthButton profileAuthButton"}>
+              <AuthButton
+                buttonName={"Reset Password"}
+                gradientColors={Constants.Colors.ButtonGradients}
+                onPress={this.resetPassword}
+                gradientStyle={{ borderRadius: moderateScale(70) }}
+                buttonStyle={{
+                  marginHorizontal: moderateScale(30),
+                  bottom: moderateScale(50),
+                  ...Platform.select({
+                    web: {
+                      marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2
+                    }
+                  })
+                }}
+              />
+            </DivContainer>
+          </DivContainer>
         </View>
       </View>
     );
@@ -130,7 +145,13 @@ class MyProfile extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        backgroundColor: Constants.Colors.BlueWhite
+      }
+    })
   },
   userContainer: {
     flex: 1,

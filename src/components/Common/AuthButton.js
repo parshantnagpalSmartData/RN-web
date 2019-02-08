@@ -19,6 +19,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
+// import DivContainer from "./DivContainer";
 const Button = props => {
   let {
     buttonName,
