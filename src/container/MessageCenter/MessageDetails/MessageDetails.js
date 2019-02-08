@@ -156,15 +156,15 @@ class MessageDetails extends Component {
       return (
         <View style={Styles.container}>
           {Platform.OS !== "web" ||
-            (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772) ? (
-              <Header
-                title={"Message Details"}
-                hideDrawer
-                onBackPress={this.onBackPress}
-                rightComponent={<RightComponent icon={Constants.Images.Reply} />}
-                onRightPress={() => this.onRightPress(message)}
-              />
-            ) : null}
+          (Platform.OS == "web" && Constants.BaseStyle.DEVICE_WIDTH < 772) ? (
+            <Header
+              title={"Message Details"}
+              hideDrawer
+              onBackPress={this.onBackPress}
+              rightComponent={<RightComponent icon={Constants.Images.Reply} />}
+              onRightPress={() => this.onRightPress(message)}
+            />
+          ) : null}
           <View style={Styles.messageView}>
             <DivContainer
               className={"messageDetailTop"}
@@ -196,10 +196,10 @@ class MessageDetails extends Component {
                         {timeSince(message && message.MessageDate)}
                       </Text>
                     ) : (
-                        <Text style={Styles.timeLine}>
-                          {this.getUserEmail(message.Recipient_GroupName)}
-                        </Text>
-                      )}
+                      <Text style={Styles.timeLine}>
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    )}
                   </View>
                   {Platform.OS === "web" ? (
                     <DivContainer className={"msgActions"}>
@@ -225,7 +225,7 @@ class MessageDetails extends Component {
                           id: "selectOption"
                         }}
                         className={"SelectSide"}
-                        onClose={() => { }}
+                        onClose={() => {}}
                         onChange={event => {
                           this.props.onClose(event.target.value, message);
                         }}
@@ -235,17 +235,17 @@ class MessageDetails extends Component {
                       </Select>
                     </DivContainer>
                   ) : (
-                      <View style={Styles.userView}>
-                        <Text
-                          style={[
-                            Styles.timeLine,
-                            { paddingLeft: moderateScale(10) }
-                          ]}
-                        >
-                          {this.getUserEmail(message.Recipient_GroupName)}
-                        </Text>
-                      </View>
-                    )}
+                    <View style={Styles.userView}>
+                      <Text
+                        style={[
+                          Styles.timeLine,
+                          { paddingLeft: moderateScale(10) }
+                        ]}
+                      >
+                        {this.getUserEmail(message.Recipient_GroupName)}
+                      </Text>
+                    </View>
+                  )}
                 </View>
               </View>
             </DivContainer>
@@ -267,7 +267,11 @@ class MessageDetails extends Component {
                   <ScrollView
                     contentContainerStyle={[
                       Styles.messageBody,
-                      { paddingVertical: 0, paddingLeft: moderateScale(75), paddingRight: moderateScale(20) }
+                      {
+                        paddingVertical: 0,
+                        paddingLeft: moderateScale(75),
+                        paddingRight: moderateScale(20)
+                      }
                     ]}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
@@ -277,14 +281,14 @@ class MessageDetails extends Component {
                     </Text>
                   </ScrollView>
                 ) : (
-                    <DivContainer className={"messageTextView"}>
-                      <View style={Styles.messageBody}>
-                        <Text style={Styles.messageBodyText}>
-                          {message && message.MessageBody}
-                        </Text>
-                      </View>
-                    </DivContainer>
-                  )}
+                  <DivContainer className={"messageTextView"}>
+                    <View style={Styles.messageBody}>
+                      <Text style={Styles.messageBodyText}>
+                        {message && message.MessageBody}
+                      </Text>
+                    </View>
+                  </DivContainer>
+                )}
                 {/* {Platform.OS === "web" ? (
                   <DivContainer
                     styleApp={Styles.divStyle}
@@ -361,10 +365,10 @@ const Styles = StyleSheet.create({
         borderBottomColor: "rgba(122,122,122,0.5)"
       },
       ios: {
-        paddingBottom: moderateScale(0),
+        paddingBottom: moderateScale(0)
       },
       android: {
-        paddingBottom: moderateScale(0),
+        paddingBottom: moderateScale(0)
       }
     })
   },
