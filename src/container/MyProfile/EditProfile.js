@@ -360,7 +360,7 @@ const Styles = StyleSheet.create({
   infoRow: {
     ...Constants.Fonts.Light,
     color: Constants.Colors.placehoder,
-    fontSize: moderateScale(16),
+    fontSize: moderateScale(16)
   },
   dataRow: {
     flex: 1,
