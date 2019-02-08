@@ -43,9 +43,14 @@ class MessageDetails extends Component {
   };
 
   onRightPress = message => {
+    let subject = message.MessageSubject;
+    let test = subject.search(/[Rr]e:/i);
+    if (test === -1) {
+      subject = "Re: " + subject;
+    }
     this.setState({
       composeModal: true,
-      subject: "Re:" + message.MessageSubject,
+      subject,
       ParentMessageID: message.MessageID,
       MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
     });
@@ -166,16 +171,7 @@ class MessageDetails extends Component {
             />
           ) : null}
           <View style={Styles.messageView}>
-            <DivContainer
-              className={"messageDetailTop"}
-              styleApp={
-                {
-                  // justifyContent:"center",
-                  // alignItem:'center'
-                }
-              }
-              styleWeb={{}}
-            >
+            <DivContainer className={"messageDetailTop"}>
               <View style={Styles.header}>
                 <View style={Styles.UserImage}>
                   <Image

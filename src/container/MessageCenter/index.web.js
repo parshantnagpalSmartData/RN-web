@@ -97,7 +97,7 @@ class MessageCenter extends Component {
         : tab === "sent"
         ? sent && sent.length && sent[0].MessageID
         : trash && trash.length && trash[0].MessageID;
-    appAction.updateWebSelectedMessage(selectedMessage);
+    appAction.setActiveMessage(selectedMessage);
   };
 
   getRecipientsIndex = user => {
@@ -123,20 +123,7 @@ class MessageCenter extends Component {
   getTabRelatedMessages = () => {
     let { appAction } = this.props;
     let { tab } = this.state;
-    appAction.getMessages(tab, () => {
-      /**
-       * adding the ischecked attribute in data array
-       */
-      // data = data.map(item => {
-      //   return { ...item, isChecked: false };
-      // });
-      // this.setState(
-      //   {
-      //     data
-      //   },
-      //   () => this.updateSelectedMessage()
-      // );
-    });
+    appAction.getMessages(tab, () => this.updateSelectedMessage());
   };
 
   toggleChecked(index) {
@@ -240,19 +227,19 @@ class MessageCenter extends Component {
     let { tab } = this.state;
     let { appAction } = this.props;
     if (tab !== "trash") {
-      appAction.deleteMessage(
-        message.MessageID,
-        tab,
-        () => {}
-        // this.getTabRelatedMessages()
-      );
+      appAction.deleteMessage(message.MessageID, tab);
     }
   };
   replyMessage = message => {
+    let subject = message.MessageSubject;
+    let test = subject.search(/[Rr]e:/i);
+    if (test === -1) {
+      subject = "Re: " + subject;
+    }
     this.setState(
       {
         composeModal: true,
-        subject: "Re:" + message.MessageSubject,
+        subject,
         ParentMessageID: message.MessageID,
         tabLabel: "Reply Message",
         MessageGroupID: this.getRecipientsIndex(message.Recipient_GroupName)
