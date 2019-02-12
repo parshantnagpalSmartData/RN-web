@@ -13,7 +13,8 @@ import {
   Text,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -24,9 +25,10 @@ import Header from "../../components/Common/Header";
 import AuthButton from "../../components/Common/AuthButton";
 import Constants from "../../constants";
 import { moderateScale } from "../../helpers/ResponsiveFonts";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ImagePicker from "react-native-image-crop-picker";
 import { ActionSheetCustom as ActionSheet } from "react-native-custom-actionsheet";
+import DivContainer from "../../components/Common/DivContainer";
 
 class MyProfile extends Component {
   constructor(props) {
@@ -38,7 +40,8 @@ class MyProfile extends Component {
         (this.props && this.props.user && this.props.user.LastName) || "",
       contact:
         (this.props && this.props.user && this.props.user.contact) || null,
-      about: (this.props && this.props.user && this.props.user.about) || ""
+      about: (this.props && this.props.user && this.props.user.about) || "",
+      height: 0
     };
   }
 
@@ -153,7 +156,7 @@ class MyProfile extends Component {
           hideDrawer
           onBackPress={this.onBackPress}
         />
-        <KeyboardAwareScrollView
+        {/* <KeyboardAwareScrollView
           scrollEnabled={false}
           enableAutomaticScroll={true}
           extraHeight={50}
@@ -163,117 +166,178 @@ class MyProfile extends Component {
           showsVerticalScrollIndicator={false}
           style={{ height: Constants.BaseStyle.DEVICE_HEIGHT }}
           contentContainerStyle={Styles.userContainer}
+        > */}
+        <ScrollView
+          contentContainerStyle={Styles.userContainer}
+          scrollEnabled
+          style={Styles.scrollStyle}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
         >
-          <View style={Styles.userDetailsContainer}>
-            <View style={Styles.userImgContainer}>
-              <TouchableOpacity
-                style={Styles.userImgView}
-                onPress={() => this.actionSheet.show()}
-              >
-                {Platform.OS === "web" ? (
-                  <label
-                    className={labelClass}
-                    // onDragEnter={this.onDragEnter}
-                    // onDragLeave={this.onDragLeave}
-                    // onDragOver={this.onDragOver}
-                    // onDrop={this.onDrop}
-                    style={{ outlineColor: borderColor }}
+          <DivContainer className={"profileFrame flatListScroll"}>
+            <View style={Styles.userDetailsContainer}>
+              <View style={Styles.userImgContainer}>
+                <DivContainer className={"profilePic"}>
+                  <TouchableOpacity
+                    style={Styles.userImgView}
+                    onPress={() => this.actionSheet.show()}
                   >
-                    {/* <input
+                    {Platform.OS === "web" ? (
+                      <label
+                        className={labelClass}
+                        // onDragEnter={this.onDragEnter}
+                        // onDragLeave={this.onDragLeave}
+                        // onDragOver={this.onDragOver}
+                        // onDrop={this.onDrop}
+                        style={{ outlineColor: borderColor }}
+                      >
+                        {/* <input
                     type={"file"}
                     id="filePicker"
                     value={this.state.image}
                     accept="image/*"
                     onChange={this._handleImageChange}
                   /> */}
-                    <img
-                      src={Constants.Images.Camera}
-                      className={loaded && "loaded"}
-                    />
-                    <i
-                      className="icon icon-upload"
-                      style={{ color: iconColor }}
-                    />
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={this.onFileChange}
-                      ref={ref => (this.input = ref)}
-                    />
-                  </label>
-                ) : (
-                  <Image
-                    source={Constants.Images.UserAvatar}
-                    resizeMethod={"resize"}
-                    style={Styles.userImg}
+                        <img
+                          src={Constants.Images.Camera}
+                          className={loaded && "loaded"}
+                        />
+                        <i
+                          className="icon icon-upload"
+                          style={{ color: iconColor }}
+                        />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={this.onFileChange}
+                          ref={ref => (this.input = ref)}
+                        />
+                      </label>
+                    ) : (
+                        <Image
+                          source={Constants.Images.UserAvatar}
+                          resizeMethod={"resize"}
+                          style={Styles.userImg}
+                        />
+                      )}
+                  </TouchableOpacity>
+                </DivContainer>
+              </View>
+              <View style={Styles.userInfoView}>
+                <DivContainer className={"userInfoWrapper"}>
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Name :</Text>
+                    <View style={Styles.textInputNameConatiner}>
+                      <View style={Styles.LeftName}>
+                        <TextInput
+                          underlineColorAndroid={Constants.Colors.Transparent}
+                          style={[Styles.dataRow]}
+                          placeholder={"Last Name"}
+                          value={lastName}
+                          onChangeText={lastName => this.setState({ lastName })}
+                        />
+                      </View>
+                      <View style={Styles.rightName}>
+                        <TextInput
+                          underlineColorAndroid={Constants.Colors.Transparent}
+                          style={[Styles.dataRow]}
+                          placeholder={"First Name"}
+                          value={firstName}
+                          onChangeText={firstName =>
+                            this.setState({ firstName })
+                          }
+                        />
+                      </View>
+                    </View>
+                  </DivContainer>
+
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Email :</Text>
+                    <Text style={Styles.dataRow}>{user.UserName}</Text>
+                  </DivContainer>
+                </DivContainer>
+                <DivContainer className={"userInfoWrapper"}>
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Contact :</Text>
+                    <View>
+                      <TextInput
+                        underlineColorAndroid={Constants.Colors.Transparent}
+                        placeholder={"Contact Number"}
+                        style={Styles.dataRow}
+                        value={contact}
+                        onChangeText={contact => this.setState({ contact })}
+                      />
+                    </View>
+                  </DivContainer>
+                  <DivContainer
+                    className={"userInfo"}
+                    styleApp={Styles.userRow}
+                    styleWeb={Styles.userRow}
+                  >
+                    <Text style={Styles.infoRow}>Role :</Text>
+                    <Text style={Styles.dataRow}>{user.Rights}</Text>
+                  </DivContainer>
+                </DivContainer>
+                {/* <DivContainer className={"userAboutus"}>
+                  <View style={[Styles.userRow, { flexDirection: "column", backgroundColor: "red" }]}>
+                    <DivContainer className={"userAboutusContent"}> */}
+                <DivContainer
+                  className={"userInfo"}
+                  styleApp={[
+                    Styles.userRow,
+                    { height: moderateScale(100), backgroundColor: "red" }
+                  ]}
+                  styleWeb={[Styles.userRow, { height: moderateScale(100) }]}
+                >
+                  <Text style={Styles.infoRow}>About:</Text>
+                  <TextInput
+                    underlineColorAndroid={Constants.Colors.Transparent}
+                    multiline={true}
+                    placeholder={"Say something about your self"}
+                    style={[
+                      Styles.dataRow,
+                      Styles.infoRow,
+                      { height: moderateScale(100) }
+                    ]}
+                    value={about}
+                    onChangeText={about => this.setState({ about })}
                   />
-                )}
-              </TouchableOpacity>
-            </View>
-            <View style={Styles.userInfoView}>
-              <View style={Styles.userRow}>
-                <Text style={Styles.infoRow}>Name :</Text>
-                <TextInput
-                  underlineColorAndroid={Constants.Colors.Transparent}
-                  style={Styles.dataRow}
-                  placeholder={"Last Name"}
-                  value={lastName}
-                  onChangeText={lastName => this.setState({ lastName })}
-                />
-                <TextInput
-                  underlineColorAndroid={Constants.Colors.Transparent}
-                  style={Styles.dataRow}
-                  placeholder={"First Name"}
-                  value={firstName}
-                  onChangeText={firstName => this.setState({ firstName })}
-                />
-              </View>
-              <View style={Styles.userRow}>
-                <Text style={Styles.infoRow}>Email :</Text>
-                <Text style={Styles.dataRow}>{user.UserName}</Text>
-              </View>
-              <View style={Styles.userRow}>
-                <Text style={Styles.infoRow}>Contact :</Text>
-                <TextInput
-                  underlineColorAndroid={Constants.Colors.Transparent}
-                  placeholder={"Contact Number"}
-                  style={Styles.dataRow}
-                  value={contact}
-                  onChangeText={contact => this.setState({ contact })}
-                />
-              </View>
-              <View style={Styles.userRow}>
-                <Text style={Styles.infoRow}>Role :</Text>
-                <Text style={Styles.dataRow}>{user.Rights}</Text>
-              </View>
-              <View style={[Styles.userRow, { flexDirection: "column" }]}>
-                <Text style={Styles.infoRow}>About:</Text>
-                <TextInput
-                  underlineColorAndroid={Constants.Colors.Transparent}
-                  multiline
-                  placeholder={"Say something about your self"}
-                  style={[Styles.dataRow, Styles.infoRow]}
-                  value={about}
-                  onChangeText={about => this.setState({ about })}
-                />
+                </DivContainer>
+                {/* </DivContainer>
+                  </View>
+                </DivContainer> */}
               </View>
             </View>
-          </View>
-          <AuthButton
-            buttonName={"Update Profile"}
-            gradientColors={Constants.Colors.ButtonGradients}
-            onPress={this.updateProfile}
-            gradientStyle={{ borderRadius: moderateScale(70) }}
-            buttonStyle={{
-              marginHorizontal: moderateScale(30),
-              bottom: moderateScale(15),
-              ...Platform.select({
-                web: {
-                  marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2
-                }
-              })
-            }}
-          />
+          </DivContainer>
+          <DivContainer className={"AuthButton profileAuthButton"}>
+            <AuthButton
+              buttonName={"Update Profile"}
+              gradientColors={Constants.Colors.ButtonGradients}
+              onPress={this.updateProfile}
+              gradientStyle={{ borderRadius: moderateScale(70) }}
+              buttonStyle={{
+                marginHorizontal: moderateScale(30),
+                bottom: moderateScale(15),
+                ...Platform.select({
+                  web: {
+                    marginHorizontal: Constants.BaseStyle.DEVICE_WIDTH * 0.2
+                  }
+                })
+              }}
+            />
+          </DivContainer>
           <TouchableOpacity
             style={Styles.CameraView}
             onPress={() => this.actionSheet.show()}
@@ -284,7 +348,7 @@ class MyProfile extends Component {
               style={Styles.camera}
             />
           </TouchableOpacity>
-        </KeyboardAwareScrollView>
+        </ScrollView>
         {Platform.OS !== "web" ? (
           <ActionSheet
             ref={ref => (this.actionSheet = ref)}
@@ -329,8 +393,31 @@ class MyProfile extends Component {
 
 const Styles = StyleSheet.create({
   containner: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Constants.Colors.White,
+    ...Platform.select({
+      web: {
+        backgroundColor: Constants.Colors.BlueWhite
+      }
+    })
   },
+  scrollStyle: {
+    height: Constants.BaseStyle.DEVICE_HEIGHT
+  },
+  textInputNameConatiner: {
+    flexDirection: "row",
+    ...Platform.select({
+      web: {},
+      ios: {
+        flex: 1
+      },
+      android: {
+        flex: 1
+      }
+    })
+  },
+  LeftName: { marginRight: moderateScale(10) },
+  rightName: { marginLeft: moderateScale(10) },
   userContainer: {
     flex: 1,
     justifyContent: "space-between",
