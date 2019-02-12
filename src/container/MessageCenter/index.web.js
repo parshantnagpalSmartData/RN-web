@@ -36,10 +36,10 @@ const customStyles = {
 };
 
 const SelectData = [
-  { key: "Inbox", value: "inbox" },
-  { key: "Sent", value: "sent" },
-  { key: "Trash", value: "trash" }
-],
+    { key: "Inbox", value: "inbox" },
+    { key: "Sent", value: "sent" },
+    { key: "Trash", value: "trash" }
+  ],
   selectDataId = {
     name: "folder",
     id: "folder-name"
@@ -95,8 +95,8 @@ class MessageCenter extends Component {
       tab === "index"
         ? inbox && inbox.length && inbox[0].MessageID
         : tab === "sent"
-          ? sent && sent.length && sent[0].MessageID
-          : trash && trash.length && trash[0].MessageID;
+        ? sent && sent.length && sent[0].MessageID
+        : trash && trash.length && trash[0].MessageID;
     appAction.setActiveMessage(selectedMessage);
   };
 
@@ -251,10 +251,10 @@ class MessageCenter extends Component {
   };
   render() {
     let {
-      app,
-      user,
-      messages: { recipients, inbox, sent, trash }
-    } = this.props,
+        app,
+        user,
+        messages: { recipients, inbox, sent, trash }
+      } = this.props,
       data,
       {
         MessageGroupID,
@@ -292,24 +292,24 @@ class MessageCenter extends Component {
     }
 
     if (filter === "name") {
-      data = data.sort(function (a, b) {
+      data = data.sort(function(a, b) {
         //compare two values
         if (
           a.Recipient_GroupName &&
           a.Recipient_GroupName.toLowerCase() <
-          b.Recipient_GroupName.toLowerCase()
+            b.Recipient_GroupName.toLowerCase()
         )
           return -1;
         if (
           a.Recipient_GroupName &&
           a.Recipient_GroupName.toLowerCase() >
-          b.Recipient_GroupName.toLowerCase()
+            b.Recipient_GroupName.toLowerCase()
         )
           return 1;
         return 0;
       });
     } else if (filter === "date") {
-      data = data.sort(function (a, b) {
+      data = data.sort(function(a, b) {
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
         return new Date(b.MessageDate) - new Date(a.MessageDate);
