@@ -2,6 +2,7 @@ package com.actnursesportal;
 
 
 import com.facebook.react.ReactApplication;
+import com.smixx.fabric.FabricPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.christopherdro.RNPrint.RNPrintPackage;
@@ -25,6 +26,7 @@ import com.christopherdro.RNPrint.RNPrintPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+import com.smixx.fabric.FabricPackage;
 
 
 
@@ -60,7 +62,8 @@ public class MainApplication extends NavigationApplication {
                                         new RNPrintPackage(),
                                         new RNFirebasePackage(),
                                         new RNFirebaseMessagingPackage(),
-                                        new RNFirebaseNotificationsPackage()
+                                        new RNFirebaseNotificationsPackage(),
+                                        new FabricPackage()
                                 );
             }
 

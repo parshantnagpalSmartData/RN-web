@@ -55,6 +55,7 @@
 		636D208469CC41AFAB468B18 /* libRCTPdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62813801DEDE43FD817C2D2C /* libRCTPdf.a */; };
 		654252418F43401A970C9A9A /* MontserratAlternates-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D6591FE29944618AC56D933 /* MontserratAlternates-Light.otf */; };
 		669B0D6421C0E1F100067085 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 669B0D6121C0E1AC00067085 /* libReactNativeNavigation.a */; };
+		66DD9762221190A5004CB349 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DD975E2211906C004CB349 /* libSMXCrashlytics.a */; };
 		66EF9BA7220C5D2D004EEFDC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66EF9B73220C5D2D004EEFDC /* GoogleService-Info.plist */; };
 		66EF9BC2220C675E004EEFDC /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EF9BC1220C675E004EEFDC /* RSKImageCropper.framework */; };
 		66EF9BC3220C675E004EEFDC /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66EF9BC1220C675E004EEFDC /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -431,6 +432,20 @@
 			remoteGlobalIDString = 7B49FEBB1E95090800DEB3EA;
 			remoteInfo = ReactNativeNavigationTests;
 		};
+		66DD975D2211906C004CB349 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66DD97262211906C004CB349 /* SMXCrashlytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D9DB831C6D03DB009FBC0E;
+			remoteInfo = SMXCrashlytics;
+		};
+		66DD975F2211906C004CB349 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66DD97262211906C004CB349 /* SMXCrashlytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6463C84C1EBA12A60095B8CD;
+			remoteInfo = "SMXCrashlytics-tvOS";
+		};
 		66EF9B11220C58F0004EEFDC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C63D1F68B0344EEAB561C2F2 /* RNFirebase.xcodeproj */;
@@ -556,6 +571,7 @@
 		64C7148FEA9941C686B0BE38 /* MontserratAlternates-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MontserratAlternates-Regular.otf"; path = "../src/assets/Font/MontserratAlternates-Regular.otf"; sourceTree = "<group>"; };
 		6671FFFF720C4484AFFC76FB /* Montserrat-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-MediumItalic.otf"; path = "../src/assets/Font/Montserrat-MediumItalic.otf"; sourceTree = "<group>"; };
 		669B0D3621C0E1AC00067085 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
+		66DD97262211906C004CB349 /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
 		66EF9B73220C5D2D004EEFDC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ActNursesportal/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		66EF9BA8220C602A004EEFDC /* ActNursesportal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ActNursesportal.entitlements; path = ActNursesportal/ActNursesportal.entitlements; sourceTree = "<group>"; };
 		66EF9BC1220C675E004EEFDC /* RSKImageCropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -657,6 +673,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66DD9762221190A5004CB349 /* libSMXCrashlytics.a in Frameworks */,
 				B47DBD2E21F0C1CE00FB4563 /* libfishhook.a in Frameworks */,
 				B423D15121C0EE240070C0D6 /* libBVLinearGradient.a in Frameworks */,
 				669B0D6421C0E1F100067085 /* libReactNativeNavigation.a in Frameworks */,
@@ -906,6 +923,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		66DD97272211906C004CB349 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66DD975E2211906C004CB349 /* libSMXCrashlytics.a */,
+				66DD97602211906C004CB349 /* libSMXCrashlytics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		66EF9B0E220C58F0004EEFDC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -969,6 +995,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				66DD97262211906C004CB349 /* SMXCrashlytics.xcodeproj */,
 				B420621021C3A44E00CC71FF /* ART.xcodeproj */,
 				B423D12321C0EE0A0070C0D6 /* BVLinearGradient.xcodeproj */,
 				669B0D3621C0E1AC00067085 /* ReactNativeNavigation.xcodeproj */,
@@ -1162,6 +1189,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				66EF9BF7220C675F004EEFDC /* Embed Frameworks */,
+				66DD96DA22117E53004CB349 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1339,6 +1367,10 @@
 				{
 					ProductGroup = 6608117A2202D5EE00F965FE /* Products */;
 					ProjectRef = F5F0CA95D81B4FBF97F47A2A /* RNPrint.xcodeproj */;
+				},
+				{
+					ProductGroup = 66DD97272211906C004CB349 /* Products */;
+					ProjectRef = 66DD97262211906C004CB349 /* SMXCrashlytics.xcodeproj */;
 				},
 				{
 					ProductGroup = 663137C921D22EF000753AF6 /* Products */;
@@ -1643,6 +1675,20 @@
 			remoteRef = 669B0D6221C0E1AC00067085 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		66DD975E2211906C004CB349 /* libSMXCrashlytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSMXCrashlytics.a;
+			remoteRef = 66DD975D2211906C004CB349 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66DD97602211906C004CB349 /* libSMXCrashlytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSMXCrashlytics.a;
+			remoteRef = 66DD975F2211906C004CB349 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		66EF9B12220C58F0004EEFDC /* libRNFirebase.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1850,6 +1896,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		66DD96DA22117E53004CB349 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3a0f4e0d383de26afee8c855c4e0a63e2117d206 a50774c3a806e1c56d43a1930d611db52b9b49f4de348e43740f49b1d9b6a8e8";
 		};
 		8069DA79FC3F7D90A7FE1907 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
