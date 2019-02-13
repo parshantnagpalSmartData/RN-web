@@ -214,12 +214,12 @@ class MyProfile extends Component {
                         />
                       </label>
                     ) : (
-                        <Image
-                          source={Constants.Images.UserAvatar}
-                          resizeMethod={"resize"}
-                          style={Styles.userImg}
-                        />
-                      )}
+                      <Image
+                        source={Constants.Images.UserAvatar}
+                        resizeMethod={"resize"}
+                        style={Styles.userImg}
+                      />
+                    )}
                   </TouchableOpacity>
                 </DivContainer>
               </View>
